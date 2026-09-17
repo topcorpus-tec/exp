@@ -1,0 +1,5 @@
+# Cloudflare Pages — headers por rota.
+# /teste é página de teste: fora dos buscadores em qualquer formato servido
+# (o X-Robots-Tag cobre também assets, que não têm <meta>).
+/teste/*
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
