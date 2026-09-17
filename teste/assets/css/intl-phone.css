@@ -1,0 +1,20 @@
+/* =========================================================================
+   tpc32 — intl-phone.css
+   Integração do intl-tel-input com os formulários (design-system e burburinho).
+   Seletores genéricos escopados a form[data-intl-phone] para funcionar com o
+   input do design-system (.field__input) e o do burburinho (.brb__input).
+   Carregar DEPOIS de intlTelInput.min.css.
+   ========================================================================= */
+
+/* O wrapper .iti ocupa toda a largura do campo; o input dentro mantém o visual
+   original do design-system/burburinho (borda, altura, padding). */
+form[data-intl-phone] .iti { width: 100%; display: block; }
+form[data-intl-phone] .iti > input { width: 100%; }
+
+/* Leitura do DDI (+55) ao lado da bandeira. */
+form[data-intl-phone] .iti__selected-dial-code { color: inherit; }
+
+/* Dropdown ancorado no <body> (dropdownParent): z-index alto para ficar acima
+   das seções seguintes da página — e acima do modal de captura da /taping/,
+   que vive em z-index 1000 e também é filho do <body>. */
+.iti__dropdown-content { z-index: 1100; }
