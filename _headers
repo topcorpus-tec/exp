@@ -1,5 +1,10 @@
 # Cloudflare Pages — headers por rota.
-# /teste é página de teste: fora dos buscadores em qualquer formato servido
-# (o X-Robots-Tag cobre também assets, que não têm <meta>).
+# Páginas de teste e rascunhos: fora dos buscadores em qualquer formato
+# servido (o X-Robots-Tag cobre também assets, que não têm <meta>).
 /teste/*
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+
+# /manual é rascunho em revisão (copy com pendências, sem imagens).
+# Remover este bloco quando a página for publicada de verdade.
+/manual/*
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
