@@ -23,14 +23,22 @@
   "use strict";
 
   /* =======================================================================
-     PENDÊNCIA — DESTINO DA COMPRA
+     DESTINO DA COMPRA
 
-     A copy não trouxe o link do checkout do manual (R$27). Enquanto esta
-     constante estiver vazia, os CTAs não levam a lugar nenhum: ficam
-     inertes e avisam no console, em vez de mandar a cliente para uma
-     página em branco. Preencher aqui libera todos os botões de uma vez.
+     O doc traz três ofertas do mesmo produto na Hotmart, uma por página:
+
+         ?off=u7qj2mgv  → R$97
+         ?off=q86wzvlt  → R$67
+         ?off=9z1ywsjs  → R$27   ← esta página
+
+     Esta é a "Página de Vendas #1", cuja dobra 5 fecha em 9x de R$3,39 ou
+     R$27 à vista — então o off é o de 27. As dobras 5.1 e 5.2 do doc são as
+     ancoragens das outras duas páginas; se um dia elas nascerem, é esta
+     constante que muda, e mais nada.
+
+     Vazio aqui deixa todos os CTAs inertes de propósito (ver initCheckout).
      ======================================================================= */
-  var CHECKOUT_URL = "";
+  var CHECKOUT_URL = "https://pay.hotmart.com/W95360090D?off=9z1ywsjs";
 
   /* =======================================================================
      PENDÊNCIA — FIM DA OFERTA

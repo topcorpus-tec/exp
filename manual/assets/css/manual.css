@@ -312,3 +312,42 @@
   /* No mobile o botão ocupa a largura toda; no desktop acompanha o texto. */
   .tp-sticky .btn--tp { width: auto; padding-block: .85rem; }
 }
+
+/* =========================================================================
+   COPY DE 23/09 — componentes que a revisão pediu
+   ========================================================================= */
+
+/* O nome do produto passou a ser a linha que acompanha o logo, acima do H1
+   (a manchete agora é a promessa, não o nome). Discreto de propósito: ele
+   identifica, não compete. */
+.mn-hero__product {
+  margin: 0 0 clamp(.5rem, 1.4vw, .85rem);
+  font-size: clamp(.78rem, 1.5vw, .9rem);
+  font-weight: var(--fw-semibold);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--tp-muted);
+}
+
+/* Respiro entre o H1 e o H2 rosa, que antes se encostavam. */
+.mn-hero__h2 { margin-top: clamp(.6rem, 1.6vw, 1rem); }
+
+/* Nota de rodapé do asterisco do parcelamento, dentro do card de preço. */
+.mn-offer__fine {
+  margin: .5rem 0 0;
+  font-size: .74rem;
+  line-height: 1.5;
+  color: var(--tp-muted);
+}
+
+/* A dobra 5 é a única seção de fundo escuro. O taping.css pinta o .tp-title
+   de branco ali, mas o .tp-hl dentro dele reimpõe o rosa escuro com faixa
+   clara — some no fundo. E o .tp-lead ("Você vai receber:"), que esta copy
+   trouxe para a seção, nunca foi previsto sobre o rosa. Os dois herdam o
+   branco aqui. */
+.tp-section--offer .tp-title .tp-hl {
+  color: #fff;
+  background-image: linear-gradient(180deg, transparent 62%, rgba(255, 255, 255, .3) 62%);
+}
+.tp-section--offer .tp-lead { color: rgba(255, 255, 255, .9); }
+.tp-section--offer .tp-lead strong { color: #fff; }
