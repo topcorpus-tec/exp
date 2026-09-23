@@ -4,7 +4,10 @@
 /teste/*
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
 
-# /manual é rascunho em revisão (copy com pendências, sem imagens).
-# Remover este bloco quando a página for publicada de verdade.
-/manual/*
+# As páginas do Manual seguem o padrão lt-v1-<ticket>: uma por preço da
+# Hotmart (27, 67 e 97), cada uma com sua própria dobra de ancoragem.
+# O curinga cobre as três de uma vez, inclusive os assets de cada uma.
+# São rascunhos em revisão (sem as imagens); remover este bloco quando
+# forem publicadas de verdade.
+/lt-v1-*
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
