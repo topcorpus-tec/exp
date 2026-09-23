@@ -199,6 +199,22 @@
   text-align: center;
 }
 
+/* A copy do taping traz três ajustes que só fazem sentido ao lado da foto da
+   Ana: o recuo negativo (sobe pra cima da foto), o respiro de baixo (deixa a
+   foto encostar na base) e, a partir de 900px, o alinhamento à esquerda da
+   grade de 2 colunas. Aqui não há foto e a coluna é uma só — os três saem. */
+.mn-hero__inner .tp-hero__copy {
+  margin-top: 0;
+  padding-bottom: 0;
+  text-align: center;
+}
+.mn-hero__inner .tp-hero__headline,
+.mn-hero__inner .tp-hero__sub,
+.mn-hero__inner .mn-hero__h2 { margin-inline: auto; }
+
+.mn-hero__inner .tp-cta   { align-items: center; }
+.mn-hero__inner .tp-trust { justify-content: center; }
+
 /* O H2 da copy (o "+70 Aplicações Ilustradas") entra sob o H1 sem competir
    com ele em peso. */
 .mn-hero__h2 {
