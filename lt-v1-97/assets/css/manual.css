@@ -1,0 +1,353 @@
+/* =========================================================================
+   Manual Ilustrado — manual.css
+
+   Camada fina sobre design-system.css + taping.css. A página de vendas do
+   manual reusa o sistema do TopTaping inteiro; aqui ficam só as três coisas
+   que ele ainda não tinha:
+
+     1. ESPAÇOS DE IMAGEM  — a página foi pedida sem imagens, então cada
+        imagem prevista na copy virou uma caixa marcada dizendo o que entra
+        ali. Some sozinha quando a <img> de verdade substituir o bloco.
+     2. PENDÊNCIAS          — valores e prazos que a copy deixou como
+        "a definir" ficam visualmente marcados, para ninguém publicar com
+        R$XX no ar por distração.
+     3. CARDS COM ÍCONE     — a dobra 2 pede ícone no lugar do número que o
+        .tp-pillar usa.
+
+   Carregar DEPOIS de taping.css.
+   ========================================================================= */
+
+/* =========================================================================
+   1. ESPAÇO DE IMAGEM
+
+   Caixa tracejada com a descrição do que entra ali. Ocupa a mesma área que a
+   imagem final vai ocupar, para o layout já ser o layout definitivo — o que
+   muda depois é só o conteúdo da caixa.
+   ========================================================================= */
+.mn-ph {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  box-sizing: border-box;
+  padding: clamp(1rem, 3vw, 1.75rem);
+  text-align: center;
+
+  border: 2px dashed var(--tp-violet-soft);
+  border-radius: var(--tp-radius-sm);
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      var(--tp-violet-wash) 0 12px,
+      var(--tp-white)       12px 24px
+    );
+  color: var(--tp-body);
+}
+
+/* Etiqueta fixa "IMAGEM", para a caixa se ler como espaço reservado mesmo
+   quando a descrição for longa. */
+.mn-ph__tag {
+  font-size: .62rem;
+  font-weight: var(--fw-extrabold);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--tp-violet-deep);
+}
+
+.mn-ph__desc {
+  margin: 0;
+  max-width: 34ch;
+  font-size: .82rem;
+  line-height: 1.5;
+  color: var(--tp-body);
+}
+
+/* Origem da ideia, quando a imagem veio de um comentário do doc e ainda não
+   é decisão fechada. */
+.mn-ph__from {
+  margin: 0;
+  font-size: .68rem;
+  line-height: 1.45;
+  color: var(--tp-muted);
+  font-style: italic;
+}
+
+/* ---- Proporções ----
+   Dentro de .tp-inside__media / .tp-bonus__media a proporção já vem do
+   contêiner; estas classes são para os espaços soltos. */
+.mn-ph--square { aspect-ratio: 1 / 1; }
+.mn-ph--wide   { aspect-ratio: 16 / 9; }
+.mn-ph--tall   { aspect-ratio: 3 / 4; }
+
+/* Preenche a caixa do contêiner herdado (tp-inside__media, tp-bonus__media),
+   que já define a proporção e o overflow. */
+.mn-ph--fill { width: 100%; height: 100%; border-radius: 0; border-width: 0 0 2px; }
+
+/* ---- Espaços que substituem imagens específicas do sistema do taping ----
+   Cada um imita a caixa da imagem que representa, para o espaçamento em volta
+   não mudar quando a imagem real entrar. */
+
+/* No lugar de .tp-hero__logo */
+.mn-ph--logo {
+  width: clamp(150px, 17vw, 200px);
+  aspect-ratio: 5 / 4;
+  margin-inline: auto;
+}
+
+/* No lugar de .tp-hero__figure — o mockup do manual com os 4 bônus */
+.mn-ph--hero {
+  width: min(100%, 460px);
+  aspect-ratio: 4 / 3;
+  margin-inline: auto;
+}
+
+/* No lugar de .tp-seal (selo de garantia) */
+.mn-ph--seal {
+  width: clamp(200px, 30vw, 320px);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  margin-inline: auto;
+}
+
+/* No lugar de .tp-offer__setup, dentro do card de preço */
+.mn-ph--offer {
+  width: clamp(240px, 40vw, 440px);
+  aspect-ratio: 5 / 4;
+  margin-inline: auto;
+  margin-bottom: .75rem;
+}
+
+/* Espaço largo, solto no meio de uma seção */
+.mn-ph--band {
+  width: 100%;
+  max-width: 760px;
+  aspect-ratio: 16 / 9;
+  margin-inline: auto;
+}
+
+/* Retrato — foto da Ana de jaleco na dobra 2 */
+.mn-ph--portrait {
+  width: min(100%, 380px);
+  aspect-ratio: 3 / 4;
+  margin-inline: auto;
+}
+
+/* =========================================================================
+   2. PENDÊNCIA
+
+   Tudo que a copy entregou como "a definir". Fica legível mas visivelmente
+   provisório: quem revisar a página vê na hora o que falta preencher.
+   ========================================================================= */
+.mn-todo {
+  display: inline-block;
+  padding: .06em .42em;
+  border-radius: 5px;
+  border: 1px dashed var(--tp-rose-soft);
+  background: var(--tp-rose-wash);
+  color: var(--tp-rose-deep);
+  font-size: .9em;
+  font-weight: var(--fw-semibold);
+  font-style: normal;
+  white-space: nowrap;
+}
+
+/* Aviso de topo listando o que falta antes de publicar. Não vai ao ar: é para
+   sair junto com as pendências. */
+.mn-draft {
+  position: relative;
+  z-index: 5;
+  padding: .85rem clamp(1rem, 4vw, 2rem);
+  background: #34222F;
+  color: #FFF;
+  font-size: .78rem;
+  line-height: 1.6;
+  text-align: center;
+}
+.mn-draft strong { color: var(--tp-rose-soft); }
+
+/* =========================================================================
+   3. CARD COM ÍCONE (dobra 2)
+
+   .tp-pillar traz o desenho do card; aqui só troca o número por um ícone.
+   ========================================================================= */
+.mn-pillar__icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: .2rem;
+  border-radius: 50%;
+  background: var(--tp-violet-wash);
+  color: var(--tp-violet-deep);
+}
+.mn-pillar__icon svg { display: block; }
+
+/* =========================================================================
+   AJUSTES PONTUAIS
+
+   O hero do taping é uma grade de 2 colunas (logo | foto) com a copy
+   ocupando a linha de baixo. Aqui a dobra 1 tem logo, título e um mockup
+   abaixo da copy — uma coluna só, centralizada.
+   ========================================================================= */
+.mn-hero__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+  padding-block: clamp(1.75rem, 5vw, 3rem);
+  text-align: center;
+}
+
+/* A copy do taping traz três ajustes que só fazem sentido ao lado da foto da
+   Ana: o recuo negativo (sobe pra cima da foto), o respiro de baixo (deixa a
+   foto encostar na base) e, a partir de 900px, o alinhamento à esquerda da
+   grade de 2 colunas. Aqui não há foto e a coluna é uma só — os três saem. */
+.mn-hero__inner .tp-hero__copy {
+  margin-top: 0;
+  padding-bottom: 0;
+  text-align: center;
+}
+.mn-hero__inner .tp-hero__headline,
+.mn-hero__inner .tp-hero__sub,
+.mn-hero__inner .mn-hero__h2 { margin-inline: auto; }
+
+.mn-hero__inner .tp-cta   { align-items: center; }
+.mn-hero__inner .tp-trust { justify-content: center; }
+
+/* O H2 da copy (o "+70 Aplicações Ilustradas") entra sob o H1 sem competir
+   com ele em peso. */
+.mn-hero__h2 {
+  margin: 0;
+  font-size: clamp(1.05rem, 2.6vw, 1.5rem);
+  font-weight: var(--fw-bold);
+  line-height: 1.3;
+  letter-spacing: -.01em;
+  color: var(--tp-rose-deep);
+  max-width: 24ch;
+}
+
+/* Assinatura da autora, abaixo do mockup */
+.mn-hero__by {
+  margin: 0;
+  font-size: .84rem;
+  line-height: 1.55;
+  color: var(--tp-muted);
+  max-width: 44ch;
+}
+
+/* Lista de preços da dobra 5 — o empilhamento de valor antes do R$27. */
+.mn-stack {
+  max-width: 620px;
+  margin-inline: auto;
+  padding: clamp(1.1rem, 3vw, 1.6rem);
+  border: 1px solid var(--tp-line-soft);
+  border-radius: var(--tp-radius-sm);
+  background: var(--tp-white);
+  box-shadow: var(--tp-shadow-sm);
+}
+.mn-stack__list { list-style: none; margin: 0; padding: 0; }
+.mn-stack__list li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .62rem 0;
+  border-bottom: 1px solid var(--tp-line-soft);
+  font-size: .92rem;
+  line-height: 1.5;
+  color: var(--tp-body);
+  text-align: left;
+}
+.mn-stack__total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: .9rem;
+  font-size: .96rem;
+  font-weight: var(--fw-extrabold);
+  color: var(--tp-ink);
+  text-align: left;
+}
+
+/* Frase de fechamento sob o preço ("Pagamento único...") */
+.mn-terms {
+  margin: .9rem 0 0;
+  font-size: .8rem;
+  letter-spacing: .02em;
+  color: var(--tp-muted);
+  text-align: center;
+}
+
+/* Botão flutuante: a copy pede o texto "+70 Aplicações Ilustradas" ao lado do
+   botão. O .tp-sticky do taping só previa o botão. */
+.mn-sticky__label {
+  font-size: .8rem;
+  font-weight: var(--fw-extrabold);
+  line-height: 1.2;
+  color: var(--tp-ink);
+  white-space: nowrap;
+}
+@media (max-width: 620px) {
+  .mn-sticky__label { display: none; }
+}
+
+/* =========================================================================
+   BOTÃO FLUTUANTE EM TODA A PÁGINA
+
+   A copy pede o flutuante "em toda a página". No taping.css o .tp-sticky é
+   display:none e só vira flex abaixo de 860px — ou seja, mobile. Aqui ele
+   vale também no desktop, em linha com a etiqueta ao lado do botão.
+   (A regra mobile do taping.css continua valendo abaixo de 860px: coluna,
+   com a etiqueta escondida.)
+   ========================================================================= */
+@media (min-width: 861px) {
+  .tp-sticky {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(.75rem, 2vw, 1.25rem);
+  }
+  /* No mobile o botão ocupa a largura toda; no desktop acompanha o texto. */
+  .tp-sticky .btn--tp { width: auto; padding-block: .85rem; }
+}
+
+/* =========================================================================
+   COPY DE 23/09 — componentes que a revisão pediu
+   ========================================================================= */
+
+/* O nome do produto passou a ser a linha que acompanha o logo, acima do H1
+   (a manchete agora é a promessa, não o nome). Discreto de propósito: ele
+   identifica, não compete. */
+.mn-hero__product {
+  margin: 0 0 clamp(.5rem, 1.4vw, .85rem);
+  font-size: clamp(.78rem, 1.5vw, .9rem);
+  font-weight: var(--fw-semibold);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--tp-muted);
+}
+
+/* Respiro entre o H1 e o H2 rosa, que antes se encostavam. */
+.mn-hero__h2 { margin-top: clamp(.6rem, 1.6vw, 1rem); }
+
+/* Nota de rodapé do asterisco do parcelamento, dentro do card de preço. */
+.mn-offer__fine {
+  margin: .5rem 0 0;
+  font-size: .74rem;
+  line-height: 1.5;
+  color: var(--tp-muted);
+}
+
+/* A dobra 5 é a única seção de fundo escuro. O taping.css pinta o .tp-title
+   de branco ali, mas o .tp-hl dentro dele reimpõe o rosa escuro com faixa
+   clara — some no fundo. E o .tp-lead ("Você vai receber:"), que esta copy
+   trouxe para a seção, nunca foi previsto sobre o rosa. Os dois herdam o
+   branco aqui. */
+.tp-section--offer .tp-title .tp-hl {
+  color: #fff;
+  background-image: linear-gradient(180deg, transparent 62%, rgba(255, 255, 255, .3) 62%);
+}
+.tp-section--offer .tp-lead { color: rgba(255, 255, 255, .9); }
+.tp-section--offer .tp-lead strong { color: #fff; }
