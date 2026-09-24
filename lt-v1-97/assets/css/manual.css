@@ -351,3 +351,26 @@
 }
 .tp-section--offer .tp-lead { color: rgba(255, 255, 255, .9); }
 .tp-section--offer .tp-lead strong { color: #fff; }
+
+/* =========================================================================
+   CTA VERDE
+
+   O sistema do taping traz o botão em roxo. Aqui ele é verde, e a escolha
+   do tom é de contraste: o texto é branco, em ~15px bold — abaixo do que a
+   WCAG considera "texto grande", então vale o mínimo de 4.5:1. O degradê
+   corre do tom mais claro para o mais escuro, então quem manda é a ponta
+   clara: #12854A dá 4.69:1 sobre branco e é o ponto mais alto que passa.
+   Clarear mais que isso quebra a leitura do rótulo.
+   ========================================================================= */
+.btn--tp {
+  background: linear-gradient(135deg, #12854A 0%, #0D6E3C 45%, #095A30 100%);
+  box-shadow: 0 12px 30px rgba(13, 110, 60, .28), inset 0 1px 0 rgba(255, 255, 255, .22);
+}
+.btn--tp:hover,
+.btn--tp:focus-visible {
+  background: linear-gradient(135deg, #0D6E3C 0%, #095A30 100%);
+  box-shadow: 0 18px 42px rgba(13, 110, 60, .36), inset 0 1px 0 rgba(255, 255, 255, .22);
+}
+/* O anel de foco do design-system usa a cor primária (roxa) e ficaria
+   destoando do botão. */
+.btn--tp:focus-visible { outline-color: #0D6E3C; }
