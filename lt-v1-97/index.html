@@ -138,17 +138,13 @@
 
       <div class="tp-container mn-hero__inner">
 
-        <!-- [Logo do Ebook] -->
-        <div class="mn-ph mn-ph--logo">
-          <span class="mn-ph__tag">Imagem</span>
-          <p class="mn-ph__desc">Logo do ebook</p>
-        </div>
+        <!-- Logo do ebook. width/height são os do arquivo: reservam a caixa
+             antes de a imagem baixar, para o título não pular. -->
+        <img class="mn-hero__logo" src="assets/img/logo-manual.webp"
+             width="600" height="391" fetchpriority="high" decoding="async"
+             alt="Manual Ilustrado para Alívio da Dor" />
 
         <div class="tp-hero__copy">
-          <!-- O nome do produto vem sob o logo, acima do H1 — no doc ele é a
-               linha que acompanha o logo, não a manchete. -->
-          <p class="mn-hero__product">Manual Ilustrado para Alívio da Dor com Massagem</p>
-
           <h1 class="tp-hero__headline" id="hero-title">
             Nunca mais atenda uma paciente com <span class="tp-hl">medo de piorar a dor dela</span>
           </h1>
@@ -199,12 +195,6 @@
           <h2 class="tp-title" id="para-quem-title">Esse manual foi criado pensando em você que:</h2>
         </div>
 
-        <!-- Imagem (foto da Ana de jaleco) -->
-        <div class="mn-ph mn-ph--portrait" data-reveal style="margin-bottom: clamp(1.75rem, 4vw, 2.75rem);">
-          <span class="mn-ph__tag">Imagem</span>
-          <p class="mn-ph__desc">Foto da Ana de jaleco</p>
-        </div>
-
         <div class="tp-pillars">
           <article class="tp-pillar" data-reveal>
             <span class="mn-pillar__icon"><svg width="22" height="22" aria-hidden="true"><use href="#i-hands" /></svg></span>
@@ -236,9 +226,39 @@
             </p>
           </article>
         </div>
+
+        <div class="tp-cta" data-reveal>
+          <a class="btn btn--tp" href="#" data-checkout>
+            <span>Sim, isso é para mim <span class="tp-arrow" aria-hidden="true">&rarr;</span></span>
+          </a>
+        </div>
       </div>
     </section>
     <!-- ==================== /DOBRA 2 ==================== -->
+
+
+    <!-- ==================== FAIXA CORRIDA ====================
+         Divide a dobra 2 da dobra 3. É ornamento: o nome do produto já
+         está no logo e no <title>, então repetir 14 vezes para quem usa
+         leitor de tela seria só ruído — daí o aria-hidden. -->
+    <div class="mn-marquee" aria-hidden="true">
+      <div class="mn-marquee__track">
+        <span class="mn-marquee__item">Manual Ilustrado para Alívio da Dor<span class="mn-marquee__sep" aria-hidden="true"></span></span>
+        <span class="mn-marquee__item">Manual Ilustrado para Alívio da Dor<span class="mn-marquee__sep" aria-hidden="true"></span></span>
+        <span class="mn-marquee__item">Manual Ilustrado para Alívio da Dor<span class="mn-marquee__sep" aria-hidden="true"></span></span>
+        <span class="mn-marquee__item">Manual Ilustrado para Alívio da Dor<span class="mn-marquee__sep" aria-hidden="true"></span></span>
+        <span class="mn-marquee__item">Manual Ilustrado para Alívio da Dor<span class="mn-marquee__sep" aria-hidden="true"></span></span>
+        <span class="mn-marquee__item">Manual Ilustrado para Alívio da Dor<span class="mn-marquee__sep" aria-hidden="true"></span></span>
+        <span class="mn-marquee__item">Manual Ilustrado para Alívio da Dor<span class="mn-marquee__sep" aria-hidden="true"></span></span>
+        <span class="mn-marquee__item">Manual Ilustrado para Alívio da Dor<span class="mn-marquee__sep" aria-hidden="true"></span></span>
+        <span class="mn-marquee__item">Manual Ilustrado para Alívio da Dor<span class="mn-marquee__sep" aria-hidden="true"></span></span>
+        <span class="mn-marquee__item">Manual Ilustrado para Alívio da Dor<span class="mn-marquee__sep" aria-hidden="true"></span></span>
+        <span class="mn-marquee__item">Manual Ilustrado para Alívio da Dor<span class="mn-marquee__sep" aria-hidden="true"></span></span>
+        <span class="mn-marquee__item">Manual Ilustrado para Alívio da Dor<span class="mn-marquee__sep" aria-hidden="true"></span></span>
+        <span class="mn-marquee__item">Manual Ilustrado para Alívio da Dor<span class="mn-marquee__sep" aria-hidden="true"></span></span>
+        <span class="mn-marquee__item">Manual Ilustrado para Alívio da Dor<span class="mn-marquee__sep" aria-hidden="true"></span></span>
+      </div>
+    </div>
 
     <!-- ==================== DOBRA 3 — O QUE VOCÊ VAI RECEBER ==================== -->
     <section class="tp-section tp-section--lilac" aria-labelledby="receber-title">
@@ -337,6 +357,12 @@
           </article>
 
         </div>
+
+        <div class="tp-cta" data-reveal>
+          <a class="btn btn--tp" href="#" data-checkout>
+            <span>Quero tudo isso em mãos <span class="tp-arrow" aria-hidden="true">&rarr;</span></span>
+          </a>
+        </div>
       </div>
     </section>
     <!-- ==================== /DOBRA 3 ==================== -->
@@ -362,9 +388,9 @@
             <span class="tp-bonus__free">Grátis</span>
             <div class="tp-bonus__body">
               <span class="tp-bonus__label">Bônus 1</span>
-              <h3 class="tp-bonus__text"><strong>Vídeo-aulas das manobras</strong></h3>
+              <h3 class="mn-bonus__title">Vídeo-aulas das manobras</h3>
               <p class="tp-bonus__text">Só pela ilustração, às vezes bate dúvida se você entendeu certo o movimento. Aqui você vê a manobra sendo feita antes de aplicar na cliente.</p>
-              <p class="tp-bonus__text">Valor: <strong>R$197</strong></p>
+              <p class="mn-bonus__price">Valor: <s>R$197</s></p>
             </div>
           </article>
 
@@ -378,9 +404,9 @@
             <span class="tp-bonus__free">Grátis</span>
             <div class="tp-bonus__body">
               <span class="tp-bonus__label">Bônus 2</span>
-              <h3 class="tp-bonus__text"><strong>Meu contato direto no WhatsApp</strong></h3>
+              <h3 class="mn-bonus__title">Meu contato direto no WhatsApp</h3>
               <p class="tp-bonus__text">Você manda sua dúvida direto pelo WhatsApp e recebe resposta na hora. Seja sábado, domingo, feriado ou de madrugada.</p>
-              <p class="tp-bonus__text">Valor: <strong>R$997</strong></p>
+              <p class="mn-bonus__price">Valor: <s>R$997</s></p>
             </div>
           </article>
 
@@ -394,9 +420,9 @@
             <span class="tp-bonus__free">Grátis</span>
             <div class="tp-bonus__body">
               <span class="tp-bonus__label">Bônus 3</span>
-              <h3 class="tp-bonus__text"><strong>Mapa ilustrado de reflexologia</strong></h3>
+              <h3 class="mn-bonus__title">Mapa ilustrado de reflexologia</h3>
               <p class="tp-bonus__text">A reflexologia é uma técnica milenar que trabalha pontos específicos dos pés para aliviar dores em outras partes do corpo. Aqui você recebe um mapa ilustrado desses pontos, um conhecimento a mais no seu repertório, sem pagar nada extra por isso.</p>
-              <p class="tp-bonus__text">Valor: <strong>R$97</strong></p>
+              <p class="mn-bonus__price">Valor: <s>R$97</s></p>
             </div>
           </article>
 
@@ -410,9 +436,9 @@
             <span class="tp-bonus__free">Grátis</span>
             <div class="tp-bonus__body">
               <span class="tp-bonus__label">Bônus 4</span>
-              <h3 class="tp-bonus__text"><strong>Guia ilustrado de drenagem linfática</strong></h3>
+              <h3 class="mn-bonus__title">Guia ilustrado de drenagem linfática</h3>
               <p class="tp-bonus__text">Um guia visual com as principais regiões linfáticas, os caminhos e o sentido de cada movimento, para você aplicar a drenagem sem ficar adivinhando para que lado ela deve ir.</p>
-              <p class="tp-bonus__text">Valor: <strong>R$297</strong></p>
+              <p class="mn-bonus__price">Valor: <s>R$297</s></p>
             </div>
           </article>
 

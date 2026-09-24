@@ -449,3 +449,187 @@
 /* Mesma coisa no H1: 21ch o partia em três linhas. Em 33ch fecha em duas,
    e ele já vem com text-wrap: balance do taping. */
 .mn-hero__inner .tp-hero__headline { max-width: 33ch; }
+
+/* =========================================================================
+   LOGO DO HERO
+
+   Substitui o espaço .mn-ph--logo. O .tp-hero__logo do taping é um logo
+   pequeno de canto (até 118px); este é o título do produto desenhado, e
+   precisa de outra escala — por isso classe própria.
+   ========================================================================= */
+.mn-hero__logo {
+  width: clamp(200px, 30vw, 300px);
+  height: auto;
+  margin-bottom: clamp(.25rem, 1vw, .6rem);
+}
+
+/* =========================================================================
+   FAIXA DE TEXTO INFINITA
+
+   Divide a dobra 2 da dobra 3 com o nome do produto correndo.
+
+   A trilha guarda a lista DUAS vezes e desliza até -50%: nesse ponto a
+   segunda cópia está exatamente onde a primeira começou, então o reinício
+   cai no mesmo pixel e a emenda não aparece. É por isso que o número de
+   itens tem de ser par e as duas metades, idênticas.
+   ========================================================================= */
+.mn-marquee {
+  overflow: hidden;
+  padding-block: clamp(.7rem, 1.8vw, 1rem);
+  background: linear-gradient(90deg, #01337C 0%, #0285D3 50%, #01337C 100%);
+}
+.mn-marquee__track {
+  display: flex;
+  width: max-content;
+  animation: mnMarquee 38s linear infinite;
+  will-change: transform;
+}
+.mn-marquee__item {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+  padding-inline-end: clamp(1rem, 2.5vw, 1.75rem);
+  white-space: nowrap;
+  color: #fff;
+  font-size: clamp(.72rem, 1.5vw, .92rem);
+  font-weight: var(--fw-extrabold);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+/* O losango separador: decorativo, não deve ser lido nem herdar o peso. */
+.mn-marquee__sep {
+  display: inline-block;
+  width: .42em;
+  height: .42em;
+  rotate: 45deg;
+  background: rgba(255, 255, 255, .65);
+}
+@keyframes mnMarquee {
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mn-marquee__track { animation: none; }
+}
+
+/* =========================================================================
+   MANCHAS DE LUZ DA DOBRA 5
+
+   As duas manchas que derivam sobre a faixa da oferta estavam em rosa e
+   roxo, escritos à mão fora dos tokens — por isso sobreviveram à troca de
+   paleta e apareciam como um borrão vermelho sobre o azul.
+   ========================================================================= */
+.tp-section--offer::before {
+  background: radial-gradient(closest-side, rgba(2, 133, 211, .55) 0%, rgba(2, 133, 211, 0) 100%);
+}
+.tp-section--offer::after {
+  background: radial-gradient(closest-side, rgba(1, 74, 155, .75) 0%, rgba(1, 74, 155, 0) 100%);
+}
+
+/* =========================================================================
+   AS DUAS GRADES COM LINHA ÓRFÃ
+
+   As duas usam repeat(auto-fit, minmax(300px, 1fr)): o número de colunas
+   sai da largura, e com 5 e 4 cards a última linha ficava pela metade,
+   encostada à esquerda. Aqui as duas ganham contagem fixa no desktop.
+
+   Abaixo de 1010px nenhuma das duas cabe em 3 colunas, então o auto-fit do
+   taping volta a mandar e as regras somem sozinhas.
+   ========================================================================= */
+@media (min-width: 1010px) {
+  /* Dobra 3 — 5 cards. A grade vira 6 colunas e cada card ocupa 2: os três
+     de cima caem em 1-2, 3-4 e 5-6, e os dois de baixo começam em 2 e 4,
+     o que os deixa centrados sem mexer na largura de ninguém. */
+  .tp-inside { grid-template-columns: repeat(6, 1fr); }
+  .tp-inside > .tp-inside__card { grid-column: span 2; }
+  .tp-inside > .tp-inside__card:nth-child(4) { grid-column: 2 / span 2; }
+  .tp-inside > .tp-inside__card:nth-child(5) { grid-column: 4 / span 2; }
+
+  /* Dobra 4 — 4 cards, pedidos em duas linhas de dois. O limite de largura
+     é o que impede o card de esticar para meia tela: mantém a proporção
+     que ele já tinha em três colunas. */
+  .tp-bonus {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 800px;
+    margin-inline: auto;
+  }
+}
+
+/* =========================================================================
+   VALOR DO BÔNUS
+
+   O valor é riscado e grande de propósito: o número é o argumento (são
+   R$1.588 em bônus somados), e o corte é o que diz que ele não entra na
+   conta. Pequeno e inteiro, ele parecia uma cobrança.
+
+   O <s> carrega o sentido no HTML, não só na aparência — leitores de tela
+   anunciam o trecho como removido.
+   ========================================================================= */
+.mn-bonus__price {
+  margin: .15rem 0 0;
+  display: flex;
+  align-items: baseline;
+  gap: .45rem;
+  font-size: .76rem;
+  font-weight: var(--fw-semibold);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--tp-muted);
+}
+.mn-bonus__price s {
+  font-size: 1.45rem;
+  font-weight: var(--fw-extrabold);
+  letter-spacing: -.02em;
+  color: var(--tp-rose-deep);
+  /* O risco fica em azul vivo e mais grosso que o padrão: sem isso ele
+     some dentro de um número em peso extrabold. */
+  text-decoration-line: line-through;
+  text-decoration-color: var(--tp-rose);
+  text-decoration-thickness: 2.5px;
+  text-transform: none;
+}
+
+/* O título do bônus era um <h3> usando a classe de corpo do taping — saía
+   do mesmo tamanho do parágrafo abaixo dele, sem hierarquia. Agora tem
+   classe própria e sobe para o tamanho de um subtítulo de card. */
+.mn-bonus__title {
+  margin: 0 0 .5rem;
+  font-size: clamp(1.08rem, 1.5vw, 1.25rem);
+  font-weight: var(--fw-extrabold);
+  line-height: 1.3;
+  letter-spacing: -.015em;
+  color: var(--tp-ink);
+  text-wrap: balance;
+}
+
+/* =========================================================================
+   RESPIRO DA DOBRA 5
+
+   A lista de valores e o card de preço são dois cartões brancos seguidos,
+   e nenhum dos dois trazia margem: encostavam um no outro e liam como um
+   bloco só partido no meio. Agora há distância entre eles, e a linha do
+   total ganha uma divisória mais firme que as das parcelas — ela é a
+   conclusão da conta, não mais um item dela.
+   ========================================================================= */
+.mn-stack {
+  margin-bottom: clamp(1.75rem, 4.5vw, 3rem);
+  padding: clamp(1.35rem, 3.4vw, 2rem);
+}
+.mn-stack__list li { padding: .72rem 0; }
+.mn-stack__list li:last-child { border-bottom: 0; }
+.mn-stack__total {
+  margin-top: 0;
+  padding-top: 1rem;
+  border-top: 2px solid var(--tp-line);
+  font-size: 1.02rem;
+}
+
+/* O logo estava competindo em altura com a própria manchete. Recuado, ele
+   volta a ser assinatura do produto e deixa o H1 abrir a dobra. */
+.mn-hero__logo { width: clamp(150px, 21vw, 215px); }
+
+/* O fio do topo do 2º card da dobra 2 tinha um lilás escrito à mão
+   (#DDBDF3) que escapou da troca de paleta e puxava rosa no meio de três
+   cards azuis. Os três passam a variar dentro da mesma família. */
+.tp-pillar:nth-child(2)::before {
+  background: linear-gradient(90deg, var(--tp-violet-soft), var(--tp-violet));
+}
