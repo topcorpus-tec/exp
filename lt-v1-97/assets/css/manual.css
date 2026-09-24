@@ -374,3 +374,89 @@
 /* O anel de foco do design-system usa a cor primária (roxa) e ficaria
    destoando do botão. */
 .btn--tp:focus-visible { outline-color: #0D6E3C; }
+
+/* =========================================================================
+   IDENTIDADE AZUL — a capa do manual
+
+   A capa é azul: navy #01337C nos títulos, azul vivo #0285D3 na marca,
+   fundo #DFEEFC. O sistema herdado do taping é rosa e roxo, quente. Em vez
+   de repintar componente por componente, os tokens são reatribuídos aqui:
+   cada um mantém o PAPEL que tinha (destaque, hover, faixa alternada) e só
+   troca de matiz. Assim qualquer componente do taping que a página venha a
+   usar já nasce azul, sem regra nova.
+
+   As duas famílias viram duas famílias de azul:
+     rose   (destaque, marca)  → azul vivo, o "DOR" da capa
+     violet (estrutura, botão) → navy, o "ALÍVIO DA" da capa
+   ========================================================================= */
+:root {
+  /* ---- Base clara: os brancos quentes esfriam ---- */
+  --tp-cream:      #FBFDFF;
+  --tp-ivory:      #F1F8FE;
+  --tp-blush:      #E9F4FD;
+  --tp-lilac:      #EEF6FE;
+  --tp-mist:       #F1F6FB;
+
+  /* ---- Marca ---- */
+  --tp-rose:       #0285D3;   /* azul vivo da capa (o "DOR")                  */
+  --tp-rose-deep:  #0A5C9E;   /* texto de destaque — 6,6:1 sobre branco       */
+  --tp-rose-soft:  #9BD1F2;
+  --tp-rose-wash:  #E3F1FC;
+  --tp-violet:     #14528F;
+  --tp-violet-lift:#1C6BB0;
+  --tp-violet-deep:#01337C;   /* navy da capa (o "ALÍVIO DA")                 */
+  --tp-violet-soft:#CDE4F7;
+  --tp-violet-wash:#E9F3FD;
+  --tp-gold:       #0285D3;   /* não há dourado na capa: vira o azul vivo     */
+  --tp-gold-soft:  #DCEEFB;
+
+  /* ---- Texto: a ameixa escura vira navy ---- */
+  --tp-ink:        #0B2545;
+  --tp-body:       #3C5772;   /* 7,5:1                                        */
+  --tp-muted:      #5E7695;   /* 4,6:1 — o mínimo para as legendas em caixa alta */
+
+  /* ---- Traços e sombras rebaseados no navy ---- */
+  --tp-line:       rgba(11, 37, 69, .12);
+  --tp-line-soft:  rgba(11, 37, 69, .07);
+  --tp-shadow-xs:  0 1px 2px rgba(11, 37, 69, .05);
+  --tp-shadow-sm:  0 4px 16px rgba(10, 60, 120, .08);
+  --tp-shadow-md:  0 14px 40px rgba(10, 60, 120, .11);
+  --tp-shadow-lg:  0 26px 70px rgba(10, 60, 120, .14);
+
+  --color-bg-footer: #EDF4FA;
+
+  /* O anel de foco e a barra de rolagem do design-system eram roxos. */
+  --color-primary:      #14528F;
+  --color-primary-dark: #01337C;
+}
+
+/* As três manchas de luz do hero e a base do degradê estão escritas em hex
+   e rgba, fora dos tokens — por isso a declaração inteira volta aqui. */
+.tp-hero {
+  background:
+    radial-gradient(58% 44% at 50% -6%, rgba(2, 133, 211, .14) 0%, transparent 68%),
+    radial-gradient(46% 38% at 88% 22%, rgba(1,  51, 124, .10) 0%, transparent 70%),
+    radial-gradient(52% 40% at 8%  72%, rgba(2, 133, 211, .09) 0%, transparent 72%),
+    linear-gradient(180deg, #F3FAFF 0%, var(--tp-cream) 55%, var(--tp-ivory) 100%);
+}
+
+/* A faixa da oferta era um rosa escuro fixo. Vira o navy da capa — com
+   texto branco dá 10,9:1, folgado. */
+.tp-section--offer {
+  background: linear-gradient(135deg, #01468F 0%, #013A80 52%, #012F6B 100%);
+}
+.tp-section--offer .tp-offer__box {
+  box-shadow: 0 30px 80px rgba(1, 28, 66, .42);
+}
+
+/* O H2 do hero quebrava em três linhas porque herdou um limite de 24ch.
+   Em 36ch ele cabe em duas, e o text-wrap: balance reparte as palavras
+   entre elas em vez de encher a primeira e deixar a sobra na segunda. */
+.mn-hero__h2 {
+  max-width: 36ch;
+  text-wrap: balance;
+}
+
+/* Mesma coisa no H1: 21ch o partia em três linhas. Em 33ch fecha em duas,
+   e ele já vem com text-wrap: balance do taping. */
+.mn-hero__inner .tp-hero__headline { max-width: 33ch; }
