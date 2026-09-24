@@ -294,24 +294,13 @@
 }
 
 /* =========================================================================
-   BOTÃO FLUTUANTE EM TODA A PÁGINA
+   BOTÃO FLUTUANTE — SÓ NO MOBILE
 
-   A copy pede o flutuante "em toda a página". No taping.css o .tp-sticky é
-   display:none e só vira flex abaixo de 860px — ou seja, mobile. Aqui ele
-   vale também no desktop, em linha com a etiqueta ao lado do botão.
-   (A regra mobile do taping.css continua valendo abaixo de 860px: coluna,
-   com a etiqueta escondida.)
+   A regra que fazia a barra aparecer também no desktop foi removida:
+   no desktop o CTA da dobra já está sempre a um scroll de distância, e
+   a barra só comia altura de tela. Sem ela aqui, vale o padrão do
+   taping.css — display:none, virando flex só abaixo de 860px.
    ========================================================================= */
-@media (min-width: 861px) {
-  .tp-sticky {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(.75rem, 2vw, 1.25rem);
-  }
-  /* No mobile o botão ocupa a largura toda; no desktop acompanha o texto. */
-  .tp-sticky .btn--tp { width: auto; padding-block: .85rem; }
-}
 
 /* =========================================================================
    COPY DE 23/09 — componentes que a revisão pediu
