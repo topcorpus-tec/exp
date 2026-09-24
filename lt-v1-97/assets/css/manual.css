@@ -633,3 +633,75 @@
 .tp-pillar:nth-child(2)::before {
   background: linear-gradient(90deg, var(--tp-violet-soft), var(--tp-violet));
 }
+
+/* Selo de garantia — ocupa a mesma caixa que o espaço reservado ocupava. */
+.mn-seal {
+  display: block;
+  width: clamp(190px, 28vw, 300px);
+  height: auto;
+  margin-inline: auto;
+}
+
+/* =========================================================================
+   ETIQUETA DO BÔNUS EM PÍLULA
+
+   Era só um texto em caixa alta, do mesmo peso do título logo abaixo. Como
+   pílula ela vira etiqueta: lê-se antes do título e não disputa com ele.
+   ========================================================================= */
+.tp-bonus__label {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  padding: .32em .85em;
+  margin-bottom: .6rem;
+  border-radius: var(--radius-pill);
+  background: var(--tp-rose-wash);
+  color: var(--tp-rose-deep);
+  font-size: .64rem;
+  letter-spacing: .14em;
+  line-height: 1;
+}
+
+/* =========================================================================
+   PREÇO ANCORADO — VERMELHO E CORTADO
+
+   Um só tratamento para todo valor que a cliente NÃO vai pagar: os cinco
+   itens da lista, o total e os valores dos bônus. O vermelho é a única
+   cor fora da paleta azul da página, e é de propósito — ele marca esses
+   números como a conta antiga, e nada mais na página usa esse tom.
+
+   O corte mora no <s> do HTML, não só aqui: quem usa leitor de tela ouve
+   que o trecho foi removido, em vez de ouvir um preço que não vale mais.
+   ========================================================================= */
+.mn-stack__list li s,
+.mn-stack__total s,
+.mn-bonus__price s,
+.tp-offer__from s {
+  color: #C62828;                       /* 5,6:1 sobre o cartão branco */
+  text-decoration-line: line-through;
+  text-decoration-color: #C62828;
+  text-decoration-thickness: 2px;
+  text-decoration-skip-ink: none;       /* o traço atravessa o cifrão e o 7 */
+}
+.mn-stack__total s { text-decoration-thickness: 2.5px; }
+.mn-bonus__price s { text-decoration-thickness: 2.5px; }
+
+/* Selo maior. O arquivo foi regerado em 760px para acompanhar: no tamanho
+   anterior ele ficaria abaixo de 2x em tela retina e borraria. */
+.mn-seal { width: clamp(230px, 34vw, 390px); }
+
+/* =========================================================================
+   GARANTIA NO MOBILE
+
+   Acima de 900px a dobra é selo à esquerda e texto à direita, e o texto
+   alinhado à esquerda acompanha o selo. Abaixo disso a grade vira uma
+   coluna só, com o selo centrado em cima — e o texto continuava à
+   esquerda, desalinhado do próprio selo. Aqui ele centra junto.
+   ========================================================================= */
+@media (max-width: 899px) {
+  .tp-guarantee__copy {
+    align-items: center;
+    text-align: center;
+  }
+  .tp-guarantee__copy .tp-cta--left { align-items: center; }
+}
