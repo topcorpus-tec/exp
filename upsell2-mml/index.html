@@ -146,8 +146,18 @@
 
   <!-- ==================== BARRA DA CONDIÇÃO ====================
        No doc ela fecha esta página, em vez de abrir como nas outras duas:
-       aqui a tarefa é assistir o vídeo, e a oferta vem depois disso. -->
-  <div class="mml-bar mml-bar--bottom">
+       aqui a tarefa é assistir o vídeo, e a oferta vem depois disso.
+
+       Por isso o data-delay: a barra só entra 120s (2 min) depois que a
+       página abre, dando tempo de o vídeo ser assistido antes de a oferta
+       aparecer. O atributo hidden é o estado inicial; o mml.js o remove
+       quando o tempo passa.
+
+       O <noscript> logo abaixo é a rede de segurança: sem JavaScript
+       ninguém removeria o hidden, e a página ficaria sem o botão para
+       sempre. Ali ele aparece de cara — melhor cedo que nunca. -->
+  <noscript><style>[data-delay] { display: block !important; }</style></noscript>
+  <div class="mml-bar mml-bar--bottom" data-delay="120" hidden>
     <div class="tp-container mml-bar__inner">
       <p class="mml-bar__text">Garanta seu acesso ao Método Mãos Lucrativas por <strong>menos de R$1 por dia</strong></p>
       <a class="btn btn--tp mml-bar__btn" href="#funil">Garantir minha vaga</a>

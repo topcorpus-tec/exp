@@ -95,11 +95,38 @@
   }
 
   /* =======================================================================
+     ENTRADA ADIADA
+
+     Qualquer bloco com [data-delay="<segundos>"] nasce com o atributo
+     hidden e só aparece quando o tempo passa. Na /upsell2-mml é a barra
+     da condição, que espera 2 minutos para o vídeo ser assistido antes de
+     a oferta entrar.
+
+     A contagem começa no load da página, não no play do vídeo: o player
+     ainda não existe (o embed entra depois) e, quando existir, nem todo
+     serviço avisa quando o play acontece. Se um dia o player expuser esse
+     evento, é aqui que a troca mora.
+     ======================================================================= */
+  function initDelays() {
+    var blocos = [].slice.call(document.querySelectorAll("[data-delay]"));
+    if (!blocos.length) return;
+
+    blocos.forEach(function (el) {
+      var seg = parseFloat(el.getAttribute("data-delay"));
+      // Valor ausente ou inválido: mostra na hora, em vez de esconder para
+      // sempre um bloco que alguém marcou por engano.
+      if (isNaN(seg) || seg <= 0) { el.removeAttribute("hidden"); return; }
+      setTimeout(function () { el.removeAttribute("hidden"); }, seg * 1000);
+    });
+  }
+
+  /* =======================================================================
      BOOT
      ======================================================================= */
   function boot() {
     initReveal();
     initAnchors();
+    initDelays();
     avisarFunilVazio();
   }
 

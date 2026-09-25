@@ -635,3 +635,28 @@
 
 /* Nesta página a barra fecha em vez de abrir, então a borda muda de lado. */
 .mml-bar--bottom { border-top: 0; }
+
+/* =========================================================================
+   12. BLOCO COM ENTRADA ADIADA
+
+   Usado na /upsell2-mml pela barra da condição: ela só aparece depois de
+   2 minutos, para o vídeo ter tempo de ser assistido antes da oferta.
+
+   O hidden do HTML é o estado inicial e precisa do !important porque as
+   classes do bloco declaram display — sem isso o display delas ganharia
+   do display:none que o navegador dá ao hidden, e a barra apareceria
+   desde o começo. Quando o JS remove o atributo, a regra deixa de casar
+   sozinha.
+   ========================================================================= */
+[data-delay][hidden] { display: none !important; }
+
+[data-delay] {
+  animation: mmlSobe .5s var(--ease-out, cubic-bezier(.22, .61, .36, 1)) both;
+}
+@keyframes mmlSobe {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-delay] { animation: none; }
+}
