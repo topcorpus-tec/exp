@@ -503,3 +503,31 @@
   .mn-bio__copy { align-items: center; text-align: center; }
   .mn-bio__copy .tp-cta--left { align-items: center; }
 }
+
+/* =========================================================================
+   OFERTA EM UMA COLUNA
+
+   O taping divide a caixa em duas colunas a partir de 900px — lista à
+   esquerda, preço à direita. Aqui os três blocos ficam empilhados: o
+   mockup abre, a lista vem abaixo dele e o preço fecha.
+
+   A divisória vertical entre as colunas, que o taping desenha com
+   border-left, vira horizontal.
+   ========================================================================= */
+@media (min-width: 900px) {
+  .tp-offer__box { grid-template-columns: 1fr; }
+  .tp-offer__price { border-left: 0; border-top: 1px solid var(--tp-line-soft); }
+}
+
+/* Numa coluna só, a caixa inteira ganha o mesmo limite de leitura que o
+   texto tem no resto da página — sem isso a lista de seis itens atravessa
+   980px e cada linha fica com um vão enorme entre o ícone e o texto. */
+.tp-offer__box { max-width: 620px; }
+
+.mn-offer__media {
+  padding: clamp(1.5rem, 3.4vw, 2.25rem) clamp(1.5rem, 3.4vw, 2.25rem) 0;
+}
+.mn-offer__media .mn-ph--offer {
+  width: 100%;
+  margin-bottom: 0;
+}
