@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#FBFEFC" />
+  <meta name="description" content="R$1.100 de desconto para entrar hoje no Método Mãos Lucrativas. Conquiste seus primeiros R$1.000,00 com massagem em 30 dias, sem maca e sem espaço próprio." />
+
+  <!-- Página de funil (downsell do upsell): não é para ser encontrada na
+       busca, só alcançada dentro do fluxo de compra. O _headers da raiz
+       reforça com X-Robots-Tag em /up-down-mml/*. -->
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+  <meta name="googlebot" content="noindex, nofollow" />
+
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), usb=()" />
+
+  <meta property="og:title"       content="R$1.100 de desconto no Método Mãos Lucrativas" />
+  <meta property="og:description" content="Seus primeiros R$1.000,00 com massagem em 30 dias, sem maca nem espaço próprio. Condição só nesta página." />
+  <meta property="og:type"        content="website" />
+  <meta property="og:locale"      content="pt_BR" />
+
+  <title>Método Mãos Lucrativas — sua condição especial</title>
+
+  <!-- ==================== Fontes compartilhadas (CDN topcorpus) ==================== -->
+  <link rel="preconnect" href="https://pcm.topcorpus.com.br" crossorigin />
+  <link rel="dns-prefetch" href="https://pcm.topcorpus.com.br" />
+  <link rel="preload" as="font" type="font/woff2" href="https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-400.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-600.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-800.woff2" crossorigin />
+
+  <!-- ==================== dataLayer init ANTES do env-config ==================== -->
+  <script>window.dataLayer = window.dataLayer || [];</script>
+
+  <!-- ==================== Site config + GTM ==================== -->
+  <script src="assets/js/env-config.js"></script>
+  <script src="assets/js/gtm-loader.js"></script>
+
+  <!-- ==================== CSS ====================
+       design-system.css e taping.css são os mesmos das páginas do Manual.
+       mml.css é a camada de cima: aqui ela repinta o sistema de verde e
+       traz os poucos componentes próprios desta página. -->
+  <link rel="stylesheet" href="assets/css/design-system.css" />
+  <link rel="stylesheet" href="assets/css/taping.css" />
+  <link rel="stylesheet" href="assets/css/mml.css" />
+
+  <script src="assets/js/mml.js" defer></script>
+</head>
+<body>
+
+  <!-- ==================== Sprite de ícones ==================== -->
+  <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12" />
+    </symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><polyline points="9 12 11 14 15 9.5" />
+    </symbol>
+    <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M8 5.5v13l11-6.5z" />
+    </symbol>
+  </svg>
+
+  <!-- ==================== BARRA DA CONDIÇÃO ====================
+       Primeira coisa da página no doc: o desconto e o botão. -->
+  <div class="mml-bar">
+    <div class="tp-container mml-bar__inner">
+      <p class="mml-bar__text"><strong>1.100 reais de desconto</strong> para você entrar no Método Mãos Lucrativas hoje</p>
+      <a class="btn btn--tp mml-bar__btn" href="#oferta">Garantir minha vaga</a>
+    </div>
+  </div>
+  <p class="mml-bar__note">Sua condição especial está garantida por tempo limitado</p>
+
+  <main>
+
+    <!-- ==================== DOBRA 1 — HERO ==================== -->
+    <section class="tp-hero mml-hero" aria-labelledby="hero-title">
+      <div class="tp-container mml-hero__inner">
+
+        <p class="mml-congrats">
+          <svg width="18" height="18" aria-hidden="true"><use href="#i-check" /></svg>
+          <span><strong>Parabéns!</strong> Você já deu o primeiro passo com o Manual Ilustrado.</span>
+        </p>
+
+        <h1 class="tp-hero__headline" id="hero-title">
+          Conquiste seus primeiros <span class="tp-hl">R$1.000,00 com massagem</span> em apenas 30 dias,
+          sem precisar de maca nem espaço próprio
+        </h1>
+
+        <p class="tp-hero__sub">Mesmo sem nunca ter feito um curso de massagem</p>
+
+        <!-- Espaço do vídeo. Entra o embed (Panda, YouTube, VSL) mantendo a
+             proporção 16/9 que a caixa já reserva, para o resto da dobra não
+             saltar quando o player carregar. -->
+        <div class="mml-video" data-reveal>
+          <div class="mml-ph">
+            <span class="mml-ph__tag">Vídeo</span>
+            <p class="mml-ph__desc">Player da VSL desta página</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 1 ==================== -->
+
+    <!-- ==================== FUNIL HOTMART ====================
+         O doc reserva este ponto: "[ AQUI ENTRA O HTML DO FUNIL DA HOTMART ]".
+         São os botões de aceitar/recusar que a própria Hotmart gera para a
+         etapa do funil — eles não são um link de checkout comum, por isso
+         não dá para inventar a URL aqui.
+
+         PARA PUBLICAR: apague a div .mml-ph de dentro de #funil e cole o
+         HTML da Hotmart no lugar. Todos os botões da página apontam para
+         #funil, então é só este bloco que precisa existir. -->
+    <section class="mml-funnel" id="funil" aria-label="Escolha sua condição">
+      <div class="tp-container">
+        <div class="mml-slot" data-reveal>
+          <div class="mml-ph mml-ph--slot">
+            <span class="mml-ph__tag">Cole aqui</span>
+            <p class="mml-ph__desc">HTML do funil da Hotmart — os botões de aceitar e recusar desta etapa</p>
+            <p class="mml-ph__from">Enquanto este bloco existir, os botões da página só rolam até aqui</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ==================== /FUNIL ==================== -->
+
+    <!-- ==================== DOBRA 2 — A CONDIÇÃO ==================== -->
+    <section class="tp-section tp-section--blush" aria-labelledby="condicao-title">
+      <div class="tp-container tp-container--narrow">
+        <div class="tp-head" data-reveal>
+          <span class="tp-eyebrow">Só aqui</span>
+          <h2 class="tp-title tp-title--sm" id="condicao-title">
+            Essa condição, com desconto extra, <span class="tp-hl">só existe nesta página, agora</span>.
+          </h2>
+          <p class="tp-lead">
+            No Método Mãos Lucrativas você vai aprender os <strong>3 passos essenciais</strong> para sair do
+            zero, atender suas primeiras clientes e ganhar pelo menos <strong>R$1.000,00 por mês</strong>
+            com massagem.
+          </p>
+        </div>
+
+        <div class="tp-cta" data-reveal>
+          <a class="btn btn--tp" href="#funil">
+            <span>Garantir minha vaga <span class="tp-arrow" aria-hidden="true">&rarr;</span></span>
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 2 ==================== -->
+
+    <!-- ==================== DOBRA 3 — O QUE CONTINUA INCLUSO ==================== -->
+    <section class="tp-section tp-section--ivory" aria-labelledby="incluso-title">
+      <div class="tp-container tp-container--narrow">
+        <div class="tp-head" data-reveal>
+          <span class="tp-eyebrow">Nada foi cortado</span>
+          <h2 class="tp-title tp-title--sm" id="incluso-title">
+            Tudo que já estava incluso no Método Mãos Lucrativas <span class="tp-hl">continua com você</span>
+          </h2>
+        </div>
+
+        <ul class="mml-includes" data-reveal>
+          <li><svg width="17" height="17" aria-hidden="true"><use href="#i-check" /></svg><span><strong>Massagem TopTerapêutica</strong></span></li>
+          <li><svg width="17" height="17" aria-hidden="true"><use href="#i-check" /></svg><span><strong>Pacote de divulgação da Trilogia Holística</strong></span></li>
+          <li><svg width="17" height="17" aria-hidden="true"><use href="#i-check" /></svg><span>Material com direcionamento de divulgação do seu serviço</span></li>
+          <li><svg width="17" height="17" aria-hidden="true"><use href="#i-check" /></svg><span>Caderno de anamnese em PDF</span></li>
+          <li><svg width="17" height="17" aria-hidden="true"><use href="#i-check" /></svg><span>E-book de apoio para utilizar durante suas consultas</span></li>
+          <li><svg width="17" height="17" aria-hidden="true"><use href="#i-check" /></svg><span>Suporte completo: minha equipe está sempre à disposição para tirar suas dúvidas</span></li>
+        </ul>
+
+        <p class="mml-nocut" data-reveal>Nada foi cortado. <strong>Só o valor caiu.</strong></p>
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 3 ==================== -->
+
+    <!-- ==================== DOBRA 4 — OFERTA ==================== -->
+    <section class="tp-section tp-section--offer" id="oferta" aria-labelledby="offer-title">
+      <div class="tp-container">
+        <div class="tp-head" data-reveal>
+          <span class="tp-eyebrow">Sua condição</span>
+          <h2 class="tp-title" id="offer-title">
+            O valor original do Método Mãos Lucrativas é <span class="tp-hl">R$ 1.297,00</span>
+          </h2>
+        </div>
+
+        <div class="mml-price" data-reveal>
+          <p class="mml-price__from">De <s>R$ 1.297,00</s></p>
+          <p class="mml-price__intro"><em>Mas hoje, você pode ter acesso completo por apenas:</em></p>
+
+          <p class="mml-price__main"><small>12x de</small> R$ 19,19<sup aria-hidden="true">*</sup></p>
+          <p class="mml-price__cash">ou <strong>R$ 197,00</strong> à vista</p>
+
+          <p class="mml-save">Você economiza 1.100 reais</p>
+
+          <!-- PENDÊNCIA: o asterisco do parcelamento não tem nota de rodapé no
+               doc. Normalmente é "parcelado com juros da plataforma" — falta
+               confirmar o texto exato antes de publicar. -->
+          <p class="mml-fine"><span class="mml-todo">* nota do parcelamento a confirmar</span></p>
+
+          <p class="mml-warranty">
+            <svg width="18" height="18" aria-hidden="true"><use href="#i-shield" /></svg>
+            <span>15 dias de Garantia Incondicional</span>
+          </p>
+
+          <div class="tp-cta">
+            <a class="btn btn--tp" href="#funil">
+              <span>Garantir meu acesso ao Método Mãos Lucrativas <span class="tp-arrow" aria-hidden="true">&rarr;</span></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 4 ==================== -->
+
+    <!-- ==================== DOBRA 5 — FECHO ==================== -->
+    <section class="tp-section tp-section--veil" aria-labelledby="fecho-title">
+      <div class="tp-container tp-container--narrow">
+        <div class="mml-close" data-reveal>
+          <h2 class="tp-title tp-title--sm" id="fecho-title">Toda decisão que você adia cobra juros.</h2>
+          <p>Essa condição não volta depois que essa página fecha.</p>
+
+          <div class="tp-cta">
+            <a class="btn btn--tp" href="#funil">
+              <span>Quero minha vaga agora <span class="tp-arrow" aria-hidden="true">&rarr;</span></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 5 ==================== -->
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__top">
+        <p class="footer__copy">
+          Copyright &copy; ANA MARTHA CURSOS ONLINE LTDA.<br />
+          Todos os direitos reservados.
+        </p>
+        <div class="footer__links">
+          <span class="footer__links-row">
+            <!-- ATENÇÃO: estes dois caminhos vieram do rodapé do /taping e
+                 respondem 404 — lá e aqui. Falta publicar as páginas legais
+                 (ou apontar para onde elas realmente estão). -->
+            <a href="/tap09/legal/politica-de-privacidade.html" target="_blank" rel="noopener noreferrer">Política de privacidade</a>
+            <span aria-hidden="true">|</span>
+            <a href="/tap09/legal/termos-de-uso.html" target="_blank" rel="noopener noreferrer">Termos de uso</a>
+          </span>
+          <span class="footer__company">ANA MARTHA CURSOS ONLINE LTDA &middot; CNPJ 41.219.310/0001-89</span>
+        </div>
+      </div>
+
+      <div class="footer__legal">
+        <span class="footer__legal-label">Aviso Legal:</span>
+        Os resultados podem variar de pessoa para pessoa. Este método tem caráter educacional e de desenvolvimento pessoal, não garantindo ganhos financeiros imediatos ou específicos. O sucesso depende da aplicação prática de cada participante. Este site não é afiliado, endossado ou patrocinado pelo Google ou Meta.
+      </div>
+    </div>
+  </footer>
+  <!-- ==================== /FOOTER ==================== -->
+
+</body>
+</html>
