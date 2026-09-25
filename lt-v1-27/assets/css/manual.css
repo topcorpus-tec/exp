@@ -1,18 +1,16 @@
 /* =========================================================================
    Manual Ilustrado — manual.css
 
-   Camada fina sobre design-system.css + taping.css. A página de vendas do
-   manual reusa o sistema do TopTaping inteiro; aqui ficam só as três coisas
-   que ele ainda não tinha:
+   Camada fina sobre design-system.css + taping.css. A página reusa o
+   sistema visual do TopTaping inteiro; aqui ficam quatro coisas:
 
-     1. ESPAÇOS DE IMAGEM  — a página foi pedida sem imagens, então cada
+     1. ESPAÇOS DE IMAGEM  — a página ainda não tem as imagens, então cada
         imagem prevista na copy virou uma caixa marcada dizendo o que entra
         ali. Some sozinha quando a <img> de verdade substituir o bloco.
-     2. PENDÊNCIAS          — valores e prazos que a copy deixou como
-        "a definir" ficam visualmente marcados, para ninguém publicar com
-        R$XX no ar por distração.
-     3. CARDS COM ÍCONE     — a dobra 2 pede ícone no lugar do número que o
-        .tp-pillar usa.
+     2. IDENTIDADE AZUL     — a capa do manual é azul; o sistema herdado é
+        rosa e roxo. Os tokens são reatribuídos, não os componentes.
+     3. COMPONENTES NOVOS   — faixa corrida, bio da autora, preço ancorado.
+     4. AJUSTES PONTUAIS    — onde o layout do taping não serve a esta copy.
 
    Carregar DEPOIS de taping.css.
    ========================================================================= */
@@ -20,8 +18,8 @@
 /* =========================================================================
    1. ESPAÇO DE IMAGEM
 
-   Caixa tracejada com a descrição do que entra ali. Ocupa a mesma área que a
-   imagem final vai ocupar, para o layout já ser o layout definitivo — o que
+   Caixa tracejada com a descrição do que entra ali. Ocupa a mesma área que
+   a imagem final vai ocupar, para o layout já ser o definitivo — o que
    muda depois é só o conteúdo da caixa.
    ========================================================================= */
 .mn-ph {
@@ -63,8 +61,7 @@
   color: var(--tp-body);
 }
 
-/* Origem da ideia, quando a imagem veio de um comentário do doc e ainda não
-   é decisão fechada. */
+/* Origem da imagem, quando o doc aponta um arquivo específico. */
 .mn-ph__from {
   margin: 0;
   font-size: .68rem;
@@ -73,44 +70,19 @@
   font-style: italic;
 }
 
-/* ---- Proporções ----
-   Dentro de .tp-inside__media / .tp-bonus__media a proporção já vem do
-   contêiner; estas classes são para os espaços soltos. */
-.mn-ph--square { aspect-ratio: 1 / 1; }
-.mn-ph--wide   { aspect-ratio: 16 / 9; }
-.mn-ph--tall   { aspect-ratio: 3 / 4; }
-
 /* Preenche a caixa do contêiner herdado (tp-inside__media, tp-bonus__media),
    que já define a proporção e o overflow. */
 .mn-ph--fill { width: 100%; height: 100%; border-radius: 0; border-width: 0 0 2px; }
 
-/* ---- Espaços que substituem imagens específicas do sistema do taping ----
-   Cada um imita a caixa da imagem que representa, para o espaçamento em volta
-   não mudar quando a imagem real entrar. */
-
-/* No lugar de .tp-hero__logo */
-.mn-ph--logo {
-  width: clamp(150px, 17vw, 200px);
-  aspect-ratio: 5 / 4;
-  margin-inline: auto;
-}
-
-/* No lugar de .tp-hero__figure — o mockup do manual com os 4 bônus */
+/* O mockup do hero. O doc pede "bem grande e destacado": é a única imagem
+   da dobra, então ela ocupa a largura que sobrou do logo e do retrato. */
 .mn-ph--hero {
-  width: min(100%, 460px);
+  width: min(100%, 620px);
   aspect-ratio: 4 / 3;
   margin-inline: auto;
 }
 
-/* No lugar de .tp-seal (selo de garantia) */
-.mn-ph--seal {
-  width: clamp(200px, 30vw, 320px);
-  aspect-ratio: 1 / 1;
-  border-radius: 50%;
-  margin-inline: auto;
-}
-
-/* No lugar de .tp-offer__setup, dentro do card de preço */
+/* Dentro do card de preço */
 .mn-ph--offer {
   width: clamp(240px, 40vw, 440px);
   aspect-ratio: 5 / 4;
@@ -118,26 +90,29 @@
   margin-bottom: .75rem;
 }
 
-/* Espaço largo, solto no meio de uma seção */
-.mn-ph--band {
-  width: 100%;
-  max-width: 760px;
-  aspect-ratio: 16 / 9;
+/* Retrato — foto da Ana de jaleco, na dobra da bio */
+.mn-ph--portrait {
+  width: min(100%, 420px);
+  aspect-ratio: 3 / 4;
   margin-inline: auto;
 }
 
-/* Retrato — foto da Ana de jaleco na dobra 2 */
-.mn-ph--portrait {
-  width: min(100%, 380px);
-  aspect-ratio: 3 / 4;
-  margin-inline: auto;
+/* O mockup no topo dos três cards de "para quem é". Sangra até as bordas
+   do card, que já tem overflow: hidden e arredonda o topo por ele. */
+.mn-ph--pillar {
+  width: calc(100% + 2 * clamp(1.6rem, 3.4vw, 2.25rem));
+  margin: calc(-1 * clamp(1.6rem, 3.4vw, 2.25rem)) 0 .35rem
+          calc(-1 * clamp(1.6rem, 3.4vw, 2.25rem));
+  aspect-ratio: 16 / 10;
+  border-radius: 0;
+  border-width: 0 0 2px;
 }
 
 /* =========================================================================
    2. PENDÊNCIA
 
-   Tudo que a copy entregou como "a definir". Fica legível mas visivelmente
-   provisório: quem revisar a página vê na hora o que falta preencher.
+   O que a copy ainda entrega como "a definir" fica legível mas visivelmente
+   provisório, para ninguém publicar com um placeholder no ar por distração.
    ========================================================================= */
 .mn-todo {
   display: inline-block;
@@ -152,231 +127,19 @@
   white-space: nowrap;
 }
 
-/* Aviso de topo listando o que falta antes de publicar. Não vai ao ar: é para
-   sair junto com as pendências. */
-.mn-draft {
-  position: relative;
-  z-index: 5;
-  padding: .85rem clamp(1rem, 4vw, 2rem);
-  background: #34222F;
-  color: #FFF;
-  font-size: .78rem;
-  line-height: 1.6;
-  text-align: center;
-}
-.mn-draft strong { color: var(--tp-rose-soft); }
-
 /* =========================================================================
-   3. CARD COM ÍCONE (dobra 2)
-
-   .tp-pillar traz o desenho do card; aqui só troca o número por um ícone.
-   ========================================================================= */
-.mn-pillar__icon {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  margin-bottom: .2rem;
-  border-radius: 50%;
-  background: var(--tp-violet-wash);
-  color: var(--tp-violet-deep);
-}
-.mn-pillar__icon svg { display: block; }
-
-/* =========================================================================
-   AJUSTES PONTUAIS
-
-   O hero do taping é uma grade de 2 colunas (logo | foto) com a copy
-   ocupando a linha de baixo. Aqui a dobra 1 tem logo, título e um mockup
-   abaixo da copy — uma coluna só, centralizada.
-   ========================================================================= */
-.mn-hero__inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: clamp(1rem, 2.5vw, 1.5rem);
-  padding-block: clamp(1.75rem, 5vw, 3rem);
-  text-align: center;
-}
-
-/* A copy do taping traz três ajustes que só fazem sentido ao lado da foto da
-   Ana: o recuo negativo (sobe pra cima da foto), o respiro de baixo (deixa a
-   foto encostar na base) e, a partir de 900px, o alinhamento à esquerda da
-   grade de 2 colunas. Aqui não há foto e a coluna é uma só — os três saem. */
-.mn-hero__inner .tp-hero__copy {
-  margin-top: 0;
-  padding-bottom: 0;
-  text-align: center;
-}
-.mn-hero__inner .tp-hero__headline,
-.mn-hero__inner .tp-hero__sub,
-.mn-hero__inner .mn-hero__h2 { margin-inline: auto; }
-
-.mn-hero__inner .tp-cta   { align-items: center; }
-.mn-hero__inner .tp-trust { justify-content: center; }
-
-/* O H2 da copy (o "+70 Aplicações Ilustradas") entra sob o H1 sem competir
-   com ele em peso. */
-.mn-hero__h2 {
-  margin: 0;
-  font-size: clamp(1.05rem, 2.6vw, 1.5rem);
-  font-weight: var(--fw-bold);
-  line-height: 1.3;
-  letter-spacing: -.01em;
-  color: var(--tp-rose-deep);
-  max-width: 24ch;
-}
-
-/* Assinatura da autora, abaixo do mockup */
-.mn-hero__by {
-  margin: 0;
-  font-size: .84rem;
-  line-height: 1.55;
-  color: var(--tp-muted);
-  max-width: 44ch;
-}
-
-/* Lista de preços da dobra 5 — o empilhamento de valor antes do R$27. */
-.mn-stack {
-  max-width: 620px;
-  margin-inline: auto;
-  padding: clamp(1.1rem, 3vw, 1.6rem);
-  border: 1px solid var(--tp-line-soft);
-  border-radius: var(--tp-radius-sm);
-  background: var(--tp-white);
-  box-shadow: var(--tp-shadow-sm);
-}
-.mn-stack__list { list-style: none; margin: 0; padding: 0; }
-.mn-stack__list li {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: .62rem 0;
-  border-bottom: 1px solid var(--tp-line-soft);
-  font-size: .92rem;
-  line-height: 1.5;
-  color: var(--tp-body);
-  text-align: left;
-}
-.mn-stack__total {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-top: .9rem;
-  font-size: .96rem;
-  font-weight: var(--fw-extrabold);
-  color: var(--tp-ink);
-  text-align: left;
-}
-
-/* Frase de fechamento sob o preço ("Pagamento único...") */
-.mn-terms {
-  margin: .9rem 0 0;
-  font-size: .8rem;
-  letter-spacing: .02em;
-  color: var(--tp-muted);
-  text-align: center;
-}
-
-/* Botão flutuante: a copy pede o texto "+70 Aplicações Ilustradas" ao lado do
-   botão. O .tp-sticky do taping só previa o botão. */
-.mn-sticky__label {
-  font-size: .8rem;
-  font-weight: var(--fw-extrabold);
-  line-height: 1.2;
-  color: var(--tp-ink);
-  white-space: nowrap;
-}
-@media (max-width: 620px) {
-  .mn-sticky__label { display: none; }
-}
-
-/* =========================================================================
-   BOTÃO FLUTUANTE — SÓ NO MOBILE
-
-   A regra que fazia a barra aparecer também no desktop foi removida:
-   no desktop o CTA da dobra já está sempre a um scroll de distância, e
-   a barra só comia altura de tela. Sem ela aqui, vale o padrão do
-   taping.css — display:none, virando flex só abaixo de 860px.
-   ========================================================================= */
-
-/* =========================================================================
-   COPY DE 23/09 — componentes que a revisão pediu
-   ========================================================================= */
-
-/* O nome do produto passou a ser a linha que acompanha o logo, acima do H1
-   (a manchete agora é a promessa, não o nome). Discreto de propósito: ele
-   identifica, não compete. */
-.mn-hero__product {
-  margin: 0 0 clamp(.5rem, 1.4vw, .85rem);
-  font-size: clamp(.78rem, 1.5vw, .9rem);
-  font-weight: var(--fw-semibold);
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--tp-muted);
-}
-
-/* Respiro entre o H1 e o H2 rosa, que antes se encostavam. */
-.mn-hero__h2 { margin-top: clamp(.6rem, 1.6vw, 1rem); }
-
-/* Nota de rodapé do asterisco do parcelamento, dentro do card de preço. */
-.mn-offer__fine {
-  margin: .5rem 0 0;
-  font-size: .74rem;
-  line-height: 1.5;
-  color: var(--tp-muted);
-}
-
-/* A dobra 5 é a única seção de fundo escuro. O taping.css pinta o .tp-title
-   de branco ali, mas o .tp-hl dentro dele reimpõe o rosa escuro com faixa
-   clara — some no fundo. E o .tp-lead ("Você vai receber:"), que esta copy
-   trouxe para a seção, nunca foi previsto sobre o rosa. Os dois herdam o
-   branco aqui. */
-.tp-section--offer .tp-title .tp-hl {
-  color: #fff;
-  background-image: linear-gradient(180deg, transparent 62%, rgba(255, 255, 255, .3) 62%);
-}
-.tp-section--offer .tp-lead { color: rgba(255, 255, 255, .9); }
-.tp-section--offer .tp-lead strong { color: #fff; }
-
-/* =========================================================================
-   CTA VERDE
-
-   O sistema do taping traz o botão em roxo. Aqui ele é verde, e a escolha
-   do tom é de contraste: o texto é branco, em ~15px bold — abaixo do que a
-   WCAG considera "texto grande", então vale o mínimo de 4.5:1. O degradê
-   corre do tom mais claro para o mais escuro, então quem manda é a ponta
-   clara: #12854A dá 4.69:1 sobre branco e é o ponto mais alto que passa.
-   Clarear mais que isso quebra a leitura do rótulo.
-   ========================================================================= */
-.btn--tp {
-  background: linear-gradient(135deg, #12854A 0%, #0D6E3C 45%, #095A30 100%);
-  box-shadow: 0 12px 30px rgba(13, 110, 60, .28), inset 0 1px 0 rgba(255, 255, 255, .22);
-}
-.btn--tp:hover,
-.btn--tp:focus-visible {
-  background: linear-gradient(135deg, #0D6E3C 0%, #095A30 100%);
-  box-shadow: 0 18px 42px rgba(13, 110, 60, .36), inset 0 1px 0 rgba(255, 255, 255, .22);
-}
-/* O anel de foco do design-system usa a cor primária (roxa) e ficaria
-   destoando do botão. */
-.btn--tp:focus-visible { outline-color: #0D6E3C; }
-
-/* =========================================================================
-   IDENTIDADE AZUL — a capa do manual
+   3. IDENTIDADE AZUL — a capa do manual
 
    A capa é azul: navy #01337C nos títulos, azul vivo #0285D3 na marca,
-   fundo #DFEEFC. O sistema herdado do taping é rosa e roxo, quente. Em vez
-   de repintar componente por componente, os tokens são reatribuídos aqui:
+   fundo claro azulado. O sistema herdado do taping é rosa e roxo, quente.
+   Em vez de repintar componente por componente, os tokens são reatribuídos:
    cada um mantém o PAPEL que tinha (destaque, hover, faixa alternada) e só
    troca de matiz. Assim qualquer componente do taping que a página venha a
    usar já nasce azul, sem regra nova.
 
    As duas famílias viram duas famílias de azul:
      rose   (destaque, marca)  → azul vivo, o "DOR" da capa
-     violet (estrutura, botão) → navy, o "ALÍVIO DA" da capa
+     violet (estrutura)        → navy, o "ALÍVIO DA" da capa
    ========================================================================= */
 :root {
   /* ---- Base clara: os brancos quentes esfriam ---- */
@@ -402,7 +165,7 @@
   /* ---- Texto: a ameixa escura vira navy ---- */
   --tp-ink:        #0B2545;
   --tp-body:       #3C5772;   /* 7,5:1                                        */
-  --tp-muted:      #5E7695;   /* 4,6:1 — o mínimo para as legendas em caixa alta */
+  --tp-muted:      #5E7695;   /* 4,6:1 — o mínimo para legendas em caixa alta */
 
   /* ---- Traços e sombras rebaseados no navy ---- */
   --tp-line:       rgba(11, 37, 69, .12);
@@ -438,35 +201,91 @@
   box-shadow: 0 30px 80px rgba(1, 28, 66, .42);
 }
 
-/* O H2 do hero quebrava em três linhas porque herdou um limite de 24ch.
-   Em 36ch ele cabe em duas, e o text-wrap: balance reparte as palavras
-   entre elas em vez de encher a primeira e deixar a sobra na segunda. */
-.mn-hero__h2 {
-  max-width: 36ch;
-  text-wrap: balance;
+/* As duas manchas que derivam sobre a faixa da oferta também estavam em
+   rosa e roxo escritos à mão. */
+.tp-section--offer::before {
+  background: radial-gradient(closest-side, rgba(2, 133, 211, .55) 0%, rgba(2, 133, 211, 0) 100%);
+}
+.tp-section--offer::after {
+  background: radial-gradient(closest-side, rgba(1, 74, 155, .75) 0%, rgba(1, 74, 155, 0) 100%);
 }
 
-/* Mesma coisa no H1: 21ch o partia em três linhas. Em 33ch fecha em duas,
-   e ele já vem com text-wrap: balance do taping. */
+/* A dobra da oferta é a única de fundo escuro. O taping.css pinta o
+   .tp-title de branco ali, mas o .tp-hl dentro dele reimpõe cor escura com
+   faixa clara — some no fundo. E o .tp-lead nunca foi previsto sobre o
+   navy. Os dois herdam o branco aqui. */
+.tp-section--offer .tp-title .tp-hl {
+  color: #fff;
+  background-image: linear-gradient(180deg, transparent 62%, rgba(255, 255, 255, .3) 62%);
+}
+.tp-section--offer .tp-lead { color: rgba(255, 255, 255, .9); }
+.tp-section--offer .tp-lead strong { color: #fff; }
+
+/* O fio do topo do 2º card de "para quem é" tinha um lilás escrito à mão
+   (#DDBDF3) que escapou da troca de paleta e puxava rosa no meio de três
+   cards azuis. Os três passam a variar dentro da mesma família. */
+.tp-pillar:nth-child(2)::before {
+  background: linear-gradient(90deg, var(--tp-violet-soft), var(--tp-violet));
+}
+
+/* =========================================================================
+   4. CTA VERDE
+
+   O sistema do taping traz o botão em roxo. Aqui ele é verde, e a escolha
+   do tom é de contraste: o texto é branco, em ~15px bold — abaixo do que a
+   WCAG considera "texto grande", então vale o mínimo de 4.5:1. O degradê
+   corre do tom mais claro para o mais escuro, então quem manda é a ponta
+   clara: #12854A dá 4.69:1 sobre branco e é o ponto mais alto que passa.
+   Clarear mais que isso quebra a leitura do rótulo.
+   ========================================================================= */
+.btn--tp {
+  background: linear-gradient(135deg, #12854A 0%, #0D6E3C 45%, #095A30 100%);
+  box-shadow: 0 12px 30px rgba(13, 110, 60, .28), inset 0 1px 0 rgba(255, 255, 255, .22);
+}
+.btn--tp:hover,
+.btn--tp:focus-visible {
+  background: linear-gradient(135deg, #0D6E3C 0%, #095A30 100%);
+  box-shadow: 0 18px 42px rgba(13, 110, 60, .36), inset 0 1px 0 rgba(255, 255, 255, .22);
+}
+/* O anel de foco do design-system usa a cor primária (azul) e destoaria do
+   botão verde. */
+.btn--tp:focus-visible { outline-color: #0D6E3C; }
+
+/* =========================================================================
+   5. HERO
+
+   O hero do taping é uma grade de 2 colunas (logo | foto) com a copy na
+   linha de baixo. Aqui é uma coluna só, centralizada: título, mockup,
+   texto e botão.
+   ========================================================================= */
+.mn-hero__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+  padding-block: clamp(1.75rem, 5vw, 3rem);
+  text-align: center;
+}
+
+/* A copy do taping traz três ajustes que só fazem sentido ao lado da foto
+   da Ana: o recuo negativo (sobe pra cima da foto), o respiro de baixo
+   (deixa a foto encostar na base) e, a partir de 900px, o alinhamento à
+   esquerda da grade de 2 colunas. Aqui não há foto e a coluna é uma só. */
+.mn-hero__inner .tp-hero__copy {
+  margin-top: 0;
+  padding-bottom: 0;
+  text-align: center;
+}
+.mn-hero__inner .tp-hero__headline,
+.mn-hero__inner .tp-hero__sub { margin-inline: auto; }
+.mn-hero__inner .tp-cta   { align-items: center; }
+.mn-hero__inner .tp-trust { justify-content: center; }
+
+/* 21ch partia a manchete em três linhas; em 33ch ela fecha em duas. */
 .mn-hero__inner .tp-hero__headline { max-width: 33ch; }
 
 /* =========================================================================
-   LOGO DO HERO
-
-   Substitui o espaço .mn-ph--logo. O .tp-hero__logo do taping é um logo
-   pequeno de canto (até 118px); este é o título do produto desenhado, e
-   precisa de outra escala — por isso classe própria.
-   ========================================================================= */
-.mn-hero__logo {
-  width: clamp(200px, 30vw, 300px);
-  height: auto;
-  margin-bottom: clamp(.25rem, 1vw, .6rem);
-}
-
-/* =========================================================================
-   FAIXA DE TEXTO INFINITA
-
-   Divide a dobra 2 da dobra 3 com o nome do produto correndo.
+   6. FAIXA DE TEXTO INFINITA
 
    A trilha guarda a lista DUAS vezes e desliza até -50%: nesse ponto a
    segunda cópia está exatamente onde a primeira começou, então o reinício
@@ -512,85 +331,33 @@
 }
 
 /* =========================================================================
-   MANCHAS DE LUZ DA DOBRA 5
-
-   As duas manchas que derivam sobre a faixa da oferta estavam em rosa e
-   roxo, escritos à mão fora dos tokens — por isso sobreviveram à troca de
-   paleta e apareciam como um borrão vermelho sobre o azul.
-   ========================================================================= */
-.tp-section--offer::before {
-  background: radial-gradient(closest-side, rgba(2, 133, 211, .55) 0%, rgba(2, 133, 211, 0) 100%);
-}
-.tp-section--offer::after {
-  background: radial-gradient(closest-side, rgba(1, 74, 155, .75) 0%, rgba(1, 74, 155, 0) 100%);
-}
-
-/* =========================================================================
-   AS DUAS GRADES COM LINHA ÓRFÃ
+   7. AS DUAS GRADES DE QUATRO CARDS
 
    As duas usam repeat(auto-fit, minmax(300px, 1fr)): o número de colunas
-   sai da largura, e com 5 e 4 cards a última linha ficava pela metade,
-   encostada à esquerda. Aqui as duas ganham contagem fixa no desktop.
+   sai da largura, e com 4 cards a última linha ficava com um só, encostado
+   à esquerda. No desktop as duas passam a duas linhas de dois. O limite de
+   largura é o que impede o card de esticar até meia tela.
 
    Abaixo de 1010px nenhuma das duas cabe em 3 colunas, então o auto-fit do
-   taping volta a mandar e as regras somem sozinhas.
+   taping volta a mandar e estas regras somem sozinhas.
    ========================================================================= */
 @media (min-width: 1010px) {
-  /* Dobra 3 — 5 cards. A grade vira 6 colunas e cada card ocupa 2: os três
-     de cima caem em 1-2, 3-4 e 5-6, e os dois de baixo começam em 2 e 4,
-     o que os deixa centrados sem mexer na largura de ninguém. */
-  .tp-inside { grid-template-columns: repeat(6, 1fr); }
-  .tp-inside > .tp-inside__card { grid-column: span 2; }
-  .tp-inside > .tp-inside__card:nth-child(4) { grid-column: 2 / span 2; }
-  .tp-inside > .tp-inside__card:nth-child(5) { grid-column: 4 / span 2; }
-
-  /* Dobra 4 — 4 cards, pedidos em duas linhas de dois. O limite de largura
-     é o que impede o card de esticar para meia tela: mantém a proporção
-     que ele já tinha em três colunas. */
+  .tp-inside,
   .tp-bonus {
     grid-template-columns: repeat(2, 1fr);
-    max-width: 800px;
+    max-width: 860px;
     margin-inline: auto;
   }
 }
 
 /* =========================================================================
-   VALOR DO BÔNUS
+   8. BÔNUS
 
-   O valor é riscado e grande de propósito: o número é o argumento (são
-   R$1.588 em bônus somados), e o corte é o que diz que ele não entra na
-   conta. Pequeno e inteiro, ele parecia uma cobrança.
-
-   O <s> carrega o sentido no HTML, não só na aparência — leitores de tela
-   anunciam o trecho como removido.
+   O título era um <h3> usando a classe de corpo do taping — saía do mesmo
+   tamanho do parágrafo abaixo dele, sem hierarquia. A etiqueta era um
+   texto em caixa alta do mesmo peso do título; como pílula ela vira
+   etiqueta, lida antes e sem disputar.
    ========================================================================= */
-.mn-bonus__price {
-  margin: .15rem 0 0;
-  display: flex;
-  align-items: baseline;
-  gap: .45rem;
-  font-size: .76rem;
-  font-weight: var(--fw-semibold);
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  color: var(--tp-muted);
-}
-.mn-bonus__price s {
-  font-size: 1.45rem;
-  font-weight: var(--fw-extrabold);
-  letter-spacing: -.02em;
-  color: var(--tp-rose-deep);
-  /* O risco fica em azul vivo e mais grosso que o padrão: sem isso ele
-     some dentro de um número em peso extrabold. */
-  text-decoration-line: line-through;
-  text-decoration-color: var(--tp-rose);
-  text-decoration-thickness: 2.5px;
-  text-transform: none;
-}
-
-/* O título do bônus era um <h3> usando a classe de corpo do taping — saía
-   do mesmo tamanho do parágrafo abaixo dele, sem hierarquia. Agora tem
-   classe própria e sobe para o tamanho de um subtítulo de card. */
 .mn-bonus__title {
   margin: 0 0 .5rem;
   font-size: clamp(1.08rem, 1.5vw, 1.25rem);
@@ -600,54 +367,6 @@
   color: var(--tp-ink);
   text-wrap: balance;
 }
-
-/* =========================================================================
-   RESPIRO DA DOBRA 5
-
-   A lista de valores e o card de preço são dois cartões brancos seguidos,
-   e nenhum dos dois trazia margem: encostavam um no outro e liam como um
-   bloco só partido no meio. Agora há distância entre eles, e a linha do
-   total ganha uma divisória mais firme que as das parcelas — ela é a
-   conclusão da conta, não mais um item dela.
-   ========================================================================= */
-.mn-stack {
-  margin-bottom: clamp(1.75rem, 4.5vw, 3rem);
-  padding: clamp(1.35rem, 3.4vw, 2rem);
-}
-.mn-stack__list li { padding: .72rem 0; }
-.mn-stack__list li:last-child { border-bottom: 0; }
-.mn-stack__total {
-  margin-top: 0;
-  padding-top: 1rem;
-  border-top: 2px solid var(--tp-line);
-  font-size: 1.02rem;
-}
-
-/* O logo estava competindo em altura com a própria manchete. Recuado, ele
-   volta a ser assinatura do produto e deixa o H1 abrir a dobra. */
-.mn-hero__logo { width: clamp(150px, 21vw, 215px); }
-
-/* O fio do topo do 2º card da dobra 2 tinha um lilás escrito à mão
-   (#DDBDF3) que escapou da troca de paleta e puxava rosa no meio de três
-   cards azuis. Os três passam a variar dentro da mesma família. */
-.tp-pillar:nth-child(2)::before {
-  background: linear-gradient(90deg, var(--tp-violet-soft), var(--tp-violet));
-}
-
-/* Selo de garantia — ocupa a mesma caixa que o espaço reservado ocupava. */
-.mn-seal {
-  display: block;
-  width: clamp(190px, 28vw, 300px);
-  height: auto;
-  margin-inline: auto;
-}
-
-/* =========================================================================
-   ETIQUETA DO BÔNUS EM PÍLULA
-
-   Era só um texto em caixa alta, do mesmo peso do título logo abaixo. Como
-   pílula ela vira etiqueta: lê-se antes do título e não disputa com ele.
-   ========================================================================= */
 .tp-bonus__label {
   display: inline-flex;
   align-items: center;
@@ -663,45 +382,124 @@
 }
 
 /* =========================================================================
-   PREÇO ANCORADO — VERMELHO E CORTADO
-
-   Um só tratamento para todo valor que a cliente NÃO vai pagar: os cinco
-   itens da lista, o total e os valores dos bônus. O vermelho é a única
-   cor fora da paleta azul da página, e é de propósito — ele marca esses
-   números como a conta antiga, e nada mais na página usa esse tom.
-
-   O corte mora no <s> do HTML, não só aqui: quem usa leitor de tela ouve
-   que o trecho foi removido, em vez de ouvir um preço que não vale mais.
+   9. OFERTA
    ========================================================================= */
-.mn-stack__list li s,
-.mn-stack__total s,
-.mn-bonus__price s,
+
+/* O preço do taping é "R$ 27" com o cifrão pequeno. Aqui a copy escreve
+   "Por apenas 27 reais", então as duas pontas ficam pequenas e o número no
+   meio é que cresce. */
+.tp-offer__installment small {
+  font-size: .32em;
+  font-weight: var(--fw-bold);
+  letter-spacing: .02em;
+}
+
+/* O preço antigo: vermelho e cortado. É a única cor fora da paleta azul da
+   página, e é de propósito — marca o número como a conta antiga, e nada
+   mais usa esse tom. O corte mora no <s> do HTML, não só aqui: quem usa
+   leitor de tela ouve que o trecho foi removido. */
 .tp-offer__from s {
   color: #C62828;                       /* 5,6:1 sobre o cartão branco */
   text-decoration-line: line-through;
   text-decoration-color: #C62828;
   text-decoration-thickness: 2px;
-  text-decoration-skip-ink: none;       /* o traço atravessa o cifrão e o 7 */
+  text-decoration-skip-ink: none;       /* o traço atravessa o cifrão */
 }
-.mn-stack__total s { text-decoration-thickness: 2.5px; }
-.mn-bonus__price s { text-decoration-thickness: 2.5px; }
 
-/* Selo maior. O arquivo foi regerado em 760px para acompanhar: no tamanho
-   anterior ele ficaria abaixo de 2x em tela retina e borraria. */
-.mn-seal { width: clamp(230px, 34vw, 390px); }
+/* Quanto se economiza: o fecho da conta, em verde do próprio botão para
+   ligar uma coisa à outra. */
+.mn-save {
+  display: inline-block;
+  margin: .55rem auto 0;
+  padding: .4em 1em;
+  border-radius: var(--radius-pill);
+  background: rgba(18, 133, 74, .1);
+  color: #0D6E3C;
+  font-size: .88rem;
+  font-weight: var(--fw-extrabold);
+  letter-spacing: -.01em;
+}
+
+/* Nota de rodapé do asterisco do parcelamento. */
+.mn-offer__fine {
+  margin: .5rem 0 0;
+  font-size: .74rem;
+  line-height: 1.5;
+  color: var(--tp-muted);
+}
 
 /* =========================================================================
-   GARANTIA NO MOBILE
+   10. BIO DA AUTORA
 
-   Acima de 900px a dobra é selo à esquerda e texto à direita, e o texto
-   alinhado à esquerda acompanha o selo. Abaixo disso a grade vira uma
-   coluna só, com o selo centrado em cima — e o texto continuava à
-   esquerda, desalinhado do próprio selo. Aqui ele centra junto.
+   Mesma estrutura da dobra de garantia que saiu: retrato de um lado, texto
+   do outro, virando uma coluna no mobile — onde o texto centraliza junto
+   com o retrato, em vez de ficar desencontrado dele.
    ========================================================================= */
+.mn-bio {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.75rem, 4.5vw, 3rem);
+  align-items: center;
+  max-width: 1000px;
+  margin-inline: auto;
+}
+.mn-bio__copy {
+  display: flex;
+  flex-direction: column;
+  gap: .85rem;
+  align-items: flex-start;
+}
+.mn-bio__copy p {
+  margin: 0;
+  font-size: clamp(.96rem, 1.5vw, 1.05rem);
+  line-height: 1.72;
+  color: var(--tp-body);
+}
+.mn-bio__copy p strong { color: var(--tp-ink); font-weight: var(--fw-bold); }
+
+/* O cargo vem colado no nome, como assinatura. */
+.mn-bio__role {
+  margin-top: -.35rem !important;
+  font-size: .9rem !important;
+  font-weight: var(--fw-semibold);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--tp-rose-deep) !important;
+}
+
+.mn-bio__kicker {
+  margin-top: .5rem !important;
+  font-weight: var(--fw-extrabold);
+  color: var(--tp-ink) !important;
+}
+
+.mn-bio__facts {
+  display: flex;
+  flex-direction: column;
+  gap: .55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+}
+.mn-bio__facts li {
+  display: flex;
+  align-items: flex-start;
+  gap: .6rem;
+  font-size: .95rem;
+  line-height: 1.55;
+  color: var(--tp-body);
+}
+.mn-bio__facts svg {
+  flex: 0 0 auto;
+  margin-top: .22em;
+  color: var(--tp-rose);
+}
+
+@media (min-width: 900px) {
+  .mn-bio { grid-template-columns: minmax(0, 420px) minmax(0, 1fr); }
+}
 @media (max-width: 899px) {
-  .tp-guarantee__copy {
-    align-items: center;
-    text-align: center;
-  }
-  .tp-guarantee__copy .tp-cta--left { align-items: center; }
+  .mn-bio__copy { align-items: center; text-align: center; }
+  .mn-bio__copy .tp-cta--left { align-items: center; }
 }
