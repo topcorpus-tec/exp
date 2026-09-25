@@ -500,3 +500,138 @@
   line-height: 1.55;
   color: var(--tp-muted);
 }
+
+/* =========================================================================
+   11. ETAPA DE CONCLUSÃO DO PEDIDO (só na /upsell2-mml)
+   ========================================================================= */
+
+/* O aviso de não fechar a página é a única coisa em âmbar, fora da paleta
+   verde. É de propósito: um aviso pintado com a cor da marca deixa de ser
+   lido como aviso. O contraste do texto sobre o âmbar é 8,6:1. */
+.mml-alert {
+  background: #FFF4E0;
+  border-bottom: 2px solid #E9A23B;
+  color: #6B3D06;
+}
+.mml-alert__inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .7rem;
+  padding-block: clamp(.8rem, 2vw, 1.05rem);
+  text-align: left;
+}
+.mml-alert__inner svg { flex: 0 0 auto; color: #B8730F; }
+.mml-alert__text {
+  margin: 0;
+  font-size: clamp(.88rem, 1.7vw, 1rem);
+  line-height: 1.45;
+  color: #6B3D06;
+}
+.mml-alert__text strong {
+  font-weight: var(--fw-extrabold);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+/* Os três pontos que acompanham "sendo processado". Cada um atrasa um
+   pouco mais que o anterior, então a onda corre da esquerda para a
+   direita em vez de piscarem juntos. */
+.mml-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: .18em;
+  margin-left: .12em;
+  vertical-align: baseline;
+}
+.mml-dots i {
+  width: .16em;
+  height: .16em;
+  border-radius: 50%;
+  background: var(--tp-rose);
+  animation: mmlDot 1.4s ease-in-out infinite;
+}
+.mml-dots i:nth-child(2) { animation-delay: .2s; }
+.mml-dots i:nth-child(3) { animation-delay: .4s; }
+@keyframes mmlDot {
+  0%, 60%, 100% { opacity: .25; }
+  30%           { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mml-dots i { animation: none; opacity: .7; }
+}
+
+.mml-proc__title { max-width: 20ch; margin-inline: auto; padding-bottom: 0; }
+
+/* Cartão do vídeo de conclusão: os dois títulos acima do player e o
+   "aperta o play" abaixo, como o doc monta. */
+.mml-watch {
+  width: 100%;
+  max-width: 760px;
+  margin-inline: auto;
+  padding: clamp(1.25rem, 3vw, 1.85rem);
+  border-radius: var(--tp-radius);
+  background: var(--tp-white);
+  border: 1px solid var(--tp-line-soft);
+  box-shadow: var(--tp-shadow-md);
+  text-align: center;
+}
+.mml-watch__hi {
+  margin: 0;
+  font-size: clamp(1.1rem, 2.4vw, 1.4rem);
+  font-weight: var(--fw-extrabold);
+  letter-spacing: -.01em;
+  color: var(--tp-rose-deep);
+}
+.mml-watch__kicker {
+  margin: .2rem 0 clamp(.9rem, 2vw, 1.25rem);
+  font-size: clamp(.8rem, 1.5vw, .9rem);
+  font-weight: var(--fw-extrabold);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--tp-ink);
+}
+.mml-watch .mml-video { box-shadow: none; border: 1px solid var(--tp-line-soft); }
+.mml-watch__play {
+  margin: clamp(.85rem, 2vw, 1.15rem) 0 0;
+  font-size: clamp(.92rem, 1.8vw, 1.05rem);
+  font-weight: var(--fw-extrabold);
+  color: var(--tp-rose-deep);
+}
+
+/* As duas instruções do "faça isso agora" */
+.mml-steps {
+  width: 100%;
+  max-width: 560px;
+  margin-inline: auto;
+  text-align: left;
+}
+.mml-steps__title {
+  margin: 0 0 .6rem;
+  font-size: .78rem;
+  font-weight: var(--fw-extrabold);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--tp-muted);
+  text-align: center;
+}
+.mml-steps__list {
+  display: grid;
+  gap: .6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.mml-steps__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: .7rem;
+  font-size: .96rem;
+  line-height: 1.55;
+  color: var(--tp-body);
+}
+.mml-steps__list li strong { color: var(--tp-ink); font-weight: var(--fw-bold); }
+.mml-steps__list svg { flex: 0 0 auto; margin-top: .2em; color: var(--tp-rose); }
+
+/* Nesta página a barra fecha em vez de abrir, então a borda muda de lado. */
+.mml-bar--bottom { border-top: 0; }

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#FBFEFC" />
+  <meta name="description" content="Seu pedido está sendo processado. Assista ao vídeo para concluir." />
+
+  <!-- Página de funil (etapa de conclusão do pedido): não é para ser
+       encontrada na busca, só alcançada dentro do fluxo de compra. O
+       _headers da raiz reforça com X-Robots-Tag em /upsell2-mml/*. -->
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+  <meta name="googlebot" content="noindex, nofollow" />
+
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), usb=()" />
+
+  <meta property="og:title"       content="Seu pedido está sendo processado" />
+  <meta property="og:description" content="Assista ao vídeo para concluir seu pedido." />
+  <meta property="og:type"        content="website" />
+  <meta property="og:locale"      content="pt_BR" />
+
+  <title>Seu pedido está sendo processado — veja como finalizar</title>
+
+  <!-- ==================== Fontes compartilhadas (CDN topcorpus) ==================== -->
+  <link rel="preconnect" href="https://pcm.topcorpus.com.br" crossorigin />
+  <link rel="dns-prefetch" href="https://pcm.topcorpus.com.br" />
+  <link rel="preload" as="font" type="font/woff2" href="https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-400.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-600.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-800.woff2" crossorigin />
+
+  <!-- ==================== dataLayer init ANTES do env-config ==================== -->
+  <script>window.dataLayer = window.dataLayer || [];</script>
+
+  <!-- ==================== Site config + GTM ==================== -->
+  <script src="assets/js/env-config.js"></script>
+  <script src="assets/js/gtm-loader.js"></script>
+
+  <!-- ==================== CSS ====================
+       Mesmos arquivos da /upsell1-mml e da /up-down-mml: as três são o
+       mesmo produto no mesmo funil, então compartilham a identidade. -->
+  <link rel="stylesheet" href="assets/css/design-system.css" />
+  <link rel="stylesheet" href="assets/css/taping.css" />
+  <link rel="stylesheet" href="assets/css/mml.css" />
+
+  <script src="assets/js/mml.js" defer></script>
+</head>
+<body>
+
+  <!-- ==================== Sprite de ícones ==================== -->
+  <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12" />
+    </symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3.2 1.8 20.8h20.4z" /><line x1="12" y1="9.5" x2="12" y2="14.5" /><line x1="12" y1="17.6" x2="12" y2="17.7" />
+    </symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2.5" y="4.5" width="19" height="15" rx="2.5" /><polyline points="3.5 6.5 12 13 20.5 6.5" />
+    </symbol>
+  </svg>
+
+  <!-- ==================== AVISO DE NÃO FECHAR ====================
+       É a única coisa da página em âmbar, fora da paleta verde: é um aviso
+       de verdade, e um aviso que se pinta com a cor da marca deixa de ser
+       lido como aviso. role="alert" faz o leitor de tela anunciar assim
+       que a página abre — que é exatamente quando ele importa. -->
+  <div class="mml-alert" role="alert">
+    <div class="tp-container mml-alert__inner">
+      <svg width="22" height="22" aria-hidden="true"><use href="#i-alert" /></svg>
+      <p class="mml-alert__text">
+        <strong>Atenção:</strong> não feche essa página. Sair agora pode travar a finalização da sua compra.
+      </p>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ==================== DOBRA 1 — PEDIDO EM PROCESSAMENTO ==================== -->
+    <section class="tp-hero mml-hero" aria-labelledby="proc-title">
+      <div class="tp-container mml-hero__inner">
+
+        <h1 class="tp-hero__headline mml-proc__title" id="proc-title">
+          Seu pedido está <span class="tp-hl">sendo processado</span>
+          <!-- Os três pontos acompanham a frase; para quem ouve a página
+               eles não existem, senão viraria "ponto ponto ponto". -->
+          <span class="mml-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        </h1>
+
+        <p class="tp-hero__sub">Enquanto isso, <strong>assista o vídeo abaixo</strong>:</p>
+
+        <!-- Cartão do vídeo: os dois títulos que o doc pede vêm acima do
+             player, e o "aperta o play" logo abaixo dele. -->
+        <div class="mml-watch" data-reveal>
+          <p class="mml-watch__hi">Seja bem-vinda!</p>
+          <p class="mml-watch__kicker">Veja como finalizar seu pedido</p>
+
+          <!-- Espaço do vídeo. Entra o embed (Panda, YouTube, VSL) mantendo
+               a proporção 16/9 que a caixa já reserva, para o resto da dobra
+               não saltar quando o player carregar. -->
+          <div class="mml-video">
+            <div class="mml-ph">
+              <span class="mml-ph__tag">Vídeo</span>
+              <p class="mml-ph__desc">Player do vídeo de conclusão do pedido</p>
+            </div>
+          </div>
+
+          <p class="mml-watch__play">Aperta o play e assista</p>
+        </div>
+
+        <div class="mml-steps" data-reveal>
+          <p class="mml-steps__title">Faça isso agora:</p>
+          <ul class="mml-steps__list">
+            <li><svg width="17" height="17" aria-hidden="true"><use href="#i-check" /></svg><span>Assista o vídeo acima para concluir seu pedido.</span></li>
+            <li><svg width="17" height="17" aria-hidden="true"><use href="#i-mail" /></svg><span>Seu link de acesso ao <strong>Manual Ilustrado</strong> será enviado por e-mail.</span></li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 1 ==================== -->
+
+    <!-- ==================== FUNIL HOTMART ====================
+         São os botões que a própria Hotmart gera para esta etapa do funil —
+         eles não são um link de checkout comum, por isso não dá para
+         inventar a URL aqui.
+
+         PARA PUBLICAR: apague a div .mml-ph de dentro de #funil e cole o
+         HTML da Hotmart no lugar. O botão da barra de baixo aponta para
+         #funil, então é só este bloco que precisa existir. -->
+    <section class="mml-funnel" id="funil" aria-label="Sua condição">
+      <div class="tp-container">
+        <div class="mml-slot" data-reveal>
+          <div class="mml-ph mml-ph--slot">
+            <span class="mml-ph__tag">Cole aqui</span>
+            <p class="mml-ph__desc">HTML do funil da Hotmart — os botões desta etapa</p>
+            <p class="mml-ph__from">Enquanto este bloco existir, o botão da página só rola até aqui</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ==================== /FUNIL ==================== -->
+
+  </main>
+
+  <!-- ==================== BARRA DA CONDIÇÃO ====================
+       No doc ela fecha esta página, em vez de abrir como nas outras duas:
+       aqui a tarefa é assistir o vídeo, e a oferta vem depois disso. -->
+  <div class="mml-bar mml-bar--bottom">
+    <div class="tp-container mml-bar__inner">
+      <p class="mml-bar__text">Garanta seu acesso ao Método Mãos Lucrativas por <strong>menos de R$1 por dia</strong></p>
+      <a class="btn btn--tp mml-bar__btn" href="#funil">Garantir minha vaga</a>
+    </div>
+  </div>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__top">
+        <p class="footer__copy">
+          Copyright &copy; ANA MARTHA CURSOS ONLINE LTDA.<br />
+          Todos os direitos reservados.
+        </p>
+        <div class="footer__links">
+          <span class="footer__links-row">
+            <!-- ATENÇÃO: estes dois caminhos vieram do rodapé do /taping e
+                 respondem 404 — lá e aqui. Falta publicar as páginas legais
+                 (ou apontar para onde elas realmente estão). -->
+            <a href="/tap09/legal/politica-de-privacidade.html" target="_blank" rel="noopener noreferrer">Política de privacidade</a>
+            <span aria-hidden="true">|</span>
+            <a href="/tap09/legal/termos-de-uso.html" target="_blank" rel="noopener noreferrer">Termos de uso</a>
+          </span>
+          <span class="footer__company">ANA MARTHA CURSOS ONLINE LTDA &middot; CNPJ 41.219.310/0001-89</span>
+        </div>
+      </div>
+
+      <div class="footer__legal">
+        <span class="footer__legal-label">Aviso Legal:</span>
+        Os resultados podem variar de pessoa para pessoa. Este método tem caráter educacional e de desenvolvimento pessoal, não garantindo ganhos financeiros imediatos ou específicos. O sucesso depende da aplicação prática de cada participante. Este site não é afiliado, endossado ou patrocinado pelo Google ou Meta.
+      </div>
+    </div>
+  </footer>
+  <!-- ==================== /FOOTER ==================== -->
+
+</body>
+</html>
