@@ -12,7 +12,10 @@
 /lt-v1-*
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
 
-# Página de funil (downsell do upsell do Método Mãos Lucrativas): só deve
-# ser alcançada dentro do fluxo de compra, nunca pela busca.
+# Páginas de funil do Método Mãos Lucrativas (upsell e o downsell dele):
+# só devem ser alcançadas dentro do fluxo de compra, nunca pela busca.
+/upsell1-mml/*
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+
 /up-down-mml/*
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
