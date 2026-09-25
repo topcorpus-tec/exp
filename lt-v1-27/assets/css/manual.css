@@ -387,11 +387,25 @@
 
 /* O preço do taping é "R$ 27" com o cifrão pequeno. Aqui a copy escreve
    "Por apenas 27 reais", então as duas pontas ficam pequenas e o número no
-   meio é que cresce. */
+   meio é que cresce — e cresce muito: ele é o argumento da dobra inteira.
+
+   Verde, o mesmo do botão: o número e a ação de comprar passam a ser a
+   mesma cor, em contraste com o vermelho riscado do preço antigo logo
+   acima. Sobre o cartão claro dá 6,4:1.
+
+   O "em" das pontas acompanha o número, então encolhe em proporção para
+   não virar dois blocos do mesmo peso. */
+.tp-offer__installment {
+  font-size: clamp(3.6rem, 9vw, 5.4rem);
+  color: #0D6E3C;
+  line-height: .95;
+}
 .tp-offer__installment small {
-  font-size: .32em;
-  font-weight: var(--fw-bold);
-  letter-spacing: .02em;
+  font-size: .22em;
+  font-weight: var(--fw-extrabold);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--tp-ink);
 }
 
 /* O preço antigo: vermelho e cortado. É a única cor fora da paleta azul da
