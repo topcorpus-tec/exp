@@ -86,15 +86,6 @@ body {
 .head__row { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem 1.1rem; }
 .head h1 { margin: 0; font-size: clamp(1.3rem, 3.4vw, 1.7rem); font-weight: 800; letter-spacing: -.02em; color: #fff; }
 .head__sub { margin: 0; font-size: .88rem; color: #9FB0C6; }
-.head__host {
-  display: inline-flex; align-items: center; gap: .45rem;
-  margin-top: .85rem; padding: .35em .85em;
-  border: 1px solid rgba(255,255,255,.14); border-radius: 999px;
-  background: rgba(255,255,255,.06);
-  font-size: .75rem; color: #C3D0E1;
-}
-.head__host b { color: #fff; font-family: var(--mono); font-weight: 600; }
-.head__host i { width: 6px; height: 6px; border-radius: 50%; background: #34D399; }
 
 /* =========================================================================
    Grupos e grade
@@ -227,9 +218,8 @@ body {
   <div class="wrap">
     <div class="head__row">
       <h1>Índice das páginas</h1>
-      <p class="head__sub">8 rotas &middot; 2 produtos &middot; 2 subdomínios</p>
+      <p class="head__sub">6 páginas &middot; 2 produtos &middot; 2 subdomínios</p>
     </div>
-    <p class="head__host"><i></i> Você está em <b id="host">—</b></p>
   </div>
 </header>
 
@@ -387,71 +377,9 @@ body {
     </div>
   </section>
 
-  <!-- ==================== OUTRAS ==================== -->
-  <section class="grupo">
-    <div class="grupo__cab">
-      <span class="grupo__rot grupo__rot--neutro">Fora dos funis</span>
-      <h2>Outras rotas</h2>
-    </div>
-
-    <div class="grade">
-
-      <article class="bloco">
-        <div class="bloco__topo">
-          <h3 class="bloco__nome">Teste</h3>
-        </div>
-        <p class="bloco__papel">Cópia reduzida da página do TopTaping</p>
-        <span class="bloco__slug">/teste/</span>
-        <div class="bloco__urls">
-          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/teste/"><b>fb</b> exp-fb.topcorpus.com.br/teste/</a>
-          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/teste/"><b>gg</b> exp-gg.topcorpus.com.br/teste/</a>
-        </div>
-        <div class="bloco__pe">
-          <div class="falta"><span class="ok">sem pendências</span></div>
-          <a class="abrir" href="/teste/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
-        </div>
-      </article>
-
-      <article class="bloco">
-        <div class="bloco__topo">
-          <h3 class="bloco__nome">Índice</h3>
-        </div>
-        <p class="bloco__papel">Esta página</p>
-        <span class="bloco__slug">/indice/</span>
-        <div class="bloco__urls">
-          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/indice/"><b>fb</b> exp-fb.topcorpus.com.br/indice/</a>
-          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/indice/"><b>gg</b> exp-gg.topcorpus.com.br/indice/</a>
-        </div>
-        <div class="bloco__pe">
-          <div class="falta"><span class="ok">sem pendências</span></div>
-          <div class="copias">
-            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/indice/">Copiar fb</button>
-            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/indice/">Copiar gg</button>
-          </div>
-        </div>
-      </article>
-
-    </div>
-  </section>
-
-  <!-- ==================== PÉ ==================== -->
-  <section class="pe">
-    <h3>Antes de mexer</h3>
-    <ul>
-      <li><strong>Publicar uma vez atualiza os dois subdomínios</strong> — são dois projetos do Cloudflare Pages servindo o mesmo repositório.</li>
-      <li><strong>As três páginas do Manual são idênticas fora da oferta</strong>, e as três do Mãos Lucrativas dividem o mesmo CSS e JS. Ajuste numa costuma valer para as irmãs.</li>
-      <li><strong>Nenhuma página está indexável</strong> — saem dos buscadores pelo <code>_headers</code> e por <code>meta robots</code>. Ao publicar de verdade, remover os dois.</li>
-      <li><strong>Falta ainda</strong>: as imagens do Manual, o vídeo e o HTML da Hotmart nas três do funil, a nota do asterisco do parcelamento, as páginas legais do rodapé (404 hoje) e o <code>SITE_KEY</code> no Cloudflare, sem o qual os leads não separam fb de gg.</li>
-    </ul>
-  </section>
-
 </div>
 
 <script>
-  // Em qual subdomínio a pessoa está. As páginas são as mesmas nos dois, e
-  // no meio de uma revisão é fácil perder a conta.
-  document.getElementById("host").textContent = location.host || "arquivo local";
-
   // Copiar a URL é a ação mais repetida aqui — o destino delas é o
   // gerenciador de anúncios. O clipboard do navegador só existe em HTTPS
   // (ou localhost), então há um caminho alternativo para o resto.
