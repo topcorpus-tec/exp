@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="theme-color" content="#0F172A" />
+<meta name="theme-color" content="#0B1220" />
 
 <!-- Índice interno: nunca deve ser encontrado na busca. O _headers da raiz
-     reforça com X-Robots-Tag. -->
+     reforça com X-Robots-Tag em /indice/*. -->
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
 <meta name="googlebot" content="noindex, nofollow" />
 <meta http-equiv="X-Content-Type-Options" content="nosniff" />
@@ -15,328 +15,682 @@
 
 <link rel="preconnect" href="https://pcm.topcorpus.com.br" crossorigin />
 <link rel="preload" as="font" type="font/woff2" href="https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-400.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-600.woff2" crossorigin />
 <link rel="preload" as="font" type="font/woff2" href="https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-800.woff2" crossorigin />
 
 <style>
-  /* As mesmas fontes das landing pages, servidas do mesmo CDN. */
-  @font-face { font-family: Manrope; font-weight: 400; font-display: swap;
-    src: url(https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-400.woff2) format("woff2"); }
-  @font-face { font-family: Manrope; font-weight: 600; font-display: swap;
-    src: url(https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-600.woff2) format("woff2"); }
-  @font-face { font-family: Manrope; font-weight: 800; font-display: swap;
-    src: url(https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-800.woff2) format("woff2"); }
+/* =========================================================================
+   Índice das páginas — EXP
 
-  /* Paleta neutra de propósito: o índice lista dois funis de cores
-     diferentes, então ele próprio não puxa para nenhuma delas. Cada funil
-     se identifica por uma faixa de cor no card. */
-  :root {
-    --bg:      #0F172A;
-    --card:    #FFFFFF;
-    --ink:     #0F172A;
-    --body:    #475569;
-    --muted:   #7A8AA0;
-    --line:    #E2E8F0;
-    --azul:    #0285D3;
-    --verde:   #12854A;
-    --cinza:   #94A3B8;
-    --aviso:   #C2410C;
-    --radius:  14px;
-  }
+   Página interna. O trabalho dela é responder quatro perguntas de relance:
+   que páginas existem, qual é o caminho entre elas, qual link eu copio, e
+   o que ainda impede cada uma de ir ao ar.
 
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    padding: 0 0 4rem;
-    font-family: Manrope, system-ui, -apple-system, "Segoe UI", sans-serif;
-    background: #F8FAFC;
-    color: var(--body);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
-  .wrap { max-width: 980px; margin-inline: auto; padding-inline: clamp(1rem, 4vw, 2rem); }
+   O diagrama do topo é o que faz a página ser entendida sem leitura: a
+   lista abaixo dele é a mesma informação em detalhe, para quem já sabe o
+   que procura.
+   ========================================================================= */
 
-  /* ---- Cabeçalho ---- */
-  .top { padding: clamp(2rem, 5vw, 3.25rem) 0 clamp(1.5rem, 4vw, 2.25rem); background: var(--bg); color: #fff; }
-  .top h1 { margin: 0; font-size: clamp(1.5rem, 4vw, 2.1rem); font-weight: 800; letter-spacing: -.02em; color: #fff; }
-  .top p  { margin: .6rem 0 0; max-width: 62ch; font-size: .95rem; color: #CBD5E1; }
-  .host   { display: inline-block; margin-top: 1rem; padding: .35em .8em; border-radius: 999px;
-            background: rgba(255,255,255,.1); font-size: .78rem; font-weight: 600; color: #E2E8F0; }
-  .host b { color: #fff; }
+@font-face { font-family: Manrope; font-weight: 400; font-display: swap;
+  src: url(https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-400.woff2) format("woff2"); }
+@font-face { font-family: Manrope; font-weight: 600; font-display: swap;
+  src: url(https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-600.woff2) format("woff2"); }
+@font-face { font-family: Manrope; font-weight: 800; font-display: swap;
+  src: url(https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-800.woff2) format("woff2"); }
 
-  /* ---- Grupos ---- */
-  .grupo { margin-top: clamp(2rem, 5vw, 3rem); }
-  .grupo__cab { display: flex; flex-wrap: wrap; align-items: baseline; gap: .75rem; margin-bottom: .35rem; }
-  .grupo h2 { margin: 0; font-size: 1.22rem; font-weight: 800; letter-spacing: -.01em; color: var(--ink); }
-  .grupo__tag { padding: .22em .7em; border-radius: 999px; font-size: .66rem; font-weight: 800;
-                letter-spacing: .1em; text-transform: uppercase; }
-  .grupo__tag--azul  { background: #E3F1FC; color: #0A5C9E; }
-  .grupo__tag--verde { background: #E4F4EA; color: #0D6E3C; }
-  .grupo__tag--cinza { background: #EEF2F6; color: #55657A; }
-  .grupo__desc { margin: 0 0 1.1rem; font-size: .9rem; color: var(--muted); max-width: 70ch; }
+/* A paleta é neutra de propósito: a página indexa um funil azul e um
+   verde, então ela própria não puxa para nenhum dos dois. Cada funil se
+   identifica por um acento pontual, nunca por um fundo inteiro. */
+:root {
+  --ink:      #0B1220;
+  --ink-2:    #1E293B;
+  --body:     #475569;
+  --muted:    #8494A8;
+  --faint:    #A9B6C6;
+  --line:     #E4E9F0;
+  --line-2:   #EFF3F7;
+  --surface:  #FFFFFF;
+  --canvas:   #F7F9FC;
 
-  /* ---- Card de página ---- */
-  .lista { display: grid; gap: .85rem; }
-  .pg {
-    position: relative; overflow: hidden;
-    display: grid; gap: .75rem;
-    padding: clamp(1rem, 2.5vw, 1.35rem);
-    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
-  }
-  /* A faixa do topo é o que diz a que funil o card pertence. */
-  .pg::before { content: ""; position: absolute; inset-inline: 0; top: 0; height: 3px; background: var(--cinza); }
-  .pg--azul::before  { background: var(--azul); }
-  .pg--verde::before { background: var(--verde); }
+  --azul:     #0873B8;
+  --azul-bg:  #EAF4FC;
+  --verde:    #0D6E3C;
+  --verde-bg: #E7F4EC;
+  --ambar:    #A55A09;
+  --ambar-bg: #FDF3E4;
+  --neutro:   #64748B;
+  --neutro-bg:#F1F5F9;
 
-  .pg__cab { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem .85rem; }
-  .pg__slug { font-size: 1rem; font-weight: 800; color: var(--ink); font-variant-ligatures: none; }
-  .pg__papel { font-size: .8rem; color: var(--muted); }
-  .pg__preco { margin-left: auto; padding: .25em .7em; border-radius: 999px; background: #F1F5F9;
-               font-size: .8rem; font-weight: 800; color: var(--ink); white-space: nowrap; }
+  --r:        12px;
+  --mono:     ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
 
-  .pg__titulo { margin: 0; font-size: .92rem; color: var(--body); }
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  padding-bottom: clamp(3rem, 8vw, 5rem);
+  font-family: Manrope, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--body);
+  background: var(--canvas);
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 1040px; margin-inline: auto; padding-inline: clamp(1.15rem, 4vw, 2.5rem); }
 
-  /* ---- Links ---- */
-  .links { display: flex; flex-wrap: wrap; gap: .5rem; }
-  .lk {
-    display: inline-flex; align-items: center; gap: .4rem;
-    padding: .42em .85em; border-radius: 8px;
-    border: 1px solid var(--line); background: #F8FAFC;
-    font-size: .8rem; font-weight: 700; color: var(--ink); text-decoration: none;
-    transition: background .15s ease, border-color .15s ease;
-  }
-  .lk:hover, .lk:focus-visible { background: #EEF4FB; border-color: #C7D6E6; }
-  .lk small { font-weight: 600; color: var(--muted); }
+h1, h2, h3 { color: var(--ink); letter-spacing: -.018em; }
 
-  /* ---- Pendências ---- */
-  .pend { display: flex; flex-wrap: wrap; gap: .4rem; }
-  .pend span {
-    padding: .2em .6em; border-radius: 6px;
-    background: #FFF3EA; color: var(--aviso);
-    font-size: .72rem; font-weight: 700;
-  }
-  .pend .ok { background: #E7F6EC; color: #15803D; }
+/* =========================================================================
+   Cabeçalho
+   ========================================================================= */
+.head {
+  padding: clamp(2.25rem, 6vw, 3.75rem) 0 clamp(1.75rem, 4vw, 2.5rem);
+  background:
+    radial-gradient(90% 120% at 12% 0%, #16233C 0%, transparent 60%),
+    linear-gradient(135deg, #0B1220 0%, #101B2E 100%);
+  color: #fff;
+}
+.head__eyebrow {
+  margin: 0 0 .7rem;
+  font-size: .68rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase;
+  color: #7C93B5;
+}
+.head h1 { margin: 0; font-size: clamp(1.65rem, 4.4vw, 2.35rem); font-weight: 800; color: #fff; }
+.head__sub { margin: .75rem 0 0; max-width: 60ch; font-size: .97rem; color: #B7C4D6; }
 
-  /* ---- Rodapé de notas ---- */
-  .notas { margin-top: clamp(2rem, 5vw, 3rem); padding: clamp(1.1rem, 3vw, 1.6rem);
-           border: 1px solid var(--line); border-radius: var(--radius); background: #fff; }
-  .notas h3 { margin: 0 0 .6rem; font-size: .95rem; font-weight: 800; color: var(--ink); }
-  .notas ul { margin: 0; padding-left: 1.1rem; }
-  .notas li { font-size: .88rem; margin-bottom: .45rem; }
-  .notas code { padding: .1em .38em; border-radius: 5px; background: #F1F5F9;
-                font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .85em; color: var(--ink); }
+/* Números que resumem o estado, para não precisar contar cards. */
+.stats { display: flex; flex-wrap: wrap; gap: clamp(1.25rem, 4vw, 2.75rem); margin-top: clamp(1.5rem, 4vw, 2.1rem); }
+.stat__n { display: block; font-size: clamp(1.4rem, 3.4vw, 1.8rem); font-weight: 800; line-height: 1.1; color: #fff; }
+.stat__l { font-size: .74rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: #8AA0BE; }
 
-  @media (max-width: 560px) {
-    .pg__preco { margin-left: 0; }
-  }
+.host {
+  display: inline-flex; align-items: center; gap: .5rem;
+  margin-top: clamp(1.4rem, 3.5vw, 1.9rem);
+  padding: .45em .95em;
+  border: 1px solid rgba(255,255,255,.14); border-radius: 999px;
+  background: rgba(255,255,255,.06);
+  font-size: .78rem; color: #C3D0E1;
+}
+.host b { color: #fff; font-family: var(--mono); font-size: .95em; font-weight: 600; }
+.host i { width: 7px; height: 7px; border-radius: 50%; background: #34D399; }
+
+/* =========================================================================
+   Seções
+   ========================================================================= */
+.sec { margin-top: clamp(2.25rem, 6vw, 3.5rem); }
+.sec__head { margin-bottom: clamp(1rem, 2.5vw, 1.4rem); }
+.sec__head h2 { margin: 0; font-size: clamp(1.1rem, 2.6vw, 1.3rem); font-weight: 800; }
+.sec__head p  { margin: .4rem 0 0; max-width: 72ch; font-size: .92rem; color: var(--muted); }
+
+.rotulo {
+  display: inline-block; margin-bottom: .55rem;
+  padding: .26em .75em; border-radius: 999px;
+  font-size: .64rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase;
+}
+.rotulo--azul   { background: var(--azul-bg);   color: var(--azul); }
+.rotulo--verde  { background: var(--verde-bg);  color: var(--verde); }
+.rotulo--neutro { background: var(--neutro-bg); color: var(--neutro); }
+
+/* =========================================================================
+   Diagrama do funil
+
+   É a peça que explica a página sem exigir leitura. Em coluna no mobile,
+   em linha no desktop; as setas são texto, não imagem, para acompanharem
+   o tamanho da fonte.
+   ========================================================================= */
+.fluxo {
+  padding: clamp(1.25rem, 3.5vw, 2rem);
+  border: 1px solid var(--line); border-radius: var(--r);
+  background: var(--surface);
+}
+.fluxo__linha {
+  display: flex; flex-direction: column; align-items: stretch; gap: .5rem;
+}
+.fluxo__passo {
+  display: grid; gap: .3rem;
+  padding: .9rem 1.1rem;
+  border: 1px solid var(--line); border-left: 3px solid var(--neutro);
+  border-radius: 10px; background: var(--canvas);
+}
+.fluxo__passo--azul  { border-left-color: var(--azul); }
+.fluxo__passo--verde { border-left-color: var(--verde); }
+.fluxo__papel { font-size: .66rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; color: var(--muted); }
+.fluxo__nome  { font-size: .95rem; font-weight: 800; color: var(--ink); }
+.fluxo__slug  { font-family: var(--mono); font-size: .8rem; color: var(--body); }
+.fluxo__seta  { justify-self: center; padding: .1rem 0; font-size: .95rem; color: var(--faint); }
+.fluxo__ramo  { display: grid; gap: .5rem; }
+.fluxo__cond  { font-size: .74rem; font-weight: 700; color: var(--muted); }
+
+@media (min-width: 760px) {
+  .fluxo__ramo { grid-template-columns: 1fr 1fr; align-items: start; }
+}
+
+.fluxo__nota {
+  margin: 1.1rem 0 0; padding-top: .9rem; border-top: 1px dashed var(--line);
+  font-size: .82rem; color: var(--muted);
+}
+.fluxo__nota strong { color: var(--ambar); }
+
+/* =========================================================================
+   Cards de página
+   ========================================================================= */
+.lista { display: grid; gap: .8rem; }
+
+.pg {
+  display: grid; gap: .9rem;
+  padding: clamp(1.05rem, 2.6vw, 1.4rem);
+  border: 1px solid var(--line); border-radius: var(--r);
+  background: var(--surface);
+  transition: border-color .16s ease, box-shadow .16s ease;
+}
+.pg:hover { border-color: #CFDAE7; box-shadow: 0 6px 22px rgba(16, 32, 56, .06); }
+
+.pg__topo { display: flex; flex-wrap: wrap; align-items: center; gap: .55rem .9rem; }
+.pg__slug {
+  font-family: var(--mono); font-size: .93rem; font-weight: 600; color: var(--ink);
+}
+.pg__papel { font-size: .82rem; color: var(--muted); }
+.pg__preco {
+  margin-left: auto;
+  padding: .3em .8em; border-radius: 8px;
+  font-size: .85rem; font-weight: 800; white-space: nowrap;
+}
+.pg--azul  .pg__preco { background: var(--azul-bg);  color: var(--azul); }
+.pg--verde .pg__preco { background: var(--verde-bg); color: var(--verde); }
+.pg__preco--vazio { background: var(--neutro-bg); color: var(--muted); font-weight: 600; }
+
+.pg__titulo { margin: 0; font-size: .95rem; color: var(--body); }
+
+/* ---- Linha de links ---- */
+.links { display: flex; flex-wrap: wrap; gap: .45rem; align-items: center; }
+.lk {
+  display: inline-flex; align-items: center; gap: .4rem;
+  padding: .45em .8em;
+  border: 1px solid var(--line); border-radius: 8px;
+  background: var(--surface);
+  font-size: .81rem; font-weight: 700; color: var(--ink-2); text-decoration: none;
+  transition: background .15s ease, border-color .15s ease, color .15s ease;
+}
+.lk:hover, .lk:focus-visible { background: var(--canvas); border-color: #CFDAE7; }
+.lk--forte { background: var(--ink); border-color: var(--ink); color: #fff; }
+.lk--forte:hover, .lk--forte:focus-visible { background: #1B2740; border-color: #1B2740; color: #fff; }
+.lk small { font-weight: 600; color: var(--faint); }
+.lk--forte small { color: #94A9C4; }
+
+/* Botão de copiar: a ação mais repetida aqui é levar a URL para o
+   gerenciador de anúncios, e clicar é mais rápido que selecionar. */
+.cp {
+  display: inline-flex; align-items: center; gap: .35rem;
+  padding: .45em .7em;
+  border: 1px solid var(--line); border-radius: 8px;
+  background: var(--surface);
+  font: inherit; font-size: .78rem; font-weight: 700; color: var(--muted);
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
+}
+.cp:hover { background: var(--canvas); color: var(--ink-2); border-color: #CFDAE7; }
+.cp.ok { background: var(--verde-bg); border-color: #BFE3CD; color: var(--verde); }
+
+/* ---- Pendências ---- */
+.falta { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; padding-top: .15rem; }
+.falta__rot { font-size: .72rem; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; color: var(--faint); }
+.falta span.item {
+  padding: .24em .65em; border-radius: 6px;
+  background: var(--ambar-bg); color: var(--ambar);
+  font-size: .76rem; font-weight: 700;
+}
+.falta span.pronto { background: var(--verde-bg); color: var(--verde); }
+
+/* =========================================================================
+   Bloqueios e notas
+   ========================================================================= */
+.bloq { display: grid; gap: .65rem; }
+.bloq__item {
+  display: grid; grid-template-columns: auto 1fr; gap: .2rem .85rem;
+  padding: clamp(.9rem, 2.2vw, 1.15rem);
+  border: 1px solid var(--line); border-radius: var(--r);
+  background: var(--surface);
+}
+.bloq__n {
+  grid-row: span 2;
+  width: 26px; height: 26px; border-radius: 7px;
+  display: grid; place-items: center;
+  background: var(--ambar-bg); color: var(--ambar);
+  font-size: .78rem; font-weight: 800;
+}
+.bloq__t { font-size: .93rem; font-weight: 800; color: var(--ink); }
+.bloq__d { font-size: .87rem; color: var(--muted); }
+.bloq__d code, .nota code {
+  padding: .12em .4em; border-radius: 5px; background: var(--neutro-bg);
+  font-family: var(--mono); font-size: .88em; color: var(--ink-2);
+}
+
+.nota {
+  padding: clamp(1.1rem, 2.8vw, 1.5rem);
+  border: 1px solid var(--line); border-radius: var(--r);
+  background: var(--surface);
+}
+.nota ul { margin: 0; padding-left: 1.15rem; display: grid; gap: .55rem; }
+.nota li { font-size: .89rem; }
+.nota strong { color: var(--ink-2); }
+
+.rodape { margin-top: clamp(2rem, 5vw, 3rem); font-size: .78rem; color: var(--faint); text-align: center; }
 </style>
 </head>
 <body>
 
-<header class="top">
+<header class="head">
   <div class="wrap">
+    <p class="head__eyebrow">TopCorpus &middot; deploy EXP</p>
     <h1>Índice das páginas</h1>
-    <p>
-      Todas as landing pages deste deploy. Cada uma existe nos dois subdomínios — um para o
-      tráfego do Meta, outro para o do Google —, servidos do mesmo repositório.
+    <p class="head__sub">
+      Tudo o que está publicado neste repositório, na ordem em que a cliente encontra.
+      Cada página existe em dois subdomínios: <b>exp-fb</b> para o tráfego do Meta e
+      <b>exp-gg</b> para o do Google.
     </p>
-    <p class="host">Você está em: <b id="host">—</b></p>
+
+    <div class="stats">
+      <div class="stat"><span class="stat__n">6</span><span class="stat__l">páginas no funil</span></div>
+      <div class="stat"><span class="stat__n">2</span><span class="stat__l">produtos</span></div>
+      <div class="stat"><span class="stat__n">12</span><span class="stat__l">URLs no ar</span></div>
+      <div class="stat"><span class="stat__n">6</span><span class="stat__l">pendências abertas</span></div>
+    </div>
+
+    <p class="host"><i></i> Você está em <b id="host">—</b></p>
   </div>
 </header>
 
 <div class="wrap">
 
-  <!-- ================= MANUAL ILUSTRADO ================= -->
-  <section class="grupo">
-    <div class="grupo__cab">
-      <h2>Manual Ilustrado para Alívio da Dor</h2>
-      <span class="grupo__tag grupo__tag--azul">Front-end &middot; 3 tickets</span>
+  <!-- ==================== O CAMINHO ==================== -->
+  <section class="sec">
+    <div class="sec__head">
+      <h2>O caminho da cliente</h2>
+      <p>Do anúncio até a conclusão do pedido. Cada caixa é uma página deste deploy.</p>
     </div>
-    <p class="grupo__desc">
-      A mesma página de vendas em três preços. São páginas de entrada: é para elas que o
-      tráfego pago aponta. A copy é idêntica nas três — o que muda é a dobra da oferta e o
-      link de checkout.
-    </p>
+
+    <div class="fluxo">
+      <div class="fluxo__linha">
+
+        <div class="fluxo__passo">
+          <span class="fluxo__papel">Origem</span>
+          <span class="fluxo__nome">Tráfego pago &mdash; Meta e Google</span>
+        </div>
+
+        <span class="fluxo__seta" aria-hidden="true">&darr;</span>
+
+        <div class="fluxo__passo fluxo__passo--azul">
+          <span class="fluxo__papel">Entrada &middot; produto de R$27 a R$97</span>
+          <span class="fluxo__nome">Manual Ilustrado para Alívio da Dor</span>
+          <span class="fluxo__slug">/lt-v1-27/ &nbsp;/lt-v1-67/ &nbsp;/lt-v1-97/</span>
+        </div>
+
+        <span class="fluxo__seta" aria-hidden="true">&darr; <span class="fluxo__cond">comprou</span></span>
+
+        <div class="fluxo__passo fluxo__passo--verde">
+          <span class="fluxo__papel">Upsell &middot; R$297</span>
+          <span class="fluxo__nome">Método Mãos Lucrativas</span>
+          <span class="fluxo__slug">/upsell1-mml/</span>
+        </div>
+
+        <span class="fluxo__seta" aria-hidden="true">&darr; <span class="fluxo__cond">recusou</span></span>
+
+        <div class="fluxo__passo fluxo__passo--verde">
+          <span class="fluxo__papel">Downsell &middot; R$197</span>
+          <span class="fluxo__nome">Mesmo método, R$1.100 de desconto</span>
+          <span class="fluxo__slug">/up-down-mml/</span>
+        </div>
+
+        <span class="fluxo__seta" aria-hidden="true">&darr;</span>
+
+        <div class="fluxo__passo fluxo__passo--verde">
+          <span class="fluxo__papel">Fecho</span>
+          <span class="fluxo__nome">Conclusão do pedido</span>
+          <span class="fluxo__slug">/upsell2-mml/</span>
+        </div>
+
+      </div>
+
+      <p class="fluxo__nota">
+        <strong>A confirmar:</strong> esta ordem foi deduzida dos nomes e do conteúdo das páginas.
+        Quem configurou o funil na Hotmart precisa confirmar se a sequência é essa mesma &mdash;
+        principalmente onde entra a página de conclusão.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==================== MANUAL ==================== -->
+  <section class="sec">
+    <div class="sec__head">
+      <span class="rotulo rotulo--azul">Produto de entrada</span>
+      <h2>Manual Ilustrado para Alívio da Dor</h2>
+      <p>
+        A mesma página de vendas em três preços &mdash; é para elas que o tráfego pago aponta.
+        A copy é idêntica nas três: o que muda é a dobra da oferta e o link de checkout.
+        <strong>Qualquer ajuste precisa ser feito nas três.</strong>
+      </p>
+    </div>
 
     <div class="lista">
 
       <article class="pg pg--azul">
-        <div class="pg__cab">
+        <div class="pg__topo">
           <span class="pg__slug">/lt-v1-27/</span>
-          <span class="pg__papel">9x de R$ 3,39 &middot; economiza 270</span>
+          <span class="pg__papel">9&times; de R$ 3,39 &middot; economiza R$ 270</span>
           <span class="pg__preco">R$ 27</span>
         </div>
         <p class="pg__titulo">+70 manobras ilustradas para aliviar a dor das pessoas com massagem</p>
         <div class="links">
-          <a class="lk" href="/lt-v1-27/">Abrir aqui</a>
-          <a class="lk" href="https://exp-fb.topcorpus.com.br/lt-v1-27/">exp-fb <small>Meta</small></a>
-          <a class="lk" href="https://exp-gg.topcorpus.com.br/lt-v1-27/">exp-gg <small>Google</small></a>
+          <a class="lk lk--forte" href="/lt-v1-27/">Abrir</a>
+          <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/lt-v1-27/">Copiar exp-fb</button>
+          <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/lt-v1-27/">Copiar exp-gg</button>
           <a class="lk" href="https://pay.hotmart.com/W95360090D?off=9z1ywsjs">Checkout <small>off=9z1ywsjs</small></a>
         </div>
-        <div class="pend"><span>14 imagens</span><span>nota do parcelamento</span></div>
+        <div class="falta">
+          <span class="falta__rot">Falta</span>
+          <span class="item">14 imagens</span>
+          <span class="item">nota do parcelamento</span>
+        </div>
       </article>
 
       <article class="pg pg--azul">
-        <div class="pg__cab">
+        <div class="pg__topo">
           <span class="pg__slug">/lt-v1-67/</span>
-          <span class="pg__papel">12x de R$ 6,53 &middot; economiza 230</span>
+          <span class="pg__papel">12&times; de R$ 6,53 &middot; economiza R$ 230</span>
           <span class="pg__preco">R$ 67</span>
         </div>
         <p class="pg__titulo">+70 manobras ilustradas para aliviar a dor das pessoas com massagem</p>
         <div class="links">
-          <a class="lk" href="/lt-v1-67/">Abrir aqui</a>
-          <a class="lk" href="https://exp-fb.topcorpus.com.br/lt-v1-67/">exp-fb <small>Meta</small></a>
-          <a class="lk" href="https://exp-gg.topcorpus.com.br/lt-v1-67/">exp-gg <small>Google</small></a>
+          <a class="lk lk--forte" href="/lt-v1-67/">Abrir</a>
+          <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/lt-v1-67/">Copiar exp-fb</button>
+          <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/lt-v1-67/">Copiar exp-gg</button>
           <a class="lk" href="https://pay.hotmart.com/W95360090D?off=q86wzvlt">Checkout <small>off=q86wzvlt</small></a>
         </div>
-        <div class="pend"><span>14 imagens</span><span>nota do parcelamento</span></div>
+        <div class="falta">
+          <span class="falta__rot">Falta</span>
+          <span class="item">14 imagens</span>
+          <span class="item">nota do parcelamento</span>
+        </div>
       </article>
 
       <article class="pg pg--azul">
-        <div class="pg__cab">
+        <div class="pg__topo">
           <span class="pg__slug">/lt-v1-97/</span>
-          <span class="pg__papel">12x de R$ 9,45 &middot; economiza 200</span>
+          <span class="pg__papel">12&times; de R$ 9,45 &middot; economiza R$ 200</span>
           <span class="pg__preco">R$ 97</span>
         </div>
         <p class="pg__titulo">+70 manobras ilustradas para aliviar a dor das pessoas com massagem</p>
         <div class="links">
-          <a class="lk" href="/lt-v1-97/">Abrir aqui</a>
-          <a class="lk" href="https://exp-fb.topcorpus.com.br/lt-v1-97/">exp-fb <small>Meta</small></a>
-          <a class="lk" href="https://exp-gg.topcorpus.com.br/lt-v1-97/">exp-gg <small>Google</small></a>
+          <a class="lk lk--forte" href="/lt-v1-97/">Abrir</a>
+          <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/lt-v1-97/">Copiar exp-fb</button>
+          <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/lt-v1-97/">Copiar exp-gg</button>
           <a class="lk" href="https://pay.hotmart.com/W95360090D?off=u7qj2mgv">Checkout <small>off=u7qj2mgv</small></a>
         </div>
-        <div class="pend"><span>14 imagens</span><span>nota do parcelamento</span></div>
+        <div class="falta">
+          <span class="falta__rot">Falta</span>
+          <span class="item">14 imagens</span>
+          <span class="item">nota do parcelamento</span>
+        </div>
       </article>
 
     </div>
   </section>
 
-  <!-- ================= MÃOS LUCRATIVAS ================= -->
-  <section class="grupo">
-    <div class="grupo__cab">
+  <!-- ==================== MÃOS LUCRATIVAS ==================== -->
+  <section class="sec">
+    <div class="sec__head">
+      <span class="rotulo rotulo--verde">Funil pós-compra</span>
       <h2>Método Mãos Lucrativas</h2>
-      <span class="grupo__tag grupo__tag--verde">Funil pós-compra</span>
+      <p>
+        As três etapas que vêm depois da compra do Manual. Nenhuma tem link de checkout próprio:
+        quem gera os botões é a Hotmart, e o HTML dela entra no bloco <code>#funil</code> de cada
+        página. <strong>As três compartilham o mesmo CSS e o mesmo JS</strong>, então um ajuste de
+        identidade vale para todas de uma vez.
+      </p>
     </div>
-    <p class="grupo__desc">
-      As três etapas que vêm depois da compra do Manual. Nenhuma delas tem link de checkout
-      próprio: quem gera os botões é a Hotmart, e o HTML dela entra no bloco <code>#funil</code>
-      de cada página.
-    </p>
 
     <div class="lista">
 
       <article class="pg pg--verde">
-        <div class="pg__cab">
+        <div class="pg__topo">
           <span class="pg__slug">/upsell1-mml/</span>
-          <span class="pg__papel">Upsell &middot; 12x de R$ 28,94</span>
+          <span class="pg__papel">Upsell &middot; 12&times; de R$ 28,94</span>
           <span class="pg__preco">R$ 297</span>
         </div>
-        <p class="pg__titulo">Ganhe R$100 por hora com massagem usando apenas suas mãos!</p>
+        <p class="pg__titulo">Ganhe R$100 por hora com massagem usando apenas suas mãos</p>
         <div class="links">
-          <a class="lk" href="/upsell1-mml/">Abrir aqui</a>
-          <a class="lk" href="https://exp-fb.topcorpus.com.br/upsell1-mml/">exp-fb <small>Meta</small></a>
-          <a class="lk" href="https://exp-gg.topcorpus.com.br/upsell1-mml/">exp-gg <small>Google</small></a>
+          <a class="lk lk--forte" href="/upsell1-mml/">Abrir</a>
+          <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/upsell1-mml/">Copiar exp-fb</button>
+          <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/upsell1-mml/">Copiar exp-gg</button>
         </div>
-        <div class="pend"><span>vídeo</span><span>HTML do funil</span><span>nota do parcelamento</span></div>
+        <div class="falta">
+          <span class="falta__rot">Falta</span>
+          <span class="item">vídeo</span>
+          <span class="item">HTML do funil</span>
+          <span class="item">nota do parcelamento</span>
+        </div>
       </article>
 
       <article class="pg pg--verde">
-        <div class="pg__cab">
+        <div class="pg__topo">
           <span class="pg__slug">/up-down-mml/</span>
-          <span class="pg__papel">Downsell &middot; 12x de R$ 19,19 &middot; economiza 1.100</span>
+          <span class="pg__papel">Downsell &middot; 12&times; de R$ 19,19 &middot; economiza R$ 1.100</span>
           <span class="pg__preco">R$ 197</span>
         </div>
         <p class="pg__titulo">Conquiste seus primeiros R$1.000,00 com massagem em apenas 30 dias</p>
         <div class="links">
-          <a class="lk" href="/up-down-mml/">Abrir aqui</a>
-          <a class="lk" href="https://exp-fb.topcorpus.com.br/up-down-mml/">exp-fb <small>Meta</small></a>
-          <a class="lk" href="https://exp-gg.topcorpus.com.br/up-down-mml/">exp-gg <small>Google</small></a>
+          <a class="lk lk--forte" href="/up-down-mml/">Abrir</a>
+          <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/up-down-mml/">Copiar exp-fb</button>
+          <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/up-down-mml/">Copiar exp-gg</button>
         </div>
-        <div class="pend"><span>vídeo</span><span>HTML do funil</span><span>nota do parcelamento</span></div>
+        <div class="falta">
+          <span class="falta__rot">Falta</span>
+          <span class="item">vídeo</span>
+          <span class="item">HTML do funil</span>
+          <span class="item">nota do parcelamento</span>
+        </div>
       </article>
 
       <article class="pg pg--verde">
-        <div class="pg__cab">
+        <div class="pg__topo">
           <span class="pg__slug">/upsell2-mml/</span>
-          <span class="pg__papel">Conclusão do pedido &middot; oferta entra após 2 min</span>
-          <span class="pg__preco">—</span>
+          <span class="pg__papel">Conclusão do pedido &middot; a oferta entra após 2 min</span>
+          <span class="pg__preco pg__preco--vazio">sem preço</span>
         </div>
-        <p class="pg__titulo">Seu pedido está sendo processado — veja como finalizar</p>
+        <p class="pg__titulo">Seu pedido está sendo processado &mdash; veja como finalizar</p>
         <div class="links">
-          <a class="lk" href="/upsell2-mml/">Abrir aqui</a>
-          <a class="lk" href="https://exp-fb.topcorpus.com.br/upsell2-mml/">exp-fb <small>Meta</small></a>
-          <a class="lk" href="https://exp-gg.topcorpus.com.br/upsell2-mml/">exp-gg <small>Google</small></a>
+          <a class="lk lk--forte" href="/upsell2-mml/">Abrir</a>
+          <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/upsell2-mml/">Copiar exp-fb</button>
+          <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/upsell2-mml/">Copiar exp-gg</button>
         </div>
-        <div class="pend"><span>vídeo</span><span>HTML do funil</span></div>
+        <div class="falta">
+          <span class="falta__rot">Falta</span>
+          <span class="item">vídeo</span>
+          <span class="item">HTML do funil</span>
+        </div>
       </article>
 
     </div>
   </section>
 
-  <!-- ================= OUTRAS ================= -->
-  <section class="grupo">
-    <div class="grupo__cab">
-      <h2>Fora dos funis</h2>
-      <span class="grupo__tag grupo__tag--cinza">Rascunho</span>
+  <!-- ==================== O QUE IMPEDE DE PUBLICAR ==================== -->
+  <section class="sec">
+    <div class="sec__head">
+      <h2>O que impede de publicar</h2>
+      <p>
+        As pendências dos cards acima, reunidas por trabalho a fazer. Nenhuma página está pronta
+        para receber tráfego enquanto as três primeiras não forem resolvidas.
+      </p>
     </div>
-    <p class="grupo__desc">Não faz parte de nenhum funil ativo; fica registrada para não se perder.</p>
+
+    <div class="bloq">
+
+      <div class="bloq__item">
+        <span class="bloq__n">1</span>
+        <span class="bloq__t">As imagens do Manual</span>
+        <span class="bloq__d">
+          São 14 espaços por página, mas as mesmas 14 nas três: o mockup do hero, as 4 ilustrações
+          indicadas no doc do Drive, os 4 mockups de bônus, os 3 dos cards de &ldquo;para quem é&rdquo;.
+          Cada espaço na página diz o que entra nele.
+        </span>
+      </div>
+
+      <div class="bloq__item">
+        <span class="bloq__n">2</span>
+        <span class="bloq__t">O vídeo das páginas do Mãos Lucrativas</span>
+        <span class="bloq__d">
+          A VSL das três. A caixa já está na proporção 16/9, então o embed entra sem fazer a página
+          saltar.
+        </span>
+      </div>
+
+      <div class="bloq__item">
+        <span class="bloq__n">3</span>
+        <span class="bloq__t">O HTML do funil da Hotmart</span>
+        <span class="bloq__d">
+          Os botões de aceitar e recusar de cada etapa. Sem eles a página não vende: os CTAs só
+          rolam até o bloco <code>#funil</code>. Para resolver, apague o espaço reservado de dentro
+          dele e cole o HTML no lugar.
+        </span>
+      </div>
+
+      <div class="bloq__item">
+        <span class="bloq__n">4</span>
+        <span class="bloq__t">A nota de rodapé do parcelamento</span>
+        <span class="bloq__d">
+          Os preços parcelados trazem um asterisco que nenhum doc explica. Costuma ser
+          &ldquo;parcelado com juros da plataforma&rdquo;, mas o texto exato precisa vir de vocês.
+          Afeta 5 das 6 páginas.
+        </span>
+      </div>
+
+      <div class="bloq__item">
+        <span class="bloq__n">5</span>
+        <span class="bloq__t">As páginas de política de privacidade e termos</span>
+        <span class="bloq__d">
+          Os dois links do rodapé respondem 404 em todas as páginas &mdash; e também no
+          <code>/taping</code>, de onde o rodapé veio. Não é um erro introduzido aqui, mas continua
+          sendo um link quebrado no ar.
+        </span>
+      </div>
+
+      <div class="bloq__item">
+        <span class="bloq__n">6</span>
+        <span class="bloq__t">A separação de leads entre Meta e Google</span>
+        <span class="bloq__d">
+          O campo <code>key</code> do <code>env-config.js</code> continua <code>"dev"</code> nos dois
+          deploys, então o <code>landing_subdomain</code> chega igual vindo do fb e do gg. Resolve-se
+          configurando o build command com <code>SITE_KEY</code> em cada projeto do Cloudflare Pages
+          &mdash; é no painel, não no código.
+        </span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== FORA DOS FUNIS ==================== -->
+  <section class="sec">
+    <div class="sec__head">
+      <span class="rotulo rotulo--neutro">Fora dos funis</span>
+      <h2>Outras rotas</h2>
+    </div>
 
     <div class="lista">
       <article class="pg">
-        <div class="pg__cab">
+        <div class="pg__topo">
           <span class="pg__slug">/teste/</span>
-          <span class="pg__papel">Cópia reduzida da página do TopTaping</span>
+          <span class="pg__papel">Cópia reduzida da página do TopTaping &middot; rascunho antigo</span>
         </div>
         <div class="links">
-          <a class="lk" href="/teste/">Abrir aqui</a>
+          <a class="lk lk--forte" href="/teste/">Abrir</a>
         </div>
-        <div class="pend"><span class="ok">sem pendências</span></div>
+        <div class="falta"><span class="item pronto">sem pendências</span></div>
+      </article>
+
+      <article class="pg">
+        <div class="pg__topo">
+          <span class="pg__slug">/indice/</span>
+          <span class="pg__papel">Esta página</span>
+        </div>
+        <div class="falta"><span class="item pronto">sem pendências</span></div>
       </article>
     </div>
   </section>
 
-  <!-- ================= NOTAS ================= -->
-  <section class="notas">
-    <h3>O que vale saber antes de mexer</h3>
-    <ul>
-      <li>
-        <strong>Toda página existe em dois subdomínios.</strong> <code>exp-fb</code> para o tráfego do
-        Meta e <code>exp-gg</code> para o do Google, servidos do mesmo repositório. Publicar uma vez
-        atualiza os dois.
-      </li>
-      <li>
-        <strong>Os leads ainda não separam por origem.</strong> O campo <code>key</code> do
-        <code>env-config.js</code> continua <code>"dev"</code> nos dois deploys, então o
-        <code>landing_subdomain</code> chega igual vindo do fb e do gg. Para separar de verdade
-        falta configurar o build command com <code>SITE_KEY</code> em cada projeto do Cloudflare
-        Pages — isso é no painel, não no código.
-      </li>
-      <li>
-        <strong>As três páginas do Manual são idênticas fora da oferta.</strong> Qualquer ajuste de
-        copy ou layout precisa ser aplicado nas três.
-      </li>
-      <li>
-        <strong>As três do Mãos Lucrativas compartilham o mesmo CSS e o mesmo JS.</strong> Um ajuste
-        de identidade vale para as três de uma vez.
-      </li>
-      <li>
-        <strong>Nenhuma página está indexável.</strong> Todas saem dos buscadores pelo
-        <code>_headers</code> e por <code>meta robots</code>. Quando alguma for publicada de
-        verdade, é preciso remover as duas coisas.
-      </li>
-      <li>
-        <strong>Os links legais do rodapé respondem 404</strong> — em todas as páginas, e também no
-        <code>/taping</code>, de onde o rodapé veio. Falta publicar as páginas de política de
-        privacidade e termos de uso.
-      </li>
-    </ul>
+  <!-- ==================== NOTAS ==================== -->
+  <section class="sec">
+    <div class="sec__head"><h2>Antes de mexer</h2></div>
+    <div class="nota">
+      <ul>
+        <li>
+          <strong>Publicar uma vez atualiza os dois subdomínios.</strong> <code>exp-fb</code> e
+          <code>exp-gg</code> são dois projetos do Cloudflare Pages servindo o mesmo repositório.
+        </li>
+        <li>
+          <strong>Nenhuma página está indexável.</strong> Todas saem dos buscadores pelo
+          <code>_headers</code> e por <code>meta robots</code>. Quando alguma for publicada de
+          verdade, é preciso remover as duas coisas &mdash; só uma não basta.
+        </li>
+        <li>
+          <strong>A raiz do domínio está vazia.</strong> Abrir o endereço sem caminho devolve uma
+          página em branco; o índice mora em <code>/indice/</code>.
+        </li>
+        <li>
+          <strong>O cache de borda atrasa alguns minutos.</strong> Se uma alteração não aparecer,
+          um <code>?cb=1</code> no fim da URL ou um recarregamento forçado mostra a versão nova.
+        </li>
+      </ul>
+    </div>
   </section>
+
+  <p class="rodape">TopCorpus &middot; índice interno &middot; não indexado</p>
 
 </div>
 
 <script>
-  // Mostra em qual subdomínio a pessoa está: as páginas são as mesmas nos
-  // dois, e no meio de uma revisão é fácil perder a conta.
+  // Em qual subdomínio a pessoa está. As páginas são as mesmas nos dois, e
+  // no meio de uma revisão é fácil perder a conta.
   document.getElementById("host").textContent = location.host || "arquivo local";
+
+  // Copiar a URL é a ação mais repetida aqui — o destino delas é o
+  // gerenciador de anúncios. O clipboard do navegador só existe em HTTPS
+  // (ou localhost), então há um caminho alternativo para o resto.
+  document.addEventListener("click", function (ev) {
+    var b = ev.target.closest("[data-copiar]");
+    if (!b) return;
+
+    var url = b.getAttribute("data-copiar");
+    var rotulo = b.textContent;
+
+    function feito(ok) {
+      // Quando o navegador recusa a área de transferência, um aviso do tipo
+      // "selecione e copie" não ajuda: não há nada visível para selecionar.
+      // O prompt entrega o endereço já selecionado, e aí sempre dá para
+      // copiar à mão.
+      if (!ok) { window.prompt("Copie o endereço:", url); }
+      b.textContent = ok ? "Copiado" : rotulo;
+      b.classList.toggle("ok", ok);
+      if (ok) setTimeout(function () { b.textContent = rotulo; b.classList.remove("ok"); }, 1600);
+    }
+
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(url).then(function () { feito(true); }, function () { feito(false); });
+      return;
+    }
+
+    // Sem clipboard: joga a URL num campo temporário e tenta o caminho antigo.
+    var t = document.createElement("textarea");
+    t.value = url;
+    t.setAttribute("readonly", "");
+    t.style.cssText = "position:fixed;top:-100px;opacity:0";
+    document.body.appendChild(t);
+    t.select();
+    var ok = false;
+    try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+    document.body.removeChild(t);
+    feito(ok);
+  });
 </script>
 
 </body>
