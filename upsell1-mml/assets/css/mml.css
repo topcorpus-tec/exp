@@ -505,28 +505,30 @@
    11. ETAPA DE CONCLUSÃO DO PEDIDO (só na /upsell2-mml)
    ========================================================================= */
 
-/* O aviso de não fechar a página é a única coisa em âmbar, fora da paleta
-   verde. É de propósito: um aviso pintado com a cor da marca deixa de ser
-   lido como aviso. O contraste do texto sobre o âmbar é 8,6:1. */
+/* O aviso de não fechar a página é a única coisa em vermelho, fora da
+   paleta verde. É de propósito: um aviso pintado com a cor da marca deixa
+   de ser lido como aviso. As duas pontas do degradê passam com o texto
+   branco — 5,6:1 na mais clara e 7,7:1 na mais escura. */
 .mml-alert {
-  background: #FFF4E0;
-  border-bottom: 2px solid #E9A23B;
-  color: #6B3D06;
+  background: linear-gradient(135deg, #C62828 0%, #A31D1D 100%);
+  color: #fff;
 }
 .mml-alert__inner {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: .7rem;
-  padding-block: clamp(.8rem, 2vw, 1.05rem);
-  text-align: left;
+  padding-block: clamp(.85rem, 2vw, 1.1rem);
+  text-align: center;
 }
-.mml-alert__inner svg { flex: 0 0 auto; color: #B8730F; }
+.mml-alert__inner svg { flex: 0 0 auto; color: #fff; }
 .mml-alert__text {
   margin: 0;
   font-size: clamp(.88rem, 1.7vw, 1rem);
   line-height: 1.45;
-  color: #6B3D06;
+  color: #fff;
+  text-wrap: balance;
 }
 .mml-alert__text strong {
   font-weight: var(--fw-extrabold);
