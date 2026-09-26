@@ -22,3 +22,10 @@
 
 /up-down-mml/*
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+
+# Índice interno das páginas, na raiz. Nunca deve ser encontrado na busca.
+/
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+
+/index.html
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet

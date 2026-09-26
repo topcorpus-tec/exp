@@ -252,16 +252,24 @@
    página ao Manual que a pessoa acabou de levar. */
 .mml-congrats {
   display: inline-flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: .55rem;
-  margin: 0;
-  padding: .55em 1.1em;
+  justify-content: center;
+  gap: .5rem .6rem;
+  /* Não estica até a largura do hero: para de crescer quando a frase cabe,
+     e é isso que deixa a pílula com cara de etiqueta e não de faixa. */
+  max-width: 42ch;
+  margin: 0 auto;
+  padding: .6em 1.25em;
   border-radius: var(--radius-pill);
   background: var(--tp-rose-wash);
   color: var(--tp-rose-deep);
   font-size: clamp(.8rem, 1.5vw, .92rem);
-  line-height: 1.4;
-  text-align: left;
+  line-height: 1.45;
+  text-align: center;
+  /* Reparte as palavras entre as linhas em vez de encher a primeira e
+     deixar a sobra sozinha na segunda. */
+  text-wrap: balance;
 }
 .mml-congrats svg { flex: 0 0 auto; }
 
