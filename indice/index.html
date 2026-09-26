@@ -22,13 +22,11 @@
 /* =========================================================================
    Índice das páginas — EXP
 
-   Página interna. O trabalho dela é responder quatro perguntas de relance:
-   que páginas existem, qual é o caminho entre elas, qual link eu copio, e
-   o que ainda impede cada uma de ir ao ar.
+   Página interna, feita para caber na tela: uma grade de blocos, um por
+   página, cada um com nome, slug, endereço e o botão que abre.
 
-   O diagrama do topo é o que faz a página ser entendida sem leitura: a
-   lista abaixo dele é a mesma informação em detalhe, para quem já sabe o
-   que procura.
+   A grade é auto-fill com mínimo de 270px — o número de colunas sai da
+   largura da janela, sem breakpoint escrito à mão.
    ========================================================================= */
 
 @font-face { font-family: Manrope; font-weight: 400; font-display: swap;
@@ -38,17 +36,16 @@
 @font-face { font-family: Manrope; font-weight: 800; font-display: swap;
   src: url(https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-800.woff2) format("woff2"); }
 
-/* A paleta é neutra de propósito: a página indexa um funil azul e um
-   verde, então ela própria não puxa para nenhum dos dois. Cada funil se
-   identifica por um acento pontual, nunca por um fundo inteiro. */
+/* Paleta neutra: a página indexa um funil azul e um verde, então ela
+   própria não puxa para nenhum dos dois. Cada funil se identifica por um
+   fio de cor no topo do bloco. */
 :root {
   --ink:      #0B1220;
   --ink-2:    #1E293B;
-  --body:     #475569;
+  --body:     #4A5A6E;
   --muted:    #8494A8;
-  --faint:    #A9B6C6;
+  --faint:    #AAB6C4;
   --line:     #E4E9F0;
-  --line-2:   #EFF3F7;
   --surface:  #FFFFFF;
   --canvas:   #F7F9FC;
 
@@ -58,379 +55,256 @@
   --verde-bg: #E7F4EC;
   --ambar:    #A55A09;
   --ambar-bg: #FDF3E4;
-  --neutro:   #64748B;
+  --neutro:   #7C8CA0;
   --neutro-bg:#F1F5F9;
 
-  --r:        12px;
-  --mono:     ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
 }
 
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
-  padding-bottom: clamp(3rem, 8vw, 5rem);
+  padding-bottom: clamp(2.5rem, 6vw, 4rem);
   font-family: Manrope, system-ui, -apple-system, "Segoe UI", sans-serif;
   font-size: 15px;
-  line-height: 1.6;
+  line-height: 1.55;
   color: var(--body);
   background: var(--canvas);
   -webkit-font-smoothing: antialiased;
 }
-.wrap { max-width: 1040px; margin-inline: auto; padding-inline: clamp(1.15rem, 4vw, 2.5rem); }
-
-h1, h2, h3 { color: var(--ink); letter-spacing: -.018em; }
+.wrap { max-width: 1180px; margin-inline: auto; padding-inline: clamp(1.15rem, 4vw, 2.25rem); }
 
 /* =========================================================================
-   Cabeçalho
+   Cabeçalho — compacto de propósito, para a grade começar cedo na tela
    ========================================================================= */
 .head {
-  padding: clamp(2.25rem, 6vw, 3.75rem) 0 clamp(1.75rem, 4vw, 2.5rem);
-  background:
-    radial-gradient(90% 120% at 12% 0%, #16233C 0%, transparent 60%),
-    linear-gradient(135deg, #0B1220 0%, #101B2E 100%);
+  padding: clamp(1.6rem, 4vw, 2.4rem) 0 clamp(1.4rem, 3vw, 1.9rem);
+  background: linear-gradient(135deg, #0B1220 0%, #121F35 100%);
   color: #fff;
 }
-.head__eyebrow {
-  margin: 0 0 .7rem;
-  font-size: .68rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase;
-  color: #7C93B5;
-}
-.head h1 { margin: 0; font-size: clamp(1.65rem, 4.4vw, 2.35rem); font-weight: 800; color: #fff; }
-.head__sub { margin: .75rem 0 0; max-width: 60ch; font-size: .97rem; color: #B7C4D6; }
-
-/* Números que resumem o estado, para não precisar contar cards. */
-.stats { display: flex; flex-wrap: wrap; gap: clamp(1.25rem, 4vw, 2.75rem); margin-top: clamp(1.5rem, 4vw, 2.1rem); }
-.stat__n { display: block; font-size: clamp(1.4rem, 3.4vw, 1.8rem); font-weight: 800; line-height: 1.1; color: #fff; }
-.stat__l { font-size: .74rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: #8AA0BE; }
-
-.host {
-  display: inline-flex; align-items: center; gap: .5rem;
-  margin-top: clamp(1.4rem, 3.5vw, 1.9rem);
-  padding: .45em .95em;
+.head__row { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem 1.1rem; }
+.head h1 { margin: 0; font-size: clamp(1.3rem, 3.4vw, 1.7rem); font-weight: 800; letter-spacing: -.02em; color: #fff; }
+.head__sub { margin: 0; font-size: .88rem; color: #9FB0C6; }
+.head__host {
+  display: inline-flex; align-items: center; gap: .45rem;
+  margin-top: .85rem; padding: .35em .85em;
   border: 1px solid rgba(255,255,255,.14); border-radius: 999px;
   background: rgba(255,255,255,.06);
-  font-size: .78rem; color: #C3D0E1;
+  font-size: .75rem; color: #C3D0E1;
 }
-.host b { color: #fff; font-family: var(--mono); font-size: .95em; font-weight: 600; }
-.host i { width: 7px; height: 7px; border-radius: 50%; background: #34D399; }
+.head__host b { color: #fff; font-family: var(--mono); font-weight: 600; }
+.head__host i { width: 6px; height: 6px; border-radius: 50%; background: #34D399; }
 
 /* =========================================================================
-   Seções
+   Grupos e grade
    ========================================================================= */
-.sec { margin-top: clamp(2.25rem, 6vw, 3.5rem); }
-.sec__head { margin-bottom: clamp(1rem, 2.5vw, 1.4rem); }
-.sec__head h2 { margin: 0; font-size: clamp(1.1rem, 2.6vw, 1.3rem); font-weight: 800; }
-.sec__head p  { margin: .4rem 0 0; max-width: 72ch; font-size: .92rem; color: var(--muted); }
-
-.rotulo {
-  display: inline-block; margin-bottom: .55rem;
-  padding: .26em .75em; border-radius: 999px;
-  font-size: .64rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase;
+.grupo { margin-top: clamp(1.6rem, 4vw, 2.4rem); }
+.grupo__cab { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem .8rem; margin-bottom: .85rem; }
+.grupo h2 { margin: 0; font-size: 1.02rem; font-weight: 800; letter-spacing: -.01em; color: var(--ink); }
+.grupo__n { font-size: .8rem; color: var(--faint); }
+.grupo__rot {
+  padding: .22em .7em; border-radius: 999px;
+  font-size: .62rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
 }
-.rotulo--azul   { background: var(--azul-bg);   color: var(--azul); }
-.rotulo--verde  { background: var(--verde-bg);  color: var(--verde); }
-.rotulo--neutro { background: var(--neutro-bg); color: var(--neutro); }
+.grupo__rot--azul   { background: var(--azul-bg);   color: var(--azul); }
+.grupo__rot--verde  { background: var(--verde-bg);  color: var(--verde); }
+.grupo__rot--neutro { background: var(--neutro-bg); color: var(--neutro); }
+
+/* O número de colunas sai da largura disponível: três num monitor, duas
+   num tablet, uma no celular — sem breakpoint escrito à mão. */
+.grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: .8rem;
+}
 
 /* =========================================================================
-   Diagrama do funil
-
-   É a peça que explica a página sem exigir leitura. Em coluna no mobile,
-   em linha no desktop; as setas são texto, não imagem, para acompanharem
-   o tamanho da fonte.
+   Bloco de página
    ========================================================================= */
-.fluxo {
-  padding: clamp(1.25rem, 3.5vw, 2rem);
-  border: 1px solid var(--line); border-radius: var(--r);
+.bloco {
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column; gap: .55rem;
+  padding: 1rem 1.05rem 1.05rem;
+  border: 1px solid var(--line); border-radius: 12px;
   background: var(--surface);
+  transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease;
 }
-.fluxo__linha {
-  display: flex; flex-direction: column; align-items: stretch; gap: .5rem;
-}
-.fluxo__passo {
-  display: grid; gap: .3rem;
-  padding: .9rem 1.1rem;
-  border: 1px solid var(--line); border-left: 3px solid var(--neutro);
-  border-radius: 10px; background: var(--canvas);
-}
-.fluxo__passo--azul  { border-left-color: var(--azul); }
-.fluxo__passo--verde { border-left-color: var(--verde); }
-.fluxo__papel { font-size: .66rem; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; color: var(--muted); }
-.fluxo__nome  { font-size: .95rem; font-weight: 800; color: var(--ink); }
-.fluxo__slug  { font-family: var(--mono); font-size: .8rem; color: var(--body); }
-.fluxo__seta  { justify-self: center; padding: .1rem 0; font-size: .95rem; color: var(--faint); }
-.fluxo__ramo  { display: grid; gap: .5rem; }
-.fluxo__cond  { font-size: .74rem; font-weight: 700; color: var(--muted); }
+.bloco:hover { border-color: #CFDAE7; box-shadow: 0 6px 20px rgba(16, 32, 56, .07); transform: translateY(-1px); }
 
-@media (min-width: 760px) {
-  .fluxo__ramo { grid-template-columns: 1fr 1fr; align-items: start; }
+/* O fio do topo é o que diz a que funil o bloco pertence. */
+.bloco::before { content: ""; position: absolute; inset-inline: 0; top: 0; height: 3px; background: var(--neutro); }
+.bloco--azul::before  { background: var(--azul); }
+.bloco--verde::before { background: var(--verde); }
+
+.bloco__topo { display: flex; align-items: flex-start; gap: .6rem; }
+.bloco__nome { margin: 0; font-size: .97rem; font-weight: 800; line-height: 1.3; color: var(--ink); }
+.bloco__preco {
+  margin-left: auto; flex: 0 0 auto;
+  padding: .22em .6em; border-radius: 7px;
+  font-size: .78rem; font-weight: 800; white-space: nowrap;
 }
+.bloco--azul  .bloco__preco { background: var(--azul-bg);  color: var(--azul); }
+.bloco--verde .bloco__preco { background: var(--verde-bg); color: var(--verde); }
+.bloco__preco--vazio { background: var(--neutro-bg); color: var(--muted); font-weight: 600; }
 
-.fluxo__nota {
-  margin: 1.1rem 0 0; padding-top: .9rem; border-top: 1px dashed var(--line);
-  font-size: .82rem; color: var(--muted);
+.bloco__papel { font-size: .8rem; color: var(--muted); }
+
+/* Slug e endereço. O <a> do endereço é o "link" propriamente dito; o
+   botão de baixo é o atalho grande. */
+.bloco__slug {
+  align-self: flex-start;
+  padding: .25em .55em; border-radius: 6px;
+  background: var(--neutro-bg);
+  font-family: var(--mono); font-size: .8rem; color: var(--ink-2);
 }
-.fluxo__nota strong { color: var(--ambar); }
-
-/* =========================================================================
-   Cards de página
-   ========================================================================= */
-.lista { display: grid; gap: .8rem; }
-
-.pg {
-  display: grid; gap: .9rem;
-  padding: clamp(1.05rem, 2.6vw, 1.4rem);
-  border: 1px solid var(--line); border-radius: var(--r);
-  background: var(--surface);
-  transition: border-color .16s ease, box-shadow .16s ease;
+.bloco__urls { display: flex; flex-direction: column; gap: .2rem; }
+.bloco__url {
+  display: inline-flex; align-items: baseline; gap: .4rem;
+  font-family: var(--mono); font-size: .72rem; color: var(--muted); text-decoration: none;
+  overflow-wrap: anywhere;
 }
-.pg:hover { border-color: #CFDAE7; box-shadow: 0 6px 22px rgba(16, 32, 56, .06); }
+.bloco__url:hover, .bloco__url:focus-visible { color: var(--ink-2); text-decoration: underline; }
+.bloco__url b { font-family: Manrope, sans-serif; font-size: .68rem; font-weight: 800;
+                letter-spacing: .07em; text-transform: uppercase; color: var(--faint); }
 
-.pg__topo { display: flex; flex-wrap: wrap; align-items: center; gap: .55rem .9rem; }
-.pg__slug {
-  font-family: var(--mono); font-size: .93rem; font-weight: 600; color: var(--ink);
+/* Empurra o rodapé do bloco para a base, para os blocos da mesma linha
+   terminarem alinhados mesmo com textos de alturas diferentes. */
+.bloco__pe { margin-top: auto; padding-top: .35rem; display: grid; gap: .45rem; }
+
+.abrir {
+  display: flex; align-items: center; justify-content: space-between; gap: .5rem;
+  padding: .6em .95em;
+  border: 1px solid var(--ink); border-radius: 9px;
+  background: var(--ink); color: #fff;
+  font-size: .84rem; font-weight: 800; text-decoration: none;
+  transition: background .15s ease, border-color .15s ease;
 }
-.pg__papel { font-size: .82rem; color: var(--muted); }
-.pg__preco {
-  margin-left: auto;
-  padding: .3em .8em; border-radius: 8px;
-  font-size: .85rem; font-weight: 800; white-space: nowrap;
-}
-.pg--azul  .pg__preco { background: var(--azul-bg);  color: var(--azul); }
-.pg--verde .pg__preco { background: var(--verde-bg); color: var(--verde); }
-.pg__preco--vazio { background: var(--neutro-bg); color: var(--muted); font-weight: 600; }
+.abrir:hover, .abrir:focus-visible { background: #1C2841; border-color: #1C2841; }
+.abrir span:last-child { font-weight: 600; }
 
-.pg__titulo { margin: 0; font-size: .95rem; color: var(--body); }
-
-/* ---- Linha de links ---- */
-.links { display: flex; flex-wrap: wrap; gap: .45rem; align-items: center; }
-.lk {
-  display: inline-flex; align-items: center; gap: .4rem;
-  padding: .45em .8em;
-  border: 1px solid var(--line); border-radius: 8px;
-  background: var(--surface);
-  font-size: .81rem; font-weight: 700; color: var(--ink-2); text-decoration: none;
-  transition: background .15s ease, border-color .15s ease, color .15s ease;
-}
-.lk:hover, .lk:focus-visible { background: var(--canvas); border-color: #CFDAE7; }
-.lk--forte { background: var(--ink); border-color: var(--ink); color: #fff; }
-.lk--forte:hover, .lk--forte:focus-visible { background: #1B2740; border-color: #1B2740; color: #fff; }
-.lk small { font-weight: 600; color: var(--faint); }
-.lk--forte small { color: #94A9C4; }
-
-/* Botão de copiar: a ação mais repetida aqui é levar a URL para o
-   gerenciador de anúncios, e clicar é mais rápido que selecionar. */
+.copias { display: flex; gap: .35rem; }
 .cp {
-  display: inline-flex; align-items: center; gap: .35rem;
-  padding: .45em .7em;
+  flex: 1 1 0;
+  padding: .45em .5em;
   border: 1px solid var(--line); border-radius: 8px;
   background: var(--surface);
-  font: inherit; font-size: .78rem; font-weight: 700; color: var(--muted);
+  font: inherit; font-size: .74rem; font-weight: 700; color: var(--muted);
   cursor: pointer;
   transition: background .15s ease, color .15s ease, border-color .15s ease;
 }
 .cp:hover { background: var(--canvas); color: var(--ink-2); border-color: #CFDAE7; }
 .cp.ok { background: var(--verde-bg); border-color: #BFE3CD; color: var(--verde); }
 
-/* ---- Pendências ---- */
-.falta { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem; padding-top: .15rem; }
-.falta__rot { font-size: .72rem; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; color: var(--faint); }
-.falta span.item {
-  padding: .24em .65em; border-radius: 6px;
+.falta { display: flex; flex-wrap: wrap; gap: .3rem; }
+.falta span {
+  padding: .2em .55em; border-radius: 6px;
   background: var(--ambar-bg); color: var(--ambar);
-  font-size: .76rem; font-weight: 700;
+  font-size: .71rem; font-weight: 700;
 }
-.falta span.pronto { background: var(--verde-bg); color: var(--verde); }
+.falta span.ok { background: var(--verde-bg); color: var(--verde); }
 
 /* =========================================================================
-   Bloqueios e notas
+   Nota de pé
    ========================================================================= */
-.bloq { display: grid; gap: .65rem; }
-.bloq__item {
-  display: grid; grid-template-columns: auto 1fr; gap: .2rem .85rem;
-  padding: clamp(.9rem, 2.2vw, 1.15rem);
-  border: 1px solid var(--line); border-radius: var(--r);
+.pe {
+  margin-top: clamp(1.75rem, 4vw, 2.5rem);
+  padding: clamp(.95rem, 2.4vw, 1.25rem);
+  border: 1px solid var(--line); border-radius: 12px;
   background: var(--surface);
 }
-.bloq__n {
-  grid-row: span 2;
-  width: 26px; height: 26px; border-radius: 7px;
-  display: grid; place-items: center;
-  background: var(--ambar-bg); color: var(--ambar);
-  font-size: .78rem; font-weight: 800;
-}
-.bloq__t { font-size: .93rem; font-weight: 800; color: var(--ink); }
-.bloq__d { font-size: .87rem; color: var(--muted); }
-.bloq__d code, .nota code {
-  padding: .12em .4em; border-radius: 5px; background: var(--neutro-bg);
-  font-family: var(--mono); font-size: .88em; color: var(--ink-2);
-}
-
-.nota {
-  padding: clamp(1.1rem, 2.8vw, 1.5rem);
-  border: 1px solid var(--line); border-radius: var(--r);
-  background: var(--surface);
-}
-.nota ul { margin: 0; padding-left: 1.15rem; display: grid; gap: .55rem; }
-.nota li { font-size: .89rem; }
-.nota strong { color: var(--ink-2); }
-
-.rodape { margin-top: clamp(2rem, 5vw, 3rem); font-size: .78rem; color: var(--faint); text-align: center; }
+.pe h3 { margin: 0 0 .5rem; font-size: .85rem; font-weight: 800; color: var(--ink); }
+.pe ul { margin: 0; padding-left: 1.1rem; display: grid; gap: .35rem; }
+.pe li { font-size: .84rem; color: var(--muted); }
+.pe strong { color: var(--ink-2); }
+.pe code { padding: .1em .38em; border-radius: 5px; background: var(--neutro-bg);
+           font-family: var(--mono); font-size: .88em; color: var(--ink-2); }
 </style>
 </head>
 <body>
 
 <header class="head">
   <div class="wrap">
-    <p class="head__eyebrow">TopCorpus &middot; deploy EXP</p>
-    <h1>Índice das páginas</h1>
-    <p class="head__sub">
-      Tudo o que está publicado neste repositório, na ordem em que a cliente encontra.
-      Cada página existe em dois subdomínios: <b>exp-fb</b> para o tráfego do Meta e
-      <b>exp-gg</b> para o do Google.
-    </p>
-
-    <div class="stats">
-      <div class="stat"><span class="stat__n">6</span><span class="stat__l">páginas no funil</span></div>
-      <div class="stat"><span class="stat__n">2</span><span class="stat__l">produtos</span></div>
-      <div class="stat"><span class="stat__n">12</span><span class="stat__l">URLs no ar</span></div>
-      <div class="stat"><span class="stat__n">6</span><span class="stat__l">pendências abertas</span></div>
+    <div class="head__row">
+      <h1>Índice das páginas</h1>
+      <p class="head__sub">8 rotas &middot; 2 produtos &middot; 2 subdomínios</p>
     </div>
-
-    <p class="host"><i></i> Você está em <b id="host">—</b></p>
+    <p class="head__host"><i></i> Você está em <b id="host">—</b></p>
   </div>
 </header>
 
 <div class="wrap">
 
-  <!-- ==================== O CAMINHO ==================== -->
-  <section class="sec">
-    <div class="sec__head">
-      <h2>O caminho da cliente</h2>
-      <p>Do anúncio até a conclusão do pedido. Cada caixa é uma página deste deploy.</p>
-    </div>
-
-    <div class="fluxo">
-      <div class="fluxo__linha">
-
-        <div class="fluxo__passo">
-          <span class="fluxo__papel">Origem</span>
-          <span class="fluxo__nome">Tráfego pago &mdash; Meta e Google</span>
-        </div>
-
-        <span class="fluxo__seta" aria-hidden="true">&darr;</span>
-
-        <div class="fluxo__passo fluxo__passo--azul">
-          <span class="fluxo__papel">Entrada &middot; produto de R$27 a R$97</span>
-          <span class="fluxo__nome">Manual Ilustrado para Alívio da Dor</span>
-          <span class="fluxo__slug">/lt-v1-27/ &nbsp;/lt-v1-67/ &nbsp;/lt-v1-97/</span>
-        </div>
-
-        <span class="fluxo__seta" aria-hidden="true">&darr; <span class="fluxo__cond">comprou</span></span>
-
-        <div class="fluxo__passo fluxo__passo--verde">
-          <span class="fluxo__papel">Upsell &middot; R$297</span>
-          <span class="fluxo__nome">Método Mãos Lucrativas</span>
-          <span class="fluxo__slug">/upsell1-mml/</span>
-        </div>
-
-        <span class="fluxo__seta" aria-hidden="true">&darr; <span class="fluxo__cond">recusou</span></span>
-
-        <div class="fluxo__passo fluxo__passo--verde">
-          <span class="fluxo__papel">Downsell &middot; R$197</span>
-          <span class="fluxo__nome">Mesmo método, R$1.100 de desconto</span>
-          <span class="fluxo__slug">/up-down-mml/</span>
-        </div>
-
-        <span class="fluxo__seta" aria-hidden="true">&darr;</span>
-
-        <div class="fluxo__passo fluxo__passo--verde">
-          <span class="fluxo__papel">Fecho</span>
-          <span class="fluxo__nome">Conclusão do pedido</span>
-          <span class="fluxo__slug">/upsell2-mml/</span>
-        </div>
-
-      </div>
-
-      <p class="fluxo__nota">
-        <strong>A confirmar:</strong> esta ordem foi deduzida dos nomes e do conteúdo das páginas.
-        Quem configurou o funil na Hotmart precisa confirmar se a sequência é essa mesma &mdash;
-        principalmente onde entra a página de conclusão.
-      </p>
-    </div>
-  </section>
-
   <!-- ==================== MANUAL ==================== -->
-  <section class="sec">
-    <div class="sec__head">
-      <span class="rotulo rotulo--azul">Produto de entrada</span>
+  <section class="grupo">
+    <div class="grupo__cab">
+      <span class="grupo__rot grupo__rot--azul">Entrada</span>
       <h2>Manual Ilustrado para Alívio da Dor</h2>
-      <p>
-        A mesma página de vendas em três preços &mdash; é para elas que o tráfego pago aponta.
-        A copy é idêntica nas três: o que muda é a dobra da oferta e o link de checkout.
-        <strong>Qualquer ajuste precisa ser feito nas três.</strong>
-      </p>
+      <span class="grupo__n">3 páginas &middot; mesma copy, preços diferentes</span>
     </div>
 
-    <div class="lista">
+    <div class="grade">
 
-      <article class="pg pg--azul">
-        <div class="pg__topo">
-          <span class="pg__slug">/lt-v1-27/</span>
-          <span class="pg__papel">9&times; de R$ 3,39 &middot; economiza R$ 270</span>
-          <span class="pg__preco">R$ 27</span>
+      <article class="bloco bloco--azul">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Manual &mdash; ticket baixo</h3>
+          <span class="bloco__preco">R$ 27</span>
         </div>
-        <p class="pg__titulo">+70 manobras ilustradas para aliviar a dor das pessoas com massagem</p>
-        <div class="links">
-          <a class="lk lk--forte" href="/lt-v1-27/">Abrir</a>
-          <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/lt-v1-27/">Copiar exp-fb</button>
-          <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/lt-v1-27/">Copiar exp-gg</button>
-          <a class="lk" href="https://pay.hotmart.com/W95360090D?off=9z1ywsjs">Checkout <small>off=9z1ywsjs</small></a>
+        <p class="bloco__papel">9&times; de R$ 3,39</p>
+        <span class="bloco__slug">/lt-v1-27/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/lt-v1-27/"><b>fb</b> exp-fb.topcorpus.com.br/lt-v1-27/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/lt-v1-27/"><b>gg</b> exp-gg.topcorpus.com.br/lt-v1-27/</a>
         </div>
-        <div class="falta">
-          <span class="falta__rot">Falta</span>
-          <span class="item">14 imagens</span>
-          <span class="item">nota do parcelamento</span>
+        <div class="bloco__pe">
+          <div class="falta"><span>14 imagens</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/lt-v1-27/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/lt-v1-27/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/lt-v1-27/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
         </div>
       </article>
 
-      <article class="pg pg--azul">
-        <div class="pg__topo">
-          <span class="pg__slug">/lt-v1-67/</span>
-          <span class="pg__papel">12&times; de R$ 6,53 &middot; economiza R$ 230</span>
-          <span class="pg__preco">R$ 67</span>
+      <article class="bloco bloco--azul">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Manual &mdash; ticket médio</h3>
+          <span class="bloco__preco">R$ 67</span>
         </div>
-        <p class="pg__titulo">+70 manobras ilustradas para aliviar a dor das pessoas com massagem</p>
-        <div class="links">
-          <a class="lk lk--forte" href="/lt-v1-67/">Abrir</a>
-          <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/lt-v1-67/">Copiar exp-fb</button>
-          <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/lt-v1-67/">Copiar exp-gg</button>
-          <a class="lk" href="https://pay.hotmart.com/W95360090D?off=q86wzvlt">Checkout <small>off=q86wzvlt</small></a>
+        <p class="bloco__papel">12&times; de R$ 6,53</p>
+        <span class="bloco__slug">/lt-v1-67/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/lt-v1-67/"><b>fb</b> exp-fb.topcorpus.com.br/lt-v1-67/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/lt-v1-67/"><b>gg</b> exp-gg.topcorpus.com.br/lt-v1-67/</a>
         </div>
-        <div class="falta">
-          <span class="falta__rot">Falta</span>
-          <span class="item">14 imagens</span>
-          <span class="item">nota do parcelamento</span>
+        <div class="bloco__pe">
+          <div class="falta"><span>14 imagens</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/lt-v1-67/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/lt-v1-67/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/lt-v1-67/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
         </div>
       </article>
 
-      <article class="pg pg--azul">
-        <div class="pg__topo">
-          <span class="pg__slug">/lt-v1-97/</span>
-          <span class="pg__papel">12&times; de R$ 9,45 &middot; economiza R$ 200</span>
-          <span class="pg__preco">R$ 97</span>
+      <article class="bloco bloco--azul">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Manual &mdash; ticket alto</h3>
+          <span class="bloco__preco">R$ 97</span>
         </div>
-        <p class="pg__titulo">+70 manobras ilustradas para aliviar a dor das pessoas com massagem</p>
-        <div class="links">
-          <a class="lk lk--forte" href="/lt-v1-97/">Abrir</a>
-          <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/lt-v1-97/">Copiar exp-fb</button>
-          <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/lt-v1-97/">Copiar exp-gg</button>
-          <a class="lk" href="https://pay.hotmart.com/W95360090D?off=u7qj2mgv">Checkout <small>off=u7qj2mgv</small></a>
+        <p class="bloco__papel">12&times; de R$ 9,45</p>
+        <span class="bloco__slug">/lt-v1-97/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/lt-v1-97/"><b>fb</b> exp-fb.topcorpus.com.br/lt-v1-97/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/lt-v1-97/"><b>gg</b> exp-gg.topcorpus.com.br/lt-v1-97/</a>
         </div>
-        <div class="falta">
-          <span class="falta__rot">Falta</span>
-          <span class="item">14 imagens</span>
-          <span class="item">nota do parcelamento</span>
+        <div class="bloco__pe">
+          <div class="falta"><span>14 imagens</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/lt-v1-97/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/lt-v1-97/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/lt-v1-97/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
         </div>
       </article>
 
@@ -438,213 +312,138 @@ h1, h2, h3 { color: var(--ink); letter-spacing: -.018em; }
   </section>
 
   <!-- ==================== MÃOS LUCRATIVAS ==================== -->
-  <section class="sec">
-    <div class="sec__head">
-      <span class="rotulo rotulo--verde">Funil pós-compra</span>
+  <section class="grupo">
+    <div class="grupo__cab">
+      <span class="grupo__rot grupo__rot--verde">Pós-compra</span>
       <h2>Método Mãos Lucrativas</h2>
-      <p>
-        As três etapas que vêm depois da compra do Manual. Nenhuma tem link de checkout próprio:
-        quem gera os botões é a Hotmart, e o HTML dela entra no bloco <code>#funil</code> de cada
-        página. <strong>As três compartilham o mesmo CSS e o mesmo JS</strong>, então um ajuste de
-        identidade vale para todas de uma vez.
-      </p>
+      <span class="grupo__n">3 etapas &middot; botões vêm do funil da Hotmart</span>
     </div>
 
-    <div class="lista">
+    <div class="grade">
 
-      <article class="pg pg--verde">
-        <div class="pg__topo">
-          <span class="pg__slug">/upsell1-mml/</span>
-          <span class="pg__papel">Upsell &middot; 12&times; de R$ 28,94</span>
-          <span class="pg__preco">R$ 297</span>
+      <article class="bloco bloco--verde">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Upsell</h3>
+          <span class="bloco__preco">R$ 297</span>
         </div>
-        <p class="pg__titulo">Ganhe R$100 por hora com massagem usando apenas suas mãos</p>
-        <div class="links">
-          <a class="lk lk--forte" href="/upsell1-mml/">Abrir</a>
-          <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/upsell1-mml/">Copiar exp-fb</button>
-          <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/upsell1-mml/">Copiar exp-gg</button>
+        <p class="bloco__papel">12&times; de R$ 28,94</p>
+        <span class="bloco__slug">/upsell1-mml/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/upsell1-mml/"><b>fb</b> exp-fb.topcorpus.com.br/upsell1-mml/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/upsell1-mml/"><b>gg</b> exp-gg.topcorpus.com.br/upsell1-mml/</a>
         </div>
-        <div class="falta">
-          <span class="falta__rot">Falta</span>
-          <span class="item">vídeo</span>
-          <span class="item">HTML do funil</span>
-          <span class="item">nota do parcelamento</span>
+        <div class="bloco__pe">
+          <div class="falta"><span>vídeo</span><span>HTML do funil</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/upsell1-mml/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/upsell1-mml/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/upsell1-mml/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
         </div>
       </article>
 
-      <article class="pg pg--verde">
-        <div class="pg__topo">
-          <span class="pg__slug">/up-down-mml/</span>
-          <span class="pg__papel">Downsell &middot; 12&times; de R$ 19,19 &middot; economiza R$ 1.100</span>
-          <span class="pg__preco">R$ 197</span>
+      <article class="bloco bloco--verde">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Downsell</h3>
+          <span class="bloco__preco">R$ 197</span>
         </div>
-        <p class="pg__titulo">Conquiste seus primeiros R$1.000,00 com massagem em apenas 30 dias</p>
-        <div class="links">
-          <a class="lk lk--forte" href="/up-down-mml/">Abrir</a>
-          <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/up-down-mml/">Copiar exp-fb</button>
-          <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/up-down-mml/">Copiar exp-gg</button>
+        <p class="bloco__papel">12&times; de R$ 19,19</p>
+        <span class="bloco__slug">/up-down-mml/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/up-down-mml/"><b>fb</b> exp-fb.topcorpus.com.br/up-down-mml/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/up-down-mml/"><b>gg</b> exp-gg.topcorpus.com.br/up-down-mml/</a>
         </div>
-        <div class="falta">
-          <span class="falta__rot">Falta</span>
-          <span class="item">vídeo</span>
-          <span class="item">HTML do funil</span>
-          <span class="item">nota do parcelamento</span>
+        <div class="bloco__pe">
+          <div class="falta"><span>vídeo</span><span>HTML do funil</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/up-down-mml/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/up-down-mml/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/up-down-mml/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
         </div>
       </article>
 
-      <article class="pg pg--verde">
-        <div class="pg__topo">
-          <span class="pg__slug">/upsell2-mml/</span>
-          <span class="pg__papel">Conclusão do pedido &middot; a oferta entra após 2 min</span>
-          <span class="pg__preco pg__preco--vazio">sem preço</span>
+      <article class="bloco bloco--verde">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Conclusão do pedido</h3>
+          <span class="bloco__preco bloco__preco--vazio">&mdash;</span>
         </div>
-        <p class="pg__titulo">Seu pedido está sendo processado &mdash; veja como finalizar</p>
-        <div class="links">
-          <a class="lk lk--forte" href="/upsell2-mml/">Abrir</a>
-          <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/upsell2-mml/">Copiar exp-fb</button>
-          <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/upsell2-mml/">Copiar exp-gg</button>
+        <p class="bloco__papel">A oferta entra após 2 min</p>
+        <span class="bloco__slug">/upsell2-mml/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/upsell2-mml/"><b>fb</b> exp-fb.topcorpus.com.br/upsell2-mml/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/upsell2-mml/"><b>gg</b> exp-gg.topcorpus.com.br/upsell2-mml/</a>
         </div>
-        <div class="falta">
-          <span class="falta__rot">Falta</span>
-          <span class="item">vídeo</span>
-          <span class="item">HTML do funil</span>
+        <div class="bloco__pe">
+          <div class="falta"><span>vídeo</span><span>HTML do funil</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/upsell2-mml/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/upsell2-mml/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/upsell2-mml/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
         </div>
       </article>
 
     </div>
   </section>
 
-  <!-- ==================== O QUE IMPEDE DE PUBLICAR ==================== -->
-  <section class="sec">
-    <div class="sec__head">
-      <h2>O que impede de publicar</h2>
-      <p>
-        As pendências dos cards acima, reunidas por trabalho a fazer. Nenhuma página está pronta
-        para receber tráfego enquanto as três primeiras não forem resolvidas.
-      </p>
-    </div>
-
-    <div class="bloq">
-
-      <div class="bloq__item">
-        <span class="bloq__n">1</span>
-        <span class="bloq__t">As imagens do Manual</span>
-        <span class="bloq__d">
-          São 14 espaços por página, mas as mesmas 14 nas três: o mockup do hero, as 4 ilustrações
-          indicadas no doc do Drive, os 4 mockups de bônus, os 3 dos cards de &ldquo;para quem é&rdquo;.
-          Cada espaço na página diz o que entra nele.
-        </span>
-      </div>
-
-      <div class="bloq__item">
-        <span class="bloq__n">2</span>
-        <span class="bloq__t">O vídeo das páginas do Mãos Lucrativas</span>
-        <span class="bloq__d">
-          A VSL das três. A caixa já está na proporção 16/9, então o embed entra sem fazer a página
-          saltar.
-        </span>
-      </div>
-
-      <div class="bloq__item">
-        <span class="bloq__n">3</span>
-        <span class="bloq__t">O HTML do funil da Hotmart</span>
-        <span class="bloq__d">
-          Os botões de aceitar e recusar de cada etapa. Sem eles a página não vende: os CTAs só
-          rolam até o bloco <code>#funil</code>. Para resolver, apague o espaço reservado de dentro
-          dele e cole o HTML no lugar.
-        </span>
-      </div>
-
-      <div class="bloq__item">
-        <span class="bloq__n">4</span>
-        <span class="bloq__t">A nota de rodapé do parcelamento</span>
-        <span class="bloq__d">
-          Os preços parcelados trazem um asterisco que nenhum doc explica. Costuma ser
-          &ldquo;parcelado com juros da plataforma&rdquo;, mas o texto exato precisa vir de vocês.
-          Afeta 5 das 6 páginas.
-        </span>
-      </div>
-
-      <div class="bloq__item">
-        <span class="bloq__n">5</span>
-        <span class="bloq__t">As páginas de política de privacidade e termos</span>
-        <span class="bloq__d">
-          Os dois links do rodapé respondem 404 em todas as páginas &mdash; e também no
-          <code>/taping</code>, de onde o rodapé veio. Não é um erro introduzido aqui, mas continua
-          sendo um link quebrado no ar.
-        </span>
-      </div>
-
-      <div class="bloq__item">
-        <span class="bloq__n">6</span>
-        <span class="bloq__t">A separação de leads entre Meta e Google</span>
-        <span class="bloq__d">
-          O campo <code>key</code> do <code>env-config.js</code> continua <code>"dev"</code> nos dois
-          deploys, então o <code>landing_subdomain</code> chega igual vindo do fb e do gg. Resolve-se
-          configurando o build command com <code>SITE_KEY</code> em cada projeto do Cloudflare Pages
-          &mdash; é no painel, não no código.
-        </span>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ==================== FORA DOS FUNIS ==================== -->
-  <section class="sec">
-    <div class="sec__head">
-      <span class="rotulo rotulo--neutro">Fora dos funis</span>
+  <!-- ==================== OUTRAS ==================== -->
+  <section class="grupo">
+    <div class="grupo__cab">
+      <span class="grupo__rot grupo__rot--neutro">Fora dos funis</span>
       <h2>Outras rotas</h2>
     </div>
 
-    <div class="lista">
-      <article class="pg">
-        <div class="pg__topo">
-          <span class="pg__slug">/teste/</span>
-          <span class="pg__papel">Cópia reduzida da página do TopTaping &middot; rascunho antigo</span>
+    <div class="grade">
+
+      <article class="bloco">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Teste</h3>
         </div>
-        <div class="links">
-          <a class="lk lk--forte" href="/teste/">Abrir</a>
+        <p class="bloco__papel">Cópia reduzida da página do TopTaping</p>
+        <span class="bloco__slug">/teste/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/teste/"><b>fb</b> exp-fb.topcorpus.com.br/teste/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/teste/"><b>gg</b> exp-gg.topcorpus.com.br/teste/</a>
         </div>
-        <div class="falta"><span class="item pronto">sem pendências</span></div>
+        <div class="bloco__pe">
+          <div class="falta"><span class="ok">sem pendências</span></div>
+          <a class="abrir" href="/teste/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
+        </div>
       </article>
 
-      <article class="pg">
-        <div class="pg__topo">
-          <span class="pg__slug">/indice/</span>
-          <span class="pg__papel">Esta página</span>
+      <article class="bloco">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Índice</h3>
         </div>
-        <div class="falta"><span class="item pronto">sem pendências</span></div>
+        <p class="bloco__papel">Esta página</p>
+        <span class="bloco__slug">/indice/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/indice/"><b>fb</b> exp-fb.topcorpus.com.br/indice/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/indice/"><b>gg</b> exp-gg.topcorpus.com.br/indice/</a>
+        </div>
+        <div class="bloco__pe">
+          <div class="falta"><span class="ok">sem pendências</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/indice/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/indice/">Copiar gg</button>
+          </div>
+        </div>
       </article>
+
     </div>
   </section>
 
-  <!-- ==================== NOTAS ==================== -->
-  <section class="sec">
-    <div class="sec__head"><h2>Antes de mexer</h2></div>
-    <div class="nota">
-      <ul>
-        <li>
-          <strong>Publicar uma vez atualiza os dois subdomínios.</strong> <code>exp-fb</code> e
-          <code>exp-gg</code> são dois projetos do Cloudflare Pages servindo o mesmo repositório.
-        </li>
-        <li>
-          <strong>Nenhuma página está indexável.</strong> Todas saem dos buscadores pelo
-          <code>_headers</code> e por <code>meta robots</code>. Quando alguma for publicada de
-          verdade, é preciso remover as duas coisas &mdash; só uma não basta.
-        </li>
-        <li>
-          <strong>A raiz do domínio está vazia.</strong> Abrir o endereço sem caminho devolve uma
-          página em branco; o índice mora em <code>/indice/</code>.
-        </li>
-        <li>
-          <strong>O cache de borda atrasa alguns minutos.</strong> Se uma alteração não aparecer,
-          um <code>?cb=1</code> no fim da URL ou um recarregamento forçado mostra a versão nova.
-        </li>
-      </ul>
-    </div>
+  <!-- ==================== PÉ ==================== -->
+  <section class="pe">
+    <h3>Antes de mexer</h3>
+    <ul>
+      <li><strong>Publicar uma vez atualiza os dois subdomínios</strong> — são dois projetos do Cloudflare Pages servindo o mesmo repositório.</li>
+      <li><strong>As três páginas do Manual são idênticas fora da oferta</strong>, e as três do Mãos Lucrativas dividem o mesmo CSS e JS. Ajuste numa costuma valer para as irmãs.</li>
+      <li><strong>Nenhuma página está indexável</strong> — saem dos buscadores pelo <code>_headers</code> e por <code>meta robots</code>. Ao publicar de verdade, remover os dois.</li>
+      <li><strong>Falta ainda</strong>: as imagens do Manual, o vídeo e o HTML da Hotmart nas três do funil, a nota do asterisco do parcelamento, as páginas legais do rodapé (404 hoje) e o <code>SITE_KEY</code> no Cloudflare, sem o qual os leads não separam fb de gg.</li>
+    </ul>
   </section>
-
-  <p class="rodape">TopCorpus &middot; índice interno &middot; não indexado</p>
 
 </div>
 
@@ -665,9 +464,8 @@ h1, h2, h3 { color: var(--ink); letter-spacing: -.018em; }
 
     function feito(ok) {
       // Quando o navegador recusa a área de transferência, um aviso do tipo
-      // "selecione e copie" não ajuda: não há nada visível para selecionar.
-      // O prompt entrega o endereço já selecionado, e aí sempre dá para
-      // copiar à mão.
+      // "selecione e copie" não ajudaria: não há nada visível para
+      // selecionar. O prompt entrega o endereço já pronto para copiar.
       if (!ok) { window.prompt("Copie o endereço:", url); }
       b.textContent = ok ? "Copiado" : rotulo;
       b.classList.toggle("ok", ok);
@@ -679,7 +477,6 @@ h1, h2, h3 { color: var(--ink); letter-spacing: -.018em; }
       return;
     }
 
-    // Sem clipboard: joga a URL num campo temporário e tenta o caminho antigo.
     var t = document.createElement("textarea");
     t.value = url;
     t.setAttribute("readonly", "");
