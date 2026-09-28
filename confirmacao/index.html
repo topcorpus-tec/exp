@@ -45,9 +45,6 @@
   <link rel="stylesheet" href="assets/css/taping.css" />
   <link rel="stylesheet" href="assets/css/confirmacao.css" />
 
-  <!-- SDK do player (VTurb/ConverteAI), como na página original -->
-  <script src="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/sdk.js" async></script>
-
   <script src="assets/js/confirmacao.js" defer></script>
 </head>
 <body>
@@ -117,30 +114,15 @@
     <!-- ==================== /DOBRA 1 ==================== -->
 
     <!-- ==================== DOBRA 2 — O QUE FAZER AGORA ====================
-         O vídeo explica o acesso, e o botão abaixo dele resolve na hora
-         para quem não quiser assistir. As duas saídas convivem de
-         propósito: ninguém deveria ter de ver um vídeo para receber o que
-         já pagou. -->
+         A dobra tem uma tarefa só: entregar o arquivo. Sem vídeo no meio,
+         a frase leva direto ao botão — ninguém deveria ter de assistir a
+         nada para receber o que já pagou. -->
     <section class="tp-section cf-section--azul" aria-labelledby="agora-title">
       <div class="tp-container">
 
         <div class="tp-head" data-reveal>
           <span class="tp-eyebrow">Seu acesso</span>
           <h2 class="tp-title" id="agora-title">O que fazer agora?</h2>
-          <p class="tp-lead">Assista ao vídeo abaixo e saiba como acessar o seu Manual.</p>
-        </div>
-
-        <!-- Vídeo em pé (9:19,5). A proporção está na caixa, não no player:
-             assim a dobra não salta quando o embed carrega.
-
-             PARA TROCAR O VÍDEO: o id do player é o trecho final da URL
-             (69821551d1648619a3594ae8). O primeiro trecho é a conta da
-             ConverteAI e não muda. -->
-        <div class="cf-video" data-reveal>
-          <iframe
-            src="https://scripts.converteai.net/02abf0a0-3315-4bbc-83ab-8116ca43936a/players/69821551d1648619a3594ae8/v4/embed.html"
-            title="Como acessar o seu Manual Ilustrado"
-            frameborder="0" allowfullscreen referrerpolicy="origin" loading="lazy"></iframe>
         </div>
 
         <p class="cf-after" data-reveal>

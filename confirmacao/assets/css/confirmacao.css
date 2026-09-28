@@ -239,32 +239,8 @@
 .cf-section--azul .tp-lead strong { color: #fff; }
 
 /* =========================================================================
-   4. VÍDEO EM PÉ
-
-   O vídeo da confirmação é vertical (9:19,5 — gravado no celular). A
-   proporção fica na caixa, não no player: assim o embed entra sem mudar a
-   altura e o resto da dobra não salta quando ele carrega.
+   4. DOBRA DO DOWNLOAD
    ========================================================================= */
-.cf-video {
-  position: relative;
-  width: 100%;
-  max-width: 400px;
-  margin-inline: auto;
-  aspect-ratio: 400 / 867;
-  border-radius: var(--tp-radius);
-  overflow: hidden;
-  background: var(--tp-violet-wash);
-  box-shadow: var(--tp-shadow-md);
-}
-.cf-video iframe,
-.cf-video video {
-  position: absolute;
-  inset: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
 
 /* Ícone dentro do rótulo de um botão. Precisa voltar a ser inline: o
    design-system deixa todo svg em display:block, e em bloco ele quebraria
@@ -275,10 +251,11 @@
   margin-right: .5rem;
 }
 
-/* A frase que leva ao botão de download, logo abaixo do player. */
+/* A frase que leva ao botão. O respiro acima dela é o do .tp-head, que
+   já fecha a distância do título — por isso ela não traz margem própria. */
 .cf-after {
   max-width: 46ch;
-  margin: clamp(1.5rem, 3.5vw, 2.25rem) auto 0;
+  margin: 0 auto;
   font-size: clamp(1.1rem, 2vw, 1.28rem);
   line-height: 1.68;
   color: var(--tp-body);
