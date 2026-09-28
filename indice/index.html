@@ -60,9 +60,15 @@
      carrega texto (legível sobre o creme), e o vivo é só o fio do topo do
      bloco, onde a cor não precisa ser lida, precisa ser vista. Um tom só
      daria ou um fio marrom ou um rótulo ilegível. */
-  --amarelo:     #8A6100;
-  --amarelo-fio: #E8B004;
-  --amarelo-bg:  #FDF6DE;
+  --amarelo:      #8A6100;
+  --amarelo-fio:  #E8B004;
+  --amarelo-bg:   #FDF6DE;
+
+  /* Meio-tom de cada cor, para a borda do bloco. O tom de texto seria forte
+     demais numa moldura, e o de fundo sumiria contra o próprio fundo. */
+  --azul-linha:    #B9D9F0;
+  --amarelo-linha: #EBD9A0;
+  --verde-linha:   #BFE3CD;
   --neutro:   #7C8CA0;
   --neutro-bg:#F1F5F9;
 
@@ -150,6 +156,31 @@ body {
 .bloco--t27::before  { background: var(--azul); }
 .bloco--t67::before  { background: var(--amarelo-fio); }
 .bloco--t97::before  { background: var(--verde); }
+
+/* O bloco inteiro é da cor do ticket: fundo, borda e o fio do topo.
+
+   Com o fundo colorido, tudo que era uma pastilha clara dentro do bloco
+   passa a branco — o chip do preço, o slug, as etiquetas de pendência. Se
+   ficassem no tom claro original desapareceriam contra o fundo, que agora
+   é desse mesmo tom. A cor delas migra para o texto, que é onde ela ainda
+   é lida. */
+.bloco--t27 { background: var(--azul-bg);    border-color: var(--azul-linha); }
+.bloco--t67 { background: var(--amarelo-bg); border-color: var(--amarelo-linha); }
+.bloco--t97 { background: var(--verde-bg);   border-color: var(--verde-linha); }
+
+.bloco--t27 .bloco__preco,
+.bloco--t67 .bloco__preco,
+.bloco--t97 .bloco__preco,
+.bloco--t27 .bloco__slug,
+.bloco--t67 .bloco__slug,
+.bloco--t97 .bloco__slug,
+.bloco--t27 .falta span,
+.bloco--t67 .falta span,
+.bloco--t97 .falta span { background: var(--surface); }
+
+.bloco--t27 .bloco__preco--vazio,
+.bloco--t67 .bloco__preco--vazio,
+.bloco--t97 .bloco__preco--vazio { color: var(--muted); }
 
 .bloco__topo { display: flex; align-items: flex-start; gap: .6rem; }
 .bloco__nome { margin: 0; font-size: .97rem; font-weight: 800; line-height: 1.3; color: var(--ink); }
