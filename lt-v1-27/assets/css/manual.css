@@ -82,7 +82,10 @@
    arredondados e sombra, lida como um objeto pousado na página, e não como
    um retângulo escuro que alguém esqueceu de recortar. */
 .mn-hero__mock {
-  width: min(100%, 680px);
+  /* No desktop ele para em 470px: maior que isso a foto passa a competir
+     com a manchete, que é quem tem de ser lida primeiro. No celular o
+     min() já entrega os 100% da coluna, sem precisar de media query. */
+  width: min(100%, 470px);
   margin: 0 auto;
   border-radius: var(--tp-radius);
   overflow: hidden;
