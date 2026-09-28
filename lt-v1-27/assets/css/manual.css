@@ -120,6 +120,13 @@
   border-width: 0 0 2px;
 }
 
+/* As quatro ilustrações da dobra "o que você vai receber" são antes/depois
+   em 3:2. A caixa do taping é 672/566, quase quadrada: nela a imagem
+   entraria deitada no meio, com faixa branca em cima e embaixo. Igualando a
+   proporção, a ilustração preenche a caixa de ponta a ponta. */
+.tp-inside__media { aspect-ratio: 3 / 2; }
+.tp-inside__media img { object-fit: cover; }
+
 /* =========================================================================
    2. PENDÊNCIA
 
