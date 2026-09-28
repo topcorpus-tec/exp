@@ -475,6 +475,26 @@ html { font-size: 112.5%; }
 
 @media (min-width: 900px) {
   .mn-bio { grid-template-columns: minmax(0, 420px) minmax(0, 1fr); }
+
+  /* A colagem avança para a esquerda, e só para lá: a borda direita fica
+     onde estava, encostada no texto, e o que cresce é o outro lado.
+
+     O avanço é a margem negativa, e a largura ganha exatamente o mesmo
+     tanto — é isso que mantém a borda direita parada.
+
+     Quanto ela pode avançar é o espaço que sobra entre a coluna e a beira
+     da tela: (100vw - 1000px)/2 é a folga de cada lado da caixa da bio, e
+     os 48px são o ar que fica antes da borda. Numa tela onde essa conta
+     dá zero ou menos, o clamp segura em 0 e nada muda — a imagem nunca é
+     empurrada para fora. O teto de 170px vem do arquivo: a colagem tem
+     700px de largura, e passar disso seria ampliar pixel. */
+  .mn-bio__media img {
+    --mn-avanco: clamp(0px, calc((100vw - 1000px) / 2 - 48px), 170px);
+    max-width: none;
+    width: calc(420px + var(--mn-avanco));
+    margin-left: calc(-1 * var(--mn-avanco));
+    margin-right: 0;
+  }
 }
 @media (max-width: 899px) {
   .mn-bio__copy { align-items: center; text-align: center; }
