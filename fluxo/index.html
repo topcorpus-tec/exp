@@ -26,14 +26,19 @@
    ligadas. Uma coluna por ticket, de cima para baixo, na ordem em que o
    comprador passa por elas.
 
-   O desenho é HTML, não imagem: as setas e os trilhos são bordas e
-   pseudo-elementos. Um fluxograma em PNG envelhece na primeira mudança de
-   slug e ninguém percebe; este é o mesmo texto que o índice serve, então
-   quando uma rota muda, muda aqui também.
+   O desenho é SVG escrito à mão, não imagem exportada. Um fluxograma em
+   PNG envelhece na primeira troca de slug e ninguém percebe; aqui os slugs
+   estão no texto e as caixas das nossas páginas são links, então um nó
+   quebrado aparece no primeiro clique.
 
-   As três colunas são idênticas na estrutura — o que muda é o ticket no
-   fim de cada slug. Isso é de propósito: o fluxo é o mesmo, o funil é que
-   é separado.
+   Os três diagramas são idênticos na geometria — mudam o ticket no fim de
+   cada slug e a cor de preenchimento. Isso é de propósito: o caminho é o
+   mesmo, o funil é que é separado. Quem for editar um precisa editar os
+   três; as coordenadas são as mesmas em todos.
+
+   A grade do desenho: colunas em x=30, 300, 570 e 840, caixas de 210x72,
+   losango de decisão no centro (1185, 151). A caixa de baixo de cada
+   coluna é a que carrega a seta que chega nela.
    ========================================================================= */
 
 @font-face { font-family: Manrope; font-weight: 400; font-display: swap;
@@ -107,33 +112,48 @@ body {
 
 /* =========================================================================
    Legenda
+
+   A chave do desenho. Cada pastilha é a mesma cor que a caixa tem lá
+   dentro, e os dois traços do contorno tracejado são os mesmos: o que se
+   vê aqui é o que se procura no diagrama.
    ========================================================================= */
 .legenda {
-  display: flex; flex-wrap: wrap; gap: .45rem .9rem; align-items: center;
+  display: flex; flex-wrap: wrap; gap: .5rem 1.1rem; align-items: center;
   margin-bottom: clamp(1.25rem, 3vw, 1.75rem);
-  padding: .8rem 1rem;
+  padding: .85rem 1rem;
   border: 1px solid var(--line); border-radius: 12px; background: var(--surface);
   font-size: .78rem; color: var(--body);
 }
 .legenda b { font-weight: 800; color: var(--ink); }
-.legenda__item { display: inline-flex; align-items: center; gap: .4rem; }
+.legenda__item { display: inline-flex; align-items: center; gap: .45rem; }
+
 .pastilha {
-  width: 26px; height: 14px; border-radius: 4px; flex: 0 0 auto;
-  border: 1px solid var(--line);
+  width: 26px; height: 15px; border-radius: 4px; flex: 0 0 auto;
+  border: 2px solid #111827;
 }
-.pastilha--nossa  { background: var(--surface); border-color: #C8D3E0; }
-.pastilha--deles  { background: repeating-linear-gradient(-45deg, #EEF2F7 0 5px, #FFF 5px 10px); }
-.pastilha--fim    { background: var(--ink); border-color: var(--ink); }
+.pastilha--anuncio { background: #BDB2F0; }
+.pastilha--hotmart { background: #E2E8F0; border-style: dashed; }
+.pastilha--decisao { background: #F3A9E4; border-radius: 3px; transform: rotate(45deg) scale(.72); }
+.pastilha--fim     { background: #CBD5E1; }
+.pastilha--t27     { background: #8FC7F0; }
+.pastilha--t67     { background: #F5D372; }
+.pastilha--t97     { background: #86DCAE; }
+
+/* As três cores da página nossa vêm juntas numa pastilha só, em faixas:
+   é uma ideia só — "esta caixa é uma página que existe aqui" — e o tom
+   apenas diz de qual ticket. Três pastilhas separadas sugeririam três
+   tipos diferentes de caixa. */
+.pastilha--nossa {
+  background: linear-gradient(90deg, #8FC7F0 0 33.34%, #F5D372 33.34% 66.67%, #86DCAE 66.67% 100%);
+}
 
 /* =========================================================================
-   As três colunas
+   Um diagrama por ticket
+
+   Empilhados, não lado a lado: o desenho tem 1400 unidades de largura e
+   três deles numa linha deixariam cada caixa ilegível.
    ========================================================================= */
-.fluxos {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: clamp(1rem, 2.5vw, 1.6rem);
-  align-items: start;
-}
+.fluxos { display: grid; gap: clamp(1rem, 2.5vw, 1.6rem); }
 
 .fluxo {
   border: 1px solid var(--line); border-radius: 14px;
@@ -151,116 +171,44 @@ body {
   padding: .2em .55em; border-radius: 7px;
   font-size: .76rem; font-weight: 800;
 }
-.fluxo__corpo { padding: 1rem 1rem 1.15rem; }
 
-.fluxo--t27 .fluxo__cab    { background: var(--azul-bg);    border-bottom-color: var(--azul-linha); }
-.fluxo--t27 .fluxo__preco  { background: var(--surface);    color: var(--azul); }
-.fluxo--t67 .fluxo__cab    { background: var(--amarelo-bg); border-bottom-color: var(--amarelo-linha); }
-.fluxo--t67 .fluxo__preco  { background: var(--surface);    color: var(--amarelo); }
-.fluxo--t97 .fluxo__cab    { background: var(--verde-bg);   border-bottom-color: var(--verde-linha); }
-.fluxo--t97 .fluxo__preco  { background: var(--surface);    color: var(--verde); }
+.fluxo--t27 .fluxo__cab   { background: var(--azul-bg);    border-bottom-color: var(--azul-linha); }
+.fluxo--t27 .fluxo__preco { background: var(--surface);    color: var(--azul); }
+.fluxo--t67 .fluxo__cab   { background: var(--amarelo-bg); border-bottom-color: var(--amarelo-linha); }
+.fluxo--t67 .fluxo__preco { background: var(--surface);    color: var(--amarelo); }
+.fluxo--t97 .fluxo__cab   { background: var(--verde-bg);   border-bottom-color: var(--verde-linha); }
+.fluxo--t97 .fluxo__preco { background: var(--surface);    color: var(--verde); }
 
-/* =========================================================================
-   Nó do fluxo
+/* A prancheta: o papel pontilhado onde o diagrama é desenhado.
 
-   Cada etapa é um cartão. O trilho que liga um ao outro é o ::before do
-   cartão de baixo, e não um elemento próprio: assim nenhum trilho sobra
-   pendurado quando um nó sai daqui.
-   ========================================================================= */
-.no {
-  position: relative;
-  padding: .7rem .85rem;
-  border: 1px solid var(--line); border-radius: 10px;
-  background: var(--surface);
+   Ela rola de lado quando a tela é estreita, e o SVG tem largura mínima
+   em px justamente para isso — encolher o desenho até caber num celular
+   deixaria os slugs em corpo 4. Rolar é o mal menor. */
+.fluxo__tela {
+  padding: clamp(.9rem, 2.5vw, 1.4rem);
+  overflow-x: auto;
+  background-color: #FBFCFE;
+  background-image: radial-gradient(#D7DEE8 1.1px, transparent 1.1px);
+  background-size: 18px 18px;
+  background-position: -9px -9px;
 }
-.no + .no,
-.no + .ramo,
-.ramo + .no { margin-top: 2.1rem; }
+/* As caixas que são link ganham um realce discreto: quem passa o mouse
+   precisa saber que aquela abre, e quem navega pelo teclado precisa ver
+   onde está. O resto do desenho não reage. */
+.dg__no { cursor: pointer; }
+.dg__no rect { transition: filter .14s ease; }
+.dg__no:hover rect { filter: brightness(.94); }
+.dg__no:focus-visible { outline: none; }
+.dg__no:focus-visible rect { stroke-width: 4; }
 
-/* O trilho e a ponta da seta. */
-.no + .no::before,
-.no + .ramo::before,
-.ramo + .no::before {
-  content: "";
-  position: absolute; left: 1.5rem; top: -2.1rem;
-  width: 2px; height: 2.1rem;
-  background: var(--line);
-}
-.no + .no::after,
-.no + .ramo::after,
-.ramo + .no::after {
-  content: "";
-  position: absolute; left: calc(1.5rem - 3px); top: -.62rem;
-  width: 0; height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 6px solid #C8D3E0;
+.dg {
+  display: block;
+  width: 100%;
+  min-width: 940px;
+  height: auto;
+  font-family: Manrope, system-ui, sans-serif;
 }
 
-/* O cartão de uma página que é nossa: tem slug e abre. */
-.no__topo { display: flex; align-items: baseline; gap: .5rem; }
-.no__nome { margin: 0; font-size: .86rem; font-weight: 800; color: var(--ink); }
-.no__etapa {
-  margin-left: auto; flex: 0 0 auto;
-  padding: .12em .45em; border-radius: 5px;
-  background: var(--neutro-bg); color: var(--neutro);
-  font-size: .62rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
-}
-.no__slug {
-  display: inline-block; margin-top: .45rem;
-  padding: .18em .45em; border-radius: 5px;
-  background: var(--neutro-bg);
-  font-family: var(--mono); font-size: .74rem; color: var(--ink-2);
-  text-decoration: none;
-  overflow-wrap: anywhere;
-}
-.no__slug:hover, .no__slug:focus-visible { background: #E2EAF3; color: var(--ink); }
-.no__nota { margin: .45rem 0 0; font-size: .74rem; line-height: 1.5; color: var(--muted); }
-
-/* Etapa que não é uma página nossa — o checkout e os botões que a Hotmart
-   gera. Hachurada, para não parecer algo que se possa abrir daqui. */
-.no--deles {
-  border-style: dashed;
-  background: repeating-linear-gradient(-45deg, #F4F7FB 0 6px, #FFF 6px 12px);
-}
-.no--deles .no__nome { color: var(--body); }
-
-/* O fim do caminho. */
-.no--fim { border-color: var(--ink); background: var(--ink); }
-.no--fim .no__nome { color: #fff; }
-.no--fim .no__etapa { background: #24344F; color: #A9BBD0; }
-.no--fim .no__slug { background: #24344F; color: #DCE6F2; }
-.no--fim .no__slug:hover, .no--fim .no__slug:focus-visible { background: #31456A; color: #fff; }
-.no--fim .no__nota { color: #93A6BE; }
-
-/* =========================================================================
-   O ramo
-
-   A única bifurcação do funil: aceitar o upsell salta o downsell, recusar
-   passa por ele. Os dois caminhos voltam a se encontrar no nó seguinte, e
-   é isso que o rótulo "os dois caminhos seguem" diz.
-   ========================================================================= */
-.ramo { position: relative; }
-.ramo__cab {
-  display: flex; flex-wrap: wrap; gap: .3rem .5rem; align-items: center;
-  margin-bottom: .5rem;
-  font-size: .72rem; color: var(--body);
-}
-.ramo__saida {
-  padding: .14em .5em; border-radius: 999px;
-  font-size: .68rem; font-weight: 800; letter-spacing: .04em;
-}
-.ramo__saida--sim  { background: var(--verde-bg); color: var(--verde); }
-.ramo__saida--nao  { background: var(--ambar-bg); color: var(--ambar); }
-.ramo__dentro {
-  padding-left: .85rem;
-  border-left: 2px dashed #CFDAE7;
-}
-.ramo__volta {
-  margin: .55rem 0 0;
-  padding-left: .85rem;
-  font-size: .72rem; color: var(--muted);
-}
 
 /* =========================================================================
    Aviso de conferência
@@ -291,190 +239,228 @@ body {
 
   <div class="legenda">
     <b>Legenda:</b>
-    <span class="legenda__item"><span class="pastilha pastilha--nossa"></span> página nossa, clique no slug para abrir</span>
-    <span class="legenda__item"><span class="pastilha pastilha--deles"></span> etapa da Hotmart, não existe como página aqui</span>
-    <span class="legenda__item"><span class="pastilha pastilha--fim"></span> fim do caminho</span>
+    <span class="legenda__item"><span class="pastilha pastilha--anuncio" aria-hidden="true"></span> anúncio — por onde entra</span>
+    <span class="legenda__item"><span class="pastilha pastilha--nossa" aria-hidden="true"></span> página nossa, na cor do ticket</span>
+    <span class="legenda__item"><span class="pastilha pastilha--hotmart" aria-hidden="true"></span> etapa da Hotmart, não existe como página aqui</span>
+    <span class="legenda__item"><span class="pastilha pastilha--decisao" aria-hidden="true"></span> decisão do comprador</span>
+    <span class="legenda__item"><span class="pastilha pastilha--fim" aria-hidden="true"></span> fim do caminho — a mesma para os três</span>
   </div>
 
   <div class="fluxos">
 
-    <!-- ==================== TICKET 27 ==================== -->
     <section class="fluxo fluxo--t27" aria-labelledby="f27">
       <div class="fluxo__cab">
         <h2 class="fluxo__t" id="f27">Ticket 27</h2>
         <span class="fluxo__preco">R$ 27</span>
       </div>
-      <div class="fluxo__corpo">
-
-        <div class="no no--deles">
-          <div class="no__topo"><h3 class="no__nome">Anúncio</h3><span class="no__etapa">Entrada</span></div>
-          <p class="no__nota">Meta cai em <b>exp-fb</b>, Google cai em <b>exp-gg</b>. A página é a mesma; o subdomínio é o que separa os leads.</p>
-        </div>
-
-        <div class="no">
-          <div class="no__topo"><h3 class="no__nome">Manual &mdash; ticket baixo</h3><span class="no__etapa">Venda</span></div>
-          <a class="no__slug" href="/lt-v1-27/">/lt-v1-27/</a>
-          <p class="no__nota">Todos os botões rolam até a oferta; só o de dentro da caixa de preço sai da página.</p>
-        </div>
-
-        <div class="no no--deles">
-          <div class="no__topo"><h3 class="no__nome">Checkout Hotmart</h3><span class="no__etapa">Pagamento</span></div>
-          <p class="no__nota"><code>?off=9z1ywsjs</code></p>
-        </div>
-
-        <div class="no">
-          <div class="no__topo"><h3 class="no__nome">Upsell</h3><span class="no__etapa">R$ 297</span></div>
-          <a class="no__slug" href="/upsell1-mml-27/">/upsell1-mml-27/</a>
-          <p class="no__nota">Método Mãos Lucrativas completo. Os botões de aceitar e recusar vêm do funil da Hotmart.</p>
-        </div>
-
-        <div class="ramo">
-          <div class="ramo__cab">
-            <span class="ramo__saida ramo__saida--sim">Aceita</span> salta o downsell
-            <span class="ramo__saida ramo__saida--nao">Recusa</span> passa por ele
-          </div>
-          <div class="ramo__dentro">
-            <div class="no">
-              <div class="no__topo"><h3 class="no__nome">Downsell</h3><span class="no__etapa">R$ 197</span></div>
-              <a class="no__slug" href="/up-down-mml-27/">/up-down-mml-27/</a>
-              <p class="no__nota">Mesma formação por um preço menor.</p>
-            </div>
-          </div>
-          <p class="ramo__volta">Aceitando ou recusando, os dois caminhos seguem para a etapa de baixo.</p>
-        </div>
-
-        <div class="no">
-          <div class="no__topo"><h3 class="no__nome">Conclusão do pedido</h3><span class="no__etapa">Espera</span></div>
-          <a class="no__slug" href="/upsell2-mml-27/">/upsell2-mml-27/</a>
-          <p class="no__nota">Segura o comprador enquanto o pedido processa; a oferta entra depois de 2 min.</p>
-        </div>
-
-        <div class="no no--fim">
-          <div class="no__topo"><h3 class="no__nome">Compra aprovada</h3><span class="no__etapa">Obrigado</span></div>
-          <a class="no__slug" href="/confirmacao/">/confirmacao/</a>
-          <p class="no__nota">Download do e-book e suporte. A mesma página serve os três tickets.</p>
-        </div>
-
+      <div class="fluxo__tela">
+    <svg class="dg" viewBox="0 0 1400 660" role="img" aria-label="Caminho do comprador do ticket 27, do anúncio até a página de obrigado.">
+      <defs>
+        <marker id="ponta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="#111827" />
+        </marker>
+      </defs>
+      <polyline points="240,96 270,96 270,151 300,151" fill="none" stroke="#111827" stroke-width="2" stroke-linejoin="round" marker-end="url(#ponta)" />
+      <polyline points="240,206 270,206 270,151 300,151" fill="none" stroke="#111827" stroke-width="2" stroke-linejoin="round" marker-end="url(#ponta)" />
+      <polyline points="510,151 570,151" fill="none" stroke="#111827" stroke-width="2" stroke-linejoin="round" marker-end="url(#ponta)" />
+      <polyline points="780,151 840,151" fill="none" stroke="#111827" stroke-width="2" stroke-linejoin="round" marker-end="url(#ponta)" />
+      <polyline points="1050,151 1089,151" fill="none" stroke="#111827" stroke-width="2" stroke-linejoin="round" marker-end="url(#ponta)" />
+      <polyline points="1185,213 1185,300" fill="none" stroke="#111827" stroke-width="2" stroke-linejoin="round" marker-end="url(#ponta)" />
+      <polyline points="1281,151 1340,151 1340,476 780,476" fill="none" stroke="#111827" stroke-width="2" stroke-linejoin="round" marker-end="url(#ponta)" />
+      <polyline points="1185,372 1185,476" fill="none" stroke="#111827" stroke-width="2" stroke-linejoin="round" />
+      <circle cx="1185" cy="476" r="4.5" fill="#111827" />
+      <polyline points="675,512 675,550" fill="none" stroke="#111827" stroke-width="2" stroke-linejoin="round" marker-end="url(#ponta)" />
+      <text x="1215" y="247" text-anchor="middle" font-size="12" font-weight="800" letter-spacing="1.4" fill="#111827">NÃO</text>
+      <text x="1308" y="137" text-anchor="middle" font-size="12" font-weight="800" letter-spacing="1.4" fill="#111827">SIM</text>
+      <g>
+        <rect x="30" y="60" width="210" height="72" rx="14" fill="#BDB2F0" stroke="#111827" stroke-width="2" />
+        <text x="135" y="90" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">Anúncio no Meta</text>
+        <text x="135" y="112" text-anchor="middle" font-size="13" font-family="var(--mono)" fill="#111827" opacity=".78">exp-fb</text>
+      </g>
+      <g>
+        <rect x="30" y="170" width="210" height="72" rx="14" fill="#BDB2F0" stroke="#111827" stroke-width="2" />
+        <text x="135" y="200" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">Anúncio no Google</text>
+        <text x="135" y="222" text-anchor="middle" font-size="13" font-family="var(--mono)" fill="#111827" opacity=".78">exp-gg</text>
+      </g>
+      <a href="/lt-v1-27/" class="dg__no">
+        <rect x="300" y="115" width="210" height="72" rx="14" fill="#8FC7F0" stroke="#111827" stroke-width="2" />
+        <text x="405" y="145" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">Manual — ticket baixo</text>
+        <text x="405" y="167" text-anchor="middle" font-size="13" font-family="var(--mono)" fill="#111827" opacity=".78">/lt-v1-27/</text>
+      </a>
+      <g>
+        <rect x="570" y="115" width="210" height="72" rx="14" fill="#E2E8F0" stroke="#111827" stroke-width="2" stroke-dasharray="7 5" />
+        <text x="675" y="145" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">Checkout Hotmart</text>
+        <text x="675" y="167" text-anchor="middle" font-size="13" font-family="var(--mono)" fill="#111827" opacity=".78">?off=9z1ywsjs</text>
+      </g>
+      <a href="/upsell1-mml-27/" class="dg__no">
+        <rect x="840" y="115" width="210" height="72" rx="14" fill="#8FC7F0" stroke="#111827" stroke-width="2" />
+        <text x="945" y="145" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">Upsell — R$ 297</text>
+        <text x="945" y="167" text-anchor="middle" font-size="13" font-family="var(--mono)" fill="#111827" opacity=".78">/upsell1-mml-27/</text>
+      </a>
+      <g>
+        <polygon points="1185,89 1281,151 1185,213 1089,151" fill="#F3A9E4" stroke="#111827" stroke-width="2" stroke-linejoin="round" />
+        <text x="1185" y="156" text-anchor="middle" font-size="15" font-weight="800" fill="#111827">Aceita?</text>
+      </g>
+      <a href="/up-down-mml-27/" class="dg__no">
+        <rect x="1080" y="300" width="210" height="72" rx="14" fill="#8FC7F0" stroke="#111827" stroke-width="2" />
+        <text x="1185" y="330" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">Downsell — R$ 197</text>
+        <text x="1185" y="352" text-anchor="middle" font-size="13" font-family="var(--mono)" fill="#111827" opacity=".78">/up-down-mml-27/</text>
+      </a>
+      <a href="/upsell2-mml-27/" class="dg__no">
+        <rect x="570" y="440" width="210" height="72" rx="14" fill="#8FC7F0" stroke="#111827" stroke-width="2" />
+        <text x="675" y="470" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">Conclusão do pedido</text>
+        <text x="675" y="492" text-anchor="middle" font-size="13" font-family="var(--mono)" fill="#111827" opacity=".78">/upsell2-mml-27/</text>
+      </a>
+      <a href="/confirmacao/" class="dg__no">
+        <rect x="570" y="550" width="210" height="72" rx="14" fill="#CBD5E1" stroke="#111827" stroke-width="2" />
+        <text x="675" y="580" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">Compra aprovada</text>
+        <text x="675" y="602" text-anchor="middle" font-size="13" font-family="var(--mono)" fill="#111827" opacity=".78">/confirmacao/</text>
+      </a>
+    </svg>
       </div>
     </section>
 
-    <!-- ==================== TICKET 67 ==================== -->
     <section class="fluxo fluxo--t67" aria-labelledby="f67">
       <div class="fluxo__cab">
         <h2 class="fluxo__t" id="f67">Ticket 67</h2>
         <span class="fluxo__preco">R$ 67</span>
       </div>
-      <div class="fluxo__corpo">
-
-        <div class="no no--deles">
-          <div class="no__topo"><h3 class="no__nome">Anúncio</h3><span class="no__etapa">Entrada</span></div>
-          <p class="no__nota">Meta cai em <b>exp-fb</b>, Google cai em <b>exp-gg</b>. A página é a mesma; o subdomínio é o que separa os leads.</p>
-        </div>
-
-        <div class="no">
-          <div class="no__topo"><h3 class="no__nome">Manual &mdash; ticket médio</h3><span class="no__etapa">Venda</span></div>
-          <a class="no__slug" href="/lt-v1-67/">/lt-v1-67/</a>
-          <p class="no__nota">Todos os botões rolam até a oferta; só o de dentro da caixa de preço sai da página.</p>
-        </div>
-
-        <div class="no no--deles">
-          <div class="no__topo"><h3 class="no__nome">Checkout Hotmart</h3><span class="no__etapa">Pagamento</span></div>
-          <p class="no__nota"><code>?off=q86wzvlt</code></p>
-        </div>
-
-        <div class="no">
-          <div class="no__topo"><h3 class="no__nome">Upsell</h3><span class="no__etapa">R$ 297</span></div>
-          <a class="no__slug" href="/upsell1-mml-67/">/upsell1-mml-67/</a>
-          <p class="no__nota">Método Mãos Lucrativas completo. Os botões de aceitar e recusar vêm do funil da Hotmart.</p>
-        </div>
-
-        <div class="ramo">
-          <div class="ramo__cab">
-            <span class="ramo__saida ramo__saida--sim">Aceita</span> salta o downsell
-            <span class="ramo__saida ramo__saida--nao">Recusa</span> passa por ele
-          </div>
-          <div class="ramo__dentro">
-            <div class="no">
-              <div class="no__topo"><h3 class="no__nome">Downsell</h3><span class="no__etapa">R$ 197</span></div>
-              <a class="no__slug" href="/up-down-mml-67/">/up-down-mml-67/</a>
-              <p class="no__nota">Mesma formação por um preço menor.</p>
-            </div>
-          </div>
-          <p class="ramo__volta">Aceitando ou recusando, os dois caminhos seguem para a etapa de baixo.</p>
-        </div>
-
-        <div class="no">
-          <div class="no__topo"><h3 class="no__nome">Conclusão do pedido</h3><span class="no__etapa">Espera</span></div>
-          <a class="no__slug" href="/upsell2-mml-67/">/upsell2-mml-67/</a>
-          <p class="no__nota">Segura o comprador enquanto o pedido processa; a oferta entra depois de 2 min.</p>
-        </div>
-
-        <div class="no no--fim">
-          <div class="no__topo"><h3 class="no__nome">Compra aprovada</h3><span class="no__etapa">Obrigado</span></div>
-          <a class="no__slug" href="/confirmacao/">/confirmacao/</a>
-          <p class="no__nota">Download do e-book e suporte. A mesma página serve os três tickets.</p>
-        </div>
-
+      <div class="fluxo__tela">
+    <svg class="dg" viewBox="0 0 1400 660" role="img" aria-label="Caminho do comprador do ticket 67, do anúncio até a página de obrigado.">
+      <defs>
+        <marker id="ponta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="#111827" />
+        </marker>
+      </defs>
+      <polyline points="240,96 270,96 270,151 300,151" fill="none" stroke="#111827" stroke-width="2" stroke-linejoin="round" marker-end="url(#ponta)" />
+      <polyline points="240,206 270,206 270,151 300,151" fill="none" stroke="#111827" stroke-width="2" stroke-linejoin="round" marker-end="url(#ponta)" />
+      <polyline points="510,151 570,151" fill="none" stroke="#111827" stroke-width="2" stroke-linejoin="round" marker-end="url(#ponta)" />
+      <polyline points="780,151 840,151" fill="none" stroke="#111827" stroke-width="2" stroke-linejoin="round" marker-end="url(#ponta)" />
+      <polyline points="1050,151 1089,151" fill="none" stroke="#111827" stroke-width="2" stroke-linejoin="round" marker-end="url(#ponta)" />
+      <polyline points="1185,213 1185,300" fill="none" stroke="#111827" stroke-width="2" stroke-linejoin="round" marker-end="url(#ponta)" />
+      <polyline points="1281,151 1340,151 1340,476 780,476" fill="none" stroke="#111827" stroke-width="2" stroke-linejoin="round" marker-end="url(#ponta)" />
+      <polyline points="1185,372 1185,476" fill="none" stroke="#111827" stroke-width="2" stroke-linejoin="round" />
+      <circle cx="1185" cy="476" r="4.5" fill="#111827" />
+      <polyline points="675,512 675,550" fill="none" stroke="#111827" stroke-width="2" stroke-linejoin="round" marker-end="url(#ponta)" />
+      <text x="1215" y="247" text-anchor="middle" font-size="12" font-weight="800" letter-spacing="1.4" fill="#111827">NÃO</text>
+      <text x="1308" y="137" text-anchor="middle" font-size="12" font-weight="800" letter-spacing="1.4" fill="#111827">SIM</text>
+      <g>
+        <rect x="30" y="60" width="210" height="72" rx="14" fill="#BDB2F0" stroke="#111827" stroke-width="2" />
+        <text x="135" y="90" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">Anúncio no Meta</text>
+        <text x="135" y="112" text-anchor="middle" font-size="13" font-family="var(--mono)" fill="#111827" opacity=".78">exp-fb</text>
+      </g>
+      <g>
+        <rect x="30" y="170" width="210" height="72" rx="14" fill="#BDB2F0" stroke="#111827" stroke-width="2" />
+        <text x="135" y="200" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">Anúncio no Google</text>
+        <text x="135" y="222" text-anchor="middle" font-size="13" font-family="var(--mono)" fill="#111827" opacity=".78">exp-gg</text>
+      </g>
+      <a href="/lt-v1-67/" class="dg__no">
+        <rect x="300" y="115" width="210" height="72" rx="14" fill="#F5D372" stroke="#111827" stroke-width="2" />
+        <text x="405" y="145" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">Manual — ticket médio</text>
+        <text x="405" y="167" text-anchor="middle" font-size="13" font-family="var(--mono)" fill="#111827" opacity=".78">/lt-v1-67/</text>
+      </a>
+      <g>
+        <rect x="570" y="115" width="210" height="72" rx="14" fill="#E2E8F0" stroke="#111827" stroke-width="2" stroke-dasharray="7 5" />
+        <text x="675" y="145" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">Checkout Hotmart</text>
+        <text x="675" y="167" text-anchor="middle" font-size="13" font-family="var(--mono)" fill="#111827" opacity=".78">?off=q86wzvlt</text>
+      </g>
+      <a href="/upsell1-mml-67/" class="dg__no">
+        <rect x="840" y="115" width="210" height="72" rx="14" fill="#F5D372" stroke="#111827" stroke-width="2" />
+        <text x="945" y="145" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">Upsell — R$ 297</text>
+        <text x="945" y="167" text-anchor="middle" font-size="13" font-family="var(--mono)" fill="#111827" opacity=".78">/upsell1-mml-67/</text>
+      </a>
+      <g>
+        <polygon points="1185,89 1281,151 1185,213 1089,151" fill="#F3A9E4" stroke="#111827" stroke-width="2" stroke-linejoin="round" />
+        <text x="1185" y="156" text-anchor="middle" font-size="15" font-weight="800" fill="#111827">Aceita?</text>
+      </g>
+      <a href="/up-down-mml-67/" class="dg__no">
+        <rect x="1080" y="300" width="210" height="72" rx="14" fill="#F5D372" stroke="#111827" stroke-width="2" />
+        <text x="1185" y="330" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">Downsell — R$ 197</text>
+        <text x="1185" y="352" text-anchor="middle" font-size="13" font-family="var(--mono)" fill="#111827" opacity=".78">/up-down-mml-67/</text>
+      </a>
+      <a href="/upsell2-mml-67/" class="dg__no">
+        <rect x="570" y="440" width="210" height="72" rx="14" fill="#F5D372" stroke="#111827" stroke-width="2" />
+        <text x="675" y="470" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">Conclusão do pedido</text>
+        <text x="675" y="492" text-anchor="middle" font-size="13" font-family="var(--mono)" fill="#111827" opacity=".78">/upsell2-mml-67/</text>
+      </a>
+      <a href="/confirmacao/" class="dg__no">
+        <rect x="570" y="550" width="210" height="72" rx="14" fill="#CBD5E1" stroke="#111827" stroke-width="2" />
+        <text x="675" y="580" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">Compra aprovada</text>
+        <text x="675" y="602" text-anchor="middle" font-size="13" font-family="var(--mono)" fill="#111827" opacity=".78">/confirmacao/</text>
+      </a>
+    </svg>
       </div>
     </section>
 
-    <!-- ==================== TICKET 97 ==================== -->
     <section class="fluxo fluxo--t97" aria-labelledby="f97">
       <div class="fluxo__cab">
         <h2 class="fluxo__t" id="f97">Ticket 97</h2>
         <span class="fluxo__preco">R$ 97</span>
       </div>
-      <div class="fluxo__corpo">
-
-        <div class="no no--deles">
-          <div class="no__topo"><h3 class="no__nome">Anúncio</h3><span class="no__etapa">Entrada</span></div>
-          <p class="no__nota">Meta cai em <b>exp-fb</b>, Google cai em <b>exp-gg</b>. A página é a mesma; o subdomínio é o que separa os leads.</p>
-        </div>
-
-        <div class="no">
-          <div class="no__topo"><h3 class="no__nome">Manual &mdash; ticket alto</h3><span class="no__etapa">Venda</span></div>
-          <a class="no__slug" href="/lt-v1-97/">/lt-v1-97/</a>
-          <p class="no__nota">Todos os botões rolam até a oferta; só o de dentro da caixa de preço sai da página.</p>
-        </div>
-
-        <div class="no no--deles">
-          <div class="no__topo"><h3 class="no__nome">Checkout Hotmart</h3><span class="no__etapa">Pagamento</span></div>
-          <p class="no__nota"><code>?off=u7qj2mgv</code></p>
-        </div>
-
-        <div class="no">
-          <div class="no__topo"><h3 class="no__nome">Upsell</h3><span class="no__etapa">R$ 297</span></div>
-          <a class="no__slug" href="/upsell1-mml-97/">/upsell1-mml-97/</a>
-          <p class="no__nota">Método Mãos Lucrativas completo. Os botões de aceitar e recusar vêm do funil da Hotmart.</p>
-        </div>
-
-        <div class="ramo">
-          <div class="ramo__cab">
-            <span class="ramo__saida ramo__saida--sim">Aceita</span> salta o downsell
-            <span class="ramo__saida ramo__saida--nao">Recusa</span> passa por ele
-          </div>
-          <div class="ramo__dentro">
-            <div class="no">
-              <div class="no__topo"><h3 class="no__nome">Downsell</h3><span class="no__etapa">R$ 197</span></div>
-              <a class="no__slug" href="/up-down-mml-97/">/up-down-mml-97/</a>
-              <p class="no__nota">Mesma formação por um preço menor.</p>
-            </div>
-          </div>
-          <p class="ramo__volta">Aceitando ou recusando, os dois caminhos seguem para a etapa de baixo.</p>
-        </div>
-
-        <div class="no">
-          <div class="no__topo"><h3 class="no__nome">Conclusão do pedido</h3><span class="no__etapa">Espera</span></div>
-          <a class="no__slug" href="/upsell2-mml-97/">/upsell2-mml-97/</a>
-          <p class="no__nota">Segura o comprador enquanto o pedido processa; a oferta entra depois de 2 min.</p>
-        </div>
-
-        <div class="no no--fim">
-          <div class="no__topo"><h3 class="no__nome">Compra aprovada</h3><span class="no__etapa">Obrigado</span></div>
-          <a class="no__slug" href="/confirmacao/">/confirmacao/</a>
-          <p class="no__nota">Download do e-book e suporte. A mesma página serve os três tickets.</p>
-        </div>
-
+      <div class="fluxo__tela">
+    <svg class="dg" viewBox="0 0 1400 660" role="img" aria-label="Caminho do comprador do ticket 97, do anúncio até a página de obrigado.">
+      <defs>
+        <marker id="ponta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 z" fill="#111827" />
+        </marker>
+      </defs>
+      <polyline points="240,96 270,96 270,151 300,151" fill="none" stroke="#111827" stroke-width="2" stroke-linejoin="round" marker-end="url(#ponta)" />
+      <polyline points="240,206 270,206 270,151 300,151" fill="none" stroke="#111827" stroke-width="2" stroke-linejoin="round" marker-end="url(#ponta)" />
+      <polyline points="510,151 570,151" fill="none" stroke="#111827" stroke-width="2" stroke-linejoin="round" marker-end="url(#ponta)" />
+      <polyline points="780,151 840,151" fill="none" stroke="#111827" stroke-width="2" stroke-linejoin="round" marker-end="url(#ponta)" />
+      <polyline points="1050,151 1089,151" fill="none" stroke="#111827" stroke-width="2" stroke-linejoin="round" marker-end="url(#ponta)" />
+      <polyline points="1185,213 1185,300" fill="none" stroke="#111827" stroke-width="2" stroke-linejoin="round" marker-end="url(#ponta)" />
+      <polyline points="1281,151 1340,151 1340,476 780,476" fill="none" stroke="#111827" stroke-width="2" stroke-linejoin="round" marker-end="url(#ponta)" />
+      <polyline points="1185,372 1185,476" fill="none" stroke="#111827" stroke-width="2" stroke-linejoin="round" />
+      <circle cx="1185" cy="476" r="4.5" fill="#111827" />
+      <polyline points="675,512 675,550" fill="none" stroke="#111827" stroke-width="2" stroke-linejoin="round" marker-end="url(#ponta)" />
+      <text x="1215" y="247" text-anchor="middle" font-size="12" font-weight="800" letter-spacing="1.4" fill="#111827">NÃO</text>
+      <text x="1308" y="137" text-anchor="middle" font-size="12" font-weight="800" letter-spacing="1.4" fill="#111827">SIM</text>
+      <g>
+        <rect x="30" y="60" width="210" height="72" rx="14" fill="#BDB2F0" stroke="#111827" stroke-width="2" />
+        <text x="135" y="90" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">Anúncio no Meta</text>
+        <text x="135" y="112" text-anchor="middle" font-size="13" font-family="var(--mono)" fill="#111827" opacity=".78">exp-fb</text>
+      </g>
+      <g>
+        <rect x="30" y="170" width="210" height="72" rx="14" fill="#BDB2F0" stroke="#111827" stroke-width="2" />
+        <text x="135" y="200" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">Anúncio no Google</text>
+        <text x="135" y="222" text-anchor="middle" font-size="13" font-family="var(--mono)" fill="#111827" opacity=".78">exp-gg</text>
+      </g>
+      <a href="/lt-v1-97/" class="dg__no">
+        <rect x="300" y="115" width="210" height="72" rx="14" fill="#86DCAE" stroke="#111827" stroke-width="2" />
+        <text x="405" y="145" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">Manual — ticket alto</text>
+        <text x="405" y="167" text-anchor="middle" font-size="13" font-family="var(--mono)" fill="#111827" opacity=".78">/lt-v1-97/</text>
+      </a>
+      <g>
+        <rect x="570" y="115" width="210" height="72" rx="14" fill="#E2E8F0" stroke="#111827" stroke-width="2" stroke-dasharray="7 5" />
+        <text x="675" y="145" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">Checkout Hotmart</text>
+        <text x="675" y="167" text-anchor="middle" font-size="13" font-family="var(--mono)" fill="#111827" opacity=".78">?off=u7qj2mgv</text>
+      </g>
+      <a href="/upsell1-mml-97/" class="dg__no">
+        <rect x="840" y="115" width="210" height="72" rx="14" fill="#86DCAE" stroke="#111827" stroke-width="2" />
+        <text x="945" y="145" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">Upsell — R$ 297</text>
+        <text x="945" y="167" text-anchor="middle" font-size="13" font-family="var(--mono)" fill="#111827" opacity=".78">/upsell1-mml-97/</text>
+      </a>
+      <g>
+        <polygon points="1185,89 1281,151 1185,213 1089,151" fill="#F3A9E4" stroke="#111827" stroke-width="2" stroke-linejoin="round" />
+        <text x="1185" y="156" text-anchor="middle" font-size="15" font-weight="800" fill="#111827">Aceita?</text>
+      </g>
+      <a href="/up-down-mml-97/" class="dg__no">
+        <rect x="1080" y="300" width="210" height="72" rx="14" fill="#86DCAE" stroke="#111827" stroke-width="2" />
+        <text x="1185" y="330" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">Downsell — R$ 197</text>
+        <text x="1185" y="352" text-anchor="middle" font-size="13" font-family="var(--mono)" fill="#111827" opacity=".78">/up-down-mml-97/</text>
+      </a>
+      <a href="/upsell2-mml-97/" class="dg__no">
+        <rect x="570" y="440" width="210" height="72" rx="14" fill="#86DCAE" stroke="#111827" stroke-width="2" />
+        <text x="675" y="470" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">Conclusão do pedido</text>
+        <text x="675" y="492" text-anchor="middle" font-size="13" font-family="var(--mono)" fill="#111827" opacity=".78">/upsell2-mml-97/</text>
+      </a>
+      <a href="/confirmacao/" class="dg__no">
+        <rect x="570" y="550" width="210" height="72" rx="14" fill="#CBD5E1" stroke="#111827" stroke-width="2" />
+        <text x="675" y="580" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">Compra aprovada</text>
+        <text x="675" y="602" text-anchor="middle" font-size="13" font-family="var(--mono)" fill="#111827" opacity=".78">/confirmacao/</text>
+      </a>
+    </svg>
       </div>
     </section>
 
