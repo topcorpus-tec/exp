@@ -564,3 +564,53 @@
   width: 100%;
   margin-bottom: 0;
 }
+
+/* =========================================================================
+   SELO DE BÔNUS
+
+   Um selo dourado carimbado no alto de cada cartão de bônus, metade dele
+   para fora da borda.
+
+   Para ele poder sair, o cartão precisa parar de recortar. No taping o
+   overflow:hidden do cartão existe por um motivo só — arredondar o canto
+   de cima da imagem, que não tem raio próprio. Então o raio volta para a
+   própria caixa da imagem e o recorte sai do cartão; nada mais ali por
+   dentro ultrapassa a borda.
+
+   A folga entre as linhas cresce porque o selo da linha de baixo ocupa
+   o vão: com o gap padrão ele encostaria no cartão de cima. A folga
+   acima da primeira linha já vem do margin-bottom do .tp-head.
+   ========================================================================= */
+.tp-bonus { row-gap: clamp(3.4rem, 6vw, 4.4rem); }
+
+/* A faixa branca no alto do cartão é onde a barriga do selo pousa. Sem
+   ela o selo cairia em cima do mockup, e mockup com carimbo por cima não
+   se lê nem como um nem como outro. */
+.tp-bonus__card {
+  --mn-faixa: clamp(1.6rem, 3.2vw, 2.2rem);
+  overflow: visible;
+  padding-top: var(--mn-faixa);
+}
+
+/* O canto de cima da imagem deixou de ser o canto do cartão: agora ele
+   encosta na faixa, e reto é o que encaixa ali. */
+.tp-bonus__media { border-radius: 0; }
+
+/* O "Grátis" desce junto com a imagem — na faixa ele sumiria, porque é
+   branco sobre branco. */
+.tp-bonus__free { top: calc(var(--mn-faixa) + .9rem); }
+
+.mn-bonus__selo {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 2;
+  width: clamp(58px, 20%, 82px);
+  height: auto;
+  /* -72%: o selo mora acima do cartão. Só a última fatia dele encosta na
+     borda — o suficiente para os dois lerem como uma peça só, sem o selo
+     virar parte da imagem. */
+  transform: translate(-50%, -72%);
+  filter: drop-shadow(0 8px 16px rgba(1, 28, 66, .3));
+  pointer-events: none;
+}
