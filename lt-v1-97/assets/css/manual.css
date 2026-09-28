@@ -4,9 +4,9 @@
    Camada fina sobre design-system.css + taping.css. A página reusa o
    sistema visual do TopTaping inteiro; aqui ficam quatro coisas:
 
-     1. ESPAÇOS DE IMAGEM  — a página ainda não tem as imagens, então cada
-        imagem prevista na copy virou uma caixa marcada dizendo o que entra
-        ali. Some sozinha quando a <img> de verdade substituir o bloco.
+     1. IMAGENS SEM MOLDURA — os mockups e as fotos que não vivem dentro de
+        uma caixa do taping: o do hero, o da oferta, a colagem da bio e as
+        três de "para quem é".
      2. IDENTIDADE AZUL     — a capa do manual é azul; o sistema herdado é
         rosa e roxo. Os tokens são reatribuídos, não os componentes.
      3. COMPONENTES NOVOS   — faixa corrida, bio da autora, preço ancorado.
@@ -16,77 +16,39 @@
    ========================================================================= */
 
 /* =========================================================================
-   1. ESPAÇO DE IMAGEM
+   0. ESCALA DE TEXTO
 
-   Caixa tracejada com a descrição do que entra ali. Ocupa a mesma área que
-   a imagem final vai ocupar, para o layout já ser o definitivo — o que
-   muda depois é só o conteúdo da caixa.
+   A página inteira ficou um ponto maior. O ajuste é na raiz, não nas
+   regras: o design system e o taping escrevem todo tamanho em rem, então
+   mexer aqui move tudo junto — manchete, corpo, rótulo, botão — e mantém
+   a proporção entre eles. Mexer regra por regra desmontaria essa escala.
+
+   Onde o tamanho é clamp(rem, vw, rem), isto levanta o piso e o teto; no
+   meio da faixa o vw ainda manda, e ali o ganho é menor.
+
+   16px vira 18px.
    ========================================================================= */
-.mn-ph {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: .5rem;
-  box-sizing: border-box;
-  padding: clamp(1rem, 3vw, 1.75rem);
-  text-align: center;
+html { font-size: 112.5%; }
 
-  border: 2px dashed var(--tp-violet-soft);
-  border-radius: var(--tp-radius-sm);
-  background:
-    repeating-linear-gradient(
-      -45deg,
-      var(--tp-violet-wash) 0 12px,
-      var(--tp-white)       12px 24px
-    );
-  color: var(--tp-body);
-}
-
-/* Etiqueta fixa "IMAGEM", para a caixa se ler como espaço reservado mesmo
-   quando a descrição for longa. */
-.mn-ph__tag {
-  font-size: .62rem;
-  font-weight: var(--fw-extrabold);
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--tp-violet-deep);
-}
-
-.mn-ph__desc {
-  margin: 0;
-  max-width: 34ch;
-  font-size: .82rem;
-  line-height: 1.5;
-  color: var(--tp-body);
-}
-
-/* Origem da imagem, quando o doc aponta um arquivo específico. */
-.mn-ph__from {
-  margin: 0;
-  font-size: .68rem;
-  line-height: 1.45;
-  color: var(--tp-muted);
-  font-style: italic;
-}
-
-/* Preenche a caixa do contêiner herdado (tp-inside__media, tp-bonus__media),
-   que já define a proporção e o overflow. */
-.mn-ph--fill { width: 100%; height: 100%; border-radius: 0; border-width: 0 0 2px; }
 
 /* O mockup do hero. O doc pede "bem grande e destacado": é a única imagem
    da dobra, então ela ocupa a largura que sobrou do logo e do retrato.
 
-   Sem moldura: nada de canto arredondado, sombra ou fundo. A foto original
-   vinha com uma vinheta que fechava em cinza escuro nos cantos, e o que
-   resolve isso é o próprio arquivo — o WebP carrega um alfa que dissolve
-   esse anel, então a imagem termina no ar em vez de terminar numa borda. */
+   Sem moldura: nada de canto arredondado, sombra ou fundo. O arquivo tem
+   alfa e o fundo do hero passa por trás dele, então a imagem termina no ar
+   em vez de terminar numa borda. */
 .mn-hero__mock {
-  /* No desktop ele para em 470px: maior que isso a foto passa a competir
-     com a manchete, que é quem tem de ser lida primeiro. No celular o
-     min() já entrega os 100% da coluna, sem precisar de media query. */
   width: min(100%, 470px);
   margin: 0 auto;
+}
+
+/* Do tablet para cima ele cresce. A colagem tem as páginas internas em
+   volta do manual, e a 470px elas viram textura — some justamente o que
+   mostra que o manual é grosso. Em vw, para acompanhar a tela em vez de
+   dar um salto na media query; o teto de 820px é onde ele ainda divide a
+   primeira tela com a manchete em vez de empurrá-la para fora. */
+@media (min-width: 768px) {
+  .mn-hero__mock { width: min(100%, clamp(580px, 60vw, 820px)); }
 }
 .mn-hero__mock img {
   display: block;
@@ -94,10 +56,15 @@
   height: auto;
 }
 
-/* Retrato — foto da Ana de jaleco, na dobra da bio */
-.mn-ph--portrait {
+/* A colagem da Ana na dobra da bio. Solta, como os outros mockups: o
+   arquivo tem alfa e o fundo da seção passa por trás dela.
+
+   Sem aspect-ratio: a colagem é 700x869 e a caixa antiga era 3:4, o que
+   comeria uma fatia dos lados. A altura vem da proporção do arquivo. */
+.mn-bio__media img {
+  display: block;
   width: min(100%, 420px);
-  aspect-ratio: 3 / 4;
+  height: auto;
   margin-inline: auto;
 }
 
