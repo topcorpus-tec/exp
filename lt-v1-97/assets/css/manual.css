@@ -575,16 +575,20 @@
    dentro ultrapassa a borda.
 
    A folga entre as linhas cresce porque o selo da linha de baixo ocupa
-   o vão: com o gap padrão ele encostaria no cartão de cima. A folga
-   acima da primeira linha já vem do margin-bottom do .tp-head.
+   o vão: com o gap padrão ele encostaria no cartão de cima. O padding
+   em cima faz o mesmo pela primeira linha, somado ao margin-bottom que
+   o .tp-head já tem.
    ========================================================================= */
-.tp-bonus { row-gap: clamp(3.4rem, 6vw, 4.4rem); }
+.tp-bonus {
+  padding-top: clamp(1.1rem, 2.5vw, 1.6rem);
+  row-gap: clamp(4.4rem, 7.5vw, 5.8rem);
+}
 
 /* A faixa branca no alto do cartão é onde a barriga do selo pousa. Sem
    ela o selo cairia em cima do mockup, e mockup com carimbo por cima não
    se lê nem como um nem como outro. */
 .tp-bonus__card {
-  --mn-faixa: clamp(1.6rem, 3.2vw, 2.2rem);
+  --mn-faixa: clamp(1.9rem, 3.6vw, 2.6rem);
   overflow: visible;
   padding-top: var(--mn-faixa);
 }
@@ -602,7 +606,9 @@
   top: 0;
   left: 50%;
   z-index: 2;
-  width: clamp(58px, 20%, 82px);
+  /* Em vw, não em % do cartão: no celular o cartão ocupa a largura toda,
+     e uma porcentagem faria o selo nascer maior ali do que no desktop. */
+  width: clamp(72px, 7vw, 104px);
   height: auto;
   /* -72%: o selo mora acima do cartão. Só a última fatia dele encosta na
      borda — o suficiente para os dois lerem como uma peça só, sem o selo
