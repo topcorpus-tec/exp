@@ -168,20 +168,6 @@
 }
 .mml-ph--slot { min-height: 160px; }
 
-/* Pendência que ainda falta preencher: fica legível mas visivelmente
-   provisória, para ninguém publicar com um placeholder no ar. */
-.mml-todo {
-  display: inline-block;
-  padding: .06em .42em;
-  border-radius: 5px;
-  border: 1px dashed var(--tp-rose-soft);
-  background: var(--tp-rose-wash);
-  color: var(--tp-rose-deep);
-  font-size: .9em;
-  font-weight: var(--fw-semibold);
-  white-space: nowrap;
-}
-
 /* =========================================================================
    4. BARRA DA CONDIÇÃO
 
@@ -432,13 +418,6 @@
   font-size: .95rem;
   font-weight: var(--fw-extrabold);
   letter-spacing: -.01em;
-}
-
-.mml-fine {
-  margin: .55rem 0 0;
-  font-size: .74rem;
-  line-height: 1.5;
-  color: var(--tp-muted);
 }
 
 .mml-warranty {
