@@ -26,3 +26,7 @@
 # Índice interno das páginas. Nunca deve ser encontrado na busca.
 /indice/*
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+
+# Página de pós-compra do Manual: só é alcançada por quem acabou de pagar.
+/confirmacao/*
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet

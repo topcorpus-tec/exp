@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#FBFDFF" />
+  <meta name="description" content="Compra aprovada. Baixe aqui o seu Manual Ilustrado para Alívio da Dor com Massagem e veja como acessar." />
+
+  <!-- Página de pós-compra: só faz sentido para quem acabou de pagar, e
+       nunca deve aparecer na busca. O _headers da raiz reforça com
+       X-Robots-Tag em /confirmacao/*. -->
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+  <meta name="googlebot" content="noindex, nofollow" />
+
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), usb=()" />
+
+  <meta property="og:title"       content="Compra aprovada — Manual Ilustrado para Alívio da Dor" />
+  <meta property="og:description" content="Sua compra foi aprovada. Veja como baixar e acessar o seu Manual." />
+  <meta property="og:type"        content="website" />
+  <meta property="og:locale"      content="pt_BR" />
+
+  <title>Compra aprovada — Manual Ilustrado para Alívio da Dor</title>
+
+  <!-- ==================== Fontes compartilhadas (CDN topcorpus) ==================== -->
+  <link rel="preconnect" href="https://pcm.topcorpus.com.br" crossorigin />
+  <link rel="dns-prefetch" href="https://pcm.topcorpus.com.br" />
+  <link rel="preload" as="font" type="font/woff2" href="https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-400.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-600.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-800.woff2" crossorigin />
+
+  <!-- ==================== dataLayer init ANTES do env-config ==================== -->
+  <script>window.dataLayer = window.dataLayer || [];</script>
+
+  <!-- ==================== Site config + GTM ==================== -->
+  <script src="assets/js/env-config.js"></script>
+  <script src="assets/js/gtm-loader.js"></script>
+
+  <!-- ==================== CSS ====================
+       design-system.css e taping.css são os mesmos das /lt-v1-*; a camada
+       de cima carrega a mesma identidade azul do Manual, porque é dele que
+       a pessoa acabou de chegar. -->
+  <link rel="stylesheet" href="assets/css/design-system.css" />
+  <link rel="stylesheet" href="assets/css/taping.css" />
+  <link rel="stylesheet" href="assets/css/confirmacao.css" />
+
+  <!-- SDK do player (VTurb/ConverteAI), como na página original -->
+  <script src="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/sdk.js" async></script>
+
+  <script src="assets/js/confirmacao.js" defer></script>
+</head>
+<body>
+
+  <!-- ==================== Sprite de ícones ==================== -->
+  <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12" />
+    </symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2.5" y="4.5" width="19" height="15" rx="2.5" /><polyline points="3.5 6.5 12 13 20.5 6.5" />
+    </symbol>
+    <symbol id="i-bulb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3a6 6 0 0 0-3.6 10.8c.5.4.8 1 .9 1.6l.1.6h5.2l.1-.6c.1-.6.4-1.2.9-1.6A6 6 0 0 0 12 3z" />
+      <line x1="9.4" y1="18.2" x2="14.6" y2="18.2" /><line x1="10.4" y1="21" x2="13.6" y2="21" />
+    </symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+      <line x1="12" y1="6" x2="12" y2="18" /><line x1="6" y1="12" x2="18" y2="12" />
+    </symbol>
+    <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="12" y1="3.5" x2="12" y2="14.5" /><polyline points="7.5 10.5 12 15 16.5 10.5" /><line x1="4.5" y1="19.5" x2="19.5" y2="19.5" />
+    </symbol>
+    <symbol id="i-whats" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.48-.89-.79-1.48-1.76-1.66-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.53.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.91-2.2-.25-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.07c.15.2 2.1 3.2 5.08 4.49.7.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.42-.08-.12-.27-.2-.57-.34M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37A9.86 9.86 0 0 1 2.16 11.9c0-5.45 4.44-9.88 9.9-9.88a9.82 9.82 0 0 1 6.98 2.9 9.83 9.83 0 0 1 2.9 6.99c0 5.45-4.44 9.88-9.89 9.88m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45c6.55 0 11.89-5.34 11.89-11.9a11.82 11.82 0 0 0-3.48-8.4" />
+    </symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .7-.2 1l-2.2 2.2z" />
+    </symbol>
+  </svg>
+
+  <main>
+
+    <!-- ==================== DOBRA 1 — PARABÉNS ====================
+         O que a pessoa veio buscar é uma confirmação. Por isso o selo vem
+         antes do título: é a linha que responde "deu certo?". -->
+    <section class="tp-hero" aria-labelledby="ok-title">
+      <div class="tp-container cf-hero__inner">
+
+        <img class="cf-logo" src="assets/img/logo-manual.webp"
+             alt="Manual Ilustrado para Alívio da Dor"
+             width="600" height="391" fetchpriority="high" decoding="async" />
+
+        <span class="cf-badge">
+          <svg width="15" height="15" aria-hidden="true"><use href="#i-check" /></svg>
+          Compra aprovada
+        </span>
+
+        <div class="tp-hero__copy">
+          <h1 class="tp-hero__headline" id="ok-title">Parabéns!</h1>
+
+          <p class="tp-hero__sub">
+            Sua compra foi aprovada e seu
+            <strong>Manual Ilustrado para Alívio da Dor com Massagem</strong>
+            já está garantido.
+          </p>
+        </div>
+
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 1 ==================== -->
+
+    <!-- ==================== DOBRA 2 — O QUE FAZER AGORA ====================
+         O vídeo explica o acesso, e o botão abaixo dele resolve na hora
+         para quem não quiser assistir. As duas saídas convivem de
+         propósito: ninguém deveria ter de ver um vídeo para receber o que
+         já pagou. -->
+    <section class="tp-section tp-section--lilac" aria-labelledby="agora-title">
+      <div class="tp-container">
+
+        <div class="tp-head" data-reveal>
+          <span class="tp-eyebrow">Seu acesso</span>
+          <h2 class="tp-title" id="agora-title">O que fazer agora?</h2>
+          <p class="tp-lead">Assista ao vídeo abaixo e saiba como acessar o seu Manual.</p>
+        </div>
+
+        <!-- Vídeo em pé (9:19,5). A proporção está na caixa, não no player:
+             assim a dobra não salta quando o embed carrega.
+
+             PARA TROCAR O VÍDEO: o id do player é o trecho final da URL
+             (69821551d1648619a3594ae8). O primeiro trecho é a conta da
+             ConverteAI e não muda. -->
+        <div class="cf-video" data-reveal>
+          <iframe
+            src="https://scripts.converteai.net/02abf0a0-3315-4bbc-83ab-8116ca43936a/players/69821551d1648619a3594ae8/v4/embed.html"
+            title="Como acessar o seu Manual Ilustrado"
+            frameborder="0" allowfullscreen referrerpolicy="origin" loading="lazy"></iframe>
+        </div>
+
+        <p class="cf-after" data-reveal>
+          Queremos garantir que você tenha acesso ao seu e-book o mais rápido possível,
+          por isso, <strong>clique no botão para baixar o seu e-book</strong>.
+        </p>
+
+        <div class="tp-cta" data-reveal>
+          <a class="btn btn--tp" href="#" data-ebook>
+            <span>
+              <svg class="cf-btn-icon" width="17" height="17" aria-hidden="true"><use href="#i-download" /></svg>
+              Baixe seu e-book aqui
+            </span>
+          </a>
+          <!-- Some sozinha quando EBOOK_URL for preenchida no confirmacao.js -->
+          <p class="cf-todo" data-ebook-todo>
+            Pendência: falta a URL do arquivo do e-book — preencher
+            <code>EBOOK_URL</code> em <code>assets/js/confirmacao.js</code>.
+          </p>
+        </div>
+
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 2 ==================== -->
+
+    <!-- ==================== DOBRA 3 — O E-MAIL ====================
+         O download resolve o acesso agora; o e-mail é o que garante o
+         acesso depois, quando a pessoa fechar esta aba. Por isso os dois
+         estão na página, nessa ordem. -->
+    <section class="tp-section tp-section--ivory" aria-labelledby="email-title">
+      <div class="tp-container">
+
+        <div class="tp-head" data-reveal>
+          <span class="tp-eyebrow">Para não perder</span>
+          <h2 class="tp-title" id="email-title">
+            Seu acesso também chegou <span class="tp-hl">no seu e-mail</span>
+          </h2>
+        </div>
+
+        <div class="cf-steps">
+
+          <article class="cf-step" data-reveal>
+            <span class="cf-step__num">01</span>
+            <p class="cf-step__text">
+              <strong>Acesse o e-mail</strong> que você usou no momento da compra.
+            </p>
+          </article>
+
+          <article class="cf-step" data-reveal>
+            <span class="cf-step__num">02</span>
+            <p class="cf-step__text">
+              Procure pelo e-mail com o assunto
+              <strong>&ldquo;Compra aprovada, seu acesso chegou!&rdquo;</strong>
+            </p>
+          </article>
+
+          <article class="cf-step" data-reveal>
+            <span class="cf-step__num">03</span>
+            <p class="cf-step__text">
+              <strong>Leia atentamente o e-mail</strong> e siga o passo a passo descrito nele.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 3 ==================== -->
+
+    <!-- ==================== DOBRA 4 — DICA EXTRA ==================== -->
+    <section class="tp-section tp-section--tight" aria-labelledby="dica-title">
+      <div class="tp-container">
+
+        <div class="cf-tip" data-reveal>
+          <span class="cf-tip__icon">
+            <svg width="30" height="30" aria-hidden="true"><use href="#i-bulb" /></svg>
+          </span>
+          <h2 class="cf-tip__title" id="dica-title">Dica extra</h2>
+
+          <p class="cf-tip__text">
+            Baixe o <strong>aplicativo da Hotmart</strong> no seu celular e tenha
+            seus materiais sempre à mão:
+          </p>
+
+          <div class="cf-tip__apps">
+            <a class="btn btn--tp-ghost"
+               href="https://play.google.com/store/apps/details?id=com.hotmart.sparkle&amp;hl=pt_BR"
+               target="_blank" rel="noopener noreferrer">Google Play (Android)</a>
+            <a class="btn btn--tp-ghost"
+               href="https://apps.apple.com/br/app/hotmart/id1066849827"
+               target="_blank" rel="noopener noreferrer">App Store (iPhone)</a>
+          </div>
+
+          <p class="cf-tip__note">
+            Entre com o <strong>mesmo e-mail da compra</strong> para acessar o seu
+            Manual de forma prática e segura.
+          </p>
+        </div>
+
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 4 ==================== -->
+
+    <!-- ==================== DOBRA 5 — DÚVIDAS FREQUENTES ====================
+         São as quatro perguntas que a pessoa faz nos primeiros minutos
+         depois de pagar. Cada uma que o FAQ resolve é uma que não vira
+         mensagem no WhatsApp do suporte. -->
+    <section class="tp-section tp-section--mist" aria-labelledby="faq-title">
+      <div class="tp-container">
+
+        <div class="tp-head" data-reveal>
+          <span class="tp-eyebrow">Dúvidas frequentes</span>
+          <h2 class="tp-title" id="faq-title">Ainda ficou com alguma dúvida?</h2>
+        </div>
+
+        <div class="tp-faq" data-reveal>
+
+          <details class="tp-faq__item">
+            <summary class="tp-faq__q">
+              Não recebi nenhum e-mail de confirmação, o que fazer?
+              <span class="tp-faq__icon"><svg width="14" height="14" aria-hidden="true"><use href="#i-plus" /></svg></span>
+            </summary>
+            <div class="tp-faq__a">
+              <p>
+                Pode levar até <strong>10 minutos</strong> para o nosso e-mail chegar.
+                Aguarde e atualize sua caixa de entrada.
+              </p>
+              <p>
+                Se mesmo assim não encontrar, <strong>verifique o spam ou a lixeira</strong>.
+                Se depois desse tempo o e-mail ainda não aparecer, pode ter havido um erro
+                de digitação no cadastro. Nesse caso,
+                <strong>fale com a nossa equipe pelo WhatsApp (12) 3199-6156</strong>.
+              </p>
+            </div>
+          </details>
+
+          <details class="tp-faq__item">
+            <summary class="tp-faq__q">
+              Quando o meu acesso será liberado?
+              <span class="tp-faq__icon"><svg width="14" height="14" aria-hidden="true"><use href="#i-plus" /></svg></span>
+            </summary>
+            <div class="tp-faq__a">
+              <p>
+                Pagou com <strong>cartão de crédito</strong>? O acesso é <strong>imediato</strong>.
+              </p>
+              <p>
+                Pagou com <strong>boleto</strong>? A liberação acontece em até
+                <strong>3 dias úteis</strong> após a confirmação do pagamento.
+              </p>
+            </div>
+          </details>
+
+          <details class="tp-faq__item">
+            <summary class="tp-faq__q">
+              Como vou saber que a minha compra foi concluída?
+              <span class="tp-faq__icon"><svg width="14" height="14" aria-hidden="true"><use href="#i-plus" /></svg></span>
+            </summary>
+            <div class="tp-faq__a">
+              <p>
+                Assim que o pagamento for confirmado, você recebe um e-mail com todas as
+                informações da compra e os links de acesso a tudo o que está incluso.
+              </p>
+            </div>
+          </details>
+
+          <details class="tp-faq__item">
+            <summary class="tp-faq__q">
+              Já comprei outro produto pela Hotmart, mas esqueci minha senha. O que fazer?
+              <span class="tp-faq__icon"><svg width="14" height="14" aria-hidden="true"><use href="#i-plus" /></svg></span>
+            </summary>
+            <div class="tp-faq__a">
+              <p>
+                Clique em <strong>&ldquo;Esqueceu sua senha?&rdquo;</strong> na tela de login
+                da Hotmart, informe o e-mail da compra e siga as instruções. Você recebe um
+                link para redefinir a senha no seu próprio e-mail.
+              </p>
+            </div>
+          </details>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 5 ==================== -->
+
+    <!-- ==================== DOBRA 6 — SUPORTE ====================
+         Fecha a página, como na original: depois de tudo explicado, sobra
+         o caminho humano. -->
+    <section class="tp-section tp-section--offer" aria-labelledby="suporte-title">
+      <div class="tp-container">
+
+        <div class="cf-support" data-reveal>
+          <span class="cf-support__icon">
+            <svg width="34" height="34" aria-hidden="true"><use href="#i-whats" /></svg>
+          </span>
+
+          <h2 class="cf-support__title" id="suporte-title">Tem alguma dúvida?</h2>
+
+          <p class="cf-support__text">
+            A equipe TopCorpus está pronta para te atender com todo o carinho e te ajudar
+            no que for preciso. Clique no botão abaixo e fale diretamente com uma das
+            nossas atendentes.
+          </p>
+
+          <div class="tp-cta">
+            <a class="btn btn--tp"
+               href="https://api.whatsapp.com/send?phone=551231996156&amp;text=Ol%C3%A1%21+Preciso+de+ajuda+para+tirar+d%C3%BAvidas."
+               target="_blank" rel="noopener noreferrer">
+              <span>Falar com o TopSuporte no WhatsApp <span class="tp-arrow" aria-hidden="true">&rarr;</span></span>
+            </a>
+          </div>
+
+          <p class="cf-support__or">Ou, se preferir, anote o número:</p>
+          <a class="cf-support__phone" href="tel:+551231996156">
+            <svg width="17" height="17" aria-hidden="true"><use href="#i-phone" /></svg>
+            (12) 3199-6156
+          </a>
+        </div>
+
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 6 ==================== -->
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__top">
+        <p class="footer__copy">
+          Copyright &copy; ANA MARTHA CURSOS ONLINE LTDA.<br />
+          Todos os direitos reservados.
+        </p>
+        <div class="footer__links">
+          <span class="footer__links-row">
+            <!-- ATENÇÃO: estes dois caminhos vieram do rodapé do /taping e
+                 respondem 404 — lá e aqui. Falta publicar as páginas legais
+                 (ou apontar para onde elas realmente estão). -->
+            <a href="/tap09/legal/politica-de-privacidade.html" target="_blank" rel="noopener noreferrer">Política de privacidade</a>
+            <span aria-hidden="true">|</span>
+            <a href="/tap09/legal/termos-de-uso.html" target="_blank" rel="noopener noreferrer">Termos de uso</a>
+          </span>
+          <span class="footer__company">ANA MARTHA CURSOS ONLINE LTDA &middot; CNPJ 41.219.310/0001-89</span>
+        </div>
+      </div>
+
+      <div class="footer__legal">
+        <span class="footer__legal-label">Aviso Legal:</span>
+        Os resultados podem variar de pessoa para pessoa. Este material tem caráter educacional e de desenvolvimento pessoal, não substituindo avaliação ou tratamento profissional. Este site não é afiliado, endossado ou patrocinado pelo Google ou Meta.
+      </div>
+    </div>
+  </footer>
+  <!-- ==================== /FOOTER ==================== -->
+
+</body>
+</html>
