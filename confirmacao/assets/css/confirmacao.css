@@ -266,13 +266,6 @@
 .cf-section--azul .cf-after { color: rgba(255, 255, 255, .9); }
 .cf-section--azul .cf-after strong { color: #fff; }
 
-/* A nota de pendência é uma pastilha clara: sobre o navy ela continua
-   legível e continua parecendo um bilhete colado, que é o que ela é. */
-.cf-section--azul .cf-todo {
-  border-color: rgba(255, 255, 255, .35);
-  background: rgba(255, 255, 255, .92);
-}
-
 /* =========================================================================
    5. PASSOS NUMERADOS
 
@@ -468,28 +461,12 @@
 .cf-support__phone svg { flex: 0 0 auto; }
 
 /* =========================================================================
-   8. PENDÊNCIA
+   8. BOTÃO SEM DESTINO
 
-   O link do e-book ainda não existe. Enquanto EBOOK_URL estiver vazio, o
-   confirmacao.js marca o botão e a nota abaixo dele aparece — para ninguém
-   publicar uma página de obrigado com o botão principal morto.
+   Enquanto EBOOK_URL estiver vazio o botão continua verde, igual ao
+   definitivo — só o cursor muda, porque clicar ainda não leva a lugar
+   nenhum. O aviso, agora, é só no console.
    ========================================================================= */
-.cf-todo {
-  display: inline-block;
-  margin: .85rem 0 0;
-  padding: .35em .8em;
-  border-radius: 8px;
-  border: 1px dashed var(--tp-rose-soft);
-  background: var(--tp-rose-wash);
-  color: var(--tp-rose-deep);
-  font-size: .78rem;
-  font-weight: var(--fw-semibold);
-  line-height: 1.5;
-}
-
-/* O botão sem destino continua verde, igual ao definitivo: o que avisa da
-   pendência é a nota acima, não a cor. Só o cursor muda, porque clicar
-   ainda não leva a lugar nenhum. */
 .btn--tp.is-pending { cursor: not-allowed; }
 
 /* =========================================================================

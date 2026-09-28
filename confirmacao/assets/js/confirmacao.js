@@ -24,15 +24,13 @@
      página que precisa ser editado quando ela existir — todos os botões de
      download apontam para cá através do [data-ebook].
 
-     Enquanto estiver vazia, o botão fica visivelmente desativado e a nota
-     de pendência aparece: uma página de obrigado com o botão principal
-     morto é pior do que uma que assume que ainda falta alguma coisa.
+     Enquanto estiver vazia o botão não navega e o aviso sai no console —
+     na página ele continua igual ao definitivo.
      ======================================================================= */
   var EBOOK_URL = "";
 
   function initDownload() {
     var botoes = [].slice.call(document.querySelectorAll("[data-ebook]"));
-    var notas  = [].slice.call(document.querySelectorAll("[data-ebook-todo]"));
     if (!botoes.length) return;
 
     if (EBOOK_URL) {
@@ -41,8 +39,6 @@
         a.setAttribute("target", "_blank");
         a.setAttribute("rel", "noopener noreferrer");
       });
-      // Com o link no ar a nota não tem mais o que avisar.
-      notas.forEach(function (n) { n.hidden = true; });
       return;
     }
 
@@ -53,7 +49,6 @@
       // aconteceu; sem destino o clique não faz nada.
       a.removeAttribute("href");
     });
-    notas.forEach(function (n) { n.hidden = false; });
 
     if (window.console && console.warn) {
       console.warn(
