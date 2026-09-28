@@ -75,11 +75,23 @@
 .mn-ph--fill { width: 100%; height: 100%; border-radius: 0; border-width: 0 0 2px; }
 
 /* O mockup do hero. O doc pede "bem grande e destacado": é a única imagem
-   da dobra, então ela ocupa a largura que sobrou do logo e do retrato. */
-.mn-ph--hero {
-  width: min(100%, 620px);
-  aspect-ratio: 4 / 3;
-  margin-inline: auto;
+   da dobra, então ela ocupa a largura que sobrou do logo e do retrato.
+
+   O fundo da foto é uma vinheta que fecha em cinza escuro nos cantos. Numa
+   dobra clara isso só funciona se a imagem se assumir como foto: cantos
+   arredondados e sombra, lida como um objeto pousado na página, e não como
+   um retângulo escuro que alguém esqueceu de recortar. */
+.mn-hero__mock {
+  width: min(100%, 680px);
+  margin: 0 auto;
+  border-radius: var(--tp-radius);
+  overflow: hidden;
+  box-shadow: var(--tp-shadow-md);
+}
+.mn-hero__mock img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 /* Dentro do card de preço */
