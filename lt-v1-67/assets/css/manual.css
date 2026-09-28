@@ -94,14 +94,6 @@
   height: auto;
 }
 
-/* Dentro do card de preço */
-.mn-ph--offer {
-  width: clamp(240px, 40vw, 440px);
-  aspect-ratio: 5 / 4;
-  margin-inline: auto;
-  margin-bottom: .75rem;
-}
-
 /* Retrato — foto da Ana de jaleco, na dobra da bio */
 .mn-ph--portrait {
   width: min(100%, 420px);
@@ -560,9 +552,14 @@
 .mn-offer__media {
   padding: clamp(1.5rem, 3.4vw, 2.25rem) clamp(1.5rem, 3.4vw, 2.25rem) 0;
 }
-.mn-offer__media .mn-ph--offer {
+/* O mockup da oferta é solto, como o do hero: sem moldura, sem raio, sem
+   sombra. O arquivo já vem com alfa, então o branco do cartão passa por
+   trás dele e a imagem termina no ar. A altura vem da proporção do
+   arquivo — nada de aspect-ratio aqui, que cortaria. */
+.mn-offer__media img {
+  display: block;
   width: 100%;
-  margin-bottom: 0;
+  height: auto;
 }
 
 /* =========================================================================
