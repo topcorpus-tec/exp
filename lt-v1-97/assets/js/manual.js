@@ -6,7 +6,7 @@
    agendadas do boleto e do bônus 2. Este arquivo repete só o que esta
    página usa:
 
-     - destino dos CTAs              ([data-checkout])
+     - destino do CTA da oferta      ([data-checkout])
      - entrada com desfoque          ([data-reveal])
      - FAQ, abrir uma fecha as demais (.tp-faq__item)
 
@@ -41,7 +41,15 @@
   var CHECKOUT_URL = "https://pay.hotmart.com/W95360090D?off=u7qj2mgv";
 
   /* =======================================================================
-     DESTINO DOS CTAs
+     DESTINO DO CTA DA OFERTA
+
+     Um só botão sai da página: o de dentro da caixa de preço. Os outros
+     seis são âncoras estáticas para #oferta, escritas no HTML — quem
+     clica neles ainda não viu o preço, e mandar essa pessoa direto para a
+     Hotmart pula justamente a dobra que a faz comprar.
+
+     Por isso este trecho continua procurando [data-checkout] no plural:
+     se amanhã outro botão precisar ir para o checkout, basta marcá-lo.
      ======================================================================= */
   function initCheckout() {
     var links = [].slice.call(document.querySelectorAll("[data-checkout]"));
