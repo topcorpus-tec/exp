@@ -167,19 +167,25 @@
 .cf-badge svg { flex: 0 0 auto; }
 
 /* ---- Confetes ------------------------------------------------------------
-   Saem do selo, uma vez só, quando a página abre. A trajetória é balística
-   de propósito: sobe até o pico no meio da animação e cai depois — confete
-   que só se espalha em linha reta lê como gráfico, não como festa.
+   Saem do selo, uma vez só, quando a página abre.
 
-   Cada peça recebe as suas variáveis do JS (destino, pico, giro, tempo);
-   as cores são as da capa mais o verde do "compra aprovada", para a festa
-   ficar dentro da paleta.
+   Aqui o CSS quase não manda: quem move cada peça é o confirmacao.js, um
+   quadro de cada vez, com gravidade, arrasto do ar e bamboleio. Uma
+   animação em keyframes daria a todas a mesma trajetória, e é isso que
+   faz confete parecer gráfico em vez de papel.
 
-   A camada tem tamanho zero e não recebe clique: ela existe só para dar o
-   ponto de origem, no centro do selo.
+   O que o CSS precisa garantir é a perspectiva: sem ela o giro nos eixos
+   X e Y não encurtaria a peça, e ela nunca mostraria o perfil. É esse
+   virar de lado — a peça afinando até quase sumir e voltando a abrir —
+   que dá a leitura de papel caindo.
+
+   Tamanho, cor e forma de cada peça também vêm do JS: sortear no script é
+   o que evita a chuva sair de um molde só.
    -------------------------------------------------------------------------- */
 .cf-celebra { position: relative; display: inline-block; }
 
+/* Nasce aqui, no centro do selo, e o JS a move para a viewport logo em
+   seguida — ver o comentário em initConfete(). */
 .cf-confete {
   position: absolute;
   left: 50%;
@@ -187,25 +193,16 @@
   width: 0;
   height: 0;
   pointer-events: none;
+  perspective: 760px;
 }
 .cf-confete i {
   position: absolute;
   left: 0;
   top: 0;
-  width: 10px;
-  height: 16px;
-  border-radius: 2px;
+  display: block;
   opacity: 0;
-  animation: cfConfete var(--dur, 1.4s) cubic-bezier(.16, .62, .38, 1) var(--atraso, 0s) forwards;
-}
-/* Um em cada três vira disco, para a chuva não parecer feita de um molde só */
-.cf-confete i.e-disco { width: 11px; height: 11px; border-radius: 50%; }
-
-@keyframes cfConfete {
-  0%   { opacity: 0; transform: translate(0, 0) rotate(0deg) scale(.5); }
-  10%  { opacity: 1; }
-  40%  { transform: translate(calc(var(--x) * .55), var(--pico)) rotate(calc(var(--giro) * .4)) scale(1); }
-  100% { opacity: 0; transform: translate(var(--x), var(--y)) rotate(var(--giro)) scale(.9); }
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
 }
 
 /* Quem pediu menos movimento no sistema não recebe confete nenhum — e o

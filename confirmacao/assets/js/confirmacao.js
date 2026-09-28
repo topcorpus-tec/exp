@@ -66,17 +66,29 @@
   /* =======================================================================
      CONFETES
 
-     Saem do selo de compra aprovada assim que a página abre. Cada peça
-     nasce no mesmo ponto e recebe o seu próprio destino, pico, giro e
-     tempo — o CSS só sabe animar entre esses valores.
+     Saem do selo de compra aprovada assim que a página abre.
 
-     São criadas no JS, e não escritas no HTML, por dois motivos: quem
-     pediu menos movimento no sistema não chega a receber nenhum elemento a
-     mais, e as peças se removem sozinhas quando a festa acaba, em vez de
-     ficarem no DOM pelo resto da visita.
+     Não são uma animação em keyframes: cada peça é simulada quadro a
+     quadro, com velocidade inicial, gravidade, arrasto do ar e um
+     bamboleio lateral. O motivo é que keyframes dão a todas as peças a
+     mesma trajetória, e confete com trajetória repetida lê como gráfico.
+     Aqui cada uma cai do seu jeito, desacelera quando sobe, ganha
+     velocidade quando desce e nunca repete o caminho da vizinha.
+
+     O detalhe que mais pesa no realismo é o giro nos eixos X e Y: a peça
+     vira, afina até quase sumir de perfil e volta a abrir. O brilho
+     acompanha esse giro — escurece de lado, clareia de frente —, que é o
+     que faz um retângulo chapado parecer papel com dois lados.
      ======================================================================= */
-  var CONFETE_CORES = ["#0285D3", "#01337C", "#12854A", "#7FC4EC", "#0A5C9E", "#1F9C63"];
-  var CONFETE_PECAS = 44;
+  var CONFETE_CORES = [
+    "#0285D3", "#14528F", "#01337C", "#7FC4EC",
+    "#12854A", "#35D177", "#5AE78F", "#0A5C9E"
+  ];
+
+  var GRAVIDADE  = .28;    // px por quadro², a 60Hz
+  var ARRASTO_X  = .985;   // o avanço lateral morre devagar
+  var ARRASTO_Y  = .965;   // no eixo da queda ele é maior: é o que dá
+                           // velocidade terminal, em vez de despencar
 
   function sorteia(min, max) { return min + Math.random() * (max - min); }
 
@@ -85,42 +97,130 @@
     if (!camada) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    var maiorTempo = 0;
+    // A camada nasce dentro do hero só para saber de onde partir. Ficando
+    // ali, o recorte do hero comeria as peças poucos décimos depois do
+    // baque — confete que some antes de cair não parece confete. Então ela
+    // muda para a viewport, ancorada no centro do selo, e a chuva
+    // atravessa a tela inteira.
+    var selo = document.querySelector(".cf-badge") || camada.parentNode;
+    var caixa = selo.getBoundingClientRect();
 
-    for (var i = 0; i < CONFETE_PECAS; i++) {
-      var peca = document.createElement("i");
+    document.body.appendChild(camada);
+    camada.style.position = "fixed";
+    camada.style.left = (caixa.left + caixa.width / 2).toFixed(0) + "px";
+    camada.style.top  = (caixa.top + caixa.height / 2).toFixed(0) + "px";
+    camada.style.zIndex = "60";
 
-      // O leque abre para os dois lados, mas o miolo é mais denso: elevar
-      // o sorteio ao quadrado joga mais peças para perto do centro.
-      var lado  = Math.random() < .5 ? -1 : 1;
-      var forca = Math.pow(Math.random(), .7);
+    // Menos peças na tela pequena: o baque é o mesmo e o aparelho é que
+    // costuma ser mais fraco.
+    var total = window.innerWidth < 640 ? 48 : 76;
+    var pecas = [];
 
-      var x     = lado * forca * sorteia(120, 380);
-      var y     = sorteia(200, 430);
-      var pico  = -sorteia(110, 250);
-      var giro  = (Math.random() < .5 ? -1 : 1) * sorteia(220, 760);
-      var dur   = sorteia(1.2, 2.1);
-      var atr   = sorteia(0, .32);
+    for (var i = 0; i < total; i++) {
+      var el = document.createElement("i");
 
-      peca.style.setProperty("--x",    x.toFixed(0) + "px");
-      peca.style.setProperty("--y",    y.toFixed(0) + "px");
-      peca.style.setProperty("--pico", pico.toFixed(0) + "px");
-      peca.style.setProperty("--giro", giro.toFixed(0) + "deg");
-      peca.style.setProperty("--dur",    dur.toFixed(2) + "s");
-      peca.style.setProperty("--atraso", atr.toFixed(2) + "s");
-      peca.style.background = CONFETE_CORES[i % CONFETE_CORES.length];
+      // Três feitios, em proporções diferentes: fita comprida, retângulo
+      // curto (o mais comum) e disco.
+      var feitio = Math.random(), larg, alt, raio;
+      if (feitio < .18)      { larg = sorteia(3.5, 5.5); alt = sorteia(14, 24); raio = "1px"; }
+      else if (feitio < .84) { larg = sorteia(7, 11);    alt = sorteia(9, 15);  raio = "1.5px"; }
+      else                   { larg = alt = sorteia(6, 9);                      raio = "50%"; }
 
-      if (i % 3 === 0) peca.className = "e-disco";
+      var cor = CONFETE_CORES[(Math.random() * CONFETE_CORES.length) | 0];
 
-      camada.appendChild(peca);
-      maiorTempo = Math.max(maiorTempo, dur + atr);
+      el.style.width  = larg.toFixed(1) + "px";
+      el.style.height = alt.toFixed(1) + "px";
+      el.style.borderRadius = raio;
+      // Um fio de luz numa das pontas: papel brilhante pega a luz de um
+      // lado só, e é esse degradê curto que sugere isso.
+      el.style.background =
+        "linear-gradient(135deg, rgba(255,255,255,.5) 0%, " + cor + " 45%, " + cor + " 100%)";
+
+      // O leque abre para cima e para os lados, como um baque de canhão.
+      var ang = -Math.PI / 2 + (Math.random() - .5) * Math.PI * 1.05;
+      var vel = sorteia(6.5, 17);
+
+      pecas.push({
+        el: el,
+        x: 0, y: 0,
+        vx: Math.cos(ang) * vel,
+        vy: Math.sin(ang) * vel,
+        rz:  sorteia(0, 360), vrz: sorteia(-9, 9),    // giro no plano
+        fx:  sorteia(0, 360), vfx: sorteia(-14, 14),  // é este que vira a peça
+        fy:  sorteia(0, 360), vfy: sorteia(-8, 8),
+        freq: sorteia(.05, .13),      // bamboleio: frequência
+        ampl: sorteia(.3, 1.1),       //            e largura
+        fase: sorteia(0, Math.PI * 2),
+        espera: sorteia(0, 13),       // em quadros — espalha a saída do baque
+        vida: 0,
+        fim: sorteia(210, 330)
+      });
+
+      camada.appendChild(el);
     }
 
-    // Terminada a animação as peças não têm mais função: saem do DOM em vez
-    // de continuarem como 34 elementos invisíveis no meio do hero.
-    setTimeout(function () {
-      if (camada.parentNode) camada.parentNode.removeChild(camada);
-    }, (maiorTempo + .3) * 1000);
+    var anterior = 0;
+    var SUMICO = 45;   // quadros de desaparecimento no fim da vida
+
+    function quadro(agora) {
+      if (!anterior) anterior = agora;
+      // Normaliza pelo tempo real: a 120Hz o intervalo é metade do de
+      // 60Hz, e sem isso a mesma física correria ao dobro da velocidade.
+      // O teto evita que uma aba voltando do segundo plano dê um salto.
+      var passo = Math.min((agora - anterior) / 16.667, 2.5);
+      anterior = agora;
+
+      var vivas = 0;
+
+      for (var i = 0; i < pecas.length; i++) {
+        var p = pecas[i];
+
+        if (p.espera > 0) { p.espera -= passo; vivas++; continue; }
+        if (p.vida >= p.fim) continue;
+
+        p.vida += passo;
+
+        p.vy += GRAVIDADE * passo;
+        p.vx *= Math.pow(ARRASTO_X, passo);
+        p.vy *= Math.pow(ARRASTO_Y, passo);
+
+        p.x += (p.vx + Math.sin(p.vida * p.freq + p.fase) * p.ampl) * passo;
+        p.y += p.vy * passo;
+
+        // O giro perde força junto com o resto do movimento.
+        p.vrz *= Math.pow(.995, passo);
+        p.vfx *= Math.pow(.997, passo);
+
+        p.rz += p.vrz * passo;
+        p.fx += p.vfx * passo;
+        p.fy += p.vfy * passo;
+
+        // De perfil a peça escurece; de frente, clareia.
+        var face = Math.abs(Math.cos(p.fx * Math.PI / 180));
+        var restante = p.fim - p.vida;
+        var opac = restante < SUMICO ? Math.max(0, restante / SUMICO) : 1;
+
+        p.el.style.opacity = opac.toFixed(2);
+        p.el.style.filter  = "brightness(" + (.6 + .4 * face).toFixed(2) + ")";
+        p.el.style.transform =
+          "translate3d(" + p.x.toFixed(1) + "px," + p.y.toFixed(1) + "px,0)" +
+          " rotateZ(" + p.rz.toFixed(0) + "deg)" +
+          " rotateX(" + p.fx.toFixed(0) + "deg)" +
+          " rotateY(" + p.fy.toFixed(0) + "deg)";
+
+        vivas++;
+      }
+
+      if (vivas) {
+        requestAnimationFrame(quadro);
+      } else if (camada.parentNode) {
+        // Acabada a festa as peças não têm mais função: saem do DOM em vez
+        // de ficarem como 76 elementos invisíveis no meio do hero.
+        camada.parentNode.removeChild(camada);
+      }
+    }
+
+    requestAnimationFrame(quadro);
   }
 
   /* =======================================================================
