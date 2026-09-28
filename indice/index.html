@@ -101,6 +101,34 @@ body {
 .head h1 { margin: 0; font-size: clamp(1.3rem, 3.4vw, 1.7rem); font-weight: 800; letter-spacing: -.02em; color: #fff; }
 .head__sub { margin: 0; font-size: .88rem; color: #9FB0C6; }
 
+/* A legenda das cores de ticket, no próprio cabeçalho: é onde o olho cai
+   antes de bater nos blocos coloridos, então é onde a chave tem de estar.
+
+   As bolinhas não repetem as cores dos blocos — as de lá são feitas para
+   fundo claro e sumiriam neste azul quase preto. Aqui vai o tom vivo de
+   cada uma, que é o mesmo par que o fio do topo do bloco usa. */
+.cores {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .35rem .85rem;
+  margin: .7rem 0 0; padding: 0; list-style: none;
+  font-size: .78rem; color: #9FB0C6;
+}
+.cores__rot { font-weight: 800; letter-spacing: .1em; text-transform: uppercase; font-size: .62rem; color: #6F819A; }
+.cores li { display: inline-flex; align-items: center; gap: .4rem; }
+.cores__p { width: 10px; height: 10px; border-radius: 3px; flex: 0 0 auto; }
+.cores__p--t27 { background: #58B0EC; }
+.cores__p--t67 { background: var(--amarelo-fio); }
+.cores__p--t97 { background: #3FBF77; }
+.cores__p--n   { background: #5C6E85; }
+.cores b { color: #DCE6F2; font-weight: 800; }
+
+.head__ir {
+  margin-left: auto;
+  padding: .4em .8em; border-radius: 8px;
+  border: 1px solid #2B3B57; background: transparent; color: #CBD7E6;
+  font-size: .78rem; font-weight: 700; text-decoration: none;
+}
+.head__ir:hover, .head__ir:focus-visible { background: #17233A; color: #fff; }
+
 /* =========================================================================
    Grupos e grade
    ========================================================================= */
@@ -275,7 +303,18 @@ body {
     <div class="head__row">
       <h1>Índice das páginas</h1>
       <p class="head__sub">13 páginas &middot; 2 produtos &middot; 2 subdomínios</p>
+      <a class="head__ir" href="/fluxo/">Ver o fluxo &rarr;</a>
     </div>
+
+    <!-- A cor não é enfeite: ela liga a página de venda de um ticket às três
+         de pós-compra dele. Um bloco fora da cor do grupo é um erro de rota. -->
+    <ul class="cores">
+      <li class="cores__rot">Cor do ticket</li>
+      <li><span class="cores__p cores__p--t27" aria-hidden="true"></span><b>27</b>&nbsp;azul</li>
+      <li><span class="cores__p cores__p--t67" aria-hidden="true"></span><b>67</b>&nbsp;amarelo</li>
+      <li><span class="cores__p cores__p--t97" aria-hidden="true"></span><b>97</b>&nbsp;verde</li>
+      <li><span class="cores__p cores__p--n" aria-hidden="true"></span>cinza&nbsp;&mdash;&nbsp;serve os três</li>
+    </ul>
   </div>
 </header>
 

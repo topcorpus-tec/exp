@@ -28,8 +28,12 @@
 /up-down-mml-*
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
 
-# Índice interno das páginas. Nunca deve ser encontrado na busca.
+# Páginas internas de apoio — o índice das rotas e o fluxograma dos
+# funis. Nunca devem ser encontradas na busca.
 /indice/*
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+
+/fluxo/*
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
 
 # Página de pós-compra do Manual: só é alcançada por quem acabou de pagar.
