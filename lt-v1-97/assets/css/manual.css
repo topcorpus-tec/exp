@@ -101,19 +101,13 @@
   margin-inline: auto;
 }
 
-/* O mockup no topo dos três cards de "para quem é". Sangra até as bordas
-   do card, que já tem overflow: hidden e arredonda o topo por ele. */
-.mn-ph--pillar {
-  width: calc(100% + 2 * clamp(1.6rem, 3.4vw, 2.25rem));
-  margin: calc(-1 * clamp(1.6rem, 3.4vw, 2.25rem)) 0 .35rem
-          calc(-1 * clamp(1.6rem, 3.4vw, 2.25rem));
-  aspect-ratio: 16 / 10;
-  border-radius: 0;
-  border-width: 0 0 2px;
-}
+/* As fotos no topo dos três cards de "para quem é". Sangram até as bordas
+   do card, que já tem overflow:hidden e arredonda o topo por elas.
 
-/* A foto ocupa o mesmo lugar do placeholder: sangra até a borda do card e
-   deixa o overflow:hidden dele arredondar o topo. */
+   A caixa é quadrada porque as três fotos são quadradas: em qualquer outra
+   proporção o cover comeria pedaço, e aqui não pode cortar — numa delas
+   sairia o alto da cabeça, noutra as mãos. Assim cada foto aparece
+   inteira, e o cover não tem o que recortar. */
 .mn-pillar__img {
   display: block;
   /* O design system limita toda imagem a max-width:100%. Aqui a largura
@@ -123,7 +117,7 @@
   width: calc(100% + 2 * clamp(1.6rem, 3.4vw, 2.25rem));
   margin: calc(-1 * clamp(1.6rem, 3.4vw, 2.25rem)) 0 .35rem
           calc(-1 * clamp(1.6rem, 3.4vw, 2.25rem));
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
 }
 
