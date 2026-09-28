@@ -90,9 +90,16 @@
              alt="Manual Ilustrado para Alívio da Dor"
              width="600" height="391" fetchpriority="high" decoding="async" />
 
-        <span class="cf-badge">
-          <svg width="15" height="15" aria-hidden="true"><use href="#i-check" /></svg>
-          Compra aprovada
+        <!-- Os confetes saem daqui: o selo é o momento da boa notícia, e
+             a camada de confete é irmã dele para nascer no mesmo ponto.
+             É enfeite puro — não existe para leitor de tela, e quem pediu
+             menos movimento no sistema não recebe nenhum. -->
+        <span class="cf-celebra">
+          <span class="cf-confete" aria-hidden="true" data-confete></span>
+          <span class="cf-badge">
+            <svg width="17" height="17" aria-hidden="true"><use href="#i-check" /></svg>
+            Compra aprovada
+          </span>
         </span>
 
         <div class="tp-hero__copy">
@@ -114,7 +121,7 @@
          para quem não quiser assistir. As duas saídas convivem de
          propósito: ninguém deveria ter de ver um vídeo para receber o que
          já pagou. -->
-    <section class="tp-section tp-section--lilac" aria-labelledby="agora-title">
+    <section class="tp-section cf-section--azul" aria-labelledby="agora-title">
       <div class="tp-container">
 
         <div class="tp-head" data-reveal>
@@ -142,7 +149,7 @@
         </p>
 
         <div class="tp-cta" data-reveal>
-          <a class="btn btn--tp" href="#" data-ebook>
+          <a class="btn btn--tp cf-pulso" href="#" data-ebook>
             <span>
               <svg class="cf-btn-icon" width="17" height="17" aria-hidden="true"><use href="#i-download" /></svg>
               Baixe seu e-book aqui
@@ -272,7 +279,7 @@
 
           <details class="tp-faq__item">
             <summary class="tp-faq__q">
-              Quando o meu acesso será liberado?
+              Quando o conteúdo do manual será liberado?
               <span class="tp-faq__icon"><svg width="14" height="14" aria-hidden="true"><use href="#i-plus" /></svg></span>
             </summary>
             <div class="tp-faq__a">

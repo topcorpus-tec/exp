@@ -143,7 +143,7 @@
    marca d'água ao lado da foto): aqui ele é o primeiro sinal de que a
    pessoa chegou no lugar certo, logo depois de pagar. */
 .cf-logo {
-  width: min(78%, 300px);
+  width: min(58%, 205px);
   height: auto;
   margin: 0 auto;
 }
@@ -154,17 +154,65 @@
   display: inline-flex;
   align-items: center;
   gap: .55rem;
-  padding: .55em 1.15em;
+  padding: .62em 1.35em;
   border-radius: var(--radius-pill);
   background: rgba(18, 133, 74, .1);
   color: #0D6E3C;                 /* 6,4:1 sobre o fundo claro do hero */
-  font-size: clamp(.74rem, 1.4vw, .82rem);
+  font-size: clamp(.88rem, 1.9vw, 1.02rem);
   font-weight: var(--fw-extrabold);
   letter-spacing: .12em;
   text-transform: uppercase;
   line-height: 1;
 }
 .cf-badge svg { flex: 0 0 auto; }
+
+/* ---- Confetes ------------------------------------------------------------
+   Saem do selo, uma vez só, quando a página abre. A trajetória é balística
+   de propósito: sobe até o pico no meio da animação e cai depois — confete
+   que só se espalha em linha reta lê como gráfico, não como festa.
+
+   Cada peça recebe as suas variáveis do JS (destino, pico, giro, tempo);
+   as cores são as da capa mais o verde do "compra aprovada", para a festa
+   ficar dentro da paleta.
+
+   A camada tem tamanho zero e não recebe clique: ela existe só para dar o
+   ponto de origem, no centro do selo.
+   -------------------------------------------------------------------------- */
+.cf-celebra { position: relative; display: inline-block; }
+
+.cf-confete {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+.cf-confete i {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 10px;
+  height: 16px;
+  border-radius: 2px;
+  opacity: 0;
+  animation: cfConfete var(--dur, 1.4s) cubic-bezier(.16, .62, .38, 1) var(--atraso, 0s) forwards;
+}
+/* Um em cada três vira disco, para a chuva não parecer feita de um molde só */
+.cf-confete i.e-disco { width: 11px; height: 11px; border-radius: 50%; }
+
+@keyframes cfConfete {
+  0%   { opacity: 0; transform: translate(0, 0) rotate(0deg) scale(.5); }
+  10%  { opacity: 1; }
+  40%  { transform: translate(calc(var(--x) * .55), var(--pico)) rotate(calc(var(--giro) * .4)) scale(1); }
+  100% { opacity: 0; transform: translate(var(--x), var(--y)) rotate(var(--giro)) scale(.9); }
+}
+
+/* Quem pediu menos movimento no sistema não recebe confete nenhum — e o
+   JS nem chega a criar as peças. */
+@media (prefers-reduced-motion: reduce) {
+  .cf-confete { display: none; }
+}
 
 /* "Parabéns!" sozinho é curto e o 21ch do taping não atrapalha, mas o
    tamanho sim: numa palavra só ele pode crescer mais que num título de
@@ -173,6 +221,25 @@
   max-width: 20ch;
   font-size: clamp(2.1rem, 6.5vw, 3.4rem);
 }
+
+/* =========================================================================
+   3b. FAIXA NAVY
+
+   O navy da capa serve de fundo em duas partes da página: a dobra do
+   vídeo e o cartão da dica. É o mesmo azul da .tp-section--offer, mas sem
+   as manchas que derivam por trás dela — aqui a faixa é só fundo, não
+   precisa de movimento.
+
+   Sobre este navy o branco dá 10,9:1, então o texto de apoio pode descer
+   até 88% de opacidade e ainda passar folgado.
+   ========================================================================= */
+.cf-section--azul {
+  background: linear-gradient(135deg, #01468F 0%, #013A80 52%, #012F6B 100%);
+}
+.cf-section--azul .tp-eyebrow { color: rgba(255, 255, 255, .78); }
+.cf-section--azul .tp-title   { color: #fff; }
+.cf-section--azul .tp-lead    { color: rgba(255, 255, 255, .9); }
+.cf-section--azul .tp-lead strong { color: #fff; }
 
 /* =========================================================================
    4. VÍDEO EM PÉ
@@ -215,12 +282,22 @@
 .cf-after {
   max-width: 46ch;
   margin: clamp(1.5rem, 3.5vw, 2.25rem) auto 0;
-  font-size: clamp(1rem, 1.7vw, 1.14rem);
+  font-size: clamp(1.1rem, 2vw, 1.28rem);
   line-height: 1.68;
   color: var(--tp-body);
   text-align: center;
 }
 .cf-after strong { color: var(--tp-ink); font-weight: var(--fw-bold); }
+
+.cf-section--azul .cf-after { color: rgba(255, 255, 255, .9); }
+.cf-section--azul .cf-after strong { color: #fff; }
+
+/* A nota de pendência é uma pastilha clara: sobre o navy ela continua
+   legível e continua parecendo um bilhete colado, que é o que ela é. */
+.cf-section--azul .cf-todo {
+  border-color: rgba(255, 255, 255, .35);
+  background: rgba(255, 255, 255, .92);
+}
 
 /* =========================================================================
    5. PASSOS NUMERADOS
@@ -272,7 +349,7 @@
 
 .cf-step__text {
   margin: 0;
-  font-size: clamp(.94rem, 1.4vw, 1.02rem);
+  font-size: clamp(1.04rem, 1.7vw, 1.16rem);
   line-height: 1.6;
   color: var(--tp-body);
 }
@@ -292,13 +369,14 @@
   padding: clamp(1.6rem, 3.6vw, 2.25rem) clamp(1.35rem, 3vw, 2rem);
   text-align: center;
 
-  border: 1px solid var(--tp-violet-soft);
+  border: 1px solid rgba(255, 255, 255, .14);
   border-radius: var(--tp-radius);
-  background: linear-gradient(180deg, var(--tp-gold-soft) 0%, var(--tp-violet-wash) 100%);
+  background: linear-gradient(135deg, #01468F 0%, #013A80 52%, #012F6B 100%);
+  box-shadow: 0 24px 60px rgba(1, 28, 66, .26);
 }
 /* O design-system deixa todo svg em display:block, então o text-align do
    cartão não o alcança — quem centraliza é a margem automática. */
-.cf-tip__icon { display: block; color: var(--tp-violet-deep); }
+.cf-tip__icon { display: block; color: #7FC4EC; }
 .cf-tip__icon svg { margin-inline: auto; }
 
 .cf-tip__title {
@@ -306,17 +384,17 @@
   font-size: clamp(1.15rem, 2.6vw, 1.5rem);
   font-weight: var(--fw-extrabold);
   letter-spacing: -.02em;
-  color: var(--tp-violet-deep);
+  color: #fff;
 }
 
 .cf-tip__text {
   max-width: 40ch;
   margin: 0 auto;
-  font-size: clamp(.94rem, 1.5vw, 1.02rem);
+  font-size: clamp(1.04rem, 1.7vw, 1.16rem);
   line-height: 1.6;
-  color: var(--tp-body);
+  color: rgba(255, 255, 255, .9);
 }
-.cf-tip__text strong { color: var(--tp-ink); font-weight: var(--fw-extrabold); }
+.cf-tip__text strong { color: #fff; font-weight: var(--fw-extrabold); }
 
 /* As duas lojas são a mesma ação em dois sistemas: lado a lado, com o mesmo
    peso, e nenhuma das duas competindo com o botão verde da dobra anterior.
@@ -344,11 +422,11 @@
 .cf-tip__note {
   max-width: 42ch;
   margin: clamp(1.15rem, 2.6vw, 1.4rem) auto 0;
-  font-size: .88rem;
+  font-size: .98rem;
   line-height: 1.6;
-  color: var(--tp-body);
+  color: rgba(255, 255, 255, .86);
 }
-.cf-tip__note strong { color: var(--tp-ink); font-weight: var(--fw-extrabold); }
+.cf-tip__note strong { color: #fff; font-weight: var(--fw-extrabold); }
 
 /* =========================================================================
    7. SUPORTE
@@ -383,7 +461,7 @@
 .cf-support__text {
   max-width: 44ch;
   margin: 0 auto;
-  font-size: clamp(.94rem, 1.5vw, 1.02rem);
+  font-size: clamp(1.04rem, 1.7vw, 1.16rem);
   line-height: 1.65;
   color: var(--tp-body);
 }
@@ -435,11 +513,97 @@
   line-height: 1.5;
 }
 
-/* O botão sem destino não pode parecer clicável: some o brilho e o cursor
-   avisa. Continua visível de propósito — é ele que está faltando. */
-.btn--tp.is-pending {
-  background: linear-gradient(135deg, #7E9AAE 0%, #64808F 100%);
-  box-shadow: none;
-  cursor: not-allowed;
+/* O botão sem destino continua verde, igual ao definitivo: o que avisa da
+   pendência é a nota acima, não a cor. Só o cursor muda, porque clicar
+   ainda não leva a lugar nenhum. */
+.btn--tp.is-pending { cursor: not-allowed; }
+
+/* =========================================================================
+   8b. BOTÃO SOBRE O NAVY
+
+   Na dobra escura o verde escuro do resto da página quase desaparece: ele
+   e o fundo têm valores parecidos, e o que separa um botão do fundo é o
+   valor, não o matiz. Aqui ele inverte — verde claro com o rótulo escuro.
+
+   As contas, com o rótulo em #04331C:
+     #5AE78F  8,9:1   (ponta clara do degradê)
+     #22C55E  6,2:1   (ponta escura)
+   E o botão inteiro contra o navy fica em 6,3:1, então ele se destaca do
+   fundo tanto quanto o texto se destaca dele.
+
+   Só vale dentro da faixa navy: no cartão branco do suporte um verde claro
+   perderia o contorno contra o fundo.
+   ========================================================================= */
+.cf-section--azul .btn--tp {
+  background: linear-gradient(135deg, #5AE78F 0%, #35D177 48%, #22C55E 100%);
+  color: #04331C;
+  box-shadow: 0 12px 30px rgba(3, 40, 20, .34), inset 0 1px 0 rgba(255, 255, 255, .35);
 }
-.btn--tp.is-pending:hover { transform: none; }
+.cf-section--azul .btn--tp:hover,
+.cf-section--azul .btn--tp:focus-visible {
+  background: linear-gradient(135deg, #6BF09C 0%, #3ADB80 100%);
+  color: #04331C;
+  box-shadow: 0 18px 42px rgba(3, 40, 20, .42), inset 0 1px 0 rgba(255, 255, 255, .35);
+}
+.cf-section--azul .btn--tp:focus-visible { outline-color: #5AE78F; }
+
+/* =========================================================================
+   9. PULSO DO BOTÃO DE DOWNLOAD
+
+   É o único botão da página que resolve o motivo da visita, e ele está
+   sobre o navy, no meio de uma dobra sem mais nada competindo. O pulso é
+   de escala pequena (3,5%) mais um anel que se abre e some: chama o olho
+   sem virar um botão que treme.
+
+   O .btn--tp do taping declara animation: none — esta camada carrega
+   depois, então a regra abaixo ganha.
+   ========================================================================= */
+.btn--tp.cf-pulso {
+  animation: cfPulso 2.4s var(--ease-in-out, cubic-bezier(.4, 0, .2, 1)) infinite;
+}
+
+/* No hover o botão tem o seu próprio transform (sobe um pouco). Uma
+   animação infinita no mesmo transform ganharia dele e o hover ficaria
+   morto — por isso o pulso sai de cena enquanto o ponteiro está em cima. */
+.btn--tp.cf-pulso:hover,
+.btn--tp.cf-pulso:focus-visible { animation: none; }
+
+/* Dentro da faixa navy o anel do pulso é o verde claro do próprio botão —
+   o verde escuro sumiria no fundo. */
+.cf-section--azul .btn--tp.cf-pulso {
+  animation-name: cfPulsoClaro;
+}
+
+@keyframes cfPulsoClaro {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 12px 30px rgba(3, 40, 20, .34),
+                0 0 0 0 rgba(90, 231, 143, .55),
+                inset 0 1px 0 rgba(255, 255, 255, .35);
+  }
+  50% {
+    transform: scale(1.035);
+    box-shadow: 0 16px 38px rgba(3, 40, 20, .42),
+                0 0 0 12px rgba(90, 231, 143, 0),
+                inset 0 1px 0 rgba(255, 255, 255, .35);
+  }
+}
+
+@keyframes cfPulso {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 12px 30px rgba(13, 110, 60, .28),
+                0 0 0 0 rgba(18, 133, 74, .5),
+                inset 0 1px 0 rgba(255, 255, 255, .22);
+  }
+  50% {
+    transform: scale(1.035);
+    box-shadow: 0 16px 38px rgba(13, 110, 60, .36),
+                0 0 0 12px rgba(18, 133, 74, 0),
+                inset 0 1px 0 rgba(255, 255, 255, .22);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn--tp.cf-pulso { animation: none; }
+}
