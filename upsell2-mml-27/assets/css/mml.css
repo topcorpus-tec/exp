@@ -230,7 +230,11 @@
   flex-direction: column;
   align-items: center;
   gap: clamp(1rem, 2.5vw, 1.5rem);
-  padding-block: clamp(1.75rem, 5vw, 3rem);
+  /* Pouco ar em cima e o de sempre embaixo: a pílula de parabéns é a
+     primeira coisa da página e não precisa de espaço para ser notada —
+     ela já é uma caixa colorida num fundo claro. O que ela precisa é
+     começar cedo, porque o que interessa mesmo é o que vem depois. */
+  padding-block: clamp(.7rem, 1.8vw, 1.1rem) clamp(1.75rem, 5vw, 3rem);
   text-align: center;
 }
 
@@ -259,11 +263,19 @@
 }
 .mml-congrats svg { flex: 0 0 auto; }
 
-.mml-hero__inner .tp-hero__headline {
-  max-width: 24ch;
+/* A manchete do upsell e do downsell fecha em duas linhas: mais larga,
+   para caber mais palavra por linha, e um ponto menor, para as duas
+   linhas não estourarem a primeira tela.
+
+   O :not() deixa de fora a página de conclusão do pedido, cuja manchete é
+   curta e tem largura própria — aplicar isto ali só a espalharia. */
+.mml-hero__inner .tp-hero__headline:not(.mml-proc__title) {
+  max-width: 30ch;
   margin-inline: auto;
   padding-bottom: 0;
+  font-size: clamp(1.45rem, 3.4vw, 2.3rem);
 }
+.mml-hero__inner .mml-proc__title { margin-inline: auto; padding-bottom: 0; }
 .mml-hero__inner .tp-hero__copy { margin-top: 0; padding-bottom: 0; }
 .mml-hero__inner .tp-hero__sub {
   max-width: 46ch;
