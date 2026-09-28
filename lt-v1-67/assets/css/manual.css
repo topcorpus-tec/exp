@@ -12,6 +12,9 @@
      3. COMPONENTES NOVOS   — faixa corrida, bio da autora, preço ancorado.
      4. AJUSTES PONTUAIS    — onde o layout do taping não serve a esta copy.
 
+   A numeração dos blocos abaixo tem buracos: os blocos de placeholder e de
+   pendência saíram quando as imagens e a nota do parcelamento entraram.
+
    Carregar DEPOIS de taping.css.
    ========================================================================= */
 
@@ -94,25 +97,6 @@ html { font-size: 112.5%; }
    proporção, a ilustração preenche a caixa de ponta a ponta. */
 .tp-inside__media { aspect-ratio: 3 / 2; }
 .tp-inside__media img { object-fit: cover; }
-
-/* =========================================================================
-   2. PENDÊNCIA
-
-   O que a copy ainda entrega como "a definir" fica legível mas visivelmente
-   provisório, para ninguém publicar com um placeholder no ar por distração.
-   ========================================================================= */
-.mn-todo {
-  display: inline-block;
-  padding: .06em .42em;
-  border-radius: 5px;
-  border: 1px dashed var(--tp-rose-soft);
-  background: var(--tp-rose-wash);
-  color: var(--tp-rose-deep);
-  font-size: .9em;
-  font-weight: var(--fw-semibold);
-  font-style: normal;
-  white-space: nowrap;
-}
 
 /* =========================================================================
    3. IDENTIDADE AZUL — a capa do manual
@@ -419,14 +403,6 @@ html { font-size: 112.5%; }
   font-size: .88rem;
   font-weight: var(--fw-extrabold);
   letter-spacing: -.01em;
-}
-
-/* Nota de rodapé do asterisco do parcelamento. */
-.mn-offer__fine {
-  margin: .5rem 0 0;
-  font-size: .74rem;
-  line-height: 1.5;
-  color: var(--tp-muted);
 }
 
 /* =========================================================================

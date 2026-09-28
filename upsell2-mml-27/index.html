@@ -8,7 +8,12 @@
 
   <!-- Página de funil (etapa de conclusão do pedido): não é para ser
        encontrada na busca, só alcançada dentro do fluxo de compra. O
-       _headers da raiz reforça com X-Robots-Tag em /upsell2-mml/*. -->
+       _headers da raiz reforça com X-Robots-Tag em /upsell2-mml-*. -->
+
+  <!-- TICKET 27 — esta é a cópia do funil de quem comprou o Manual de
+       R$27. As três cópias desta etapa são iguais em copy; o que muda
+       entre elas é o HTML da Hotmart colado no #funil, porque cada ticket
+       tem a sua própria sequência de ofertas lá. -->
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
   <meta name="googlebot" content="noindex, nofollow" />
 
@@ -127,7 +132,8 @@
          inventar a URL aqui.
 
          PARA PUBLICAR: apague a div .mml-ph de dentro de #funil e cole o
-         HTML da Hotmart no lugar. O botão da barra de baixo aponta para
+         HTML da Hotmart do funil do TICKET 27 no lugar — não o de
+         outro ticket, que mandaria o comprador para a oferta errada. O botão da barra de baixo aponta para
          #funil, então é só este bloco que precisa existir. -->
     <section class="mml-funnel" id="funil" aria-label="Sua condição">
       <div class="tp-container">

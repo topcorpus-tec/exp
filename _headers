@@ -12,15 +12,20 @@
 /lt-v1-*
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
 
-# Páginas de funil do Método Mãos Lucrativas (upsell e o downsell dele):
-# só devem ser alcançadas dentro do fluxo de compra, nunca pela busca.
-/upsell1-mml/*
+# Páginas de funil do Método Mãos Lucrativas (upsell, downsell e a
+# conclusão do pedido): só devem ser alcançadas dentro do fluxo de compra,
+# nunca pela busca.
+#
+# Cada etapa tem uma cópia por ticket do Manual — <etapa>-27, -67 e -97 —,
+# porque o HTML de funil que a Hotmart gera é diferente em cada uma. O
+# curinga cobre as três de uma vez, como no /lt-v1-* acima.
+/upsell1-mml-*
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
 
-/upsell2-mml/*
+/upsell2-mml-*
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
 
-/up-down-mml/*
+/up-down-mml-*
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
 
 # Índice interno das páginas. Nunca deve ser encontrado na busca.
