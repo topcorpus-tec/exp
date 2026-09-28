@@ -77,19 +77,16 @@
 /* O mockup do hero. O doc pede "bem grande e destacado": é a única imagem
    da dobra, então ela ocupa a largura que sobrou do logo e do retrato.
 
-   O fundo da foto é uma vinheta que fecha em cinza escuro nos cantos. Numa
-   dobra clara isso só funciona se a imagem se assumir como foto: cantos
-   arredondados e sombra, lida como um objeto pousado na página, e não como
-   um retângulo escuro que alguém esqueceu de recortar. */
+   Sem moldura: nada de canto arredondado, sombra ou fundo. A foto original
+   vinha com uma vinheta que fechava em cinza escuro nos cantos, e o que
+   resolve isso é o próprio arquivo — o WebP carrega um alfa que dissolve
+   esse anel, então a imagem termina no ar em vez de terminar numa borda. */
 .mn-hero__mock {
   /* No desktop ele para em 470px: maior que isso a foto passa a competir
      com a manchete, que é quem tem de ser lida primeiro. No celular o
      min() já entrega os 100% da coluna, sem precisar de media query. */
   width: min(100%, 470px);
   margin: 0 auto;
-  border-radius: var(--tp-radius);
-  overflow: hidden;
-  box-shadow: var(--tp-shadow-md);
 }
 .mn-hero__mock img {
   display: block;
