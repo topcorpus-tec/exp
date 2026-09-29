@@ -20,14 +20,23 @@
   /* =======================================================================
      DOWNLOAD DO E-BOOK
 
-     PENDÊNCIA: a URL do arquivo ainda não existe. É o único lugar da
-     página que precisa ser editado quando ela existir — todos os botões de
-     download apontam para cá através do [data-ebook].
+     O arquivo mora no Drive. Este é o endereço de download direto, não o
+     da página de visualização: com ele o clique baixa o PDF na hora, em
+     vez de abrir o leitor do Drive e pedir mais um clique de quem acabou
+     de pagar.
 
-     Enquanto estiver vazia o botão não navega e o aviso sai no console —
-     na página ele continua igual ao definitivo.
+     O arquivo tem 9,3 MB — abaixo dos 25 MB em que o Drive passa a
+     interpor o aviso de "não foi possível verificar o vírus". Se ele for
+     trocado por uma versão maior, o download volta a ter essa tela no
+     meio, e aí a página de visualização vira a opção menos ruim.
+
+     A pasta precisa continuar compartilhada como "qualquer pessoa com o
+     link". Fechar isso quebra o botão sem aviso nenhum.
+
+     É o único lugar da página que precisa ser editado: todos os botões de
+     download apontam para cá através do [data-ebook].
      ======================================================================= */
-  var EBOOK_URL = "";
+  var EBOOK_URL = "https://drive.google.com/uc?export=download&id=1S8sO9CNm0sf_-IfushxgkZMbgkAg3tbu";
 
   function initDownload() {
     var botoes = [].slice.call(document.querySelectorAll("[data-ebook]"));
