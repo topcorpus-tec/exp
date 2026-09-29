@@ -385,21 +385,18 @@
   box-shadow: 0 30px 80px rgba(3, 40, 20, .42);
 }
 
-/* O mockup abre o cartão de preço: certificado, área de aulas e o selo de
-   1 ano — os três itens da lista logo abaixo, mostrados antes de serem
-   lidos.
+/* O mockup da oferta: certificado, área de aulas e o selo de 1 ano — os
+   três itens da lista do cartão, mostrados antes de serem lidos.
 
-   Ele avança um pouco sobre o respiro lateral do cartão. A imagem é larga
-   e baixa, e presa ao respiro ela ficaria uma tira fina no meio de muito
-   branco; passando por cima dele, ganha a largura que o assunto pede sem
-   que o cartão precise crescer. */
-.mml-price__mock {
+   Fica entre o título e o cartão, solto sobre o verde: o arquivo tem alfa
+   e o fundo da seção passa por trás. Fora do cartão ele pode ser bem mais
+   largo que os 560px dele, que é o que essa imagem pede — ela é larga e
+   baixa, e espremida virava uma tira fina. */
+.mml-offer__mock {
   display: block;
-  width: calc(100% + 2 * clamp(.7rem, 2vw, 1.4rem));
-  max-width: none;
+  width: min(100%, 900px);
   height: auto;
-  margin: calc(-1 * clamp(.5rem, 1.5vw, 1rem)) calc(-1 * clamp(.7rem, 2vw, 1.4rem))
-          clamp(.9rem, 2.4vw, 1.4rem);
+  margin: 0 auto clamp(1.4rem, 3.2vw, 2.2rem);
 }
 
 .mml-price__from {
