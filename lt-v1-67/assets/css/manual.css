@@ -521,6 +521,11 @@ html { font-size: 112.5%; }
    980px e cada linha fica com um vão enorme entre o ícone e o texto. */
 .tp-offer__box { max-width: 620px; }
 
+/* A nota do pagamento subiu do pé do cartão para dentro da lista (ver o
+   HTML). Ali ela precisa de um respiro maior: a lista separa os itens com
+   linha tracejada, e sem esse espaço a nota lê como um quinto bônus. */
+.tp-offer__list .tp-offer__note { margin-top: 1.1rem; }
+
 .mn-offer__media {
   padding: clamp(1.5rem, 3.4vw, 2.25rem) clamp(1.5rem, 3.4vw, 2.25rem) 0;
 }
