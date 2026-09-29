@@ -4,21 +4,21 @@
 /teste/*
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
 
-# As páginas do Manual seguem o padrão lt-v1-<ticket>: uma por preço da
-# Hotmart (27, 67 e 97), cada uma com sua própria dobra de ancoragem.
-# O curinga cobre as três de uma vez, inclusive os assets de cada uma.
-# São rascunhos em revisão (sem as imagens); remover este bloco quando
-# forem publicadas de verdade.
-/lt-v1-*
-  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+# As páginas do Manual (lt-v1-27, -67 e -97) saíram do noindex em
+# 29/09/2026: estão publicadas e podem ser indexadas. Não há regra para
+# elas aqui — ausência é permissão.
 
 # Páginas de funil do Método Mãos Lucrativas (upsell, downsell e a
 # conclusão do pedido): só devem ser alcançadas dentro do fluxo de compra,
 # nunca pela busca.
 #
 # Cada etapa tem uma cópia por ticket do Manual — <etapa>-27, -67 e -97 —,
-# porque o HTML de funil que a Hotmart gera é diferente em cada uma. O
-# curinga cobre as três de uma vez, como no /lt-v1-* acima.
+# para dar uma URL a cada funil e separar tráfego por preço. O curinga
+# cobre as três de uma vez.
+#
+# Estas continuam fora dos buscadores por natureza, não por serem
+# rascunho: são páginas de pós-compra, e uma delas encontrada na busca
+# entregaria a oferta a quem não comprou.
 /upsell1-mml-*
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
 
