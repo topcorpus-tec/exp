@@ -489,8 +489,6 @@
   color: var(--tp-body);
 }
 .mml-facts svg { flex: 0 0 auto; margin-top: .18em; color: var(--tp-rose); }
-.mml-facts .is-no { color: var(--tp-muted); }
-.mml-facts .is-no svg { color: #C0625F; }
 
 /* O lembrete de que a condição é desta página, no pé do cartão. */
 .mml-onlyhere {

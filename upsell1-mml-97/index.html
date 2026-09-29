@@ -58,9 +58,6 @@
     <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
       <polyline points="20 6 9 17 4 12" />
     </symbol>
-    <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="6" y1="6" x2="18" y2="18" /><line x1="18" y1="6" x2="6" y2="18" />
-    </symbol>
     <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /><polyline points="9 12 11 14 15 9.5" />
     </symbol>
@@ -180,24 +177,27 @@
         <div class="tp-head" data-reveal>
           <span class="tp-eyebrow">Sua condição</span>
           <h2 class="tp-title" id="offer-title">
-            O valor original do Método Mãos Lucrativas é <span class="tp-hl">R$ 1.297,00</span>
+            O valor original do Método Mãos Lucrativas é
           </h2>
         </div>
 
         <div class="mml-price" data-reveal>
-          <p class="mml-price__from">De <s>R$ 1.297,00</s></p>
+          <!-- O preço antigo sai do título e vem para cá riscado: o doc diz a
+               frase e mostra o valor cortado logo abaixo, e assim ele aparece
+               uma vez só, em vez de repetir no h2 e no cartão. -->
+          <p class="mml-price__from"><s>R$ 1.297,00</s></p>
           <p class="mml-price__intro"><em>Mas hoje, você pode ter acesso completo por apenas:</em></p>
 
           <p class="mml-price__main"><small>12x de</small> R$ 28,94</p>
           <p class="mml-price__cash">ou <strong>R$ 297,00</strong> à vista!</p>
 
-          <!-- O doc escreve esta lista com ❌ e ✅. Aqui os dois viram ícone,
-               e a cor separa o que a pessoa NÃO precisa do que ela leva. -->
+          <!-- O doc marca os três com ✅ e destaca a abertura de cada um. Aqui o
+               ✅ vira ícone e o destaque vira <strong>: quem passa o olho lê só
+               as três aberturas e já sabe o que leva. -->
           <ul class="mml-facts">
-            <li class="is-no"><svg width="16" height="16" aria-hidden="true"><use href="#i-x" /></svg><span>Sem precisar de faculdade</span></li>
-            <li class="is-no"><svg width="16" height="16" aria-hidden="true"><use href="#i-x" /></svg><span>Sem precisar investir em nenhum espaço ou equipamento</span></li>
-            <li><svg width="16" height="16" aria-hidden="true"><use href="#i-check" /></svg><span>Tudo que você precisa para começar a ganhar dinheiro com massagem são as suas mãos!</span></li>
-            <li><svg width="16" height="16" aria-hidden="true"><use href="#i-check" /></svg><span>15 dias de Garantia Incondicional</span></li>
+            <li><svg width="16" height="16" aria-hidden="true"><use href="#i-check" /></svg><span><strong>15 dias de Garantia Incondicional</strong></span></li>
+            <li><svg width="16" height="16" aria-hidden="true"><use href="#i-check" /></svg><span><strong>Certificado de conclusão</strong> com o seu nome, para comprovar sua conquista</span></li>
+            <li><svg width="16" height="16" aria-hidden="true"><use href="#i-check" /></svg><span><strong>1 ano de acesso</strong> para ver e rever quantas vezes quiser</span></li>
           </ul>
 
           <div class="tp-cta">
