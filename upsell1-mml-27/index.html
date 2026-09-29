@@ -11,9 +11,17 @@
        X-Robots-Tag em /upsell1-mml-*. -->
 
   <!-- TICKET 27 — esta é a cópia do funil de quem comprou o Manual de
-       R$27. As três cópias desta etapa são iguais em copy; o que muda
-       entre elas é o HTML da Hotmart colado no #funil, porque cada ticket
-       tem a sua própria sequência de ofertas lá. -->
+       R$27.
+
+       As três cópias desta etapa são hoje idênticas, arquivo por arquivo.
+       Elas foram separadas por ticket na suposição de que o HTML do funil
+       da Hotmart seria diferente em cada uma; o widget que a Hotmart
+       entregou depois é genérico — ele resolve a oferta pela sessão de
+       compra, não pelo que está escrito na página.
+
+       A separação continua valendo pelo que ela dá de graça: cada ticket
+       tem a sua URL, então dá para separar tráfego e conversão por preço
+       sem depender de parâmetro. -->
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
   <meta name="googlebot" content="noindex, nofollow" />
 
@@ -106,18 +114,25 @@
          etapa do funil — eles não são um link de checkout comum, por isso
          não dá para inventar a URL aqui.
 
-         PARA PUBLICAR: apague a div .mml-ph de dentro de #funil e cole o
-         HTML da Hotmart do funil do TICKET 27 no lugar — não o de
-         outro ticket, que mandaria o comprador para a oferta errada. Todos os botões da página apontam para
-         #funil, então é só este bloco que precisa existir. -->
+         O widget da Hotmart já está colado aqui. Todos os botões da
+         página apontam para #funil, então é só este bloco que
+         precisa existir. -->
     <section class="mml-funnel" id="funil" aria-label="Escolha sua condição">
       <div class="tp-container">
         <div class="mml-slot" data-reveal>
-          <div class="mml-ph mml-ph--slot">
-            <span class="mml-ph__tag">Cole aqui</span>
-            <p class="mml-ph__desc">HTML do funil da Hotmart — os botões de aceitar e recusar desta etapa</p>
-            <p class="mml-ph__from">Enquanto este bloco existir, os botões da página só rolam até aqui</p>
-          </div>
+          <!-- HOTMART — Sales Funnel Widget. A Hotmart monta os botões de
+               aceitar e recusar aqui dentro, a partir da compra que trouxe a
+               pessoa até esta página. O snippet não cita ticket nem oferta:
+               quem resolve isso é a sessão, do lado deles.
+
+               Os dois <script> ficam aqui, logo abaixo do container, e não
+               no <head>: o mount() roda assim que o arquivo é lido, e lá em
+               cima o #hotmart-sales-funnel ainda não existiria. -->
+          <div id="hotmart-sales-funnel"></div>
+          <script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
+          <script>
+            checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel');
+          </script>
         </div>
       </div>
     </section>
