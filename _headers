@@ -35,6 +35,12 @@
 /mml-v1/*
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
 
+# Downsell da página de venda do Método Mãos Lucrativas, refeito a partir
+# de topcorpus.com.br/tpc29/metodo-downsell. Mesmo motivo do /mml-v1/*:
+# fora dos buscadores enquanto a versão de lá estiver no ar.
+/mml-downsell/*
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+
 # Páginas internas de apoio — o índice das rotas e o fluxograma dos
 # funis. Nunca devem ser encontradas na busca.
 /indice/*

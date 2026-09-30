@@ -1,0 +1,1146 @@
+/* =========================================================================
+   Método Mãos Lucrativas — PG-VENDAS — Downsell — downsell.css
+
+   Reprodução da página topcorpus.com.br/tpc29/metodo-downsell/ (post 70793
+   do Elementor). As cores, os tamanhos de fonte, os raios, as bordas e os
+   gradientes abaixo saíram do CSS de lá (post-70793.css e o kit post-6.css);
+   o que mudou foi só a forma de escrever — os empilhamentos de margem
+   negativa do Elementor viraram grid e flex comuns.
+
+   Folha única, sem a pilha design-system → taping das outras rotas: o
+   design system do repo é roxo, tem outra escala tipográfica e outro botão,
+   e sobrepor tudo isso custaria mais linhas de correção do que escrever
+   esta camada inteira.
+
+   Ordem: tokens → base → utilitários → botões → dobras, de cima para baixo.
+   ========================================================================= */
+
+/* ==================== Fontes ==================== */
+@font-face {
+  font-family: "Manrope";
+  src: url("https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-400.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-500.woff2") format("woff2");
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-600.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-700.woff2") format("woff2");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-800.woff2") format("woff2");
+  font-weight: 800; font-style: normal; font-display: swap;
+}
+
+/* ==================== Tokens ==================== */
+:root {
+  --dw-fonte:        "Manrope", system-ui, -apple-system, sans-serif;
+  --dw-fonte-apoio:  "Poppins", var(--dw-fonte);
+
+  /* verdes, do mais escuro ao mais claro */
+  --dw-hero:         #01140B;
+  --dw-verde-900:    #052113;
+  --dw-verde-850:    #062516;
+  --dw-verde-800:    #062817;
+  --dw-verde-700:    #0A3621;
+  --dw-verde-600:    #00422E;
+  --dw-verde-500:    #036245;
+  --dw-verde-texto:  #006345;
+
+  /* cremes e amarelos */
+  --dw-creme:        #FFFEFB;
+  --dw-creme-claro:  #F9FDFD;
+  --dw-amarelo:      #FFF59E;
+  --dw-amarelo-bg:   #FFF7C9;
+  --dw-amarelo-fim:  #F9EB9B;
+
+  /* linhas e apoios */
+  --dw-linha-clara:  #B8FF9E;
+  --dw-linha-verde:  #4A8A33;
+  --dw-linha-creme:  #FFFEF4;
+  --dw-apoio:        #D6D6D6;
+
+  --dw-sombra-cartao: 0 12px 22px -15px rgba(0, 0, 0, .31);
+
+  --dw-largura:      1250px;
+  --dw-gutter:       clamp(1rem, 4vw, 2rem);
+}
+
+/* ==================== Base ==================== */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+          text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--dw-fonte);
+  font-size: 16px;
+  line-height: 1.5;
+  color: #FFFFFF;
+  background: var(--dw-hero);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;   /* as fotos de fundo sangram; nada rola na horizontal */
+}
+
+img, picture, svg { display: block; max-width: 100%; }
+img { height: auto; }
+
+h1, h2, h3, p, ul, figure { margin: 0; }
+ul { padding: 0; list-style: none; }
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 3px solid #B8FF9E;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+
+/* ==================== Utilitários ==================== */
+.dw-container {
+  width: 100%;
+  max-width: var(--dw-largura);
+  margin-inline: auto;
+  padding-inline: var(--dw-gutter);
+}
+
+/* As seções claras repetem a mesma textura de fundo. */
+.dw-fundo-claro {
+  background: #F9FDFD url("../img/fundo-claro.webp") center center / cover no-repeat;
+}
+
+.dw-titulo {
+  max-width: 874px;
+  margin-inline: auto;
+  font-size: clamp(1.5rem, 3.4vw, 2.3em);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 1.2px;
+  text-align: center;
+  color: #FFFFFF;
+}
+.dw-titulo--caixa-alta { text-transform: uppercase; }
+.dw-titulo--escuro     { color: var(--dw-verde-700); letter-spacing: 0; }
+.dw-titulo--folga      { margin-top: clamp(2rem, 5vw, 3rem); }
+
+/* Blocos de parágrafos: o espaçamento entre <p> é o mesmo em toda a página. */
+.dw-corpo > p + p { margin-top: .85em; }
+.dw-corpo         { font-weight: 500; line-height: 1.55; }
+.dw-corpo--centro { text-align: center; }
+.dw-corpo--escuro { color: #2F2F2F; font-weight: 400; }
+.dw-corpo--poppins {
+  font-family: var(--dw-fonte-apoio);
+  font-weight: 400;
+  color: var(--dw-verde-600);
+}
+
+.dw-ico { width: 1em; height: 1em; fill: currentColor; }
+.dw-ico--34     { width: 34px; height: 34px; color: #EBE38E; margin-inline: auto; }
+.dw-ico--ticket { width: 19px; height: 19px; color: #F1CA71; flex: 0 0 auto; fill: none; stroke: currentColor; }
+.dw-ico--x      { width: 14px; height: 14px; color: #E25151; flex: 0 0 auto; }
+.dw-ico--ok     { width: 14px; height: 14px; color: #1A9038; flex: 0 0 auto; }
+.dw-ico--seta   { width: 20px; height: 20px; color: #FFFACE; flex: 0 0 auto; fill: none; stroke: currentColor; }
+.dw-ico--whats  { width: 44px; height: 44px; color: #1A9038; margin-inline: auto; }
+.dw-ico--faq    { width: 40px; height: 40px; color: var(--dw-verde-600); margin-inline: auto; }
+
+/* ==================== Botões ====================
+   Três variantes, as mesmas da origem: o gradiente claro com texto preto,
+   o gradiente escuro com texto branco e o botão de dentro do cartão da
+   oferta. O pulso é o mesmo keyframe de lá. */
+.dw-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: min(100%, 446px);
+  min-height: 62px;
+  padding: .8rem 1.4rem;
+  border: 1px solid #A8C976;
+  border-radius: 293px;
+  font-family: var(--dw-fonte);
+  font-size: clamp(.875rem, 1.6vw, 17px);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: .3px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  animation: dw-pulso 1.5s infinite;
+  transition: box-shadow .5s, filter .3s;
+}
+.dw-btn:hover  { animation: none; box-shadow: 0 0 5px #B8EC68, 0 0 10px #B8EC68, 0 0 30px #B8EC68; }
+.dw-btn:active { filter: brightness(.95); }
+
+.dw-btn--claro  { color: #000000; background-image: linear-gradient(263deg, #7CE58A 0%, #1CB332 100%); }
+.dw-btn--escuro { color: #FFFFFF; background-image: linear-gradient(263deg, #2DA73E 0%, #02470C 100%); }
+.dw-btn--oferta {
+  width: auto;
+  min-width: 249px;
+  max-width: 100%;
+  min-height: 52px;
+  padding-inline: 2rem;
+  font-size: clamp(.7rem, 1.4vw, 19px);
+  font-weight: 500;
+  color: #FFFFFF;
+  background-image: linear-gradient(222deg, #4CC75D 0%, #0E8A1F 100%);
+  border-width: 2px;
+}
+
+/* Link de WhatsApp antes do JS preencher o href. */
+.dw-btn[aria-disabled="true"] { cursor: not-allowed; filter: grayscale(.4) brightness(.9); animation: none; }
+
+.dw-cta-centro { display: flex; margin: clamp(2rem, 5vw, 3rem) auto 0; }
+
+@keyframes dw-pulso {
+  0%   { transform: scale(1);    box-shadow: 0 0 10px -20px #5CB261; }
+  50%  { transform: scale(1.05); box-shadow: 0 0 0 30px transparent; }
+  100% { transform: scale(1);    box-shadow: 0 0 0 0 transparent; }
+}
+
+
+/* =========================================================================
+   DOBRA 1 — HERO
+   ========================================================================= */
+.dw-hero {
+  position: relative;
+  background: var(--dw-hero) url("../img/hero-fundo.webp") center center / cover no-repeat;
+}
+.dw-hero__grade {
+  width: 100%;
+  max-width: var(--dw-largura);
+  margin-inline: auto;
+  padding: 2em var(--dw-gutter) 4em;
+  min-height: 895px;
+  display: grid;
+  align-content: center;
+}
+.dw-hero__texto { max-width: 50%; }
+
+.dw-hero__logo { width: min(100%, 292px); margin-bottom: .5rem; }
+
+.dw-hero__titulo {
+  max-width: 586px;
+  margin-top: 1.9rem;
+  font-size: clamp(1.55rem, 3.9vw, 2.8em);
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+.dw-hero__titulo em { font-style: italic; font-weight: 700; color: #F1CA71; }
+
+.dw-hero__sub {
+  max-width: 449px;
+  margin-top: 1.1rem;
+  font-size: clamp(.95rem, 1.7vw, 22px);
+  font-weight: 400;
+  color: #FFFFFF;
+}
+
+.dw-hero__cta { margin-top: 1.6rem; }
+
+.dw-hero__nota {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  margin-top: 1.1rem;
+  font-size: 12px;
+  color: #FFFFFF;
+}
+
+@media (max-width: 1024px) {
+  .dw-hero__grade { min-height: 515px; padding-block: 2em 3em; }
+  .dw-hero__titulo { margin-top: 1rem; }
+}
+@media (max-width: 767px) {
+  /* No celular a arte é vertical e o texto desce para o terço de baixo,
+     como na origem. */
+  .dw-hero {
+    background-image: url("../img/hero-fundo-movel.webp");
+    background-position: top center;
+  }
+  .dw-hero__grade {
+    min-height: 0;
+    padding: 0 var(--dw-gutter) 3em;
+    align-content: start;
+  }
+  .dw-hero__texto {
+    max-width: none;
+    margin-top: 221px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .dw-hero__logo   { width: 141px; margin-top: 1.6rem; }
+  .dw-hero__titulo { max-width: 334px; font-size: 25px; }
+  .dw-hero__sub    { max-width: 278px; font-size: 13px; line-height: 1.6; letter-spacing: .2px; }
+  .dw-hero__cta    { width: min(100%, 302px); min-height: 65px; font-size: 14px; }
+  .dw-hero__nota   { max-width: 259px; }
+}
+
+
+/* =========================================================================
+   DOBRA 2 — TRÊS SELOS
+   ========================================================================= */
+.dw-selos { padding-block: clamp(1.5rem, 4vw, 2em); }
+.dw-selos__lista {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+.dw-selo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .35rem;
+  padding: 30px;
+  text-align: center;
+  border: 1px solid var(--dw-linha-clara);
+  border-radius: 16px;
+  background-image: linear-gradient(305deg, #052113 0%, #083E23 100%);
+  box-shadow: var(--dw-sombra-cartao);
+}
+.dw-selo__titulo { font-size: clamp(1rem, 1.8vw, 21px); font-weight: 700; color: #FFFFFF; }
+.dw-selo__texto  { font-size: clamp(.8rem, 1.4vw, 16px); font-weight: 300; color: #AEAEAE; }
+
+@media (max-width: 767px) {
+  .dw-selos { padding-block: 1.5em 2em; }
+  .dw-selos__lista { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .dw-selo { border-radius: 13px; }
+}
+
+
+/* =========================================================================
+   DOBRA 3 — PRESENTES
+   ========================================================================= */
+.dw-presentes { padding-block: 4em; background: var(--dw-verde-800); }
+.dw-presentes__icone { width: 92px; margin-inline: auto; }
+.dw-presentes .dw-titulo { margin-top: 1.25rem; }
+
+.dw-presentes__caixa {
+  margin-top: 1.8rem;
+  padding: 30px;
+  border: 1px solid var(--dw-linha-verde);
+  border-radius: 16px;
+  background-image: linear-gradient(305deg, #0B4126 0%, #196E43 100%);
+  box-shadow: var(--dw-sombra-cartao);
+  display: grid;
+  gap: clamp(2rem, 5vw, 3.5rem);
+}
+
+.dw-presente {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2rem);
+}
+.dw-presente--invertido .dw-presente__texto { order: 2; }
+.dw-presente--invertido .dw-presente__midia { order: 1; }
+
+.dw-presente__pilula {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .3rem;
+  padding: 3% 0;
+  border: 1px solid #2E7A38;
+  border-radius: 12px;
+  background: #1D7749;
+}
+.dw-presente__titulo {
+  font-size: clamp(1rem, 1.8vw, 21px);
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+.dw-presente__texto .dw-corpo {
+  max-width: 490px;
+  margin-inline: auto;
+  padding: 1.3em 1.6em 0;
+  text-align: center;
+  color: #FFFFFF;
+}
+.dw-presente__midia img { width: 100%; }
+
+@media (max-width: 1024px) {
+  .dw-presente { grid-template-columns: minmax(0, 1fr); }
+  .dw-presente--invertido .dw-presente__texto,
+  .dw-presente--invertido .dw-presente__midia { order: 0; }
+}
+@media (max-width: 767px) {
+  .dw-presentes { padding-block: 3em 4em; }
+  .dw-presentes__icone { width: 68px; }
+  .dw-presentes__caixa { padding: 1em; border-radius: 13px; }
+  .dw-presente__texto .dw-corpo {
+    max-width: 264px; padding: 1.3em 0 0;
+    font-size: 15px; line-height: 1.4; letter-spacing: .2px;
+  }
+}
+
+
+/* =========================================================================
+   DOBRA 4 — PROVA (esteira de prints)
+   ========================================================================= */
+.dw-prova { padding-block: 4em; background: var(--dw-verde-700); }
+.dw-prova__caixa {
+  margin-top: 1.4rem;
+  padding: 30px;
+  border: 1px solid var(--dw-linha-verde);
+  border-radius: 16px;
+  background-image: linear-gradient(305deg, #0B4126 0%, #196E43 100%);
+  box-shadow: var(--dw-sombra-cartao);
+}
+
+.dw-esteira { overflow: hidden; }
+.dw-esteira__faixa {
+  display: flex;
+  gap: 60px;
+  width: max-content;
+  animation: dw-desliza 45s linear infinite;
+}
+.dw-esteira:hover .dw-esteira__faixa { animation-play-state: paused; }
+.dw-esteira__faixa > li { flex: 0 0 auto; }
+.dw-esteira__faixa img  { width: 541px; max-width: 70vw; border-radius: 6px; }
+
+/* Desliza metade da faixa: a segunda metade é a cópia da primeira, feita
+   pelo JS, então ao chegar em -50% o quadro é idêntico ao do início. */
+@keyframes dw-desliza {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-50% - 30px)); }
+}
+
+@media (max-width: 767px) {
+  .dw-prova { padding-block: 3em; }
+  .dw-prova__caixa { padding: 1em; border-radius: 13px; }
+  .dw-esteira__faixa { gap: 30px; }
+  @keyframes dw-desliza {
+    from { transform: translateX(0); }
+    to   { transform: translateX(calc(-50% - 15px)); }
+  }
+}
+
+
+/* =========================================================================
+   DOBRA 5 — PARA QUEM É
+   ========================================================================= */
+.dw-perfeito { padding-block: 4em; }
+/* Flex com quebra, e não grid: assim a segunda fila — que tem dois cards —
+   fica centrada sozinha, como na origem. */
+.dw-perfeito__lista {
+  margin-top: 1.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+.dw-perfeito__lista > li { flex: 0 1 calc((100% - 40px) / 3); }
+
+.dw-perfil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .6rem;
+  padding: 30px;
+  border: 1px solid var(--dw-linha-clara);
+  border-radius: 16px;
+  background-image: linear-gradient(305deg, #052113 0%, #083E23 100%);
+  box-shadow: var(--dw-sombra-cartao);
+}
+.dw-perfil p {
+  max-width: 254px;
+  font-size: clamp(.85rem, 1.5vw, 16px);
+  font-weight: 500;
+  letter-spacing: .6px;
+  text-align: center;
+  color: #D6D6D6;
+}
+
+@media (max-width: 900px) {
+  .dw-perfeito__lista > li { flex-basis: 100%; }
+}
+@media (max-width: 767px) {
+  .dw-perfeito { padding-block: 3em 4em; }
+  .dw-perfil { border-radius: 13px; }
+}
+
+
+/* =========================================================================
+   DOBRA 6 — MÉTODO DE 3 PASSOS
+   ========================================================================= */
+.dw-passos { padding-block: 4em; background: var(--dw-verde-700); }
+.dw-passos .dw-titulo { max-width: 827px; }
+
+.dw-passo { margin-top: clamp(2.5rem, 6vw, 4rem); }
+
+/* A pilastra amarela encosta metade para dentro do cartão verde. */
+.dw-passo__pilula {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 500px);
+  margin: 0 auto -23px;
+  padding: .55em 1em;
+  border-radius: 18px;
+  background: var(--dw-amarelo);
+  font-size: clamp(1.1rem, 2.2vw, 1.7em);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: .6px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #4C1B58;
+}
+
+.dw-passo__caixa {
+  padding: 46px 30px 30px;
+  border: 1px solid var(--dw-linha-verde);
+  border-radius: 16px;
+  background-image: linear-gradient(305deg, #0B4126 0%, #196E43 100%);
+  box-shadow: var(--dw-sombra-cartao);
+}
+.dw-passo__caixa .dw-corpo {
+  max-width: 637px;
+  margin-inline: auto;
+  color: #FFFFFF;
+}
+.dw-passo__chamada {
+  max-width: 637px;
+  margin: 1rem auto 0;
+  font-size: clamp(.95rem, 1.6vw, 18px);
+  font-weight: 600;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+/* Cartões numerados, creme */
+.dw-itens {
+  margin-top: clamp(3.4rem, 6vw, 4.2rem);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 2.5vw, 1.6rem) clamp(1rem, 2vw, 1.4rem);
+  align-items: start;
+}
+.dw-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .45rem;
+  padding: 3.2rem 1.1rem 1.7rem;
+  border: 2px solid var(--dw-linha-creme);
+  border-radius: 10px;
+  background-image: linear-gradient(212deg, #FFFADB 0%, #FFF7C6 100%);
+}
+/* O número mora numa plaquinha que sobe metade para fora do cartão. */
+.dw-item__n {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 78px;
+  padding: .1em .35em;
+  border: 2px solid var(--dw-linha-creme);
+  border-radius: 10px;
+  background-image: linear-gradient(135deg, #FFFEF6 0%, #E5DA99 100%);
+  font-size: clamp(1.7rem, 3vw, 39px);
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: center;
+  color: #000000;
+}
+.dw-item__titulo {
+  font-size: clamp(.95rem, 1.7vw, 21px);
+  font-weight: 700;
+  text-align: center;
+  color: #000000;
+}
+.dw-item__texto {
+  font-family: var(--dw-fonte-apoio);
+  font-size: clamp(.85rem, 1.4vw, 16px);
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  color: #205C34;
+}
+.dw-item img { margin-top: auto; padding-top: .7rem; border-radius: 6px; }
+
+@media (max-width: 900px) {
+  .dw-itens { grid-template-columns: minmax(0, 1fr); gap: 3.6rem; }
+}
+@media (max-width: 767px) {
+  .dw-passos { padding-block: 4em; }
+  .dw-passo__pilula { width: min(100%, 280px); font-size: 23px; letter-spacing: -.3px; }
+  .dw-passo__caixa { padding: 2.6em 1em 1.6em; border-radius: 13px; }
+  .dw-passo__caixa .dw-corpo { max-width: 264px; font-size: 15px; line-height: 1.4; letter-spacing: .2px; }
+  .dw-passo__chamada { max-width: 264px; font-size: 15px; }
+  .dw-item__n { min-width: 85px; }
+  .dw-item__titulo { font-size: 18px; }
+  .dw-item__texto { font-size: 15px; }
+}
+
+
+/* =========================================================================
+   DOBRA 7 — BÔNUS
+   ========================================================================= */
+.dw-bonus { padding-block: 4em; background: var(--dw-verde-850); }
+.dw-bonus .dw-titulo { max-width: 845px; }
+.dw-bonus__intro {
+  max-width: 483px;
+  margin: 1rem auto 0;
+  font-size: clamp(.9rem, 1.6vw, 19px);
+  text-align: center;
+  color: #FFFFFF;
+}
+.dw-bonus__rotulo {
+  max-width: 483px;
+  margin: .9rem auto 0;
+  font-size: clamp(1.05rem, 2.2vw, 27px);
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.dw-bonus__caixa {
+  margin-top: 1.6rem;
+  padding: 30px;
+  border: 1px solid var(--dw-linha-verde);
+  border-radius: 16px;
+  background-image: linear-gradient(305deg, #0B4126 0%, #196E43 100%);
+  box-shadow: var(--dw-sombra-cartao);
+}
+
+.dw-itens--bonus {
+  margin-top: 3.6rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  align-items: stretch;   /* os quatro terminam na mesma linha, como na origem */
+}
+.dw-item--bonus  { justify-content: flex-start; padding-top: 3.6rem; }
+.dw-item__selo {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -52%);
+  width: clamp(76px, 8vw, 112px);
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .28));
+  pointer-events: none;
+}
+.dw-item__capa { width: 89%; margin-top: 0; padding-top: 0; }
+.dw-item--bonus .dw-item__texto { margin-top: auto; padding-top: .8rem; }
+
+@media (max-width: 1024px) {
+  .dw-itens--bonus { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4rem 1.4rem; }
+}
+@media (max-width: 640px) {
+  .dw-itens--bonus { grid-template-columns: minmax(0, 1fr); gap: 4.4rem; }
+}
+@media (max-width: 767px) {
+  .dw-bonus__caixa { padding: 1em; border-radius: 13px; }
+}
+
+
+/* =========================================================================
+   DOBRA 8 — QUANTO VALE
+   ========================================================================= */
+.dw-quanto {
+  background: #F9FDFD url("../img/fundo-oferta.webp") center center / cover no-repeat;
+  min-height: 640px;
+  display: flex;
+  align-items: center;
+}
+.dw-quanto__grade {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: end;
+}
+.dw-quanto__texto { width: min(100%, 430px); }
+.dw-quanto__titulo {
+  font-size: clamp(1.4rem, 2.6vw, 30px);
+  font-weight: 700;
+  line-height: 1.2;
+  color: #303030;
+}
+.dw-quanto .dw-corpo { margin-top: 1rem; font-size: clamp(.85rem, 1.4vw, 16px); }
+
+@media (max-width: 1024px) { .dw-quanto { min-height: 590px; } }
+@media (max-width: 767px) {
+  /* No celular a arte é a foto vertical da Ana e o texto vem por cima. */
+  .dw-quanto {
+    min-height: 950px;
+    align-items: flex-start;
+    padding-block: 2em 0;
+    background-image: url("../img/fundo-oferta-movel.webp");
+    background-position: bottom center;
+  }
+  .dw-quanto__grade { justify-items: center; }
+  .dw-quanto__texto { width: min(100%, 320px); text-align: center; }
+  .dw-quanto__titulo { font-size: 30px; line-height: 1.3; }
+  .dw-quanto .dw-corpo { font-size: 14px; }
+}
+
+
+/* =========================================================================
+   DOBRA 9 — OFERTA
+   ========================================================================= */
+.dw-oferta {
+  padding-block: 7em;
+  background: var(--dw-verde-500);
+}
+.dw-oferta .dw-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* O mockup sobra por cima do cartão branco, como na origem. */
+.dw-oferta__mock {
+  position: relative;
+  z-index: 3;
+  width: min(100%, 847px);
+  margin-bottom: -6rem;
+}
+.dw-oferta__mock img { width: 100%; }
+
+.dw-oferta__cartao {
+  position: relative;
+  width: min(100%, 847px);
+  padding: 33px;
+  border: 2px solid #FFF9B9;
+  border-radius: 25px;
+  background: var(--dw-creme);
+  text-align: center;
+}
+
+.dw-oferta__titulo {
+  max-width: 565px;
+  margin: 7rem auto 0;
+  font-size: clamp(1.15rem, 2.4vw, 2.2em);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--dw-verde-texto);
+}
+.dw-oferta__de       { margin-top: 1.1em; font-size: clamp(1rem, 1.9vw, 1.5em); color: var(--dw-verde-600); }
+.dw-oferta__riscado  { font-size: clamp(1.3rem, 2.4vw, 2em); color: #C0392B; }
+.dw-oferta__riscado s { text-decoration-thickness: 2px; }
+.dw-oferta__chamada  { margin-top: .4em; font-size: clamp(1rem, 1.9vw, 1.5em); font-style: italic; color: var(--dw-verde-600); }
+.dw-oferta__parcelas { margin-top: .9em; font-size: clamp(1.4rem, 3vw, 2.4em); font-weight: 700; color: var(--dw-verde-600); }
+.dw-oferta__preco {
+  margin-top: -.12em;
+  font-size: clamp(3rem, 9.5vw, 7.5em);
+  font-weight: 700;
+  line-height: 1.05;
+  color: #07855F;
+}
+.dw-oferta__avista { font-size: clamp(1rem, 2.1vw, 1.7em); color: var(--dw-verde-600); }
+
+.dw-oferta__lista {
+  margin: 1.8rem auto 0;
+  display: grid;
+  gap: .7rem;
+  max-width: 575px;
+}
+.dw-oferta__lista li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .55rem;
+  min-height: 53px;
+  padding: .55rem 1rem;
+  border-radius: 10px;
+  background: #EAFFF1;
+  font-size: clamp(.8rem, 1.5vw, 18px);
+  text-align: center;
+  color: #303030;
+}
+
+.dw-oferta__linha { width: 100%; margin: 1.6rem 0 0; border: 0; border-top: 1px solid #00000030; }
+
+.dw-oferta__bonus {
+  margin-top: 1.3em;
+  font-size: clamp(.95rem, 1.9vw, 1.5em);
+  color: var(--dw-verde-600);
+}
+.dw-oferta__bonus em { font-style: italic; font-weight: 700; }
+
+.dw-oferta .dw-btn--oferta { margin: 1.4rem auto 0; }
+
+.dw-oferta__aviso {
+  max-width: 584px;
+  margin: 1.4rem auto 0;
+  font-family: var(--dw-fonte-apoio);
+  font-size: clamp(.75rem, 1.3vw, 1.2em);
+  color: var(--dw-verde-600);
+}
+
+@media (max-width: 767px) {
+  .dw-oferta { padding-block: 5em 3em; }
+  .dw-oferta__mock { margin-bottom: -2.5rem; }
+  .dw-oferta__cartao { padding: 1em; }
+  .dw-oferta__titulo { margin-top: 3.2rem; font-size: 1.3em; }
+  .dw-oferta__de, .dw-oferta__chamada { font-size: 1.1em; }
+  .dw-oferta__riscado { font-size: 1.5em; }
+  .dw-oferta__parcelas { font-size: 1.9em; }
+  .dw-oferta__preco { font-size: 3.6em; }
+  .dw-oferta__avista { font-size: 1.2em; }
+  .dw-oferta__lista li { font-size: 13px; }
+  .dw-btn--oferta { width: min(100%, 249px); min-width: 0; padding-inline: 1rem; font-size: 11px; }
+  .dw-oferta__bonus { font-size: 1em; }
+  .dw-oferta__aviso { font-size: .8em; }
+}
+
+
+/* =========================================================================
+   DOBRA 10 — FAZ A CONTA
+   ========================================================================= */
+.dw-conta { padding-block: 4em 5em; }
+.dw-conta__caixa {
+  width: min(100%, 64%);
+  margin: 1.4rem auto 0;
+  padding: 30px;
+  border: 1px solid var(--dw-linha-clara);
+  border-radius: 16px;
+  background-image: linear-gradient(305deg, #052113 0%, #083E23 100%);
+  box-shadow: var(--dw-sombra-cartao);
+  text-align: center;
+}
+.dw-conta__destaque {
+  font-size: clamp(.95rem, 1.8vw, 21px);
+  font-weight: 500;
+  letter-spacing: .6px;
+  color: #FFFFFF;
+}
+.dw-conta__destaque strong { color: #FFFACE; }
+.dw-conta__apoio {
+  margin-top: .4rem;
+  font-size: clamp(.9rem, 1.8vw, 21px);
+  font-weight: 500;
+  letter-spacing: .6px;
+  color: var(--dw-apoio);
+}
+
+.dw-conta__lista { display: grid; }
+.dw-conta__lista li {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .6rem 0;
+  font-size: clamp(.85rem, 1.5vw, 18px);
+  text-align: left;
+  color: #FFFFFF;
+}
+.dw-conta__lista li + li { border-top: 1px solid #DDDDDD61; }
+
+.dw-conta__fecho {
+  max-width: 752px;
+  margin: clamp(1.6rem, 4vw, 2.4rem) auto 0;
+  font-size: clamp(1.05rem, 2vw, 1.6em);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: .7px;
+  text-align: center;
+  color: var(--dw-verde-700);
+}
+
+@media (max-width: 900px) { .dw-conta__caixa { width: 100%; } }
+@media (max-width: 767px) {
+  .dw-conta { padding-block: 3em 4em; }
+  .dw-conta__caixa { padding: 20px; border-radius: 13px; }
+  .dw-conta__apoio { font-size: 15px; }
+  .dw-conta__fecho { font-size: 18px; letter-spacing: 0; }
+}
+
+
+/* =========================================================================
+   DOBRA 11 — GARANTIA
+   ========================================================================= */
+.dw-garantia { padding-block: 3.2em 7em; background: var(--dw-verde-900); }
+
+/* O selo flutua meio para fora do cartão, com o mesmo vaivém da origem. */
+.dw-garantia__cartao {
+  position: relative;
+  width: min(100%, 93%);
+  margin: 7rem auto 0;
+  padding: 3.3rem clamp(1rem, 4vw, 3rem);
+  border-radius: 25px;
+  background: #FBF8E8;
+  text-align: center;
+}
+.dw-garantia__selo {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: clamp(120px, 17%, 190px);
+  transform: translate(-50%, -62%);
+  animation: dw-flutua 3s ease-in-out infinite;
+}
+.dw-garantia__titulo {
+  font-size: clamp(1.35rem, 3vw, 2.6em);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: .2px;
+  color: var(--dw-verde-texto);
+}
+.dw-garantia__cartao .dw-corpo {
+  max-width: 81%;
+  margin: 1rem auto 0;
+  font-size: clamp(.8rem, 1.4vw, 1.2em);
+}
+
+@keyframes dw-flutua {
+  0%, 100% { transform: translate(-50%, -62%); }
+  50%      { transform: translate(-50%, -52%); }
+}
+
+@media (max-width: 767px) {
+  .dw-garantia { padding-block: 7em 3em; }
+  .dw-garantia__cartao { width: 100%; margin-top: 3rem; padding: 2.4rem 1rem; }
+  .dw-garantia__selo { width: 150px; }
+  .dw-garantia__titulo { font-size: 2em; line-height: 1.3; letter-spacing: 0; }
+  .dw-garantia__cartao .dw-corpo { max-width: 272px; font-size: .9em; }
+}
+
+
+/* =========================================================================
+   DOBRA 12 — FALE COM A EQUIPE
+   ========================================================================= */
+.dw-suporte {
+  min-height: 746px;
+  display: flex;
+  align-items: center;
+  padding-block: 4em;
+  border-top: 1px solid #DEC28A;
+  background: var(--dw-amarelo-bg) url("../img/suporte-fundo.webp") center center / cover no-repeat;
+}
+.dw-suporte__cartao {
+  width: min(100%, 50%);
+  padding: 3.1em;
+  border-radius: 21px;
+  background-image: linear-gradient(146deg, #DFFFEC 0%, #F4FFF9 100%);
+  box-shadow: 12px 17px 41px -6px rgba(0, 0, 0, .17);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+.dw-suporte__titulo {
+  max-width: 496px;
+  font-size: clamp(1.4rem, 3vw, 2.7em);
+  font-weight: 600;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: #044C1B;
+}
+.dw-suporte__cartao .dw-corpo { max-width: 400px; }
+
+@media (max-width: 1024px) {
+  .dw-suporte {
+    min-height: 535px;
+    padding-block: 3em;
+    background-image: url("../img/suporte-fundo-movel.webp");
+  }
+  .dw-suporte__cartao { width: min(100%, 70%); padding: 2.6em; }
+}
+@media (max-width: 767px) {
+  .dw-suporte {
+    min-height: 1070px;
+    align-items: flex-start;
+    padding: 3em 1em;
+    background-position: bottom center;
+  }
+  .dw-suporte__cartao { width: 100%; max-width: 500px; margin-inline: auto; padding: 3em 1em; }
+  .dw-suporte__titulo { max-width: 266px; font-size: 27px; line-height: 1.3; }
+}
+
+
+/* =========================================================================
+   DOBRA 13 — BIO
+   ========================================================================= */
+.dw-bio {
+  padding-block: 0 3em;
+  border-top: 1px solid #FFF5D5;
+  background: var(--dw-verde-600);
+}
+.dw-bio__grade {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+.dw-bio__foto img { width: min(100%, 596px); margin-top: 3.2rem; margin-inline: auto; }
+.dw-bio__titulo {
+  font-size: clamp(1.5rem, 3vw, 2.6em);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: .2px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+.dw-bio__texto .dw-corpo { margin-top: 1rem; font-size: clamp(.9rem, 1.5vw, 1.1em); font-weight: 400; }
+.dw-bio__texto .dw-btn   { margin-top: 2.3rem; width: min(100%, 300px); }
+
+@media (max-width: 1024px) {
+  .dw-bio { padding: 0 2em 2em; }
+  .dw-bio__grade { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 767px) {
+  .dw-bio { padding: 1em 1em 4em; }
+  .dw-bio__grade { text-align: center; justify-items: center; }
+  /* No celular a foto vem depois do texto, como na origem. */
+  .dw-bio__foto  { order: 2; margin-top: 1.5rem; }
+  .dw-bio__texto { order: 1; }
+  .dw-bio__titulo { font-size: 2em; }
+  .dw-bio__texto .dw-corpo { max-width: 296px; margin-inline: auto; font-size: 1em; }
+  .dw-bio__texto .dw-btn   { margin-inline: auto; }
+}
+
+
+/* =========================================================================
+   DOBRA 14 — FAQ
+   ========================================================================= */
+.dw-faq { padding-block: 3em; background: var(--dw-creme); }
+.dw-faq__titulo {
+  max-width: 804px;
+  margin: .6rem auto 0;
+  font-size: clamp(1.7rem, 3.2vw, 2.7em);
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  color: #000000;
+}
+
+.dw-faq__lista {
+  width: min(100%, 1000px);
+  margin: 1.6rem auto 0;
+  display: grid;
+  gap: 15px;
+}
+.dw-faq__item summary {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  padding: 18px;
+  border-radius: 8px;
+  background: #257257;
+  font-size: 1rem;
+  color: #FFFFFF;
+  cursor: pointer;
+  list-style: none;
+  transition: color .25s;
+}
+.dw-faq__item summary::-webkit-details-marker { display: none; }
+.dw-faq__item summary:hover { color: #9DF3E4; }
+.dw-faq__item[open] summary { color: #C2C2C2; }
+.dw-faq__item summary span  { order: 2; flex: 1 1 auto; }
+
+.dw-ico--faq-sinal { width: 15px; height: 15px; order: 1; flex: 0 0 auto; }
+/* O sinal vira menos quando a pergunta abre, como na origem. */
+.dw-faq__item      .dw-ico--aberto  { display: none; }
+.dw-faq__item[open] .dw-ico--fechado { display: none; }
+.dw-faq__item[open] .dw-ico--aberto  { display: block; }
+
+.dw-faq__resposta {
+  margin-top: 7px;
+  padding: 27px;
+  border: 1px solid #8BCD8E;
+  border-radius: 8px;
+  background: #EAFFF1;
+  color: #205C34;
+}
+
+@media (max-width: 767px) {
+  .dw-faq { padding-block: 2em 4em; }
+  .dw-faq__titulo { max-width: 356px; font-size: 32px; line-height: 1.3; }
+}
+
+
+/* =========================================================================
+   DOBRA 15 — PRECISA DE AJUDA
+   ========================================================================= */
+.dw-ajuda {
+  position: relative;
+  padding-block: 4em 3em;
+  background-image: linear-gradient(180deg, #FFFEFB 0%, var(--dw-amarelo-fim) 100%);
+}
+.dw-ajuda__cartao {
+  position: relative;
+  z-index: 1;
+  padding: 3.1em;
+  border-radius: 21px;
+  background-image: linear-gradient(146deg, #DFFFEC 0%, #F4FFF9 100%);
+  box-shadow: 12px 17px 41px -6px rgba(0, 0, 0, .5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+.dw-ajuda__titulo {
+  max-width: 584px;
+  font-size: clamp(1.6rem, 3.2vw, 2.7em);
+  font-weight: 600;
+  line-height: 1.2;
+  color: #044C1B;
+}
+.dw-ajuda__texto {
+  max-width: 668px;
+  font-family: var(--dw-fonte-apoio);
+  font-weight: 400;
+  color: #000000;
+}
+
+/* A marca d'água fica por baixo do cartão e é só decoração. */
+.dw-ajuda__marca {
+  margin-top: -3.5rem;
+  font-size: clamp(3.4rem, 13vw, 13.7em);
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  color: #58371B0A;
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
+}
+
+@media (max-width: 767px) {
+  .dw-ajuda { padding-block: 3em 2.5em; }
+  .dw-ajuda__cartao { width: min(100%, 310px); margin-inline: auto; padding: 3em 1em; }
+  .dw-ajuda__marca { margin-top: -1.6rem; font-size: 54px; line-height: 1.3; }
+}
+
+
+/* =========================================================================
+   RODAPÉ
+   ========================================================================= */
+.dw-rodape {
+  padding: 1.2rem var(--dw-gutter);
+  background: #161616;
+  text-align: center;
+}
+.dw-rodape p {
+  font-family: "Times New Roman", Times, serif;
+  font-size: .85rem;
+  color: #FFFFFF;
+}
