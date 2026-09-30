@@ -28,16 +28,10 @@
 /up-down-mml-*
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
 
-# Página de venda do Método Mãos Lucrativas, refeita a partir da versão em
-# topcorpus.com.br/metodo-maos-lucrativas-v1. Fora dos buscadores enquanto
+# Downsell da página de venda do Método Mãos Lucrativas, refeito a partir
+# de topcorpus.com.br/tpc29/metodo-downsell. Fora dos buscadores enquanto
 # as duas existirem: indexadas as duas, elas disputariam a mesma busca e o
 # Google escolheria sozinho qual mostrar.
-/mml-v1/*
-  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
-
-# Downsell da página de venda do Método Mãos Lucrativas, refeito a partir
-# de topcorpus.com.br/tpc29/metodo-downsell. Mesmo motivo do /mml-v1/*:
-# fora dos buscadores enquanto a versão de lá estiver no ar.
 /mml-downsell/*
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
 
