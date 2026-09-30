@@ -1,0 +1,633 @@
+/* =========================================================================
+   Método Mãos Lucrativas — página de venda — venda.css
+
+   Camada fina sobre design-system.css + taping.css + mml.css. A identidade
+   verde vem do mml.css, que é a mesma das páginas de funil do produto:
+   quem chega aqui pelo anúncio e quem chega pelo upsell veem a mesma marca.
+
+   Aqui ficam só as peças que esta página tem e as outras não:
+
+     1. TARJA E HERO      — o filtro de público e a dobra de abertura
+     2. A DOR             — as três dependências, em negativo
+     3. PROVA             — a faixa de prints que rola de lado
+     4. AS 3 TÉCNICAS     — os três cartões numerados
+     5. O MÉTODO          — as etapas alternando imagem e texto
+     6. A TROCA           — as duas colunas, antes e depois
+     7. A OFERTA          — a soma dos valores e o contador
+     8. GARANTIA E BIO
+     9. O FORMULÁRIO
+    10. SUPORTE
+
+   Carregar DEPOIS de mml.css.
+   ========================================================================= */
+
+/* =========================================================================
+   1. TARJA E HERO
+   ========================================================================= */
+
+/* A primeira linha da página é o filtro de público. Escura e estreita,
+   para ler como etiqueta e não como manchete — a manchete vem logo
+   abaixo e é ela que tem de levar o olho. */
+.vd-tarja {
+  padding: .62rem 1rem;
+  background: var(--tp-ink, #0B1F14);
+  color: rgba(255, 255, 255, .92);
+  text-align: center;
+  font-size: clamp(.64rem, 1.5vw, .74rem);
+  font-weight: var(--fw-extrabold);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.vd-hero { padding-block: 0; }
+
+/* Duas colunas no desktop: a copy à esquerda, a foto à direita. No celular
+   a foto vai para baixo do botão — antes dele ela empurraria a manchete e
+   o CTA para fora da primeira tela. */
+.vd-hero__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+  align-items: center;
+  padding-block: clamp(1.75rem, 4.5vw, 3.25rem);
+}
+@media (min-width: 900px) {
+  .vd-hero__inner { grid-template-columns: 1.05fr .95fr; }
+}
+
+.vd-hero__copy { display: flex; flex-direction: column; align-items: center; text-align: center; gap: clamp(.9rem, 2.2vw, 1.3rem); }
+@media (min-width: 900px) {
+  .vd-hero__copy { align-items: flex-start; text-align: left; }
+}
+
+.vd-logo {
+  display: block;
+  width: min(100%, 210px);
+  height: auto;
+}
+
+.vd-hero__inner .tp-hero__headline {
+  max-width: 19ch;
+  margin: 0;
+  padding-bottom: 0;
+  font-size: clamp(1.6rem, 3.6vw, 2.5rem);
+}
+.vd-hero__inner .tp-hero__sub { max-width: 46ch; margin: 0; }
+.vd-hero__inner .tp-cta { margin: 0; }
+@media (min-width: 900px) {
+  .vd-hero__inner .tp-cta { align-items: flex-start; }
+}
+
+/* Os três selos abaixo do botão: número de alunas, duração e garantia.
+   São a resposta rápida às três primeiras dúvidas de quem chega. */
+.vd-selos {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: .45rem 1.1rem;
+  margin: .2rem 0 0; padding: 0;
+  list-style: none;
+  font-size: .82rem; font-weight: var(--fw-semibold);
+  color: var(--tp-body);
+}
+.vd-selos li { display: inline-flex; align-items: center; gap: .4rem; }
+.vd-selos svg { flex: 0 0 auto; color: var(--tp-rose); }
+@media (min-width: 900px) { .vd-selos { justify-content: flex-start; } }
+
+.vd-hero__foto {
+  margin: 0;
+  width: min(100%, 460px);
+  margin-inline: auto;
+}
+.vd-hero__foto img { display: block; width: 100%; height: auto; }
+
+/* =========================================================================
+   2. A DOR
+   ========================================================================= */
+.vd-section--dor { background: var(--tp-white); }
+
+/* Cada dependência numa linha, com o ✕ à frente. A borda só embaixo
+   separa sem fechar caixa: fechar cada item numa caixa daria peso igual
+   ao da lista de benefícios, que vem depois e precisa pesar mais. */
+.vd-dor {
+  display: grid; gap: 0;
+  max-width: 640px; margin: 0 auto; padding: 0;
+  list-style: none;
+}
+.vd-dor li {
+  display: flex; align-items: flex-start; gap: .75rem;
+  padding: .95rem 0;
+  border-bottom: 1px dashed var(--tp-line-soft);
+  font-size: clamp(.95rem, 1.6vw, 1.05rem);
+  line-height: 1.6;
+  color: var(--tp-body);
+}
+.vd-dor li:last-child { border-bottom: 0; }
+.vd-dor svg { flex: 0 0 auto; margin-top: .28em; color: #C0625F; }
+.vd-dor strong { color: var(--tp-ink); font-weight: var(--fw-bold); }
+
+.vd-prosa {
+  max-width: 600px;
+  margin: clamp(1.75rem, 4vw, 2.5rem) auto 0;
+  text-align: center;
+}
+.vd-prosa p {
+  margin: 0 0 .9rem;
+  font-size: clamp(.98rem, 1.6vw, 1.08rem);
+  line-height: 1.7;
+  color: var(--tp-body);
+}
+.vd-prosa__forte {
+  margin-top: 1.4rem !important;
+  font-size: clamp(1.1rem, 2.2vw, 1.35rem) !important;
+  font-weight: var(--fw-semibold);
+  color: var(--tp-ink) !important;
+}
+.vd-prosa__forte strong { color: var(--tp-rose-deep); }
+
+/* =========================================================================
+   3. PROVA
+
+   Os prints são imagens de conversa, largas e baixas. Empilhados viram uma
+   coluna que ninguém termina de ler; numa faixa que rola de lado, a leitora
+   passa o dedo e para no que a interessa.
+   ========================================================================= */
+.vd-section--prova { background: var(--tp-ivory); }
+
+.vd-prova {
+  overflow-x: auto;
+  /* A barra da faixa é fina e discreta: o design system pinta a barra da
+     página com a cor da marca, e aqui dentro isso viraria um traço verde
+     grosso atravessando a dobra. */
+  scrollbar-width: thin;
+  scrollbar-color: var(--tp-line) transparent;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  padding-block: .35rem 1.1rem;
+}
+.vd-prova__trilha {
+  display: flex;
+  gap: clamp(.8rem, 2vw, 1.15rem);
+  margin: 0;
+  /* O respiro lateral acompanha o do container, para o primeiro print
+     começar alinhado com o título em vez de colado na borda. */
+  padding: 0 max(1.15rem, calc((100vw - var(--tp-container, 1120px)) / 2));
+  list-style: none;
+}
+.vd-prova__trilha li {
+  flex: 0 0 auto;
+  width: min(78vw, 330px);
+  scroll-snap-align: center;
+}
+.vd-prova::-webkit-scrollbar { height: 6px; }
+.vd-prova::-webkit-scrollbar-track { background: transparent; }
+.vd-prova::-webkit-scrollbar-thumb { background: var(--tp-line); border-radius: 99px; border: 0; }
+
+.vd-prova__trilha img {
+  display: block; width: 100%; height: auto;
+  border-radius: var(--tp-radius-sm);
+  border: 1px solid var(--tp-line-soft);
+  background: var(--tp-white);
+  box-shadow: var(--tp-shadow-xs);
+}
+
+/* =========================================================================
+   4. AS 3 TÉCNICAS
+   ========================================================================= */
+.vd-section--virada { background: var(--tp-white); }
+.vd-assinatura {
+  margin: .4rem 0 0;
+  font-size: clamp(1rem, 1.8vw, 1.15rem);
+  font-weight: var(--fw-semibold);
+  color: var(--tp-rose-deep);
+}
+
+.vd-section--tecnicas { background: var(--tp-ivory); }
+
+.vd-tecnicas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+.vd-tec {
+  position: relative;
+  display: flex; flex-direction: column; gap: .55rem;
+  padding: clamp(1.4rem, 3vw, 1.9rem);
+  border: 1px solid var(--tp-line-soft);
+  border-radius: var(--tp-radius);
+  background: var(--tp-white);
+  box-shadow: var(--tp-shadow-sm);
+}
+/* O número é grande e claro, atrás do nome: marca a ordem sem competir
+   com ele pela leitura. */
+.vd-tec__n {
+  position: absolute; top: .5rem; right: 1rem;
+  font-size: 3.2rem; font-weight: var(--fw-extrabold);
+  line-height: 1;
+  color: var(--tp-rose-wash);
+  pointer-events: none;
+}
+.vd-tec__nome {
+  position: relative;
+  margin: 0;
+  font-size: clamp(1.15rem, 2.2vw, 1.38rem);
+  font-weight: var(--fw-extrabold);
+  letter-spacing: -.01em;
+  color: var(--tp-rose-deep);
+}
+.vd-tec__texto { margin: 0; font-size: .95rem; line-height: 1.6; color: var(--tp-body); }
+.vd-tec__gancho {
+  margin: .35rem 0 0;
+  padding-top: .75rem;
+  border-top: 1px dashed var(--tp-line-soft);
+  font-size: .92rem; font-weight: var(--fw-bold);
+  color: var(--tp-ink);
+}
+
+/* A objeção do equipamento, respondida logo depois das três técnicas. */
+.vd-semmaca {
+  display: flex; align-items: flex-start; gap: clamp(.9rem, 2vw, 1.25rem);
+  margin-top: clamp(1.25rem, 3vw, 1.75rem);
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  border: 1px solid var(--tp-rose-soft);
+  border-radius: var(--tp-radius);
+  background: var(--tp-rose-wash);
+}
+.vd-semmaca svg { flex: 0 0 auto; margin-top: .15rem; color: var(--tp-rose-deep); }
+.vd-semmaca h3 {
+  margin: 0 0 .35rem;
+  font-size: 1.02rem; font-weight: var(--fw-extrabold);
+  color: var(--tp-ink);
+}
+.vd-semmaca p { margin: 0; font-size: .96rem; line-height: 1.65; color: var(--tp-body); }
+.vd-semmaca strong { color: var(--tp-ink); }
+
+/* =========================================================================
+   5. O MÉTODO
+   ========================================================================= */
+.vd-section--metodo { background: var(--tp-white); }
+
+.vd-etapas { display: grid; gap: clamp(1.75rem, 4.5vw, 3rem); }
+
+.vd-etapa {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.1rem, 3vw, 2rem);
+  align-items: center;
+}
+@media (min-width: 860px) {
+  .vd-etapa { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); }
+  /* A etapa do meio inverte a ordem visual sem mexer na ordem do HTML:
+     quem lê com leitor de tela continua recebendo imagem e texto na mesma
+     sequência das outras duas. */
+  .vd-etapa--invertida .vd-etapa__media { order: 2; }
+}
+
+.vd-etapa__media { margin: 0; }
+.vd-etapa__media img {
+  display: block; width: 100%; height: auto;
+  border-radius: var(--tp-radius);
+  box-shadow: var(--tp-shadow-md);
+}
+
+.vd-etapa__n {
+  display: inline-block;
+  padding: .22em .7em; border-radius: var(--radius-pill);
+  background: var(--tp-rose-wash); color: var(--tp-rose-deep);
+  font-size: .68rem; font-weight: var(--fw-extrabold);
+  letter-spacing: .14em; text-transform: uppercase;
+}
+.vd-etapa__nome {
+  margin: .6rem 0 .5rem;
+  font-size: clamp(1.25rem, 2.6vw, 1.6rem);
+  font-weight: var(--fw-extrabold);
+  letter-spacing: -.01em;
+  color: var(--tp-ink);
+}
+.vd-etapa__corpo p { margin: 0 0 .75rem; font-size: .98rem; line-height: 1.65; color: var(--tp-body); }
+
+.vd-lista { display: grid; gap: .5rem; margin: 0; padding: 0; list-style: none; }
+.vd-lista li {
+  display: flex; align-items: flex-start; gap: .6rem;
+  font-size: .93rem; line-height: 1.55; color: var(--tp-body);
+}
+.vd-lista svg { flex: 0 0 auto; margin-top: .22em; color: var(--tp-rose); }
+.vd-lista strong { color: var(--tp-ink); font-weight: var(--fw-bold); }
+
+/* =========================================================================
+   6. A TROCA
+   ========================================================================= */
+.vd-section--troca { background: var(--tp-ivory); }
+
+.vd-troca {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+  align-items: start;
+}
+@media (min-width: 820px) { .vd-troca { grid-template-columns: 1fr 1fr; } }
+
+.vd-troca__col {
+  padding: clamp(1.4rem, 3vw, 2rem);
+  border-radius: var(--tp-radius);
+  border: 1px solid var(--tp-line-soft);
+  background: var(--tp-white);
+}
+.vd-troca__col h3 {
+  margin: 0 0 1rem;
+  font-size: clamp(1.02rem, 2vw, 1.2rem);
+  font-weight: var(--fw-extrabold);
+  color: var(--tp-ink);
+}
+.vd-troca__col ul { display: grid; gap: .65rem; margin: 0; padding: 0; list-style: none; }
+.vd-troca__col li {
+  display: flex; align-items: flex-start; gap: .65rem;
+  font-size: .95rem; line-height: 1.55;
+}
+.vd-troca__col svg { flex: 0 0 auto; margin-top: .2em; }
+
+/* A coluna do antes fica mais apagada de propósito: é o lado que a leitora
+   está deixando para trás, e o contraste entre as duas é o argumento. */
+.vd-troca__col--antes { background: #FBF7F7; border-color: #EBDCDC; }
+.vd-troca__col--antes li { color: var(--tp-muted); }
+.vd-troca__col--antes svg { color: #C0625F; }
+
+.vd-troca__col--depois { border-color: var(--tp-rose-soft); box-shadow: var(--tp-shadow-sm); }
+.vd-troca__col--depois li { color: var(--tp-body); }
+.vd-troca__col--depois svg { color: var(--tp-rose); }
+
+/* =========================================================================
+   7. A OFERTA
+   ========================================================================= */
+.vd-section--bonus { background: var(--tp-white); }
+.vd-bonus__title {
+  margin: .1rem 0 .4rem;
+  font-size: clamp(1rem, 1.9vw, 1.14rem);
+  font-weight: var(--fw-extrabold);
+  letter-spacing: -.01em;
+  color: var(--tp-ink);
+}
+
+/* A soma dos valores. Fica sobre o verde da dobra da oferta, então ela é
+   branca por dentro — número escuro sobre claro é o que se lê rápido, e
+   preço é para ser lido rápido. */
+.vd-valor {
+  max-width: 560px;
+  margin: 0 auto clamp(1.5rem, 3.5vw, 2.25rem);
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  border-radius: var(--tp-radius);
+  background: var(--tp-white);
+  box-shadow: 0 24px 60px rgba(3, 40, 20, .3);
+}
+.vd-valor__itens { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+.vd-valor__itens li {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+  padding: .7rem 0;
+  border-bottom: 1px dashed var(--tp-line-soft);
+  font-size: .93rem; line-height: 1.45;
+  color: var(--tp-body);
+}
+.vd-valor__itens b { flex: 0 0 auto; font-weight: var(--fw-bold); color: var(--tp-ink); }
+.vd-valor__total {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+  margin: .9rem 0 0;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  font-weight: var(--fw-extrabold);
+  color: var(--tp-ink);
+}
+.vd-valor__total span { letter-spacing: .1em; text-transform: uppercase; font-size: .72rem; color: var(--tp-muted); }
+.vd-valor__total b { font-size: clamp(1.3rem, 2.8vw, 1.7rem); color: var(--tp-rose-deep); }
+
+.vd-oferta__calma {
+  max-width: 620px;
+  margin: 0 auto clamp(1.25rem, 3vw, 1.75rem);
+  text-align: center;
+  font-size: clamp(.96rem, 1.7vw, 1.06rem);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, .92);
+}
+.vd-oferta__calma strong { color: #fff; }
+
+.vd-preco__desconto {
+  margin: 0 0 .5rem;
+  font-size: .88rem; font-weight: var(--fw-semibold);
+  color: var(--tp-body);
+}
+.vd-preco__desconto strong { color: var(--tp-rose-deep); }
+
+/* O contador. Discreto de propósito: dois números e um rótulo, sem caixa
+   piscando. Ele nasce escondido e o JS o revela — assim, com o JS fora do
+   ar, a página não mostra um cronômetro parado em 15:00 para sempre. */
+.vd-contador {
+  margin-top: 1.1rem;
+  padding-top: 1.1rem;
+  border-top: 1px dashed var(--tp-line-soft);
+  text-align: center;
+}
+.vd-contador__rot {
+  margin: 0 0 .5rem;
+  font-size: .66rem; font-weight: var(--fw-extrabold);
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--tp-muted);
+}
+.vd-contador__nums {
+  display: flex; justify-content: center; gap: .9rem;
+  margin: 0;
+}
+.vd-contador__nums span {
+  display: flex; flex-direction: column; align-items: center;
+  min-width: 62px;
+  padding: .5rem .6rem;
+  border-radius: var(--tp-radius-sm);
+  background: var(--tp-ink);
+}
+.vd-contador__nums b {
+  font-size: 1.5rem; font-weight: var(--fw-extrabold);
+  line-height: 1; color: #fff;
+  font-variant-numeric: tabular-nums;
+}
+.vd-contador__nums i {
+  margin-top: .22rem;
+  font-style: normal; font-size: .6rem;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(255, 255, 255, .62);
+}
+.vd-contador__nota {
+  margin: .6rem 0 0;
+  font-size: .78rem; line-height: 1.5;
+  color: var(--tp-muted);
+}
+
+/* =========================================================================
+   8. GARANTIA E BIO
+   ========================================================================= */
+.vd-section--garantia { background: var(--tp-ivory); }
+
+.vd-garantia {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.25rem, 3.5vw, 2.5rem);
+  align-items: start;
+}
+@media (min-width: 820px) {
+  .vd-garantia { grid-template-columns: minmax(0, 200px) minmax(0, 1fr); }
+}
+.vd-garantia__selo { margin: 0; width: min(100%, 180px); margin-inline: auto; }
+.vd-garantia__selo img { display: block; width: 100%; height: auto; }
+.vd-garantia__corpo p { margin: 0 0 .85rem; font-size: .98rem; line-height: 1.7; color: var(--tp-body); }
+.vd-garantia__corpo strong { color: var(--tp-ink); }
+
+.vd-prazo {
+  display: grid; gap: .8rem;
+  margin: 1.2rem 0; padding: 0;
+  list-style: none;
+  counter-reset: none;
+}
+.vd-prazo li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: .3rem .9rem;
+  align-items: baseline;
+}
+.vd-prazo__q {
+  padding: .2em .65em; border-radius: var(--radius-pill);
+  background: var(--tp-rose-wash); color: var(--tp-rose-deep);
+  font-size: .68rem; font-weight: var(--fw-extrabold);
+  letter-spacing: .1em; text-transform: uppercase;
+  white-space: nowrap;
+}
+.vd-prazo p { margin: 0 !important; font-size: .95rem; line-height: 1.6; }
+.vd-prazo em { font-style: italic; color: var(--tp-ink); }
+
+.vd-garantia__selo-frase {
+  display: flex; align-items: center; gap: .6rem;
+  margin: 1.2rem 0 0 !important;
+  padding: .85rem 1.1rem;
+  border-radius: var(--tp-radius-sm);
+  background: var(--tp-rose-wash);
+  font-weight: var(--fw-extrabold) !important;
+  color: var(--tp-rose-deep) !important;
+}
+.vd-garantia__selo-frase svg { flex: 0 0 auto; }
+
+.vd-section--bio { background: var(--tp-white); }
+.vd-bio {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.5rem, 4vw, 2.75rem);
+  align-items: center;
+  max-width: 1000px; margin-inline: auto;
+}
+@media (min-width: 860px) { .vd-bio { grid-template-columns: minmax(0, 380px) minmax(0, 1fr); } }
+.vd-bio__media img { display: block; width: min(100%, 380px); height: auto; margin-inline: auto; border-radius: var(--tp-radius); }
+.vd-bio__copy p { margin: 0 0 .85rem; font-size: .98rem; line-height: 1.7; color: var(--tp-body); }
+.vd-bio__role {
+  margin-top: -.3rem !important;
+  font-size: .88rem !important;
+  font-weight: var(--fw-semibold);
+  letter-spacing: .04em; text-transform: uppercase;
+  color: var(--tp-rose-deep) !important;
+}
+
+/* =========================================================================
+   9. O FORMULÁRIO
+   ========================================================================= */
+.vd-section--vaga { background: var(--tp-ivory); }
+
+.vd-form {
+  display: grid; gap: 1rem;
+  max-width: 480px; margin: 0 auto;
+  padding: clamp(1.5rem, 3.5vw, 2.25rem);
+  border: 1px solid var(--tp-line-soft);
+  border-radius: var(--tp-radius);
+  background: var(--tp-white);
+  box-shadow: var(--tp-shadow-md);
+}
+.vd-campo { display: grid; gap: .35rem; }
+.vd-campo label {
+  font-size: .8rem; font-weight: var(--fw-bold);
+  color: var(--tp-ink);
+}
+.vd-campo input {
+  width: 100%;
+  padding: .85rem 1rem;
+  border: 1px solid var(--tp-line);
+  border-radius: var(--tp-radius-sm);
+  background: var(--tp-white);
+  font: inherit; font-size: 1rem;   /* 1rem trava o zoom automático do iOS */
+  color: var(--tp-ink);
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.vd-campo input::placeholder { color: var(--tp-faint, #AAB6C4); }
+.vd-campo input:focus-visible {
+  outline: none;
+  border-color: var(--tp-rose);
+  box-shadow: 0 0 0 3px var(--tp-rose-wash);
+}
+/* O estado de erro é borda + mensagem, nunca cor sozinha: quem não
+   distingue vermelho precisa da frase para saber o que corrigir. */
+.vd-campo input[aria-invalid="true"] { border-color: #C0392B; }
+.vd-erro {
+  margin: 0;
+  font-size: .78rem; line-height: 1.4;
+  color: #A93226;
+}
+
+.vd-aceite {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: .3rem .65rem;
+  align-items: start;
+  font-size: .8rem; line-height: 1.5;
+  color: var(--tp-body);
+}
+.vd-aceite input { margin-top: .18em; width: 1.05em; height: 1.05em; accent-color: var(--tp-rose-deep); }
+.vd-aceite .vd-erro { grid-column: 1 / -1; }
+.vd-aceite a { color: var(--tp-rose-deep); text-decoration: underline; }
+
+.vd-form__btn { width: 100%; margin-top: .3rem; }
+.vd-form__btn[aria-busy="true"] { opacity: .72; pointer-events: none; }
+
+/* A nota é um bloco de texto centrado com o escudo embutido na primeira
+   linha. Em flex, o ícone virava uma coluna à esquerda e o texto ficava
+   deslocado dele quando quebrava em duas linhas. */
+.vd-form__nota {
+  margin: 0;
+  font-size: .78rem; line-height: 1.5;
+  color: var(--tp-muted);
+  text-align: center;
+}
+.vd-form__nota svg { display: inline-block; vertical-align: -3px; margin-right: .35rem; color: var(--tp-rose); }
+
+/* =========================================================================
+   10. SUPORTE
+   ========================================================================= */
+.vd-section--suporte { background: var(--tp-white); }
+.vd-suporte {
+  display: flex; flex-direction: column; align-items: center; gap: .6rem;
+  padding: clamp(1.5rem, 3.5vw, 2.25rem);
+  border: 1px solid var(--tp-line-soft);
+  border-radius: var(--tp-radius);
+  background: var(--tp-ivory);
+  text-align: center;
+}
+.vd-suporte svg { color: #12854A; }
+.vd-suporte h2 {
+  margin: .2rem 0 0;
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  font-weight: var(--fw-extrabold);
+  color: var(--tp-ink);
+}
+.vd-suporte p { margin: 0 0 .5rem; font-size: .95rem; color: var(--tp-body); }
+
+/* Botão secundário: o primário desta página é sempre o que leva ao
+   formulário, e o suporte não pode competir com ele. */
+.btn--ghost {
+  background: transparent !important;
+  color: var(--tp-rose-deep) !important;
+  border: 1.5px solid var(--tp-rose-soft);
+  box-shadow: none !important;
+}
+.btn--ghost:hover, .btn--ghost:focus-visible { background: var(--tp-rose-wash) !important; }
+.btn--ghost[aria-disabled="true"] { cursor: not-allowed; opacity: .6; }

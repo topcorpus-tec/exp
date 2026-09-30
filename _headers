@@ -28,6 +28,13 @@
 /up-down-mml-*
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
 
+# Página de venda do Método Mãos Lucrativas, refeita a partir da versão em
+# topcorpus.com.br/metodo-maos-lucrativas-v1. Fora dos buscadores enquanto
+# as duas existirem: indexadas as duas, elas disputariam a mesma busca e o
+# Google escolheria sozinho qual mostrar.
+/mml-v1/*
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+
 # Páginas internas de apoio — o índice das rotas e o fluxograma dos
 # funis. Nunca devem ser encontradas na busca.
 /indice/*
