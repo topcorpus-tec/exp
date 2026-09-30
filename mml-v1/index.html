@@ -88,11 +88,16 @@
   <main>
 
     <!-- ==================== DOBRA 1 — HERO ==================== -->
+    <!-- ==================== DOBRA 1 — HERO ====================
+         Na origem a foto é o fundo da dobra inteira, não uma imagem ao
+         lado: a Ana ocupa a direita e o degradê abre espaço claro à
+         esquerda, que é onde a copy pousa. Aqui é a mesma coisa, com um
+         véu por cima para o texto não depender de onde a foto clareia. -->
     <section class="tp-hero vd-hero" aria-labelledby="hero-title">
       <div class="tp-container vd-hero__inner">
 
         <div class="vd-hero__copy">
-          <img class="vd-logo" src="assets/img/logo-mml.webp"
+          <img class="vd-logo" src="assets/img/logo-mml-topo.webp"
                alt="Método Mãos Lucrativas"
                width="700" height="234" fetchpriority="high" decoding="async" />
 
@@ -120,10 +125,13 @@
           </ul>
         </div>
 
-        <figure class="vd-hero__foto">
+        <!-- No celular a origem troca o fundo por esta versão recortada, com
+             a Ana centrada. Mantive a troca: a foto larga, espremida atrás
+             do texto num telefone, ou come a Ana ou come a manchete. -->
+        <figure class="vd-hero__movel">
           <img src="assets/img/hero-ana.webp"
-               alt="A Ana Martha de jaleco branco, sorrindo, ao lado do print de uma aluna contando quanto faturou no primeiro mês."
-               width="1100" height="1157" fetchpriority="high" decoding="async" />
+               alt="A Ana Martha de jaleco branco, sorrindo, com notas de cem reais ao redor e prints de alunas contando quanto faturaram."
+               width="1100" height="1157" loading="lazy" decoding="async" />
         </figure>
 
       </div>
@@ -213,6 +221,24 @@
           <p class="vd-assinatura">É justamente esse caminho que eu quero te mostrar.</p>
         </div>
       </div>
+
+      <!-- As duas fotos que na origem fecham esta dobra. Elas entram depois
+           da frase e antes das técnicas: é a imagem do que a promessa
+           significa na prática, antes de a página explicar como. -->
+      <div class="tp-container">
+        <div class="vd-duo" data-reveal>
+          <figure>
+            <img src="assets/img/virada-1.webp"
+                 alt="A Ana Martha de jaleco branco aplicando a manobra nas costas de uma cliente deitada na maca."
+                 width="1000" height="914" loading="lazy" decoding="async" />
+          </figure>
+          <figure>
+            <img src="assets/img/virada-2.webp"
+                 alt="Mãos trabalhando a musculatura da perna de uma cliente, com a toalha por cima."
+                 width="840" height="768" loading="lazy" decoding="async" />
+          </figure>
+        </div>
+      </div>
     </section>
     <!-- ==================== /DOBRA 4 ==================== -->
 
@@ -234,6 +260,11 @@
         <div class="vd-tecnicas">
 
           <article class="vd-tec" data-reveal>
+            <figure class="vd-tec__foto">
+              <img src="assets/img/tec-topface.webp"
+                   alt="Mãos trabalhando o rosto de uma cliente deitada, com a faixa na testa."
+                   width="575" height="325" loading="lazy" decoding="async" />
+            </figure>
             <span class="vd-tec__n">01</span>
             <h3 class="vd-tec__nome">TopFace</h3>
             <p class="vd-tec__texto">
@@ -244,6 +275,11 @@
           </article>
 
           <article class="vd-tec" data-reveal>
+            <figure class="vd-tec__foto">
+              <img src="assets/img/tec-topreflexo.webp"
+                   alt="Mãos pressionando pontos na planta do pé de uma cliente."
+                   width="575" height="325" loading="lazy" decoding="async" />
+            </figure>
             <span class="vd-tec__n">02</span>
             <h3 class="vd-tec__nome">TopReflexo</h3>
             <p class="vd-tec__texto">
@@ -254,6 +290,11 @@
           </article>
 
           <article class="vd-tec" data-reveal>
+            <figure class="vd-tec__foto">
+              <img src="assets/img/tec-miotop.webp"
+                   alt="Mãos afundando na musculatura da lombar de um cliente deitado."
+                   width="575" height="325" loading="lazy" decoding="async" />
+            </figure>
             <span class="vd-tec__n">03</span>
             <h3 class="vd-tec__nome">MioTop</h3>
             <p class="vd-tec__texto">
@@ -304,61 +345,56 @@
           </p>
         </div>
 
+        <!-- Na origem as três etapas são texto, sem foto: as imagens de
+             atendimento ficam na dobra anterior. Em três colunas, elas se
+             leem como as três partes de um mesmo treinamento. -->
         <div class="vd-etapas">
 
           <article class="vd-etapa" data-reveal>
-            <div class="vd-etapa__media">
-              <img src="assets/img/metodo-ambiente.webp"
-                   alt="Sala de atendimento montada com toalhas, luz baixa e a maca preparada."
-                   width="1000" height="914" loading="lazy" decoding="async" />
-            </div>
-            <div class="vd-etapa__corpo">
-              <span class="vd-etapa__n">Etapa 1</span>
-              <h3 class="vd-etapa__nome">Ambiente</h3>
-              <p>
-                Como transformar qualquer ambiente numa experiência de spa, seja na sua casa ou na
-                casa da cliente. Você recebe um roteiro completo do que fazer e de como fazer.
-              </p>
-            </div>
-          </article>
-
-          <article class="vd-etapa vd-etapa--invertida" data-reveal>
-            <div class="vd-etapa__media">
-              <img src="assets/img/metodo-tecnicas.webp"
-                   alt="A Ana Martha aplicando uma das manobras nas costas de uma cliente deitada."
-                   width="840" height="768" loading="lazy" decoding="async" />
-            </div>
-            <div class="vd-etapa__corpo">
-              <span class="vd-etapa__n">Etapa 2</span>
-              <h3 class="vd-etapa__nome">As 3 técnicas</h3>
-              <p>TopFace, TopReflexo e MioTop. Para cada uma, uma aula completa ensinando:</p>
-              <ul class="vd-lista">
-                <li><svg width="15" height="15" aria-hidden="true"><use href="#i-check" /></svg>O essencial de anatomia do corpo</li>
-                <li><svg width="15" height="15" aria-hidden="true"><use href="#i-check" /></svg>O passo a passo de como fazer</li>
-                <li><svg width="15" height="15" aria-hidden="true"><use href="#i-check" /></svg>Onde tocar e como tocar</li>
-                <li><svg width="15" height="15" aria-hidden="true"><use href="#i-check" /></svg>Qual pressão usar nas mãos</li>
-                <li><svg width="15" height="15" aria-hidden="true"><use href="#i-check" /></svg>O que evitar</li>
-              </ul>
-            </div>
+            <figure class="vd-etapa__foto">
+              <img src="assets/img/etapa-ambiente.webp"
+                   alt="Sala de atendimento com maca preparada, toalha enrolada e velas acesas."
+                   width="576" height="542" loading="lazy" decoding="async" />
+            </figure>
+            <span class="vd-etapa__n">Etapa 1</span>
+            <h3 class="vd-etapa__nome">Ambiente</h3>
+            <p>
+              Como transformar qualquer ambiente numa experiência de spa, seja na sua casa ou na
+              casa da cliente. Você recebe um roteiro completo do que fazer e de como fazer.
+            </p>
           </article>
 
           <article class="vd-etapa" data-reveal>
-            <div class="vd-etapa__media">
-              <img src="assets/img/mockup-curso.webp"
-                   alt="A área de aulas do Método Mãos Lucrativas aberta no notebook, no tablet e no celular."
-                   width="1600" height="900" loading="lazy" decoding="async" />
-            </div>
-            <div class="vd-etapa__corpo">
-              <span class="vd-etapa__n">Etapa 3</span>
-              <h3 class="vd-etapa__nome">Vendas</h3>
-              <p>
-                Como vender o seu serviço, para quem oferecer, como oferecer e quanto cobrar.
-              </p>
-              <ul class="vd-lista">
-                <li><svg width="15" height="15" aria-hidden="true"><use href="#i-check" /></svg><strong>Estratégia de indicação:</strong>&nbsp;como fazer 1 cliente virar 10</li>
-                <li><svg width="15" height="15" aria-hidden="true"><use href="#i-check" /></svg><strong>Técnicas de fidelização:</strong>&nbsp;como manter a agenda estável e previsível</li>
-              </ul>
-            </div>
+            <figure class="vd-etapa__foto">
+              <img src="assets/img/etapa-tecnicas.webp"
+                   alt="Três recortes lado a lado: massagem no rosto, no pé e nas costas."
+                   width="576" height="542" loading="lazy" decoding="async" />
+            </figure>
+            <span class="vd-etapa__n">Etapa 2</span>
+            <h3 class="vd-etapa__nome">As 3 técnicas</h3>
+            <p>TopFace, TopReflexo e MioTop. Para cada uma, uma aula completa ensinando:</p>
+            <ul class="vd-lista">
+              <li><svg width="15" height="15" aria-hidden="true"><use href="#i-check" /></svg>O essencial de anatomia do corpo</li>
+              <li><svg width="15" height="15" aria-hidden="true"><use href="#i-check" /></svg>O passo a passo de como fazer</li>
+              <li><svg width="15" height="15" aria-hidden="true"><use href="#i-check" /></svg>Onde tocar e como tocar</li>
+              <li><svg width="15" height="15" aria-hidden="true"><use href="#i-check" /></svg>Qual pressão usar nas mãos</li>
+              <li><svg width="15" height="15" aria-hidden="true"><use href="#i-check" /></svg>O que evitar</li>
+            </ul>
+          </article>
+
+          <article class="vd-etapa" data-reveal>
+            <figure class="vd-etapa__foto">
+              <img src="assets/img/etapa-vendas.webp"
+                   alt="Cliente deitada recebendo massagem nos ombros, de olhos fechados."
+                   width="576" height="542" loading="lazy" decoding="async" />
+            </figure>
+            <span class="vd-etapa__n">Etapa 3</span>
+            <h3 class="vd-etapa__nome">Vendas</h3>
+            <p>Como vender o seu serviço, para quem oferecer, como oferecer e quanto cobrar.</p>
+            <ul class="vd-lista">
+              <li><svg width="15" height="15" aria-hidden="true"><use href="#i-check" /></svg><strong>Estratégia de indicação:</strong>&nbsp;como fazer 1 cliente virar 10</li>
+              <li><svg width="15" height="15" aria-hidden="true"><use href="#i-check" /></svg><strong>Técnicas de fidelização:</strong>&nbsp;como manter a agenda estável e previsível</li>
+            </ul>
           </article>
 
         </div>
@@ -509,6 +545,15 @@
             Veja o que você recebe entrando hoje para o Mãos Lucrativas
           </h2>
         </div>
+
+        <!-- O mockup da plataforma abre a oferta: é a primeira vez que a
+             leitora vê o produto que vai comprar, e vê logo antes da soma
+             dos valores. -->
+        <figure class="vd-oferta__mock" data-reveal>
+          <img src="assets/img/mockup-curso.webp"
+               alt="A área de aulas do Método Mãos Lucrativas aberta no notebook, no tablet e no celular, ao lado do certificado e do selo de 1 ano de acesso."
+               width="1600" height="900" loading="lazy" decoding="async" />
+        </figure>
 
         <!-- A soma antes do preço. Cada linha tem o seu valor cheio, e o
              total é o número que o desconto vai derrubar na dobra seguinte
@@ -668,6 +713,16 @@
           <p class="tp-lead">Preencha os dados abaixo para continuar para o pagamento.</p>
         </div>
 
+        <!-- Os quatro selos que na origem ficam dentro do modal do
+             formulário. É onde eles servem: logo antes de a pessoa entregar
+             os dados, respondendo "quem está do outro lado disso". -->
+        <ul class="vd-selos-marca" data-reveal>
+          <li><img src="assets/img/selo-topcorpus.webp" alt="TopCorpus" width="642" height="517" loading="lazy" decoding="async" /></li>
+          <li><img src="assets/img/selo-congresso.webp" alt="3º Congresso de Massoterapia" width="686" height="199" loading="lazy" decoding="async" /></li>
+          <li><img src="assets/img/selo-toptaping.webp" alt="TopTaping" width="560" height="456" loading="lazy" decoding="async" /></li>
+          <li><img src="assets/img/selo-aprimoramento.webp" alt="Aprimoramento em Massoterapia Clínica" width="560" height="169" loading="lazy" decoding="async" /></li>
+        </ul>
+
         <form class="vd-form" data-reveal novalidate data-vaga>
 
           <div class="vd-campo">
@@ -805,7 +860,9 @@
     <section class="tp-section vd-section--suporte" aria-labelledby="suporte-title">
       <div class="tp-container tp-container--narrow">
         <div class="vd-suporte" data-reveal>
-          <svg width="30" height="30" aria-hidden="true"><use href="#i-whats" /></svg>
+          <img class="vd-suporte__icone" src="assets/img/icone-whats.webp"
+               alt="" aria-hidden="true"
+               width="640" height="629" loading="lazy" decoding="async" />
           <h2 id="suporte-title">Ficou alguma dúvida?</h2>
           <p>Fale com a minha equipe no WhatsApp agora mesmo.</p>
           <!-- PENDÊNCIA: o número do suporte não veio na página de origem.
@@ -826,6 +883,10 @@
        numa página que promete R$1.000 por mês ele não é formalidade. -->
   <footer class="footer" role="contentinfo">
     <div class="container">
+      <img class="footer__marca" src="assets/img/logo-mml.webp"
+           alt="Método Mãos Lucrativas"
+           width="700" height="234" loading="lazy" decoding="async" />
+
       <div class="footer__top">
         <p class="footer__copy">
           Copyright &copy; ANA MARTHA CURSOS ONLINE LTDA.<br />

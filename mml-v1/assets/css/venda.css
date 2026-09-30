@@ -40,42 +40,89 @@
   line-height: 1.4;
 }
 
-.vd-hero { padding-block: 0; }
+/* A foto ocupa a metade direita da dobra, que é onde a Ana está no
+   arquivo original — o resto dele era fundo vazio e foi recortado fora.
 
-/* Duas colunas no desktop: a copy à esquerda, a foto à direita. No celular
-   a foto vai para baixo do botão — antes dele ela empurraria a manchete e
-   o CTA para fora da primeira tela. */
+   Ela é uma camada própria ancorada à direita, e não o background da
+   seção. O motivo: a copy desta dobra é mais alta que a proporção da
+   foto, e um background com cover cortaria as laterais para preencher a
+   altura, empurrando a Ana para dentro da coluna de texto. Como camada
+   de largura fixa isso não acontece em altura nenhuma.
+
+   A borda esquerda dela dissolve numa máscara, para não haver um corte
+   reto no meio da dobra. */
+.vd-hero {
+  position: relative;
+  padding-block: 0;
+  background: linear-gradient(120deg, #FFFFFF 0%, #F4FBF7 58%, #E9F7EF 100%);
+}
+.vd-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: min(58%, 820px);
+  /* 62% e não "right": no cover a caixa é mais alta que o arquivo e o
+     corte vem dos lados; ancorada à direita, a Ana caía na faixa onde a
+     máscara ainda está apagando a imagem. */
+  background: url("../img/hero-fundo.webp") 62% center / cover no-repeat;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 15%);
+          mask-image: linear-gradient(to right, transparent 0%, #000 15%);
+  pointer-events: none;
+}
+.vd-hero > .tp-container { position: relative; z-index: 1; }
+
+/* No celular a camada sai e entra a versão recortada, como na origem: a
+   foto atrás do texto num telefone ou come a Ana ou come a manchete. */
+.vd-hero__movel { display: block; margin: clamp(1.25rem, 4vw, 1.75rem) 0 0; }
+.vd-hero__movel img { display: block; width: min(100%, 340px); height: auto; margin-inline: auto; }
+
+@media (max-width: 719px) {
+  .vd-hero::after { display: none; }
+}
+@media (min-width: 720px) {
+  .vd-hero__movel { display: none; }
+  /* Altura mínima para a foto ter onde respirar; se a copy pedir mais, a
+     caixa cede e a camada acompanha. */
+  .vd-hero { min-height: clamp(420px, 42vw, 620px); }
+  .vd-hero__inner { align-content: center; }
+}
+
 .vd-hero__inner {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(1.5rem, 4vw, 2.5rem);
-  align-items: center;
-  padding-block: clamp(1.75rem, 4.5vw, 3.25rem);
+  padding-block: clamp(1.75rem, 5vw, 4rem);
 }
-@media (min-width: 900px) {
-  .vd-hero__inner { grid-template-columns: 1.05fr .95fr; }
+@media (min-width: 720px) {
+  /* A copy para antes da metade: dali para a direita é onde a Ana está na
+     foto, e escrever ali seria escrever por cima dela. */
+  .vd-hero__inner { grid-template-columns: minmax(0, 52%); }
+}
+@media (min-width: 1100px) {
+  .vd-hero__inner { grid-template-columns: minmax(0, 45%); }
 }
 
-.vd-hero__copy { display: flex; flex-direction: column; align-items: center; text-align: center; gap: clamp(.9rem, 2.2vw, 1.3rem); }
-@media (min-width: 900px) {
+.vd-hero__copy { display: flex; flex-direction: column; align-items: center; text-align: center; gap: clamp(.75rem, 1.6vw, 1.05rem); }
+@media (min-width: 720px) {
   .vd-hero__copy { align-items: flex-start; text-align: left; }
 }
 
 .vd-logo {
   display: block;
-  width: min(100%, 210px);
+  width: min(100%, 185px);
   height: auto;
 }
 
 .vd-hero__inner .tp-hero__headline {
-  max-width: 19ch;
+  max-width: 18ch;
   margin: 0;
   padding-bottom: 0;
-  font-size: clamp(1.6rem, 3.6vw, 2.5rem);
+  /* Um ponto menor que o das outras dobras: aqui ela divide a altura com
+     logo, subtítulo, botão e selos, dentro da proporção da foto. */
+  font-size: clamp(1.5rem, 2.9vw, 2.15rem);
 }
 .vd-hero__inner .tp-hero__sub { max-width: 46ch; margin: 0; }
 .vd-hero__inner .tp-cta { margin: 0; }
-@media (min-width: 900px) {
+@media (min-width: 720px) {
   .vd-hero__inner .tp-cta { align-items: flex-start; }
 }
 
@@ -91,14 +138,7 @@
 }
 .vd-selos li { display: inline-flex; align-items: center; gap: .4rem; }
 .vd-selos svg { flex: 0 0 auto; color: var(--tp-rose); }
-@media (min-width: 900px) { .vd-selos { justify-content: flex-start; } }
-
-.vd-hero__foto {
-  margin: 0;
-  width: min(100%, 460px);
-  margin-inline: auto;
-}
-.vd-hero__foto img { display: block; width: 100%; height: auto; }
+@media (min-width: 720px) { .vd-selos { justify-content: flex-start; } }
 
 /* =========================================================================
    2. A DOR
@@ -202,6 +242,26 @@
   color: var(--tp-rose-deep);
 }
 
+/* As duas fotos que fecham a dobra da virada. Lado a lado no desktop,
+   empilhadas no celular — em duas colunas estreitas demais elas viram
+   selos, e é o contrário: é a hora de mostrar o trabalho de perto. */
+.vd-duo {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(.9rem, 2.4vw, 1.5rem);
+  max-width: 900px;
+  margin: clamp(1.5rem, 4vw, 2.5rem) auto 0;
+}
+@media (min-width: 720px) { .vd-duo { grid-template-columns: 1fr 1fr; } }
+.vd-duo figure { margin: 0; }
+.vd-duo img {
+  display: block; width: 100%; height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--tp-radius);
+  box-shadow: var(--tp-shadow-md);
+}
+
 .vd-section--tecnicas { background: var(--tp-ivory); }
 
 .vd-tecnicas {
@@ -213,7 +273,8 @@
 .vd-tec {
   position: relative;
   display: flex; flex-direction: column; gap: .55rem;
-  padding: clamp(1.4rem, 3vw, 1.9rem);
+  overflow: hidden;
+  padding: 0 clamp(1.4rem, 3vw, 1.9rem) clamp(1.4rem, 3vw, 1.9rem);
   border: 1px solid var(--tp-line-soft);
   border-radius: var(--tp-radius);
   background: var(--tp-white);
@@ -221,11 +282,25 @@
 }
 /* O número é grande e claro, atrás do nome: marca a ordem sem competir
    com ele pela leitura. */
+/* A foto sangra até as bordas do cartão, que já recorta pelo overflow. */
+.vd-tec__foto {
+  margin: 0 calc(-1 * clamp(1.4rem, 3vw, 1.9rem)) clamp(1rem, 2.4vw, 1.3rem);
+}
+.vd-tec__foto img {
+  display: block; width: 100%; height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+/* O número fica sobre a foto, no canto. Dentro do cartão ele atravessava
+   as linhas do texto; ali em cima marca a ordem e não disputa leitura. */
 .vd-tec__n {
-  position: absolute; top: .5rem; right: 1rem;
-  font-size: 3.2rem; font-weight: var(--fw-extrabold);
+  position: absolute; top: .55rem; right: .9rem;
+  z-index: 1;
+  font-size: 2.6rem; font-weight: var(--fw-extrabold);
   line-height: 1;
-  color: var(--tp-rose-wash);
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, .38);
   pointer-events: none;
 }
 .vd-tec__nome {
@@ -268,31 +343,35 @@
    ========================================================================= */
 .vd-section--metodo { background: var(--tp-white); }
 
-.vd-etapas { display: grid; gap: clamp(1.75rem, 4.5vw, 3rem); }
+/* Três colunas de igual peso: são as três partes de um treinamento só, e
+   qualquer uma maior que as outras sugeriria uma hierarquia que não existe. */
+.vd-etapas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+  align-items: start;
+}
 
 .vd-etapa {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(1.1rem, 3vw, 2rem);
-  align-items: center;
-}
-@media (min-width: 860px) {
-  .vd-etapa { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); }
-  /* A etapa do meio inverte a ordem visual sem mexer na ordem do HTML:
-     quem lê com leitor de tela continua recebendo imagem e texto na mesma
-     sequência das outras duas. */
-  .vd-etapa--invertida .vd-etapa__media { order: 2; }
-}
-
-.vd-etapa__media { margin: 0; }
-.vd-etapa__media img {
-  display: block; width: 100%; height: auto;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  padding: 0 clamp(1.4rem, 3vw, 1.9rem) clamp(1.4rem, 3vw, 1.9rem);
+  border: 1px solid var(--tp-line-soft);
   border-radius: var(--tp-radius);
-  box-shadow: var(--tp-shadow-md);
+  background: var(--tp-ivory);
+}
+.vd-etapa__foto {
+  margin: 0 calc(-1 * clamp(1.4rem, 3vw, 1.9rem)) clamp(1rem, 2.4vw, 1.3rem);
+}
+.vd-etapa__foto img {
+  display: block; width: 100%; height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
 }
 
 .vd-etapa__n {
   display: inline-block;
+  align-self: flex-start;
   padding: .22em .7em; border-radius: var(--radius-pill);
   background: var(--tp-rose-wash); color: var(--tp-rose-deep);
   font-size: .68rem; font-weight: var(--fw-extrabold);
@@ -305,7 +384,7 @@
   letter-spacing: -.01em;
   color: var(--tp-ink);
 }
-.vd-etapa__corpo p { margin: 0 0 .75rem; font-size: .98rem; line-height: 1.65; color: var(--tp-body); }
+.vd-etapa p { margin: 0 0 .75rem; font-size: .98rem; line-height: 1.65; color: var(--tp-body); }
 
 .vd-lista { display: grid; gap: .5rem; margin: 0; padding: 0; list-style: none; }
 .vd-lista li {
@@ -398,6 +477,19 @@
 }
 .vd-valor__total span { letter-spacing: .1em; text-transform: uppercase; font-size: .72rem; color: var(--tp-muted); }
 .vd-valor__total b { font-size: clamp(1.3rem, 2.8vw, 1.7rem); color: var(--tp-rose-deep); }
+
+/* O mockup abre a dobra da oferta, sobre o verde. O arquivo não tem alfa:
+   ele traz o próprio fundo claro, então ganha raio e sombra para ler como
+   peça apoiada e não como retângulo colado. */
+.vd-oferta__mock {
+  margin: 0 auto clamp(1.25rem, 3vw, 1.9rem);
+  width: min(100%, 720px);
+}
+.vd-oferta__mock img {
+  display: block; width: 100%; height: auto;
+  border-radius: var(--tp-radius);
+  box-shadow: 0 24px 60px rgba(3, 40, 20, .34);
+}
 
 .vd-oferta__calma {
   max-width: 620px;
@@ -535,6 +627,29 @@
    ========================================================================= */
 .vd-section--vaga { background: var(--tp-ivory); }
 
+/* Os quatro selos de autoridade. Cinza e pequenos: eles respondem a uma
+   dúvida de fundo — quem está do outro lado — e não devem competir com o
+   formulário que vem logo abaixo. Ganham cor ao passar o mouse. */
+.vd-selos-marca {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: clamp(1.1rem, 3vw, 2.2rem);
+  max-width: 480px;
+  margin: 0 auto clamp(1.1rem, 2.8vw, 1.6rem);
+  padding: 0;
+  list-style: none;
+}
+.vd-selos-marca li { flex: 0 0 auto; }
+.vd-selos-marca img {
+  display: block;
+  height: clamp(30px, 6vw, 40px);
+  width: auto;
+  opacity: .55;
+  filter: grayscale(1);
+  transition: opacity .2s ease, filter .2s ease;
+}
+.vd-selos-marca li:hover img { opacity: 1; filter: none; }
+@media (prefers-reduced-motion: reduce) { .vd-selos-marca img { transition: none; } }
+
 .vd-form {
   display: grid; gap: 1rem;
   max-width: 480px; margin: 0 auto;
@@ -612,6 +727,7 @@
   background: var(--tp-ivory);
   text-align: center;
 }
+.vd-suporte__icone { display: block; width: 58px; height: auto; }
 .vd-suporte svg { color: #12854A; }
 .vd-suporte h2 {
   margin: .2rem 0 0;
@@ -631,3 +747,14 @@
 }
 .btn--ghost:hover, .btn--ghost:focus-visible { background: var(--tp-rose-wash) !important; }
 .btn--ghost[aria-disabled="true"] { cursor: not-allowed; opacity: .6; }
+
+/* =========================================================================
+   11. A MARCA NO RODAPÉ
+   ========================================================================= */
+.footer__marca {
+  display: block;
+  width: min(100%, 170px);
+  height: auto;
+  margin: 0 auto clamp(1rem, 2.5vw, 1.5rem);
+  opacity: .85;
+}
