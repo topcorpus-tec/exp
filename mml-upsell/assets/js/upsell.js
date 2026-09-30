@@ -1,5 +1,5 @@
 /* =========================================================================
-   Método Mãos Lucrativas — PG-VENDAS — Downsell — downsell.js
+   Método Mãos Lucrativas — /mml-upsell/ — upsell.js
 
    O que roda aqui:
 
@@ -30,7 +30,7 @@
                   encodeURIComponent("Olá! Quero tirar uma dúvida sobre o Método Mãos Lucrativas");
 
   function avisa(msg) {
-    if (window.console && console.warn) console.warn("[mml-downsell] " + msg);
+    if (window.console && console.warn) console.warn("[mml-upsell] " + msg);
   }
 
   /* =======================================================================
@@ -66,7 +66,7 @@
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
           event: "clique_checkout",
-          pagina: "mml-downsell",
+          pagina: "mml-upsell",
           rotulo: (a.textContent || "").trim()
         });
       });
