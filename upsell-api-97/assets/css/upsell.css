@@ -132,6 +132,45 @@ a { color: inherit; }
   background: #F9FDFD url("../img/fundo-claro.webp") center center / cover no-repeat;
 }
 
+/* ==================== Quebra de linha ====================
+
+   Nenhum título ou parágrafo deve terminar com uma palavra sozinha na última
+   linha. São duas ferramentas diferentes, e usar a errada custa caro:
+
+   - balance reparte o texto em linhas de largura parecida. É o que serve
+     para título, chamada e rótulo de botão: blocos curtos, onde a simetria
+     é justamente o que se vê. O navegador só aplica até seis linhas, o que
+     nunca limita um título.
+   O pedido foi equilibrar tudo, então o corpo de texto também vai de
+   balance, e não do pretty — que só conserta a última linha. Os blocos
+   desta página são curtos; o navegador desiste do balance acima de seis
+   linhas e volta sozinho para a quebra normal, que é a rede de proteção
+   para o caso de algum parágrafo crescer.
+
+   Onde o navegador não conhece a propriedade a quebra volta a ser a padrão,
+   então isto é melhoria, nunca dependência. */
+
+p, li, dd, figcaption, summary, .dw-corpo { text-wrap: balance; }
+
+h1, h2, h3, h4, h5, h6,
+.dw-btn,
+.dw-hero__sub,
+.dw-hero__nota span,
+.dw-selo__titulo,
+.dw-passo__pilula,
+.dw-passo__chamada,
+.dw-presente__titulo,
+.dw-prova__fecho,
+.dw-item__titulo,
+.dw-conta__destaque,
+.dw-conta__apoio,
+.dw-oferta__chamada,
+.dw-oferta__avista,
+.dw-oferta__lista li span,
+.dw-faq__item summary span {
+  text-wrap: balance;
+}
+
 .dw-titulo {
   max-width: 874px;
   margin-inline: auto;
@@ -234,7 +273,13 @@ a { color: inherit; }
   display: grid;
   align-content: center;
 }
-.dw-hero__texto { max-width: 50%; }
+/* O recuo extra à esquerda é só do bloco de texto: o gutter da grade vale
+   para a página inteira, e aumentá-lo moveria todas as dobras. Aqui a
+   margem some no celular, onde o texto é centralizado. */
+.dw-hero__texto {
+  max-width: 50%;
+  margin-inline-start: clamp(0rem, 3vw, 2.75rem);
+}
 
 .dw-hero__logo { width: min(100%, 292px); margin-bottom: .5rem; }
 
@@ -287,6 +332,7 @@ a { color: inherit; }
   }
   .dw-hero__texto {
     max-width: none;
+    margin-inline-start: 0;
     margin-top: 221px;
     display: flex;
     flex-direction: column;
@@ -302,7 +348,38 @@ a { color: inherit; }
 
 
 /* =========================================================================
-   DOBRA 2 — MÉTODO DE 3 PASSOS
+   DOBRA 2 — TRÊS SELOS
+   ========================================================================= */
+.dw-selos { padding-block: clamp(1.5rem, 4vw, 2em); }
+.dw-selos__lista {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+.dw-selo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .35rem;
+  padding: 30px;
+  text-align: center;
+  border: 1px solid var(--dw-linha-clara);
+  border-radius: 16px;
+  background-image: linear-gradient(305deg, #052113 0%, #083E23 100%);
+  box-shadow: var(--dw-sombra-cartao);
+}
+.dw-selo__titulo { font-size: clamp(1rem, 1.8vw, 21px); font-weight: 700; color: #FFFFFF; }
+.dw-selo__texto  { font-size: clamp(.8rem, 1.4vw, 16px); font-weight: 300; color: #AEAEAE; }
+
+@media (max-width: 767px) {
+  .dw-selos { padding-block: 1.5em 2em; }
+  .dw-selos__lista { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .dw-selo { border-radius: 13px; }
+}
+
+
+/* =========================================================================
+   DOBRA 3 — MÉTODO DE 3 PASSOS
    ========================================================================= */
 .dw-passos { padding-block: 4em; background: var(--dw-verde-700); }
 .dw-passos .dw-titulo { max-width: 827px; }
@@ -354,7 +431,10 @@ a { color: inherit; }
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: clamp(1rem, 2.5vw, 1.6rem) clamp(1rem, 2vw, 1.4rem);
-  align-items: start;
+  /* stretch, não start: os três cartões da linha têm textos de tamanhos
+     diferentes, e com start cada um parava onde o seu texto acabava — três
+     bases desalinhadas lado a lado. */
+  align-items: stretch;
 }
 .dw-item {
   position: relative;
@@ -416,55 +496,27 @@ a { color: inherit; }
 
 
 /* =========================================================================
-   DOBRA 3 — TRÊS SELOS
-   ========================================================================= */
-.dw-selos { padding-block: clamp(1.5rem, 4vw, 2em); }
-.dw-selos__lista {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
-}
-.dw-selo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: .35rem;
-  padding: 30px;
-  text-align: center;
-  border: 1px solid var(--dw-linha-clara);
-  border-radius: 16px;
-  background-image: linear-gradient(305deg, #052113 0%, #083E23 100%);
-  box-shadow: var(--dw-sombra-cartao);
-}
-.dw-selo__titulo { font-size: clamp(1rem, 1.8vw, 21px); font-weight: 700; color: #FFFFFF; }
-.dw-selo__texto  { font-size: clamp(.8rem, 1.4vw, 16px); font-weight: 300; color: #AEAEAE; }
-
-@media (max-width: 767px) {
-  .dw-selos { padding-block: 1.5em 2em; }
-  .dw-selos__lista { grid-template-columns: minmax(0, 1fr); gap: 14px; }
-  .dw-selo { border-radius: 13px; }
-}
-
-
-/* =========================================================================
    DOBRA 4 — PRESENTES
    ========================================================================= */
 .dw-presentes { padding-block: 4em; background: var(--dw-verde-800); }
 .dw-presentes__icone { width: 92px; margin-inline: auto; }
 .dw-presentes .dw-titulo { margin-top: 1.25rem; }
 
+/* Cada presente no seu próprio cartão. Antes era um cartão só com os seis
+   dentro, e quem estava embaixo — o Suporte, sem imagem de capa larga —
+   ficava boiando no fundo da seção, sem nada que o delimitasse. */
 .dw-presentes__caixa {
   margin-top: 1.8rem;
+  display: grid;
+  gap: clamp(1rem, 2.5vw, 1.6rem);
+}
+
+.dw-presente {
   padding: 30px;
   border: 1px solid var(--dw-linha-verde);
   border-radius: 16px;
   background-image: linear-gradient(305deg, #0B4126 0%, #196E43 100%);
   box-shadow: var(--dw-sombra-cartao);
-  display: grid;
-  gap: clamp(2rem, 5vw, 3.5rem);
-}
-
-.dw-presente {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: center;
@@ -517,7 +569,7 @@ a { color: inherit; }
 @media (max-width: 767px) {
   .dw-presentes { padding-block: 3em 4em; }
   .dw-presentes__icone { width: 68px; }
-  .dw-presentes__caixa { padding: 1em; border-radius: 13px; }
+  .dw-presente { padding: 1.4em 1em; border-radius: 13px; }
   .dw-presente__texto .dw-corpo {
     max-width: 264px; padding: 1.3em 0 0;
     font-size: 15px; line-height: 1.4; letter-spacing: .2px;
@@ -580,7 +632,72 @@ a { color: inherit; }
 
 
 /* =========================================================================
-   DOBRA 6 — PARA QUEM É
+   DOBRA 6 — CERTIFICADO
+   ========================================================================= */
+.dw-certificado { padding-block: 4em; }
+
+/* Uma coluna só enquanto a arte não chega. O doc pede aqui a foto da Ana
+   segurando o certificado; quando ela existir, esta grade passa a duas
+   colunas e a <figure class="dw-certificado__midia"> entra na segunda. */
+.dw-certificado__grade {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+.dw-certificado__texto { max-width: 874px; margin-inline: auto; }
+
+.dw-certificado__texto .dw-corpo {
+  max-width: 700px;
+  margin: 1.2rem auto 0;
+  text-align: center;
+}
+
+.dw-certificado__lista {
+  max-width: 760px;
+  margin: 1.8rem auto 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 2.5vw, 1.6rem);
+}
+.dw-certificado__lista li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+  padding: 26px 20px;
+  border: 1px solid var(--dw-linha-clara);
+  border-radius: 16px;
+  background-image: linear-gradient(305deg, #052113 0%, #083E23 100%);
+  box-shadow: var(--dw-sombra-cartao);
+  text-align: center;
+}
+.dw-certificado__lista strong {
+  display: block;
+  font-size: clamp(.95rem, 1.6vw, 17px);
+  font-weight: 700;
+  color: #FFFFFF;
+}
+/* O parêntese do doc vira a linha de apoio: mesma informação, sem o
+   parêntese, que em cartão centralizado só rouba largura. */
+.dw-certificado__lista span {
+  display: block;
+  margin-top: .3rem;
+  font-family: var(--dw-fonte-apoio);
+  font-size: clamp(.78rem, 1.3vw, 14px);
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--dw-apoio);
+}
+
+@media (max-width: 767px) {
+  .dw-certificado { padding-block: 3em; }
+  .dw-certificado__lista { grid-template-columns: minmax(0, 1fr); }
+  .dw-certificado__lista li { border-radius: 13px; }
+}
+
+
+/* =========================================================================
+   DOBRA 7 — PARA QUEM É
    ========================================================================= */
 .dw-perfeito { padding-block: 4em; }
 /* Flex com quebra, e não grid: assim a segunda fila — que tem dois cards —
@@ -624,7 +741,7 @@ a { color: inherit; }
 
 
 /* =========================================================================
-   DOBRA 7 — OFERTA
+   DOBRA 8 — OFERTA
    ========================================================================= */
 .dw-oferta {
   padding-block: 7em;
@@ -764,7 +881,7 @@ a { color: inherit; }
 
 
 /* =========================================================================
-   DOBRA 8 — FAZ A CONTA
+   DOBRA 9 — FAZ A CONTA
    ========================================================================= */
 .dw-conta { padding-block: 4em 5em; }
 .dw-conta__caixa {
@@ -825,7 +942,7 @@ a { color: inherit; }
 
 
 /* =========================================================================
-   DOBRA 9 — GARANTIA
+   DOBRA 10 — GARANTIA
    ========================================================================= */
 .dw-garantia { padding-block: 3.2em 7em; background: var(--dw-verde-900); }
 
@@ -875,7 +992,7 @@ a { color: inherit; }
 
 
 /* =========================================================================
-   DOBRA 10 — BIO
+   DOBRA 11 — BIO
    ========================================================================= */
 .dw-bio {
   padding-block: 0 3em;
@@ -926,7 +1043,7 @@ a { color: inherit; }
 
 
 /* =========================================================================
-   DOBRA 11 — FAQ
+   DOBRA 12 — FAQ
    ========================================================================= */
 .dw-faq { padding-block: 3em; background: var(--dw-creme); }
 .dw-faq__titulo {
