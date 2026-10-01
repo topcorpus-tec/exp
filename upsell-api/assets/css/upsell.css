@@ -340,8 +340,8 @@ h1, h2, h3, h4, h5, h6,
   .dw-hero::before {
     content: "";
     position: absolute;
-    inset: 105vw 0 0;
-    background-image: linear-gradient(180deg, transparent 0, var(--dw-hero) 21vw);
+    inset: 100vw 0 0;
+    background-image: linear-gradient(180deg, transparent 0, var(--dw-hero) 16vw);
     pointer-events: none;
   }
   .dw-hero__grade { position: relative; }
@@ -354,12 +354,12 @@ h1, h2, h3, h4, h5, h6,
      da altura dela e o vestido some no verde a 50%. Como o fundo é cover
      numa arte vertical, ele sempre escala pela largura — a altura exibida é
      2144/733 = 2,925 vezes a largura. Por isso a margem é em vw, e não em px:
-     126vw é onde a cortina acima já fechou, logo abaixo da colagem,
+     116vw é onde a cortina acima já fechou, encostando na colagem,
      que acaba em 111vw. Vale em qualquer celular. */
   .dw-hero__texto {
     max-width: none;
     margin-inline-start: 0;
-    margin-top: 126vw;
+    margin-top: 116vw;
     display: flex;
     flex-direction: column;
     align-items: center;
