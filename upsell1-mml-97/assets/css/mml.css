@@ -261,6 +261,15 @@
      deixar a sobra sozinha na segunda. */
   text-wrap: balance;
 }
+
+/* No desktop a frase cabe numa linha só, então o teto de 42ch sai da frente.
+   Tirar o teto, e não trocar por nowrap: a pílula é um item flex de largura
+   fit-content, então ela cresce só até o que o texto pede e para na largura
+   do container. Se um dia a frase ficar longa demais, volta a quebrar em vez
+   de furar a página. */
+@media (min-width: 1024px) {
+  .mml-congrats { max-width: 100%; }
+}
 .mml-congrats svg { flex: 0 0 auto; }
 
 /* A manchete do upsell e do downsell fecha em duas linhas: mais larga,
@@ -274,6 +283,16 @@
   margin-inline: auto;
   padding-bottom: 0;
   font-size: clamp(1.45rem, 3.4vw, 2.3rem);
+}
+
+/* O título do downsell do upsell tem 107 caracteres contra os 58 do upsell,
+   e na medida de 30ch fechava em quatro linhas. Aqui ele ganha linha mais
+   larga e um ponto menor, para fechar em duas como o outro. A regra é
+   separada porque a medida que serve a um estoura o outro: a 56ch, o título
+   do upsell viraria uma linha só. */
+.mml-hero__inner .tp-hero__headline.tp-hero__headline--larga {
+  max-width: 56ch;
+  font-size: clamp(1.45rem, 3vw, 2rem);
 }
 .mml-hero__inner .mml-proc__title { margin-inline: auto; padding-bottom: 0; }
 .mml-hero__inner .tp-hero__copy { margin-top: 0; padding-bottom: 0; }
