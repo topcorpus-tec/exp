@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#01140B" />
+  <meta name="description" content="Aprenda 3 técnicas simples de massagem humanizada e conquiste sua independência financeira, mesmo sem maca, sem espaço próprio e sem experiência." />
+
+  <!-- Cópia estática de topcorpus.com.br/tpc29/metodo-downsell/ (post 70793).
+       Fora dos buscadores enquanto as duas existirem: indexadas as duas,
+       elas disputariam a mesma busca e o Google escolheria sozinho qual
+       mostrar. O _headers da raiz reforça com X-Robots-Tag. -->
+  <!-- TICKET 27 — esta é a cópia desta etapa para quem comprou o Manual de
+       R$27.
+
+       As três cópias são hoje idênticas, arquivo por arquivo: a página não
+       cita preço nenhum e o destino dos botões é o mesmo. A separação
+       existe pelo que ela dá de graça — cada ticket tem a sua URL, então dá
+       para separar tráfego e conversão por preço sem depender de parâmetro.
+
+       Se um dia o checkout for diferente por ticket, o lugar de mudar é a
+       constante CHECKOUT_URL no topo de assets/js/upsell.js desta pasta. -->
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+  <meta name="googlebot" content="noindex, nofollow" />
+
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), usb=()" />
+
+  <meta property="og:title"       content="Ganhe R$100 por hora com massagem usando apenas suas mãos!" />
+  <meta property="og:description" content="Aprenda 3 técnicas simples de massagem humanizada e conquiste sua independência financeira, mesmo sem maca, sem espaço próprio e sem experiência." />
+  <meta property="og:type"        content="website" />
+  <meta property="og:locale"      content="pt_BR" />
+
+  <!-- Favicon do TopCorpus, na raiz do site: um arquivo só serve todas as
+       rotas, e o caminho absoluto funciona de qualquer pasta. O .ico leva
+       16, 32 e 48 px dentro, que cobre aba, atalho e barra de tarefas. -->
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <title>Método Mãos Lucrativas — PG-VENDAS — Upsell — ticket 27</title>
+
+  <!-- ==================== Fontes ====================
+       Manrope sai do CDN compartilhado, igual às outras páginas do repo.
+       Poppins é usada em quatro blocos pequenos (títulos dos cards dos
+       passos e dos bônus, o aviso do contador, os parágrafos da garantia e
+       do suporte) — é assim na página de origem. -->
+  <link rel="preconnect" href="https://pcm.topcorpus.com.br" crossorigin />
+  <link rel="dns-prefetch" href="https://pcm.topcorpus.com.br" />
+  <link rel="preload" as="font" type="font/woff2" href="https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-400.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-600.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-700.woff2" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&amp;display=swap" />
+
+  <!-- ==================== dataLayer init ANTES do env-config ==================== -->
+  <script>window.dataLayer = window.dataLayer || [];</script>
+
+  <!-- ==================== Site config + GTM ==================== -->
+  <script src="assets/js/env-config.js"></script>
+  <script src="assets/js/gtm-loader.js"></script>
+
+  <!-- ==================== CSS ====================
+       Uma folha só, e não a pilha design-system → taping → página das
+       outras rotas. O pedido aqui foi reproduzir a página de origem como
+       ela está, e o design system do repo tem outra paleta (roxo), outra
+       escala e outros botões: sobrepor tudo isso custaria mais linhas de
+       correção do que escrever a camada desta página inteira. -->
+  <link rel="stylesheet" href="assets/css/upsell.css" />
+
+  <script src="assets/js/upsell.js" defer></script>
+</head>
+<body>
+
+  <!-- ==================== Sprite de ícones ====================
+       Os traçados vêm do Font Awesome, que é o que a página de origem
+       usa. Os três desenhados à mão (ticket, presente e seta) substituem
+       ícones do pacote Happy Addons, que não é fonte aberta. -->
+  <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+    <symbol id="i-escudo" viewBox="0 0 512 512"><path d="M466.5 83.7l-192-80a48.15 48.15 0 0 0-36.9 0l-192 80C27.7 91.1 16 108.6 16 128c0 198.5 114.5 335.7 221.5 380.3 11.8 4.9 25.1 4.9 36.9 0C360.1 472.6 496 349.3 496 128c0-19.4-11.7-36.9-29.5-44.3zM256.1 446.3l-.1-381 175.9 73.3c-3.3 151.4-82.1 261.1-175.8 307.7z"/></symbol>
+    <symbol id="i-relogio" viewBox="0 0 512 512"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></symbol>
+    <symbol id="i-check-circulo" viewBox="0 0 512 512"><path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 48c110.532 0 200 89.451 200 200 0 110.532-89.451 200-200 200-110.532 0-200-89.451-200-200 0-110.532 89.451-200 200-200m140.204 130.267l-22.536-22.718c-4.667-4.705-12.265-4.736-16.97-.068L215.346 303.697l-59.792-60.277c-4.667-4.705-12.265-4.736-16.97-.069l-22.719 22.536c-4.705 4.667-4.736 12.265-.068 16.971l90.781 91.516c4.667 4.705 12.265 4.736 16.97.068l172.589-171.204c4.704-4.668 4.734-12.266.067-16.971z"/></symbol>
+    <symbol id="i-x" viewBox="0 0 352 512"><path d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 512 512"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></symbol>
+    <symbol id="i-whats" viewBox="0 0 448 512"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></symbol>
+    <symbol id="i-interrogacao" viewBox="0 0 512 512"><path d="M504 256c0 136.997-111.043 248-248 248S8 392.997 8 256C8 119.083 119.043 8 256 8s248 111.083 248 248zM262.655 90c-54.497 0-89.255 22.957-116.549 63.758-3.536 5.286-2.353 12.415 2.715 16.258l34.699 26.31c5.205 3.947 12.621 3.008 16.665-2.122 17.864-22.658 30.113-35.797 57.303-35.797 20.429 0 45.698 13.148 45.698 32.958 0 14.976-12.363 22.667-32.534 33.976C247.128 238.528 216 254.941 216 296v4c0 6.627 5.373 12 12 12h56c6.627 0 12-5.373 12-12v-1.333c0-28.462 83.186-29.647 83.186-106.667 0-58.002-60.165-102-116.531-102zM256 338c-25.365 0-46 20.635-46 46 0 25.364 20.635 46 46 46s46-20.636 46-46c0-25.365-20.635-46-46-46z"/></symbol>
+    <symbol id="i-ticket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 8.5V6.5a1.5 1.5 0 0 1 1.5-1.5h15A1.5 1.5 0 0 1 21 6.5v2a2.5 2.5 0 0 0 0 5v2a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 15.5v-2a2.5 2.5 0 0 0 0-5z" />
+      <path d="M13 7.5v1.2M13 11.4v1.2M13 15.3v1.2" />
+    </symbol>
+    <symbol id="i-presente" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2.5" y="8" width="19" height="4" rx="1" />
+      <path d="M4.2 12v8a1.5 1.5 0 0 0 1.5 1.5h12.6a1.5 1.5 0 0 0 1.5-1.5v-8" />
+      <path d="M12 8v13.5" />
+      <path d="M12 8S10.6 3.2 8.2 3.2a2.4 2.4 0 0 0 0 4.8zM12 8s1.4-4.8 3.8-4.8a2.4 2.4 0 0 1 0 4.8z" />
+    </symbol>
+    <symbol id="i-seta-quadrada" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2.8" y="2.8" width="18.4" height="18.4" rx="6" />
+      <path d="M9 12h6M12.4 9l3 3-3 3" />
+    </symbol>
+    <symbol id="i-mais" viewBox="0 0 448 512"><path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/></symbol>
+    <symbol id="i-menos" viewBox="0 0 448 512"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/></symbol>
+  </svg>
+
+
+  <!-- ==================================================================
+       DOBRA 1 — HERO
+       ================================================================== -->
+  <header class="dw-hero">
+    <div class="dw-hero__grade">
+      <div class="dw-hero__texto">
+        <img class="dw-hero__logo" src="assets/img/logo-mml.webp"
+             alt="Método Mãos Lucrativas" width="350" height="117" fetchpriority="high" decoding="async" />
+
+        <h1 class="dw-hero__titulo">Ganhe <em>R$100 por hora</em> com massagem usando apenas suas mãos!</h1>
+
+        <p class="dw-hero__sub">Aprenda 3 técnicas simples de massagem humanizada e conquiste sua independência financeira, mesmo sem maca, sem espaço próprio e sem experiência.</p>
+
+        <a class="dw-btn dw-btn--claro dw-hero__cta" href="#" data-checkout>GARANTIR MINHA VAGA AGORA!</a>
+
+        <p class="dw-hero__nota">
+          <svg class="dw-ico dw-ico--ticket" aria-hidden="true"><use href="#i-ticket" /></svg>
+          <span>Garanta sua vaga no Método Mãos Lucrativas por apenas 12x de R$28,94!</span>
+        </p>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ==================================================================
+       DOBRA 2 — TRÊS SELOS
+       ================================================================== -->
+  <section class="dw-selos dw-fundo-claro" aria-label="Garantias da compra">
+    <div class="dw-container">
+      <ul class="dw-selos__lista">
+        <li class="dw-selo">
+          <svg class="dw-ico dw-ico--34" aria-hidden="true"><use href="#i-escudo" /></svg>
+          <p class="dw-selo__titulo">Pagamento Seguro</p>
+          <p class="dw-selo__texto">Seus dados estão protegidos e sua compra é 100% segura.</p>
+        </li>
+        <li class="dw-selo">
+          <svg class="dw-ico dw-ico--34" aria-hidden="true"><use href="#i-relogio" /></svg>
+          <p class="dw-selo__titulo">Acesso imediato</p>
+          <p class="dw-selo__texto">Receba seu login e senha por e-mail assim que seu pagamento for processado.</p>
+        </li>
+        <li class="dw-selo">
+          <svg class="dw-ico dw-ico--34" aria-hidden="true"><use href="#i-check-circulo" /></svg>
+          <p class="dw-selo__titulo">15 Dias de Garantia</p>
+          <p class="dw-selo__texto">Teste gratuitamente por 15 dias. Satisfação garantida ou o seu dinheiro de volta.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+
+  <!-- ==================================================================
+       DOBRA 3 — PRESENTES
+       ================================================================== -->
+  <section class="dw-presentes" aria-labelledby="t-presentes">
+    <div class="dw-container">
+      <img class="dw-presentes__icone" src="assets/img/icone-presentes.webp"
+           alt="" aria-hidden="true" width="320" height="320" loading="lazy" decoding="async" />
+
+      <h2 class="dw-titulo dw-titulo--caixa-alta" id="t-presentes">Presentes exclusivos para para todas as inscritas no Método Mãos Lucrativas:</h2>
+
+      <div class="dw-presentes__caixa">
+        <article class="dw-presente">
+          <div class="dw-presente__texto">
+            <div class="dw-presente__pilula">
+              <svg class="dw-ico dw-ico--34" aria-hidden="true"><use href="#i-presente" /></svg>
+              <p class="dw-presente__titulo">Massagem TopTerapêutica</p>
+            </div>
+            <div class="dw-corpo">
+              <p>Uma técnica extra tirada de dentro do Curso TopCorpus &#8211; a massagem que alivia dores.</p>
+              <p>Esse conteúdo eu só ensino no curso completo. Mas vou liberar pra você como presente especial.</p>
+              <p>Sabe aquela paciente que chega com dor nas costas, ombro travado, pescoço duro? Com a TopTerapêutica você vai saber exatamente o que fazer.</p>
+            </div>
+          </div>
+          <div class="dw-presente__midia">
+            <img src="assets/img/presente-topterapeutica.webp"
+                 alt="Aulas da Massagem TopTerapêutica abertas num notebook e num celular"
+                 width="557" height="450" loading="lazy" decoding="async" />
+          </div>
+        </article>
+
+        <article class="dw-presente dw-presente--invertido">
+          <div class="dw-presente__texto">
+            <div class="dw-presente__pilula">
+              <svg class="dw-ico dw-ico--34" aria-hidden="true"><use href="#i-presente" /></svg>
+              <p class="dw-presente__titulo">Pacote de divulgação da Trilogia Holística</p>
+            </div>
+            <div class="dw-corpo">
+              <p>Meus materiais de divulgação prontos para você encaminhar para suas potenciais pacientes falando dos benefícios das 3 técnicas.</p>
+              <p>Reforça sua autoridade, seu profissionalismo e seu conhecimento!</p>
+              <p>Esse pacote de divulgação além de atrair mais pacientes para você, vai fazer com que elas tenham desejo pelo seu atendimento e compartilhem com mais pessoas!</p>
+            </div>
+          </div>
+          <div class="dw-presente__midia">
+            <img src="assets/img/presente-pacote.webp"
+                 alt="Peças do pacote de divulgação da Trilogia Holística"
+                 width="557" height="450" loading="lazy" decoding="async" />
+          </div>
+        </article>
+
+      </div>
+
+      <a class="dw-btn dw-btn--claro dw-cta-centro" href="#" data-checkout>ENTRAR AGORA E GANHAR OS PRESENTES</a>
+    </div>
+  </section>
+
+
+  <!-- ==================================================================
+       DOBRA 4 — PROVA (prints das alunas)
+       ================================================================== -->
+  <section class="dw-prova" aria-labelledby="t-prova">
+    <div class="dw-container">
+      <h2 class="dw-titulo" id="t-prova">PRESENTES EXCLUSIVOS PARA PARA TODAS AS INSCRITAS NO MÉTODO MÃOS LUCRATIVAS:</h2>
+
+      <div class="dw-prova__caixa">
+        <!-- Esteira contínua: a página de origem usa um carrossel do Elementor
+             com autoplay 0 e transição linear de 9s, que na prática é uma
+             esteira. Aqui é CSS: a faixa tem a lista duplicada e desliza
+             metade da própria largura, então o laço não tem emenda. -->
+        <div class="dw-esteira" data-esteira>
+          <ul class="dw-esteira__faixa">
+            <li><img src="assets/img/print-1.webp" alt="Print de aluna: com mãos lucrativas consegui em 1 mês 1.600, é possível" width="541" height="226" loading="lazy" decoding="async" /></li>
+            <li><img src="assets/img/print-2.webp" alt="Print de aluna: com mãos lucrativas consegui meus 1.000 e mais pra ser topcorpus" width="541" height="226" loading="lazy" decoding="async" /></li>
+            <li><img src="assets/img/print-3.webp" alt="Print de mensagem de aluna do Método Mãos Lucrativas" width="541" height="226" loading="lazy" decoding="async" /></li>
+            <li><img src="assets/img/print-4.webp" alt="Print de mensagem de aluna do Método Mãos Lucrativas" width="541" height="226" loading="lazy" decoding="async" /></li>
+            <li><img src="assets/img/print-5.webp" alt="Print de mensagem de aluna do Método Mãos Lucrativas" width="541" height="226" loading="lazy" decoding="async" /></li>
+            <li><img src="assets/img/print-6.webp" alt="Print de mensagem de aluna do Método Mãos Lucrativas" width="541" height="226" loading="lazy" decoding="async" /></li>
+            <li><img src="assets/img/print-7.webp" alt="Print de mensagem de aluna do Método Mãos Lucrativas" width="541" height="226" loading="lazy" decoding="async" /></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================================================================
+       DOBRA 5 — PARA QUEM É
+       ================================================================== -->
+  <section class="dw-perfeito dw-fundo-claro" aria-labelledby="t-perfeito">
+    <div class="dw-container">
+      <h2 class="dw-titulo dw-titulo--escuro" id="t-perfeito">O Método Mãos Lucrativas é perfeito para você que:</h2>
+
+      <ul class="dw-perfeito__lista">
+        <li class="dw-perfil">
+          <svg class="dw-ico dw-ico--34" aria-hidden="true"><use href="#i-check-circulo" /></svg>
+          <p>Quer começar a trabalhar com massagem mas não sabe por onde começar;</p>
+        </li>
+        <li class="dw-perfil">
+          <svg class="dw-ico dw-ico--34" aria-hidden="true"><use href="#i-check-circulo" /></svg>
+          <p>Ainda não tem maca nem espaço próprio, mas quer conquistar sua independência financeira;</p>
+        </li>
+        <li class="dw-perfil">
+          <svg class="dw-ico dw-ico--34" aria-hidden="true"><use href="#i-check-circulo" /></svg>
+          <p>Não pode investir alto agora, mas não quer ficar parada esperando;</p>
+        </li>
+        <li class="dw-perfil">
+          <svg class="dw-ico dw-ico--34" aria-hidden="true"><use href="#i-check-circulo" /></svg>
+          <p>Quer aprender técnicas para fazer em familiares e amigos que precisam;</p>
+        </li>
+        <li class="dw-perfil">
+          <svg class="dw-ico dw-ico--34" aria-hidden="true"><use href="#i-check-circulo" /></svg>
+          <p>Busca uma renda extra usando apenas suas mãos!</p>
+        </li>
+      </ul>
+
+      <a class="dw-btn dw-btn--escuro dw-cta-centro" href="#" data-checkout>É PARA MIM, QUERO ME INSCREVER!</a>
+    </div>
+  </section>
+
+
+  <!-- ==================================================================
+       DOBRA 6 — MÉTODO DE 3 PASSOS
+       ================================================================== -->
+  <section class="dw-passos" aria-labelledby="t-passos">
+    <div class="dw-container">
+      <h2 class="dw-titulo" id="t-passos">Conheça o MÉTODO DE 3 PASSOS do Método Mãos Lucrativas para você lucrar R$1.000 em 30 dias usando apenas suas mãos:</h2>
+
+      <!-- PASSO 1 -->
+      <div class="dw-passo">
+        <p class="dw-passo__pilula"><span>PASSO 1:</span> EXPERIÊNCIA DE SPA</p>
+        <div class="dw-passo__caixa">
+          <div class="dw-corpo dw-corpo--centro">
+            <p>No primeiro passo, você vai aprender a criar uma EXPERIÊNCIA DE SPA: como oferecer um atendimento 5 estrelas em qualquer lugar.</p>
+          </div>
+          <p class="dw-passo__chamada">É isso que te permite cobrar mais pela sessão! Você vai aprender:</p>
+
+          <ul class="dw-itens">
+            <li class="dw-item">
+              <p class="dw-item__n">01</p>
+              <p class="dw-item__titulo">Acolhimento:</p>
+              <p class="dw-item__texto">Como receber a cliente de forma humanizada.</p>
+              <img src="assets/img/passo1-acolhimento.webp" alt="Massoterapeuta recebendo a cliente na porta" width="300" height="200" loading="lazy" decoding="async" />
+            </li>
+            <li class="dw-item">
+              <p class="dw-item__n">02</p>
+              <p class="dw-item__titulo">Ambiência:</p>
+              <p class="dw-item__texto">Dicas práticas para transformar qualquer ambiente em um espaço de massagem relaxante.</p>
+              <img src="assets/img/passo1-ambiencia.webp" alt="Sala preparada para uma sessão de massagem" width="300" height="200" loading="lazy" decoding="async" />
+            </li>
+            <li class="dw-item">
+              <p class="dw-item__n">03</p>
+              <p class="dw-item__titulo">Técnicas Básicas de Massagem:</p>
+              <p class="dw-item__texto">Domine os movimentos essenciais que promovem alívio e relaxamento.</p>
+              <img src="assets/img/passo1-tecnicas.webp" alt="Massoterapeuta aplicando uma técnica básica de massagem" width="300" height="201" loading="lazy" decoding="async" />
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- PASSO 2 -->
+      <div class="dw-passo">
+        <p class="dw-passo__pilula"><span>PASSO 2:</span> TRILOGIA HOLÍSTICA</p>
+        <div class="dw-passo__caixa">
+          <div class="dw-corpo dw-corpo--centro">
+            <p>No segundo passo, você vai aprender na prática as 3 TÉCNICAS DA TRILOGIA HOLÍSTICA.</p>
+            <p>Elas foram criadas especialmente para serem feitas sem maca, sem espaço próprio e são ideais para quem está começando.</p>
+          </div>
+          <p class="dw-passo__chamada">AS 3 TÉCNICAS QUE VOCÊ VAI DOMINAR:</p>
+
+          <ul class="dw-itens">
+            <li class="dw-item">
+              <p class="dw-item__n">01</p>
+              <p class="dw-item__titulo">MASSAGEM TOPFACE</p>
+              <p class="dw-item__texto">A massagem facial que reduz olheiras, bolsas e papada. Resultado visível na primeira sessão, a paciente se olha no espelho e vê a diferença.</p>
+              <img src="assets/img/passo2-topface.webp" alt="Massagem facial TopFace sendo aplicada" width="300" height="201" loading="lazy" decoding="async" />
+            </li>
+            <li class="dw-item">
+              <p class="dw-item__n">02</p>
+              <p class="dw-item__titulo">TOPREFLEXO (REFLEXOLOGIA)</p>
+              <p class="dw-item__texto">A reflexologia nos pés que trata o corpo inteiro. Conhecimento milenar chinês na palma da sua mão. Você vai dominar o mapa completo do pé. Vai saber tratar ansiedade, intestino, dor nas costas, insônia, tudo através dos pés. A paciente que faz reflexologia vicia. Ela volta toda semana.</p>
+              <img src="assets/img/passo2-topreflexo.webp" alt="Reflexologia sendo aplicada no pé da paciente" width="300" height="201" loading="lazy" decoding="async" />
+            </li>
+            <li class="dw-item">
+              <p class="dw-item__n">03</p>
+              <p class="dw-item__titulo">LIBERAÇÃO MIOFASCIAL (MIOTOP)</p>
+              <p class="dw-item__texto">A técnica que dissolve dor e nó muscular. Para aquela paciente que chega atrasada e sai nova. Ou aquele idoso que precisa das suas mãos. Para você atender dor nas costas, pescoço travado, ombro tenso, dor no ciático. Essa técnica sozinha já vale o curso inteiro!</p>
+              <img src="assets/img/passo2-miotop.webp" alt="Liberação miofascial sendo aplicada nas costas" width="300" height="201" loading="lazy" decoding="async" />
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- PASSO 3 -->
+      <div class="dw-passo">
+        <p class="dw-passo__pilula"><span>PASSO 3:</span> AGENDA MAGNÉTICA</p>
+        <div class="dw-passo__caixa">
+          <div class="dw-corpo dw-corpo--centro">
+            <p>No terceiro passo, você vai aprender a AGENDA MAGNÉTICA: como atrair suas primeiras pacientes.</p>
+            <p>Por mais que existam muitas pessoas precisando de massagem, você precisa divulgar do jeito certo. Você vai aprender:</p>
+          </div>
+          <p class="dw-passo__chamada">AS 3 TÉCNICAS QUE VOCÊ VAI DOMINAR:</p>
+
+          <ul class="dw-itens">
+            <li class="dw-item">
+              <p class="dw-item__n">01</p>
+              <p class="dw-item__titulo">Construção da Autoridade Local:</p>
+              <p class="dw-item__texto">Como mostrar o seu valor nas redes sociais e na comunidade.</p>
+              <img src="assets/img/passo3-autoridade.webp" alt="Massoterapeuta gravando conteúdo para as redes sociais" width="300" height="201" loading="lazy" decoding="async" />
+            </li>
+            <li class="dw-item">
+              <p class="dw-item__n">02</p>
+              <p class="dw-item__titulo">Pacotes e Preços:</p>
+              <p class="dw-item__texto">Estratégias para criar ofertas irresistíveis.</p>
+              <img src="assets/img/passo3-pacotes.webp" alt="Massoterapeuta apresentando um pacote para a cliente" width="300" height="201" loading="lazy" decoding="async" />
+            </li>
+            <li class="dw-item">
+              <p class="dw-item__n">03</p>
+              <p class="dw-item__titulo">Gestão da Agenda:</p>
+              <p class="dw-item__texto">Mantenha sua agenda sempre cheia com um planejamento inteligente.</p>
+              <img src="assets/img/passo3-agenda.webp" alt="Massoterapeuta organizando a agenda no celular" width="300" height="202" loading="lazy" decoding="async" />
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <a class="dw-btn dw-btn--claro dw-cta-centro" href="#" data-checkout>QUERO APRENDER OS 3 PASSOS</a>
+    </div>
+  </section>
+
+
+  <!-- ==================================================================
+       DOBRA 7 — BÔNUS
+       ================================================================== -->
+  <section class="dw-bonus" aria-labelledby="t-bonus">
+    <div class="dw-container">
+      <h2 class="dw-titulo" id="t-bonus">VOCÊ VAI SABER EXATAMENTE O QUE FAZER EM CADA ATENDIMENTO!</h2>
+      <p class="dw-bonus__intro">Você nunca mais vai ficar com dúvidas, pois vai ter em mãos tudo o que precisa para começar a atender:</p>
+      <p class="dw-bonus__rotulo"><strong>Bônus exclusivos</strong>:</p>
+
+      <div class="dw-bonus__caixa">
+        <ul class="dw-itens dw-itens--bonus">
+          <li class="dw-item dw-item--bonus">
+            <img class="dw-item__selo" src="assets/img/selo-bonus.webp" alt="" aria-hidden="true" width="320" height="330" loading="lazy" decoding="async" />
+            <img class="dw-item__capa" src="assets/img/bonus-divulgacao.webp" alt="Material com direcionamento de divulgação do seu serviço" width="229" height="277" loading="lazy" decoding="async" />
+            <p class="dw-item__texto">Material com direcionamento de divulgação do seu serviço;</p>
+          </li>
+          <li class="dw-item dw-item--bonus">
+            <img class="dw-item__selo" src="assets/img/selo-bonus.webp" alt="" aria-hidden="true" width="320" height="330" loading="lazy" decoding="async" />
+            <img class="dw-item__capa" src="assets/img/bonus-anamnese.webp" alt="Caderno de anamnese em PDF" width="480" height="583" loading="lazy" decoding="async" />
+            <p class="dw-item__texto">Caderno de anamnese em PDF;</p>
+          </li>
+          <li class="dw-item dw-item--bonus">
+            <img class="dw-item__selo" src="assets/img/selo-bonus.webp" alt="" aria-hidden="true" width="320" height="330" loading="lazy" decoding="async" />
+            <img class="dw-item__capa" src="assets/img/bonus-ebook.webp" alt="E-book de apoio do Método Mãos Lucrativas" width="289" height="400" loading="lazy" decoding="async" />
+            <p class="dw-item__texto">E-Book de apoio para utilizar durante suas consultas;</p>
+          </li>
+          <li class="dw-item dw-item--bonus">
+            <img class="dw-item__selo" src="assets/img/selo-bonus.webp" alt="" aria-hidden="true" width="320" height="330" loading="lazy" decoding="async" />
+            <img class="dw-item__capa" src="assets/img/bonus-suporte.webp" alt="Comunidade de suporte do Método Mãos Lucrativas no celular" width="229" height="277" loading="lazy" decoding="async" />
+            <p class="dw-item__texto"><strong>Suporte completo:</strong><br />minha equipe está sempre à disposição para tirar suas dúvidas.</p>
+          </li>
+        </ul>
+      </div>
+
+      <a class="dw-btn dw-btn--claro dw-cta-centro" href="#" data-checkout>QUERO TER ACESSO IMEDIATO</a>
+    </div>
+  </section>
+
+
+  <!-- ==================================================================
+       DOBRA 8 — QUANTO VALE
+       ================================================================== -->
+  <section class="dw-quanto" aria-labelledby="t-quanto">
+    <div class="dw-container dw-quanto__grade">
+      <div class="dw-quanto__texto">
+        <h2 class="dw-quanto__titulo" id="t-quanto">QUANTO VALE TUDO ISSO PARA VOCÊ?</h2>
+        <div class="dw-corpo dw-corpo--escuro">
+          <p>Fiz um cálculo breve aqui e percebi que somando <strong><em>apenas as 3 técnicas</em></strong> da Trilogia Holística, o valor passaria, facilmente, de <strong>R$1.297,00</strong>.</p>
+          <p>E mesmo que eu cobrasse esse valor, ainda seria barato, pois esse é o valor que você pode ganhar em <strong>APENAS UM MÊS</strong> aplicando o que vai aprender.</p>
+          <p>Mas eu não quero que o dinheiro seja desculpa pra você não começar.</p>
+          <p>Eu queria um valor que coubesse no bolso de qualquer mulher.</p>
+          <p>Por isso você, mulher sortuda que está nessa página, vai ganhar um desconto de <strong>MIL REAIS!</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================================================================
+       DOBRA 9 — OFERTA
+       ================================================================== -->
+  <section class="dw-oferta" id="oferta" aria-labelledby="t-oferta">
+    <div class="dw-container">
+      <picture class="dw-oferta__mock">
+        <source media="(max-width: 767px)" srcset="assets/img/oferta-mockup-movel.webp" width="900" height="506" />
+        <img src="assets/img/oferta-mockup.webp"
+             alt="Certificado e aulas do Método Mãos Lucrativas em notebook, tablet e celular, com selo de 1 ano de acesso"
+             width="1400" height="788" loading="lazy" decoding="async" />
+      </picture>
+
+      <div class="dw-oferta__cartao">
+        <h2 class="dw-oferta__titulo" id="t-oferta">QUÃO COMPROMETIDA VOCÊ ESTÁ EM COMEÇAR A GANHAR DINHEIRO COM MASSAGEM?</h2>
+
+        <p class="dw-oferta__de">O preço original é</p>
+        <p class="dw-oferta__riscado"><s>R$ 1297,00.</s></p>
+        <p class="dw-oferta__chamada">Mas hoje, você pode ter acesso completo por apenas:</p>
+
+        <p class="dw-oferta__parcelas">12X de</p>
+        <p class="dw-oferta__preco">R$ 28,94</p>
+        <p class="dw-oferta__avista">ou <strong>R$297,00</strong> à vista</p>
+
+        <ul class="dw-oferta__lista">
+          <li>
+            <svg class="dw-ico dw-ico--x" aria-hidden="true"><use href="#i-x" /></svg>
+            <span>Sem precisar de faculdade.</span>
+          </li>
+          <li>
+            <svg class="dw-ico dw-ico--x" aria-hidden="true"><use href="#i-x" /></svg>
+            <span>Sem precisar investir em nenhum espaço ou equipamento.</span>
+          </li>
+          <li>
+            <svg class="dw-ico dw-ico--ok" aria-hidden="true"><use href="#i-check" /></svg>
+            <span>Tudo que você precisa para começar a ganhar dinheiro  com massagem são as suas mãos!</span>
+          </li>
+        </ul>
+
+        <hr class="dw-oferta__linha" />
+
+        <p class="dw-oferta__bonus"><em>E ainda levar bônus incríveis para acelerar seus resultados:</em></p>
+
+        <a class="dw-btn dw-btn--oferta" href="#" data-checkout>SIM! QUERO ENTRAR AGORA</a>
+
+        <p class="dw-oferta__aviso">Atenção! Este é o tempo restante desta oferta. Depois que o cronômetro zerar, acabou&#8230; Aproveite agora!</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================================================================
+       DOBRA 10 — FAZ A CONTA
+       ================================================================== -->
+  <section class="dw-conta dw-fundo-claro" aria-labelledby="t-conta">
+    <div class="dw-container">
+      <h2 class="dw-titulo dw-titulo--escuro" id="t-conta">Faz a conta comigo:</h2>
+
+      <div class="dw-conta__caixa">
+        <p class="dw-conta__destaque">R$297 ÷ 30 dias = <strong>menos de R$10 por dia</strong></p>
+        <p class="dw-conta__apoio">É o preço de um lanche. É o preço de um café com pão de queijo.</p>
+      </div>
+
+      <h2 class="dw-titulo dw-titulo--escuro dw-titulo--folga">E olha só:</h2>
+
+      <div class="dw-conta__caixa">
+        <ul class="dw-conta__lista">
+          <li>
+            <svg class="dw-ico dw-ico--seta" aria-hidden="true"><use href="#i-seta-quadrada" /></svg>
+            <span>Com 1 massagem de R$100 você já pagou 1/3 do curso</span>
+          </li>
+          <li>
+            <svg class="dw-ico dw-ico--seta" aria-hidden="true"><use href="#i-seta-quadrada" /></svg>
+            <span>Com 2 massagens você pagou 2/3</span>
+          </li>
+          <li>
+            <svg class="dw-ico dw-ico--seta" aria-hidden="true"><use href="#i-seta-quadrada" /></svg>
+            <span>Com 3 massagens você pagou tudo e já tá no lucro</span>
+          </li>
+        </ul>
+      </div>
+
+      <h2 class="dw-conta__fecho">Em 7 dias você pode ter feito 3 massagens. Em 7 dias você já pode ter pago o curso e estar lucrando.</h2>
+
+      <a class="dw-btn dw-btn--escuro dw-cta-centro" href="#" data-checkout>É PARA MIM, QUERO ME INSCREVER!</a>
+    </div>
+  </section>
+
+
+  <!-- ==================================================================
+       DOBRA 11 — GARANTIA
+       ================================================================== -->
+  <section class="dw-garantia" aria-labelledby="t-garantia">
+    <div class="dw-container">
+      <div class="dw-garantia__cartao">
+        <img class="dw-garantia__selo" src="assets/img/selo-garantia.webp"
+             alt="Selo de garantia de 15 dias" width="426" height="426" loading="lazy" decoding="async" />
+        <h2 class="dw-garantia__titulo" id="t-garantia">Garantia Incondicional de 15 Dias:</h2>
+        <div class="dw-corpo dw-corpo--poppins">
+          <p>Você tem 15 dias para explorar o Método Mãos Lucrativas, sem compromisso.</p>
+          <p>Assistir às aulas, praticar as técnicas e contar com o time de suporte.</p>
+          <p>Se, por qualquer motivo, decidir que o curso não é para você, devolvo 100% do seu dinheiro.</p>
+          <p>Sem perguntas, sem complicações. E nossa amizade continua, mulher!</p>
+        </div>
+      </div>
+
+      <a class="dw-btn dw-btn--escuro dw-cta-centro" href="#" data-checkout>QUERO TESTAR AGORA SEM RISCO</a>
+    </div>
+  </section>
+
+
+  <!-- ==================================================================
+       DOBRA 12 — FALE COM A EQUIPE
+       ================================================================== -->
+  <section class="dw-suporte" aria-labelledby="t-suporte">
+    <div class="dw-container">
+      <div class="dw-suporte__cartao">
+        <svg class="dw-ico dw-ico--whats" aria-hidden="true"><use href="#i-whats" /></svg>
+        <h2 class="dw-suporte__titulo" id="t-suporte">FALE DIRETAMENTE COM MINHA EQUIPE!</h2>
+        <div class="dw-corpo dw-corpo--escuro dw-corpo--centro">
+          <p>Mulher, se você ficou com alguma dúvida ou tem dificuldade na hora de fazer a compra, agora você também pode falar com minha equipe.</p>
+          <p>Nós vamos te ajudar a garantir sua vaga! Aqui a gente empurra sua bicicleta, mulher!</p>
+        </div>
+        <a class="dw-btn dw-btn--claro" href="#" data-whats>PRECISO DE AJUDA PARA ENTRAR NO CURSO</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================================================================
+       DOBRA 13 — BIO
+       ================================================================== -->
+  <section class="dw-bio" aria-labelledby="t-bio">
+    <div class="dw-container dw-bio__grade">
+      <figure class="dw-bio__foto">
+        <img src="assets/img/bio-ana.webp" alt="Ana Martha, fisioterapeuta dermatofuncional e criadora do Método Mãos Lucrativas"
+             width="596" height="751" loading="lazy" decoding="async" />
+      </figure>
+
+      <div class="dw-bio__texto">
+        <h2 class="dw-bio__titulo" id="t-bio">QUEM SERÁ SUA PROFESSORA?</h2>
+        <div class="dw-corpo">
+          <p><strong>Quero pegar na sua mão e te ajudar a dar o primeiro passo na massagem!</strong></p>
+          <p>E no Método Mãos Lucrativas nós vamos fazer isso de um jeito muito mais fácil, rápido e acessível.</p>
+          <p>Eu sou Fisioterapeuta Dermatofuncional, especialista em pós-operatório, técnica em administração, gestora de Spas e clínicas e palestrante internacional.</p>
+          <p>Ao longo dos meus quase 20 anos atuando com massagem, percebi que muitas mulheres queriam começar na massagem mas não tinham condições de investir alto.</p>
+          <p><strong>Eu comecei atendendo sem maca, sem espaço, usando apenas as minhas mãos.</strong> Eu sei o que é começar do zero.</p>
+          <p>Foi por isso que criei o Método Mãos Lucrativas: <strong>o primeiro passo para você começar a ganhar dinheiro com massagem!</strong></p>
+          <p>Eu amo o que eu faço e hoje minha missão é ajudar mulheres a conquistar uma vida independente e realizada com a massagem.</p>
+          <p>Já ajudei mais de 60.000 alunas e milhares de pacientes foram impactadas no mundo pelo poder da massagem humanizada.</p>
+          <p><strong>E agora quero que você também faça parte disso! Vamos juntas?</strong></p>
+        </div>
+        <a class="dw-btn dw-btn--claro" href="#" data-checkout>SIM, VAMOS JUNTAS!</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================================================================
+       DOBRA 14 — FAQ
+       ================================================================== -->
+  <section class="dw-faq" aria-labelledby="t-faq">
+    <div class="dw-container">
+      <svg class="dw-ico dw-ico--faq" aria-hidden="true"><use href="#i-interrogacao" /></svg>
+      <h2 class="dw-faq__titulo" id="t-faq">Perguntas frequentes</h2>
+
+      <div class="dw-faq__lista">
+        <details class="dw-faq__item" open>
+          <summary>
+            <span>O curso é online ou presencial?</span>
+            <svg class="dw-ico dw-ico--faq-sinal dw-ico--fechado" aria-hidden="true"><use href="#i-mais" /></svg>
+            <svg class="dw-ico dw-ico--faq-sinal dw-ico--aberto" aria-hidden="true"><use href="#i-menos" /></svg>
+          </summary>
+          <div class="dw-faq__resposta"><p>O curso é 100% online e ficará disponível durante 1 ano. Como as aulas são gravadas, você pode assistir quando e onde puder e quiser, quantas vezes preferir!</p></div>
+        </details>
+
+        <details class="dw-faq__item">
+          <summary>
+            <span>O curso é indicado para iniciantes?</span>
+            <svg class="dw-ico dw-ico--faq-sinal dw-ico--fechado" aria-hidden="true"><use href="#i-mais" /></svg>
+            <svg class="dw-ico dw-ico--faq-sinal dw-ico--aberto" aria-hidden="true"><use href="#i-menos" /></svg>
+          </summary>
+          <div class="dw-faq__resposta"><p>O curso TopCorpus é indicado para todos os níveis: desde  pessoas com mais experiência que já atuam na área, até pessoas completamente iniciantes.<br /><br />O conteúdo é totalmente estruturado para que você se sinta segura, seguindo uma sequência lógica de aulas que unem teoria e prática.</p></div>
+        </details>
+
+        <details class="dw-faq__item">
+          <summary>
+            <span>Qual a duração do curso?</span>
+            <svg class="dw-ico dw-ico--faq-sinal dw-ico--fechado" aria-hidden="true"><use href="#i-mais" /></svg>
+            <svg class="dw-ico dw-ico--faq-sinal dw-ico--aberto" aria-hidden="true"><use href="#i-menos" /></svg>
+          </summary>
+          <div class="dw-faq__resposta"><p>O curso tem duração de 1 ano, mas dependendo da sua disponibilidade para estudar, você já pode começar a atender como massoterapeuta assim que concluir os primeiros módulos.</p></div>
+        </details>
+
+        <details class="dw-faq__item">
+          <summary>
+            <span>O curso tem material didático?</span>
+            <svg class="dw-ico dw-ico--faq-sinal dw-ico--fechado" aria-hidden="true"><use href="#i-mais" /></svg>
+            <svg class="dw-ico dw-ico--faq-sinal dw-ico--aberto" aria-hidden="true"><use href="#i-menos" /></svg>
+          </summary>
+          <div class="dw-faq__resposta"><p>Sim, você recebe vários materiais: livros digitais, fichas para avaliação dos pacientes, posts para redes sociais, banners, uma lista de controle de atendimento, planilha para ajudar nas suas finanças, contratos prontos, cupons de desconto, oportunidades de parcerias e sugestões de textos para divulgar os seus serviços.</p></div>
+        </details>
+
+        <details class="dw-faq__item">
+          <summary>
+            <span>Posso comprar as técnicas separadamente?</span>
+            <svg class="dw-ico dw-ico--faq-sinal dw-ico--fechado" aria-hidden="true"><use href="#i-mais" /></svg>
+            <svg class="dw-ico dw-ico--faq-sinal dw-ico--aberto" aria-hidden="true"><use href="#i-menos" /></svg>
+          </summary>
+          <div class="dw-faq__resposta"><p>Não, todas as técnicas oferecidas fazem parte somente do curso completo de formação em massoterapia humanizada.</p></div>
+        </details>
+
+        <details class="dw-faq__item">
+          <summary>
+            <span>Para ser massoterapeuta precisa de faculdade?</span>
+            <svg class="dw-ico dw-ico--faq-sinal dw-ico--fechado" aria-hidden="true"><use href="#i-mais" /></svg>
+            <svg class="dw-ico dw-ico--faq-sinal dw-ico--aberto" aria-hidden="true"><use href="#i-menos" /></svg>
+          </summary>
+          <div class="dw-faq__resposta"><p>Não, qualquer pessoa pode se tornar um massoterapeuta. O curso TopCorpus é profissionalizante e reconhecido pelo MEC através da Faculdade de Brasília.</p></div>
+        </details>
+
+        <details class="dw-faq__item">
+          <summary>
+            <span>Posso assistir às aulas pelo celular?</span>
+            <svg class="dw-ico dw-ico--faq-sinal dw-ico--fechado" aria-hidden="true"><use href="#i-mais" /></svg>
+            <svg class="dw-ico dw-ico--faq-sinal dw-ico--aberto" aria-hidden="true"><use href="#i-menos" /></svg>
+          </summary>
+          <div class="dw-faq__resposta"><p>Sim, se tiver acesso à internet, você pode assistir todas as aulas pelo celular e também pelo seu computador e tablet.</p></div>
+        </details>
+
+        <details class="dw-faq__item">
+          <summary>
+            <span>O curso tem Certificado?</span>
+            <svg class="dw-ico dw-ico--faq-sinal dw-ico--fechado" aria-hidden="true"><use href="#i-mais" /></svg>
+            <svg class="dw-ico dw-ico--faq-sinal dw-ico--aberto" aria-hidden="true"><use href="#i-menos" /></svg>
+          </summary>
+          <div class="dw-faq__resposta"><p>Sim, após finalizar o curso você receberá um certificado, comprovando sua Formação Completa em Massoterapia TopCorpus &#8211; Método Ana Martha, com quase 200h de duração. Você poderá emoldurar e colocar em sua sala de atendimento!</p></div>
+        </details>
+
+        <details class="dw-faq__item">
+          <summary>
+            <span>Como funciona o suporte?</span>
+            <svg class="dw-ico dw-ico--faq-sinal dw-ico--fechado" aria-hidden="true"><use href="#i-mais" /></svg>
+            <svg class="dw-ico dw-ico--faq-sinal dw-ico--aberto" aria-hidden="true"><use href="#i-menos" /></svg>
+          </summary>
+          <div class="dw-faq__resposta"><p>O suporte funciona dentro da própria plataforma do curso e através do WhatsApp exclusivo de Suporte.</p></div>
+        </details>
+
+        <details class="dw-faq__item">
+          <summary>
+            <span>É seguro comprar nesse site?</span>
+            <svg class="dw-ico dw-ico--faq-sinal dw-ico--fechado" aria-hidden="true"><use href="#i-mais" /></svg>
+            <svg class="dw-ico dw-ico--faq-sinal dw-ico--aberto" aria-hidden="true"><use href="#i-menos" /></svg>
+          </summary>
+          <div class="dw-faq__resposta"><p>Sim, este site é 100% seguro. Seus dados estão totalmente protegidos. A plataforma de pagamentos (Hotmart) é uma das maiores do mundo e te dá total segurança na hora das compras.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================================================================
+       DOBRA 15 — PRECISA DE AJUDA
+       ================================================================== -->
+  <section class="dw-ajuda" aria-labelledby="t-ajuda">
+    <div class="dw-container">
+      <div class="dw-ajuda__cartao">
+        <svg class="dw-ico dw-ico--whats" aria-hidden="true"><use href="#i-whats" /></svg>
+        <h2 class="dw-ajuda__titulo" id="t-ajuda">Precisa de ajuda?</h2>
+        <p class="dw-ajuda__texto">Toque no botão abaixo e fale diretamente com nosso suporte pelo WhatsApp.</p>
+        <a class="dw-btn dw-btn--claro" href="#" data-whats>PRECISO DE AJUDA PARA ENTRAR NO CURSO</a>
+      </div>
+    </div>
+    <p class="dw-ajuda__marca" aria-hidden="true">ANA MARTHA</p>
+  </section>
+
+
+  <!-- ==================================================================
+       RODAPÉ
+       ================================================================== -->
+  <footer class="dw-rodape">
+    <p>Todos os direitos reservados  &#8211; TOPCORPUS&reg; &#8211; 2026</p>
+  </footer>
+
+</body>
+</html>
