@@ -795,12 +795,7 @@ h1, h2, h3, h4, h5, h6,
 }
 .dw-oferta__mock img { width: 100%; }
 
-/* O #oferta fica no cartão, não na dobra: a dobra começa acima do mockup,
-   e os oito botões que apontam para cá precisam parar no "QUÃO
-   COMPROMETIDA", que é onde o preço está. A folga de rolagem é o que
-   impede o título de encostar no topo da tela. */
 .dw-oferta__cartao {
-  scroll-margin-top: clamp(1rem, 4vw, 2.5rem);
   position: relative;
   width: min(100%, 847px);
   padding: 33px;
@@ -822,7 +817,11 @@ h1, h2, h3, h4, h5, h6,
 .dw-oferta__riscado  { font-size: clamp(1.3rem, 2.4vw, 2em); color: #C0392B; }
 .dw-oferta__riscado s { text-decoration-thickness: 2px; }
 .dw-oferta__chamada  { margin-top: .4em; font-size: clamp(1rem, 1.9vw, 1.5em); font-style: italic; color: var(--dw-verde-600); }
-.dw-oferta__parcelas { margin-top: .9em; font-size: clamp(1.4rem, 3vw, 2.4em); font-weight: 700; color: var(--dw-verde-600); }
+/* O #oferta fica aqui, no "12X de", e não na dobra nem no cartão: a dobra
+   começa acima do mockup e o cartão começa no título, e nos dois casos a
+   rolagem parava com o preço fora da tela. A folga de rolagem é o que
+   impede o preço de encostar no topo. */
+.dw-oferta__parcelas { scroll-margin-top: clamp(2rem, 6vw, 4rem); margin-top: .9em; font-size: clamp(1.4rem, 3vw, 2.4em); font-weight: 700; color: var(--dw-verde-600); }
 .dw-oferta__preco {
   margin-top: -.12em;
   font-size: clamp(3rem, 9.5vw, 7.5em);
