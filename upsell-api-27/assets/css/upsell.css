@@ -354,7 +354,7 @@ h1, h2, h3, h4, h5, h6,
      da altura dela e o vestido some no verde a 50%. Como o fundo é cover
      numa arte vertical, ele sempre escala pela largura — a altura exibida é
      2144/733 = 2,925 vezes a largura. Por isso a margem é em vw, e não em px:
-     a foto sobe 22vw, a cortina desce junto para o degradê não
+     a foto sobe 16vw, a cortina desce junto para o degradê não
      mudar de aparência, e 92vw é onde ela fecha. Com a foto subida a colagem
      acaba em 87vw e as mãos dela em 89vw. A rampa da cortina encurtou de
      21vw para 9vw justamente para caber aqui: começando mais tarde, ela
@@ -795,7 +795,12 @@ h1, h2, h3, h4, h5, h6,
 }
 .dw-oferta__mock img { width: 100%; }
 
+/* O #oferta fica no cartão, não na dobra: a dobra começa acima do mockup,
+   e os oito botões que apontam para cá precisam parar no "QUÃO
+   COMPROMETIDA", que é onde o preço está. A folga de rolagem é o que
+   impede o título de encostar no topo da tela. */
 .dw-oferta__cartao {
+  scroll-margin-top: clamp(1rem, 4vw, 2.5rem);
   position: relative;
   width: min(100%, 847px);
   padding: 33px;
