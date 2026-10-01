@@ -578,15 +578,6 @@ html { font-size: 112.5%; }
    branco sobre branco. */
 .tp-bonus__free { top: calc(var(--mn-faixa) + .9rem); }
 
-/* Bônus 5 ainda sem mockup. Sem a imagem, o cartão ficaria mais baixo que
-   os quatro irmãos e o "Grátis" flutuaria sobre o texto — ele é posicionado
-   contra o topo do cartão, que é onde a imagem estaria. Então aqui o chip
-   volta para dentro da faixa branca do selo e o corpo ganha o ar que a
-   imagem dava. Quando o mockup chegar, basta apagar esta regra e repetir o
-   bloco .tp-bonus__media dos outros no HTML. */
-.tp-bonus__card--sem-mock .tp-bonus__free { top: calc(var(--mn-faixa) * .25); }
-.tp-bonus__card--sem-mock .tp-bonus__body { padding-top: clamp(1.6rem, 3.4vw, 2.2rem); }
-
 .mn-bonus__selo {
   position: absolute;
   top: 0;
