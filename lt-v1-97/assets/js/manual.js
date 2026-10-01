@@ -9,6 +9,7 @@
      - destino do CTA da oferta      ([data-checkout])
      - entrada com desfoque          ([data-reveal])
      - FAQ, abrir uma fecha as demais (.tp-faq__item)
+     - parada das âncoras da oferta   (a[href="#oferta"])
 
    O contador de oferta e o botão flutuante saíram na revisão de 25/09 —
    por isso o código dos dois também saiu, em vez de ficar procurando
@@ -119,6 +120,51 @@
   }
 
   /* =======================================================================
+     PARADA DAS ÂNCORAS DA OFERTA
+
+     Sem JS os seis botões param no topo da dobra 4, no "A condição de
+     hoje", e o botão de compra fica uns 1.500px abaixo — fora da tela em
+     qualquer aparelho. Aqui a rolagem desce até o botão de compra ficar no
+     pé da tela, com uma folga, e o preço logo acima aparece junto. Se a
+     tela for alta o bastante para caber a dobra inteira, ela para no topo
+     da dobra, como sem JS.
+
+     A conta usa offsetTop, e não getBoundingClientRect, porque a caixa da
+     oferta ainda está deslocada 20px pelo [data-reveal] quando a pessoa
+     clica — com o rect, a parada sairia 20px abaixo do ponto certo.
+     ======================================================================= */
+  function topoNaPagina(el) {
+    var y = 0;
+    for (; el; el = el.offsetParent) y += el.offsetTop;
+    return y;
+  }
+
+  function alvoDaOferta() {
+    var dobra = document.getElementById("oferta");
+    var botao = document.querySelector("#oferta [data-checkout]");
+    if (!dobra || !botao) return null;
+
+    var folga = 24;
+    var topoDobra = topoNaPagina(dobra)
+      - (parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0);
+    var peBotao = topoNaPagina(botao) + botao.offsetHeight;
+    return Math.max(topoDobra, peBotao + folga - window.innerHeight);
+  }
+
+  function initAncoras() {
+    [].slice.call(document.querySelectorAll('a[href="#oferta"]')).forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        var y = alvoDaOferta();
+        if (y === null) return;
+        e.preventDefault();
+        var calmo = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+        window.scrollTo({ top: y, behavior: calmo ? "auto" : "smooth" });
+        if (history.replaceState) history.replaceState(null, "", "#oferta");
+      });
+    });
+  }
+
+  /* =======================================================================
      FAQ — abrir uma pergunta fecha as demais
      ======================================================================= */
   function initFaq() {
@@ -137,6 +183,7 @@
   function boot() {
     initCheckout();
     initReveal();
+    initAncoras();
     initFaq();
   }
 
