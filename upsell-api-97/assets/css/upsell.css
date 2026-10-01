@@ -340,8 +340,8 @@ h1, h2, h3, h4, h5, h6,
   .dw-hero::before {
     content: "";
     position: absolute;
-    inset: 77vw 0 0;
-    background-image: linear-gradient(180deg, transparent 0, var(--dw-hero) 21vw);
+    inset: 84vw 0 0;
+    background-image: linear-gradient(180deg, transparent 0, var(--dw-hero) 9vw);
     pointer-events: none;
   }
   .dw-hero__grade { position: relative; }
@@ -355,14 +355,16 @@ h1, h2, h3, h4, h5, h6,
      numa arte vertical, ele sempre escala pela largura — a altura exibida é
      2144/733 = 2,925 vezes a largura. Por isso a margem é em vw, e não em px:
      a foto sobe 22vw, a cortina desce junto para o degradê não
-     mudar de aparência, e 98vw é onde ela fecha. Com a foto subida a
-     colagem acaba em 89vw e as mãos dela em 95vw, então 98vw é o limite:
-     daqui para cima o texto passa por cima das mãos. Vale em qualquer
-     celular. */
+     mudar de aparência, e 92vw é onde ela fecha. Com a foto subida a colagem
+     acaba em 87vw e as mãos dela em 89vw. A rampa da cortina encurtou de
+     21vw para 9vw justamente para caber aqui: começando mais tarde, ela
+     escurece menos o pé das capas do que escurecia antes, e mesmo assim
+     fecha a tempo do texto. Daqui para cima não dá — ou o texto sobe nas
+     mãos, ou a cortina come o pé das capas. Vale em qualquer celular. */
   .dw-hero__texto {
     max-width: none;
     margin-inline-start: 0;
-    margin-top: 98vw;
+    margin-top: 92vw;
     display: flex;
     flex-direction: column;
     align-items: center;
