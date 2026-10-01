@@ -125,10 +125,11 @@
 
      Sem JS os seis botões param no topo da dobra 4, no "A condição de
      hoje", e o botão de compra fica uns 1.500px abaixo — fora da tela em
-     qualquer aparelho. Aqui a rolagem desce até o botão de compra ficar no
-     pé da tela, com uma folga, e o preço logo acima aparece junto. Se a
-     tela for alta o bastante para caber a dobra inteira, ela para no topo
-     da dobra, como sem JS.
+     qualquer aparelho. Aqui a rolagem desce até o fim da caixa da oferta
+     ficar no pé da tela, com uma folga: o preço e o botão aparecem
+     inteiros, e a borda de baixo da caixa mostra que ali termina a oferta.
+     Se a tela for alta o bastante para caber a dobra inteira, ela para no
+     topo da dobra, como sem JS.
 
      A conta usa offsetTop, e não getBoundingClientRect, porque a caixa da
      oferta ainda está deslocada 20px pelo [data-reveal] quando a pessoa
@@ -142,14 +143,14 @@
 
   function alvoDaOferta() {
     var dobra = document.getElementById("oferta");
-    var botao = document.querySelector("#oferta [data-checkout]");
-    if (!dobra || !botao) return null;
+    var caixa = document.querySelector("#oferta .tp-offer__box");
+    if (!dobra || !caixa) return null;
 
-    var folga = 24;
+    var folga = 40;
     var topoDobra = topoNaPagina(dobra)
       - (parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0);
-    var peBotao = topoNaPagina(botao) + botao.offsetHeight;
-    return Math.max(topoDobra, peBotao + folga - window.innerHeight);
+    var peCaixa = topoNaPagina(caixa) + caixa.offsetHeight;
+    return Math.max(topoDobra, peCaixa + folga - window.innerHeight);
   }
 
   function initAncoras() {
