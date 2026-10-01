@@ -557,7 +557,7 @@ h1, h2, h3, h4, h5, h6,
    arquivo e o max-width só impede que a maior (480px) destoe das outras. */
 .dw-presente__midia--capa img {
   width: auto;
-  max-width: min(100%, 300px);
+  max-width: min(100%, 420px);
   margin-inline: auto;
 }
 
