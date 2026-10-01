@@ -326,7 +326,7 @@ h1, h2, h3, h4, h5, h6,
      como na origem. */
   .dw-hero {
     background-image: url("../img/hero-fundo-movel.webp");
-    background-position: top center;
+    background-position: center -14vw;
   }
   /* Entre o fim da colagem e o verde limpo, a arte tem uma faixa de vestido
      prateado onde o texto branco some. Esta cortina continua o degradê que a
@@ -340,8 +340,8 @@ h1, h2, h3, h4, h5, h6,
   .dw-hero::before {
     content: "";
     position: absolute;
-    inset: 100vw 0 0;
-    background-image: linear-gradient(180deg, transparent 0, var(--dw-hero) 16vw);
+    inset: 91vw 0 0;
+    background-image: linear-gradient(180deg, transparent 0, var(--dw-hero) 21vw);
     pointer-events: none;
   }
   .dw-hero__grade { position: relative; }
@@ -354,12 +354,14 @@ h1, h2, h3, h4, h5, h6,
      da altura dela e o vestido some no verde a 50%. Como o fundo é cover
      numa arte vertical, ele sempre escala pela largura — a altura exibida é
      2144/733 = 2,925 vezes a largura. Por isso a margem é em vw, e não em px:
-     116vw é onde a cortina acima já fechou, encostando na colagem,
-     que acaba em 111vw. Vale em qualquer celular. */
+     a foto sobe 14vw (o topo da arte é só fundo acima da cabeça
+     dela), a cortina desce junto para o degradê não mudar de aparência, e
+     112vw é onde ela fecha — encostando na colagem, que com a foto subida
+     acaba em 97vw. Vale em qualquer celular. */
   .dw-hero__texto {
     max-width: none;
     margin-inline-start: 0;
-    margin-top: 116vw;
+    margin-top: 112vw;
     display: flex;
     flex-direction: column;
     align-items: center;
