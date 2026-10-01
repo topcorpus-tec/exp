@@ -273,12 +273,15 @@ h1, h2, h3, h4, h5, h6,
   display: grid;
   align-content: center;
 }
-/* O recuo extra à esquerda é só do bloco de texto: o gutter da grade vale
-   para a página inteira, e aumentá-lo moveria todas as dobras. Aqui a
-   margem some no celular, onde o texto é centralizado. */
+/* A arte nova traz a Ana e a colagem dos bônus no meio do quadro, e o texto
+   precisou andar para a esquerda para não encostar no certificado. Quem anda
+   é só a hero: ela ganha uma pista mais larga que a da página (1250px), e o
+   bloco de texto perde o recuo extra que existia quando o lado esquerdo era
+   só degradê. O gutter continua valendo, então o texto nunca cola na borda. */
+.dw-hero__grade { max-width: 1560px; }
 .dw-hero__texto {
   max-width: 50%;
-  margin-inline-start: clamp(0rem, 3vw, 2.75rem);
+  margin-inline-start: 0;
 }
 
 .dw-hero__logo { width: min(100%, 292px); margin-bottom: .5rem; }
@@ -325,21 +328,46 @@ h1, h2, h3, h4, h5, h6,
     background-image: url("../img/hero-fundo-movel.webp");
     background-position: top center;
   }
+  /* Entre o fim da colagem e o verde limpo, a arte tem uma faixa de vestido
+     prateado onde o texto branco some. Esta cortina continua o degradê que a
+     arte já faz, só que mais cedo, e é o que deixa o conteúdo subir sem
+     perder contraste.
+
+     As paradas são em vw, não em %, de propósito: a altura da hero depende
+     do tamanho do texto, mas a da arte depende só da largura (cover numa
+     arte vertical escala sempre pela largura). Em vw a cortina cai sempre no
+     mesmo ponto da arte, em qualquer celular. */
+  .dw-hero::before {
+    content: "";
+    position: absolute;
+    inset: 105vw 0 0;
+    background-image: linear-gradient(180deg, transparent 0, var(--dw-hero) 21vw);
+    pointer-events: none;
+  }
+  .dw-hero__grade { position: relative; }
   .dw-hero__grade {
     min-height: 0;
     padding: 0 var(--dw-gutter) 3em;
     align-content: start;
   }
+  /* O recuo do texto é medido na arte, não chutado: a colagem acaba a 38%
+     da altura dela e o vestido some no verde a 50%. Como o fundo é cover
+     numa arte vertical, ele sempre escala pela largura — a altura exibida é
+     2144/733 = 2,925 vezes a largura. Por isso a margem é em vw, e não em px:
+     126vw é onde a cortina acima já fechou, logo abaixo da colagem,
+     que acaba em 111vw. Vale em qualquer celular. */
   .dw-hero__texto {
     max-width: none;
     margin-inline-start: 0;
-    margin-top: 221px;
+    margin-top: 126vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
   }
-  .dw-hero__logo   { width: 141px; margin-top: 1.6rem; }
+  /* O logo sai no celular: a arte já traz a marca na capa do e-book e na do
+     curso, e ele empurrava o H1 para fora da primeira tela. */
+  .dw-hero__logo   { display: none; }
   .dw-hero__titulo { max-width: 334px; font-size: 25px; }
   .dw-hero__sub    { max-width: 278px; font-size: 13px; line-height: 1.6; letter-spacing: .2px; }
   .dw-hero__cta    { width: min(100%, 302px); min-height: 65px; font-size: 14px; }
