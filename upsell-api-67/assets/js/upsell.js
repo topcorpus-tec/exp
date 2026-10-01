@@ -61,12 +61,38 @@
 
      Dos nove botões, oito rolam até a dobra da oferta — só o que está dentro
      dela vai para o checkout. O href já está no HTML, então o botão funciona
-     sem JS; aqui só entra a medição, para não perder de vista qual dobra
-     empurrou a pessoa para a oferta.
+     sem JS; aqui entram a medição, para não perder de vista qual dobra
+     empurrou a pessoa para a oferta, e o ponto de parada.
+
+     Sem JS a rolagem para com o riscado no topo, e em tela baixa o botão do
+     checkout fica abaixo da dobra. Aqui, quando o botão não cabe, a rolagem
+     desce até ele ficar no pé da tela, com uma folga — o riscado sai por
+     cima, mas o preço e o botão aparecem. Quando cabe, ela para no riscado,
+     como no CSS.
      ======================================================================= */
+  function alvoDaOferta() {
+    var riscado = document.getElementById("oferta");
+    var botao = document.querySelector(".dw-btn--oferta");
+    if (!riscado || !botao) return null;
+
+    var folga = 24;
+    var topoRiscado = riscado.getBoundingClientRect().top + window.pageYOffset
+      - (parseFloat(getComputedStyle(riscado).scrollMarginTop) || 0);
+    var peBotao = botao.getBoundingClientRect().bottom + window.pageYOffset;
+    return Math.max(topoRiscado, peBotao + folga - window.innerHeight);
+  }
+
   function initAncoras() {
     [].slice.call(document.querySelectorAll("[data-ancora]")).forEach(function (a) {
-      a.addEventListener("click", function () {
+      a.addEventListener("click", function (e) {
+        var y = alvoDaOferta();
+        if (y !== null) {
+          e.preventDefault();
+          var calmo = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+          window.scrollTo({ top: y, behavior: calmo ? "auto" : "smooth" });
+          if (history.replaceState) history.replaceState(null, "", "#oferta");
+        }
+
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
           event: "clique_oferta",
