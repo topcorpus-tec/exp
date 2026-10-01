@@ -103,13 +103,21 @@
 
         <p class="tp-hero__sub">Mesmo sem nunca ter feito um curso de massagem</p>
 
-        <!-- Espaço do vídeo. Entra o embed (Panda, YouTube, VSL) mantendo a
-             proporção 16/9 que a caixa já reserva, para o resto da dobra não
-             saltar quando o player carregar. -->
-        <div class="mml-video" data-reveal>
-          <div class="mml-ph">
-            <span class="mml-ph__tag">Vídeo</span>
-            <p class="mml-ph__desc">Player da VSL desta página</p>
+        <!-- VSL desta etapa (VTurb / ConverteAI, player 6abe558fde5ac7ef8e069c74).
+             O embed vem como a plataforma entrega: o <script> injeta o SDK no
+             <head> e o iframe só carrega de verdade no onload, passando a URL
+             atual para o player. A caixa e a proporção 9/16 são do inline
+             style deles — a nossa folha não mexe nisso, só centraliza e
+             arredonda, senão as duas brigariam pela mesma medida. -->
+        <div class="mml-vsl" data-reveal>
+          <script type="text/javascript">
+            var s = document.createElement("script");
+            s.src = "https://scripts.converteai.net/lib/js/smartplayer-wc/v4/sdk.js", s.async = !0, document.head.appendChild(s);
+          </script>
+          <div id="ifr_6abe558fde5ac7ef8e069c74_wrapper" style="margin: 0 auto; width: 100%; max-width: 400px;">
+            <div class="mml-vsl__caixa" style="position: relative; padding: 177.77777777777777% 0 0 0;" id="ifr_6abe558fde5ac7ef8e069c74_aspect">
+              <iframe frameborder="0" allowfullscreen src="about:blank" id="ifr_6abe558fde5ac7ef8e069c74" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" referrerpolicy="origin" onload=" this.onload=null, this.src='https://scripts.converteai.net/02abf0a0-3315-4bbc-83ab-8116ca43936a/players/6abe558fde5ac7ef8e069c74/v4/embed.html' +(location.search||'?') +'&vl=' +encodeURIComponent(location.href)"></iframe>
+            </div>
           </div>
         </div>
 
