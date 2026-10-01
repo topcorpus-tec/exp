@@ -584,12 +584,13 @@ h1, h2, h3, h4, h5, h6,
 }
 .dw-presente__midia img { width: 100%; }
 
-/* Presentes 3 a 6: as capas vieram da dobra de bônus, que era uma grade de
-   miniaturas — a menor tem 229px de largura. Aqui a coluna chega a ~500px, e
-   esticar o arquivo até lá borraria. width:auto mantém o tamanho natural do
-   arquivo e o max-width só impede que a maior (480px) destoe das outras. */
+/* Presentes 3 a 6: as capas são retratos e, na largura toda da coluna,
+   ficariam altas demais — o max-width segura todas em 420px. A largura tem
+   que ser 100%, e não auto: com auto a imagem lazy mede 0px até carregar, a
+   página cresce no meio da rolagem e os botões que levam ao #oferta param
+   antes dele. */
 .dw-presente__midia--capa img {
-  width: auto;
+  width: 100%;
   max-width: min(100%, 420px);
   margin-inline: auto;
 }
@@ -907,7 +908,9 @@ h1, h2, h3, h4, h5, h6,
   .dw-oferta__cartao { padding: 1em; }
   .dw-oferta__titulo { margin-top: 3.2rem; font-size: 1.3em; }
   .dw-oferta__de, .dw-oferta__chamada { font-size: 1.1em; }
-  .dw-oferta__riscado { font-size: 1.5em; }
+  /* No celular a folga é maior para o fim do título e o "O preço original
+     é" aparecerem acima do riscado. */
+  .dw-oferta__riscado { scroll-margin-top: 5.5rem; font-size: 1.5em; }
   .dw-oferta__parcelas { font-size: 1.9em; }
   .dw-oferta__preco { font-size: 3.6em; }
   .dw-oferta__avista { font-size: 1.2em; }
@@ -1080,7 +1083,10 @@ h1, h2, h3, h4, h5, h6,
   .dw-bio { padding: 1em 1em 4em; }
   .dw-bio__grade { text-align: center; justify-items: center; }
   /* No celular a foto vem depois do texto, como na origem. */
-  .dw-bio__foto  { order: 2; margin-top: 1.5rem; }
+  /* O stretch impede a foto de encolher junto com o justify-items: sem
+     ele a figura mede 0px até a imagem lazy carregar, e a página cresce no
+     meio da rolagem até o #oferta. */
+  .dw-bio__foto  { order: 2; margin-top: 1.5rem; justify-self: stretch; }
   .dw-bio__texto { order: 1; }
   .dw-bio__titulo { font-size: 2em; }
   .dw-bio__texto .dw-corpo { max-width: 296px; margin-inline: auto; font-size: 1em; }
