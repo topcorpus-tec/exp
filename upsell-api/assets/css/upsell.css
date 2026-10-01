@@ -1044,8 +1044,16 @@ h1, h2, h3, h4, h5, h6,
   gap: clamp(1.5rem, 4vw, 3rem);
 }
 .dw-bio__foto img { width: min(100%, 596px); margin-top: 3.2rem; margin-inline: auto; }
+/* "POR QUE EU POSSO TE ENSINAR?" em uma linha só no desktop. A coluna de
+   texto é metade do container de 1250px, ou seja ~569px cheios, e no 2,6em
+   antigo a frase não cabia e quebrava em duas. O nowrap sozinho estouraria
+   a coluna, então o corpo desce junto: 2,55vw acompanha a coluna enquanto
+   ela encolhe e trava em 2em, que é o tamanho em que a frase ainda cabe nos
+   569px. Abaixo de 1024px a dobra vira uma coluna só e tudo volta ao que
+   era. */
 .dw-bio__titulo {
-  font-size: clamp(1.5rem, 3vw, 2.6em);
+  font-size: clamp(1.5rem, 2.55vw, 2em);
+  white-space: nowrap;
   font-weight: 400;
   line-height: 1.1;
   letter-spacing: .2px;
@@ -1067,6 +1075,7 @@ h1, h2, h3, h4, h5, h6,
 @media (max-width: 1024px) {
   .dw-bio { padding: 0 2em 2em; }
   .dw-bio__grade { grid-template-columns: minmax(0, 1fr); }
+  .dw-bio__titulo { font-size: clamp(1.5rem, 3vw, 2.6em); white-space: normal; }
 }
 @media (max-width: 767px) {
   .dw-bio { padding: 1em 1em 4em; }
