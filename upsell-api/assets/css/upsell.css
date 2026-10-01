@@ -326,7 +326,7 @@ h1, h2, h3, h4, h5, h6,
      como na origem. */
   .dw-hero {
     background-image: url("../img/hero-fundo-movel.webp");
-    background-position: center -22vw;
+    background-position: center -16vw;
   }
   /* Entre o fim da colagem e o verde limpo, a arte tem uma faixa de vestido
      prateado onde o texto branco some. Esta cortina continua o degradê que a
