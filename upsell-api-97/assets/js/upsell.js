@@ -25,9 +25,10 @@
      ======================================================================= */
   var CHECKOUT_URL = "https://evento.topcorpus.com.br/link-pagina";
 
-  /* Suporte — o número e o texto vieram dos dois botões de WhatsApp de lá. */
-  var WHATS_URL = "https://api.whatsapp.com/send/?phone=5512936182269&text=" +
-                  encodeURIComponent("Olá! Quero tirar uma dúvida sobre o Método Mãos Lucrativas");
+  /* A revisão do doc tirou as duas dobras de WhatsApp — "Fale diretamente com
+     minha equipe" e "Precisa de ajuda?" —, então não sobrou nenhum botão
+     [data-whats] e o initWhats saiu junto. O número do suporte era
+     5512936182269; se alguma delas voltar, é por aqui que ela se liga. */
 
   function avisa(msg) {
     if (window.console && console.warn) console.warn("[upsell-api-97] " + msg);
@@ -55,6 +56,27 @@
     });
   }
 
+  /* =======================================================================
+     ÂNCORAS PARA A OFERTA
+
+     Dos nove botões, oito rolam até a dobra da oferta — só o que está dentro
+     dela vai para o checkout. O href já está no HTML, então o botão funciona
+     sem JS; aqui só entra a medição, para não perder de vista qual dobra
+     empurrou a pessoa para a oferta.
+     ======================================================================= */
+  function initAncoras() {
+    [].slice.call(document.querySelectorAll("[data-ancora]")).forEach(function (a) {
+      a.addEventListener("click", function () {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: "clique_oferta",
+          pagina: "upsell-api-97",
+          rotulo: (a.textContent || "").trim()
+        });
+      });
+    });
+  }
+
   function initCheckout() {
     initLinks("[data-checkout]", CHECKOUT_URL, "CHECKOUT_URL");
     if (!CHECKOUT_URL) return;
@@ -70,15 +92,6 @@
           rotulo: (a.textContent || "").trim()
         });
       });
-    });
-  }
-
-  function initWhats() {
-    initLinks("[data-whats]", WHATS_URL, "WHATS_URL");
-    if (!WHATS_URL) return;
-    [].slice.call(document.querySelectorAll("[data-whats]")).forEach(function (a) {
-      a.setAttribute("target", "_blank");
-      a.setAttribute("rel", "noopener noreferrer");
     });
   }
 
@@ -125,8 +138,8 @@
      BOOT
      ======================================================================= */
   function boot() {
+    initAncoras();
     initCheckout();
-    initWhats();
     initEsteira();
     initFaq();
   }

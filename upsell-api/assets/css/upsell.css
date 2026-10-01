@@ -150,7 +150,6 @@ a { color: inherit; }
 .dw-corpo > p + p { margin-top: .85em; }
 .dw-corpo         { font-weight: 500; line-height: 1.55; }
 .dw-corpo--centro { text-align: center; }
-.dw-corpo--escuro { color: #2F2F2F; font-weight: 400; }
 .dw-corpo--poppins {
   font-family: var(--dw-fonte-apoio);
   font-weight: 400;
@@ -163,7 +162,6 @@ a { color: inherit; }
 .dw-ico--x      { width: 14px; height: 14px; color: #E25151; flex: 0 0 auto; }
 .dw-ico--ok     { width: 14px; height: 14px; color: #1A9038; flex: 0 0 auto; }
 .dw-ico--seta   { width: 20px; height: 20px; color: #FFFACE; flex: 0 0 auto; fill: none; stroke: currentColor; }
-.dw-ico--whats  { width: 44px; height: 44px; color: #1A9038; margin-inline: auto; }
 .dw-ico--faq    { width: 40px; height: 40px; color: var(--dw-verde-600); margin-inline: auto; }
 
 /* ==================== Botões ====================
@@ -304,193 +302,7 @@ a { color: inherit; }
 
 
 /* =========================================================================
-   DOBRA 2 — TRÊS SELOS
-   ========================================================================= */
-.dw-selos { padding-block: clamp(1.5rem, 4vw, 2em); }
-.dw-selos__lista {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
-}
-.dw-selo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: .35rem;
-  padding: 30px;
-  text-align: center;
-  border: 1px solid var(--dw-linha-clara);
-  border-radius: 16px;
-  background-image: linear-gradient(305deg, #052113 0%, #083E23 100%);
-  box-shadow: var(--dw-sombra-cartao);
-}
-.dw-selo__titulo { font-size: clamp(1rem, 1.8vw, 21px); font-weight: 700; color: #FFFFFF; }
-.dw-selo__texto  { font-size: clamp(.8rem, 1.4vw, 16px); font-weight: 300; color: #AEAEAE; }
-
-@media (max-width: 767px) {
-  .dw-selos { padding-block: 1.5em 2em; }
-  .dw-selos__lista { grid-template-columns: minmax(0, 1fr); gap: 14px; }
-  .dw-selo { border-radius: 13px; }
-}
-
-
-/* =========================================================================
-   DOBRA 3 — PRESENTES
-   ========================================================================= */
-.dw-presentes { padding-block: 4em; background: var(--dw-verde-800); }
-.dw-presentes__icone { width: 92px; margin-inline: auto; }
-.dw-presentes .dw-titulo { margin-top: 1.25rem; }
-
-.dw-presentes__caixa {
-  margin-top: 1.8rem;
-  padding: 30px;
-  border: 1px solid var(--dw-linha-verde);
-  border-radius: 16px;
-  background-image: linear-gradient(305deg, #0B4126 0%, #196E43 100%);
-  box-shadow: var(--dw-sombra-cartao);
-  display: grid;
-  gap: clamp(2rem, 5vw, 3.5rem);
-}
-
-.dw-presente {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  align-items: center;
-  gap: clamp(1rem, 3vw, 2rem);
-}
-.dw-presente--invertido .dw-presente__texto { order: 2; }
-.dw-presente--invertido .dw-presente__midia { order: 1; }
-
-.dw-presente__pilula {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: .3rem;
-  padding: 3% 0;
-  border: 1px solid #2E7A38;
-  border-radius: 12px;
-  background: #1D7749;
-}
-.dw-presente__titulo {
-  font-size: clamp(1rem, 1.8vw, 21px);
-  font-weight: 700;
-  text-align: center;
-  text-transform: uppercase;
-  color: #FFFFFF;
-}
-.dw-presente__texto .dw-corpo {
-  max-width: 490px;
-  margin-inline: auto;
-  padding: 1.3em 1.6em 0;
-  text-align: center;
-  color: #FFFFFF;
-}
-.dw-presente__midia img { width: 100%; }
-
-@media (max-width: 1024px) {
-  .dw-presente { grid-template-columns: minmax(0, 1fr); }
-  .dw-presente--invertido .dw-presente__texto,
-  .dw-presente--invertido .dw-presente__midia { order: 0; }
-}
-@media (max-width: 767px) {
-  .dw-presentes { padding-block: 3em 4em; }
-  .dw-presentes__icone { width: 68px; }
-  .dw-presentes__caixa { padding: 1em; border-radius: 13px; }
-  .dw-presente__texto .dw-corpo {
-    max-width: 264px; padding: 1.3em 0 0;
-    font-size: 15px; line-height: 1.4; letter-spacing: .2px;
-  }
-}
-
-
-/* =========================================================================
-   DOBRA 4 — PROVA (esteira de prints)
-   ========================================================================= */
-.dw-prova { padding-block: 4em; background: var(--dw-verde-700); }
-.dw-prova__caixa {
-  margin-top: 1.4rem;
-  padding: 30px;
-  border: 1px solid var(--dw-linha-verde);
-  border-radius: 16px;
-  background-image: linear-gradient(305deg, #0B4126 0%, #196E43 100%);
-  box-shadow: var(--dw-sombra-cartao);
-}
-
-.dw-esteira { overflow: hidden; }
-.dw-esteira__faixa {
-  display: flex;
-  gap: 60px;
-  width: max-content;
-  animation: dw-desliza 45s linear infinite;
-}
-.dw-esteira:hover .dw-esteira__faixa { animation-play-state: paused; }
-.dw-esteira__faixa > li { flex: 0 0 auto; }
-.dw-esteira__faixa img  { width: 541px; max-width: 70vw; border-radius: 6px; }
-
-/* Desliza metade da faixa: a segunda metade é a cópia da primeira, feita
-   pelo JS, então ao chegar em -50% o quadro é idêntico ao do início. */
-@keyframes dw-desliza {
-  from { transform: translateX(0); }
-  to   { transform: translateX(calc(-50% - 30px)); }
-}
-
-@media (max-width: 767px) {
-  .dw-prova { padding-block: 3em; }
-  .dw-prova__caixa { padding: 1em; border-radius: 13px; }
-  .dw-esteira__faixa { gap: 30px; }
-  @keyframes dw-desliza {
-    from { transform: translateX(0); }
-    to   { transform: translateX(calc(-50% - 15px)); }
-  }
-}
-
-
-/* =========================================================================
-   DOBRA 5 — PARA QUEM É
-   ========================================================================= */
-.dw-perfeito { padding-block: 4em; }
-/* Flex com quebra, e não grid: assim a segunda fila — que tem dois cards —
-   fica centrada sozinha, como na origem. */
-.dw-perfeito__lista {
-  margin-top: 1.6rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
-.dw-perfeito__lista > li { flex: 0 1 calc((100% - 40px) / 3); }
-
-.dw-perfil {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: .6rem;
-  padding: 30px;
-  border: 1px solid var(--dw-linha-clara);
-  border-radius: 16px;
-  background-image: linear-gradient(305deg, #052113 0%, #083E23 100%);
-  box-shadow: var(--dw-sombra-cartao);
-}
-.dw-perfil p {
-  max-width: 254px;
-  font-size: clamp(.85rem, 1.5vw, 16px);
-  font-weight: 500;
-  letter-spacing: .6px;
-  text-align: center;
-  color: #D6D6D6;
-}
-
-@media (max-width: 900px) {
-  .dw-perfeito__lista > li { flex-basis: 100%; }
-}
-@media (max-width: 767px) {
-  .dw-perfeito { padding-block: 3em 4em; }
-  .dw-perfil { border-radius: 13px; }
-}
-
-
-/* =========================================================================
-   DOBRA 6 — MÉTODO DE 3 PASSOS
+   DOBRA 2 — MÉTODO DE 3 PASSOS
    ========================================================================= */
 .dw-passos { padding-block: 4em; background: var(--dw-verde-700); }
 .dw-passos .dw-titulo { max-width: 827px; }
@@ -604,27 +416,121 @@ a { color: inherit; }
 
 
 /* =========================================================================
-   DOBRA 7 — BÔNUS
+   DOBRA 3 — TRÊS SELOS
    ========================================================================= */
-.dw-bonus { padding-block: 4em; background: var(--dw-verde-850); }
-.dw-bonus .dw-titulo { max-width: 845px; }
-.dw-bonus__intro {
-  max-width: 483px;
-  margin: 1rem auto 0;
-  font-size: clamp(.9rem, 1.6vw, 19px);
-  text-align: center;
-  color: #FFFFFF;
+.dw-selos { padding-block: clamp(1.5rem, 4vw, 2em); }
+.dw-selos__lista {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
 }
-.dw-bonus__rotulo {
-  max-width: 483px;
-  margin: .9rem auto 0;
-  font-size: clamp(1.05rem, 2.2vw, 27px);
+.dw-selo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .35rem;
+  padding: 30px;
   text-align: center;
-  color: #FFFFFF;
+  border: 1px solid var(--dw-linha-clara);
+  border-radius: 16px;
+  background-image: linear-gradient(305deg, #052113 0%, #083E23 100%);
+  box-shadow: var(--dw-sombra-cartao);
+}
+.dw-selo__titulo { font-size: clamp(1rem, 1.8vw, 21px); font-weight: 700; color: #FFFFFF; }
+.dw-selo__texto  { font-size: clamp(.8rem, 1.4vw, 16px); font-weight: 300; color: #AEAEAE; }
+
+@media (max-width: 767px) {
+  .dw-selos { padding-block: 1.5em 2em; }
+  .dw-selos__lista { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .dw-selo { border-radius: 13px; }
 }
 
-.dw-bonus__caixa {
-  margin-top: 1.6rem;
+
+/* =========================================================================
+   DOBRA 4 — PRESENTES
+   ========================================================================= */
+.dw-presentes { padding-block: 4em; background: var(--dw-verde-800); }
+.dw-presentes__icone { width: 92px; margin-inline: auto; }
+.dw-presentes .dw-titulo { margin-top: 1.25rem; }
+
+.dw-presentes__caixa {
+  margin-top: 1.8rem;
+  padding: 30px;
+  border: 1px solid var(--dw-linha-verde);
+  border-radius: 16px;
+  background-image: linear-gradient(305deg, #0B4126 0%, #196E43 100%);
+  box-shadow: var(--dw-sombra-cartao);
+  display: grid;
+  gap: clamp(2rem, 5vw, 3.5rem);
+}
+
+.dw-presente {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2rem);
+}
+.dw-presente--invertido .dw-presente__texto { order: 2; }
+.dw-presente--invertido .dw-presente__midia { order: 1; }
+
+.dw-presente__pilula {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .3rem;
+  padding: 3% 0;
+  border: 1px solid #2E7A38;
+  border-radius: 12px;
+  background: #1D7749;
+}
+.dw-presente__titulo {
+  font-size: clamp(1rem, 1.8vw, 21px);
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+.dw-presente__texto .dw-corpo {
+  max-width: 490px;
+  margin-inline: auto;
+  padding: 1.3em 1.6em 0;
+  text-align: center;
+  color: #FFFFFF;
+}
+.dw-presente__midia img { width: 100%; }
+
+/* Presentes 3 a 6: as capas vieram da dobra de bônus, que era uma grade de
+   miniaturas — a menor tem 229px de largura. Aqui a coluna chega a ~500px, e
+   esticar o arquivo até lá borraria. width:auto mantém o tamanho natural do
+   arquivo e o max-width só impede que a maior (480px) destoe das outras. */
+.dw-presente__midia--capa img {
+  width: auto;
+  max-width: min(100%, 300px);
+  margin-inline: auto;
+}
+
+@media (max-width: 1024px) {
+  .dw-presente { grid-template-columns: minmax(0, 1fr); }
+  .dw-presente--invertido .dw-presente__texto,
+  .dw-presente--invertido .dw-presente__midia { order: 0; }
+}
+@media (max-width: 767px) {
+  .dw-presentes { padding-block: 3em 4em; }
+  .dw-presentes__icone { width: 68px; }
+  .dw-presentes__caixa { padding: 1em; border-radius: 13px; }
+  .dw-presente__texto .dw-corpo {
+    max-width: 264px; padding: 1.3em 0 0;
+    font-size: 15px; line-height: 1.4; letter-spacing: .2px;
+  }
+}
+
+
+/* =========================================================================
+   DOBRA 5 — PROVA (esteira de prints)
+   ========================================================================= */
+.dw-prova { padding-block: 4em; background: var(--dw-verde-700); }
+.dw-prova__caixa {
+  margin-top: 1.4rem;
   padding: 30px;
   border: 1px solid var(--dw-linha-verde);
   border-radius: 16px;
@@ -632,77 +538,93 @@ a { color: inherit; }
   box-shadow: var(--dw-sombra-cartao);
 }
 
-.dw-itens--bonus {
-  margin-top: 3.6rem;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  align-items: stretch;   /* os quatro terminam na mesma linha, como na origem */
+/* A frase que fecha a esteira e emenda no botão. Entrou com a revisão do
+   doc: a esteira sozinha terminava sem conclusão nenhuma. */
+.dw-prova__fecho {
+  max-width: 900px;
+  margin: 2rem auto 0;
+  font-size: clamp(1rem, 2vw, 1.4em);
+  line-height: 1.5;
+  text-align: center;
+  color: #FFFFFF;
 }
-.dw-item--bonus  { justify-content: flex-start; padding-top: 3.6rem; }
-.dw-item__selo {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translate(-50%, -52%);
-  width: clamp(76px, 8vw, 112px);
-  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .28));
-  pointer-events: none;
-}
-.dw-item__capa { width: 89%; margin-top: 0; padding-top: 0; }
-.dw-item--bonus .dw-item__texto { margin-top: auto; padding-top: .8rem; }
+.dw-prova__fecho strong { color: var(--dw-amarelo); }
 
-@media (max-width: 1024px) {
-  .dw-itens--bonus { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4rem 1.4rem; }
-}
-@media (max-width: 640px) {
-  .dw-itens--bonus { grid-template-columns: minmax(0, 1fr); gap: 4.4rem; }
-}
-@media (max-width: 767px) {
-  .dw-bonus__caixa { padding: 1em; border-radius: 13px; }
-}
-
-
-/* =========================================================================
-   DOBRA 8 — QUANTO VALE
-   ========================================================================= */
-.dw-quanto {
-  background: #F9FDFD url("../img/fundo-oferta.webp") center center / cover no-repeat;
-  min-height: 640px;
+.dw-esteira { overflow: hidden; }
+.dw-esteira__faixa {
   display: flex;
-  align-items: center;
+  gap: 60px;
+  width: max-content;
+  animation: dw-desliza 45s linear infinite;
 }
-.dw-quanto__grade {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  justify-items: end;
-}
-.dw-quanto__texto { width: min(100%, 430px); }
-.dw-quanto__titulo {
-  font-size: clamp(1.4rem, 2.6vw, 30px);
-  font-weight: 700;
-  line-height: 1.2;
-  color: #303030;
-}
-.dw-quanto .dw-corpo { margin-top: 1rem; font-size: clamp(.85rem, 1.4vw, 16px); }
+.dw-esteira:hover .dw-esteira__faixa { animation-play-state: paused; }
+.dw-esteira__faixa > li { flex: 0 0 auto; }
+.dw-esteira__faixa img  { width: 541px; max-width: 70vw; border-radius: 6px; }
 
-@media (max-width: 1024px) { .dw-quanto { min-height: 590px; } }
+/* Desliza metade da faixa: a segunda metade é a cópia da primeira, feita
+   pelo JS, então ao chegar em -50% o quadro é idêntico ao do início. */
+@keyframes dw-desliza {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-50% - 30px)); }
+}
+
 @media (max-width: 767px) {
-  /* No celular a arte é a foto vertical da Ana e o texto vem por cima. */
-  .dw-quanto {
-    min-height: 950px;
-    align-items: flex-start;
-    padding-block: 2em 0;
-    background-image: url("../img/fundo-oferta-movel.webp");
-    background-position: bottom center;
+  .dw-prova { padding-block: 3em; }
+  .dw-prova__caixa { padding: 1em; border-radius: 13px; }
+  .dw-esteira__faixa { gap: 30px; }
+  @keyframes dw-desliza {
+    from { transform: translateX(0); }
+    to   { transform: translateX(calc(-50% - 15px)); }
   }
-  .dw-quanto__grade { justify-items: center; }
-  .dw-quanto__texto { width: min(100%, 320px); text-align: center; }
-  .dw-quanto__titulo { font-size: 30px; line-height: 1.3; }
-  .dw-quanto .dw-corpo { font-size: 14px; }
 }
 
 
 /* =========================================================================
-   DOBRA 9 — OFERTA
+   DOBRA 6 — PARA QUEM É
+   ========================================================================= */
+.dw-perfeito { padding-block: 4em; }
+/* Flex com quebra, e não grid: assim a segunda fila — que tem dois cards —
+   fica centrada sozinha, como na origem. */
+.dw-perfeito__lista {
+  margin-top: 1.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+.dw-perfeito__lista > li { flex: 0 1 calc((100% - 40px) / 3); }
+
+.dw-perfil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .6rem;
+  padding: 30px;
+  border: 1px solid var(--dw-linha-clara);
+  border-radius: 16px;
+  background-image: linear-gradient(305deg, #052113 0%, #083E23 100%);
+  box-shadow: var(--dw-sombra-cartao);
+}
+.dw-perfil p {
+  max-width: 254px;
+  font-size: clamp(.85rem, 1.5vw, 16px);
+  font-weight: 500;
+  letter-spacing: .6px;
+  text-align: center;
+  color: #D6D6D6;
+}
+
+@media (max-width: 900px) {
+  .dw-perfeito__lista > li { flex-basis: 100%; }
+}
+@media (max-width: 767px) {
+  .dw-perfeito { padding-block: 3em 4em; }
+  .dw-perfil { border-radius: 13px; }
+}
+
+
+/* =========================================================================
+   DOBRA 7 — OFERTA
    ========================================================================= */
 .dw-oferta {
   padding-block: 7em;
@@ -777,12 +699,43 @@ a { color: inherit; }
 
 .dw-oferta__linha { width: 100%; margin: 1.6rem 0 0; border: 0; border-top: 1px solid #00000030; }
 
-.dw-oferta__bonus {
-  margin-top: 1.3em;
-  font-size: clamp(.95rem, 1.9vw, 1.5em);
+/* "Olha tudo o que você vai levar": a lista que substituiu a chamada de
+   bônus. Alinhada à esquerda, ao contrário da lista de cima — são frases
+   longas, e centralizar linha a linha deixaria o bloco em serrote. */
+.dw-oferta__levar {
+  margin-top: 1.7rem;
+  font-size: clamp(1.1rem, 2.4vw, 1.8em);
+  font-weight: 700;
+  line-height: 1.25;
   color: var(--dw-verde-600);
 }
-.dw-oferta__bonus em { font-style: italic; font-weight: 700; }
+.dw-oferta__itens {
+  max-width: 575px;
+  margin: 1.1rem auto 0;
+  display: grid;
+  gap: .5rem;
+  text-align: left;
+}
+.dw-oferta__itens li {
+  position: relative;
+  padding: .6rem .9rem .6rem 2.1rem;
+  border-radius: 10px;
+  background: #EAFFF1;
+  font-size: clamp(.8rem, 1.5vw, 17px);
+  line-height: 1.4;
+  color: #303030;
+}
+.dw-oferta__itens li::before {
+  content: "";
+  position: absolute;
+  top: 1.05em;
+  left: .95rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--dw-verde-500);
+}
+
 
 .dw-oferta .dw-btn--oferta { margin: 1.4rem auto 0; }
 
@@ -806,13 +759,12 @@ a { color: inherit; }
   .dw-oferta__avista { font-size: 1.2em; }
   .dw-oferta__lista li { font-size: 13px; }
   .dw-btn--oferta { width: min(100%, 249px); min-width: 0; padding-inline: 1rem; font-size: 11px; }
-  .dw-oferta__bonus { font-size: 1em; }
   .dw-oferta__aviso { font-size: .8em; }
 }
 
 
 /* =========================================================================
-   DOBRA 10 — FAZ A CONTA
+   DOBRA 8 — FAZ A CONTA
    ========================================================================= */
 .dw-conta { padding-block: 4em 5em; }
 .dw-conta__caixa {
@@ -873,7 +825,7 @@ a { color: inherit; }
 
 
 /* =========================================================================
-   DOBRA 11 — GARANTIA
+   DOBRA 9 — GARANTIA
    ========================================================================= */
 .dw-garantia { padding-block: 3.2em 7em; background: var(--dw-verde-900); }
 
@@ -923,60 +875,7 @@ a { color: inherit; }
 
 
 /* =========================================================================
-   DOBRA 12 — FALE COM A EQUIPE
-   ========================================================================= */
-.dw-suporte {
-  min-height: 746px;
-  display: flex;
-  align-items: center;
-  padding-block: 4em;
-  border-top: 1px solid #DEC28A;
-  background: var(--dw-amarelo-bg) url("../img/suporte-fundo.webp") center center / cover no-repeat;
-}
-.dw-suporte__cartao {
-  width: min(100%, 50%);
-  padding: 3.1em;
-  border-radius: 21px;
-  background-image: linear-gradient(146deg, #DFFFEC 0%, #F4FFF9 100%);
-  box-shadow: 12px 17px 41px -6px rgba(0, 0, 0, .17);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  text-align: center;
-}
-.dw-suporte__titulo {
-  max-width: 496px;
-  font-size: clamp(1.4rem, 3vw, 2.7em);
-  font-weight: 600;
-  line-height: 1.2;
-  text-transform: uppercase;
-  color: #044C1B;
-}
-.dw-suporte__cartao .dw-corpo { max-width: 400px; }
-
-@media (max-width: 1024px) {
-  .dw-suporte {
-    min-height: 535px;
-    padding-block: 3em;
-    background-image: url("../img/suporte-fundo-movel.webp");
-  }
-  .dw-suporte__cartao { width: min(100%, 70%); padding: 2.6em; }
-}
-@media (max-width: 767px) {
-  .dw-suporte {
-    min-height: 1070px;
-    align-items: flex-start;
-    padding: 3em 1em;
-    background-position: bottom center;
-  }
-  .dw-suporte__cartao { width: 100%; max-width: 500px; margin-inline: auto; padding: 3em 1em; }
-  .dw-suporte__titulo { max-width: 266px; font-size: 27px; line-height: 1.3; }
-}
-
-
-/* =========================================================================
-   DOBRA 13 — BIO
+   DOBRA 10 — BIO
    ========================================================================= */
 .dw-bio {
   padding-block: 0 3em;
@@ -998,6 +897,15 @@ a { color: inherit; }
   text-transform: uppercase;
   color: #FFFFFF;
 }
+/* A linha de assinatura logo abaixo do título. Amarela, e não verde: o fundo
+   da dobra é o --dw-verde-600 e um verde sobre verde some. */
+.dw-bio__assinatura {
+  margin-top: .5rem;
+  font-size: clamp(1rem, 2vw, 1.3em);
+  font-weight: 700;
+  color: var(--dw-amarelo);
+}
+
 .dw-bio__texto .dw-corpo { margin-top: 1rem; font-size: clamp(.9rem, 1.5vw, 1.1em); font-weight: 400; }
 .dw-bio__texto .dw-btn   { margin-top: 2.3rem; width: min(100%, 300px); }
 
@@ -1018,7 +926,7 @@ a { color: inherit; }
 
 
 /* =========================================================================
-   DOBRA 14 — FAQ
+   DOBRA 11 — FAQ
    ========================================================================= */
 .dw-faq { padding-block: 3em; background: var(--dw-creme); }
 .dw-faq__titulo {
@@ -1077,43 +985,17 @@ a { color: inherit; }
 
 
 /* =========================================================================
-   DOBRA 15 — PRECISA DE AJUDA
+   MARCA D'ÁGUA
+
+   Sobrou da dobra "Precisa de ajuda?", que saiu na revisão do doc. O nome em
+   marca d'água é o fecho visual da página, não cópia — sem ele o conteúdo
+   encosta no rodapé preto sem transição.
    ========================================================================= */
-.dw-ajuda {
-  position: relative;
-  padding-block: 4em 3em;
+.dw-marca {
+  padding-block: 3em 1em;
   background-image: linear-gradient(180deg, #FFFEFB 0%, var(--dw-amarelo-fim) 100%);
 }
-.dw-ajuda__cartao {
-  position: relative;
-  z-index: 1;
-  padding: 3.1em;
-  border-radius: 21px;
-  background-image: linear-gradient(146deg, #DFFFEC 0%, #F4FFF9 100%);
-  box-shadow: 12px 17px 41px -6px rgba(0, 0, 0, .5);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  text-align: center;
-}
-.dw-ajuda__titulo {
-  max-width: 584px;
-  font-size: clamp(1.6rem, 3.2vw, 2.7em);
-  font-weight: 600;
-  line-height: 1.2;
-  color: #044C1B;
-}
-.dw-ajuda__texto {
-  max-width: 668px;
-  font-family: var(--dw-fonte-apoio);
-  font-weight: 400;
-  color: #000000;
-}
-
-/* A marca d'água fica por baixo do cartão e é só decoração. */
-.dw-ajuda__marca {
-  margin-top: -3.5rem;
+.dw-marca__texto {
   font-size: clamp(3.4rem, 13vw, 13.7em);
   font-weight: 600;
   line-height: 1.2;
@@ -1125,12 +1007,9 @@ a { color: inherit; }
 }
 
 @media (max-width: 767px) {
-  .dw-ajuda { padding-block: 3em 2.5em; }
-  .dw-ajuda__cartao { width: min(100%, 310px); margin-inline: auto; padding: 3em 1em; }
-  .dw-ajuda__marca { margin-top: -1.6rem; font-size: 54px; line-height: 1.3; }
+  .dw-marca { padding-block: 2em 1em; }
+  .dw-marca__texto { font-size: 54px; line-height: 1.3; }
 }
-
-
 /* =========================================================================
    RODAPÉ
    ========================================================================= */
