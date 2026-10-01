@@ -304,7 +304,12 @@
    pela mesma caixa, e a proporção não é a mesma em toda etapa do funil —
    esta é vertical. Por isso aqui só fica o acabamento: a mesma borda
    arredondada e a mesma sombra que a caixa do vídeo tinha. */
-.mml-vsl { margin-inline: auto; }
+/* width:100% não é enfeite: o hero é um flex column com align-items:center,
+   e aí um item sem largura encolhe até o conteúdo. O conteúdo é um iframe em
+   position:absolute, que não mede nada — a caixa ficava com 0 de largura e,
+   como a altura do embed vem de um padding em %, com 0 de altura junto. O
+   teto de 400px continua sendo o do embed, não daqui. */
+.mml-vsl { width: 100%; margin-inline: auto; }
 .mml-vsl__caixa {
   border-radius: var(--tp-radius);
   overflow: hidden;
