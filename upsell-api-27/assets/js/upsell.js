@@ -16,14 +16,11 @@
   /* =======================================================================
      DESTINO DA COMPRA
 
-     É o mesmo href que está em todos os nove botões da página de origem.
-
-     ATENÇÃO: "link-pagina" tem cara de placeholder que ficou no ar — o
-     domínio evento.topcorpus.com.br é real, o caminho é que parece não ter
-     sido trocado pela URL do checkout. Copiei como está, que é o que foi
-     pedido; trocar aqui muda os nove botões de uma vez.
+     Checkout da Hotmart próprio do ticket 27, com a oferta e o modo de
+     checkout já no link. Trocar aqui muda todos os botões [data-checkout]
+     da página de uma vez.
      ======================================================================= */
-  var CHECKOUT_URL = "https://evento.topcorpus.com.br/link-pagina";
+  var CHECKOUT_URL = "https://pay.hotmart.com/W95360090D?off=9z1ywsjs&checkoutMode=10";
 
   /* A revisão do doc tirou as duas dobras de WhatsApp — "Fale diretamente com
      minha equipe" e "Precisa de ajuda?" —, então não sobrou nenhum botão
