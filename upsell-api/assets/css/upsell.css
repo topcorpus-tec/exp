@@ -670,9 +670,6 @@ h1, h2, h3, h4, h5, h6,
    ========================================================================= */
 .dw-certificado { padding-block: 4em; }
 
-/* Uma coluna só enquanto a arte não chega. O doc pede aqui a foto da Ana
-   segurando o certificado; quando ela existir, esta grade passa a duas
-   colunas e a <figure class="dw-certificado__midia"> entra na segunda. */
 .dw-certificado__grade {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -685,6 +682,11 @@ h1, h2, h3, h4, h5, h6,
   margin: 1.2rem auto 0;
   text-align: center;
 }
+
+/* O mockup dos dois certificados abre a dobra, acima do título,
+   centralizado e sempre inteiro, na proporção do arquivo. */
+.dw-certificado__midia { max-width: 560px; margin: 0 auto 1.6rem; }
+.dw-certificado__midia img { display: block; width: 100%; height: auto; }
 
 .dw-certificado__lista {
   max-width: 760px;
