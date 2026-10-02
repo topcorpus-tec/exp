@@ -67,8 +67,13 @@
 
 /* As quatro perguntas, uma por caixa. O taping faz a caixa e o ícone com o
    rosa do TopTaping escrito à mão (borda e hover); aqui eles voltam para o
-   azul da capa. O texto inteiro da pergunta é o destaque. */
-.v2-asks { max-width: 1000px; }
+   azul da capa. O texto inteiro da pergunta é o destaque.
+   Duas por linha, na largura do texto da dobra: em quatro colunas a
+   imagem de cada caixa ficava pequena demais para se ler. */
+.v2-asks {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 760px;
+}
 .v2-asks .tp-asks__box {
   border-top-color: var(--tp-rose-soft);
   font-size: clamp(1rem, 1.6vw, 1.08rem);
@@ -102,6 +107,7 @@
    A imagem ocupa a linha de cima inteira; o flex: 1 1 0 do <strong> é o
    que o mantém ao lado do ícone em vez de descer quando a frase é longa. */
 @media (max-width: 640px) {
+  .v2-asks { grid-template-columns: 1fr; }
   .v2-asks .tp-asks__box {
     display: flex;
     flex-wrap: wrap;
