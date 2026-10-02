@@ -8,6 +8,14 @@
 # 29/09/2026: estão publicadas e podem ser indexadas. Não há regra para
 # elas aqui — ausência é permissão.
 
+# A v2 do Manual (lt-v2-27, -67 e -97) é o mesmo produto da v1 com outra
+# copy, para testar no tráfego pago. Fora dos buscadores: indexadas junto
+# com a v1, as seis disputariam a mesma busca. O anúncio não depende de
+# indexação, então o teste não perde nada. Se a v2 virar a página oficial,
+# sai daqui e a v1 entra no lugar.
+/lt-v2-*
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+
 # Páginas de funil do Método Mãos Lucrativas (upsell, downsell e a
 # conclusão do pedido): só devem ser alcançadas dentro do fluxo de compra,
 # nunca pela busca.

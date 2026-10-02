@@ -1,0 +1,544 @@
+/* =========================================================================
+   Manual Ilustrado — v2.css
+
+   A lt-v2 é a mesma identidade da lt-v1 (design-system + taping + manual,
+   copiados sem alteração) com a copy da "Página de Vendas #2" e o esqueleto
+   das páginas low ticket de referência: dor em perguntas, lista do que se
+   aprende, entregáveis lado a lado, bônus, pilha de valor, escolha final.
+
+   Aqui ficam só os blocos que a v1 não tinha. Tudo é escrito com os tokens
+   que o manual.css já reatribuiu para o azul, então nada aqui fixa cor de
+   marca à mão — exceto o verde do botão e o vermelho do preço riscado, que
+   na v1 também são fixos.
+
+   Carregar DEPOIS de manual.css.
+   ========================================================================= */
+
+/* =========================================================================
+   1. HERO — a caixa de chamada e o selo de "começando agora"
+
+   No doc as duas frases vêm em caixas próprias, separadas da manchete. A de
+   cima é quem a página quer parar; a de baixo tira a objeção de quem acha
+   que não tem experiência para usar o manual.
+   ========================================================================= */
+.v2-hero__pre {
+  max-width: 44ch;
+  margin: 0 auto;
+  padding: .75em 1.25em;
+  border: 1px solid var(--tp-violet-soft);
+  border-radius: var(--tp-radius-sm);
+  background: var(--tp-white);
+  box-shadow: var(--tp-shadow-sm);
+  font-size: clamp(.92rem, 1.5vw, 1.04rem);
+  font-weight: var(--fw-semibold);
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--tp-rose-deep);
+  text-wrap: balance;
+}
+
+/* A manchete da v2 é mais longa que a da v1: em 33ch ela fechava em quatro
+   linhas no desktop. */
+.mn-hero__inner .tp-hero__headline { max-width: 36ch; }
+
+.v2-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  margin: 0;
+  padding: .5em 1.1em;
+  border-radius: var(--radius-pill);
+  background: rgba(18, 133, 74, .1);
+  color: #0D6E3C;
+  font-size: clamp(.86rem, 1.4vw, .96rem);
+  font-weight: var(--fw-bold);
+  line-height: 1.3;
+}
+.v2-hero__badge svg { flex: 0 0 auto; }
+
+/* =========================================================================
+   2. A DÚVIDA
+
+   O título desta dobra é a pergunta do doc, então ele usa o tamanho menor:
+   é uma frase inteira, não uma chamada de duas linhas.
+   ========================================================================= */
+.tp-manifest > .tp-title { max-width: 30ch; text-wrap: balance; }
+.tp-manifest > p strong { color: var(--tp-ink); font-weight: var(--fw-bold); }
+
+/* As quatro perguntas, uma por caixa. O taping faz a caixa e o ícone com o
+   rosa do TopTaping escrito à mão (borda e hover); aqui eles voltam para o
+   azul da capa. O texto inteiro da pergunta é o destaque. */
+.v2-asks { max-width: 1000px; }
+.v2-asks .tp-asks__box {
+  border-top-color: var(--tp-rose-soft);
+  font-size: clamp(1rem, 1.6vw, 1.08rem);
+  line-height: 1.45;
+}
+.v2-asks .tp-asks__icon { border-color: var(--tp-violet-soft); }
+.v2-asks .tp-asks__box:hover .tp-asks__icon {
+  background: linear-gradient(135deg, var(--tp-rose), var(--tp-violet-deep));
+}
+
+/* Imagem de cada pergunta, no topo da caixa, acima do ícone. A proporção
+   fica no contêiner, então a <img> que entrar no lugar do .v2-ph só
+   preenche — o layout já é o definitivo. */
+.v2-asks__media {
+  aspect-ratio: 4 / 3;
+  margin-bottom: 1rem;
+  border-radius: calc(var(--tp-radius-sm) - 4px);
+  overflow: hidden;
+}
+.v2-asks__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* No celular as caixas ficam uma por linha, e com o ícone em cima cada uma
+   gastava três linhas para uma pergunta de uma. Ali o ícone vai para o
+   lado. Pode ser flex porque aqui a caixa só tem um <strong> — o aviso do
+   taping sobre o flex quebrar a frase vale para texto com vários.
+   A imagem ocupa a linha de cima inteira; o flex: 1 1 0 do <strong> é o
+   que o mantém ao lado do ícone em vez de descer quando a frase é longa. */
+@media (max-width: 640px) {
+  .v2-asks .tp-asks__box {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .85rem;
+  }
+  .v2-asks .tp-asks__icon { flex: 0 0 auto; margin-bottom: 0; }
+  .v2-asks .tp-asks__box strong { flex: 1 1 0; min-width: 0; }
+  .v2-asks__media { flex: 0 0 100%; margin-bottom: 0; }
+}
+
+/* Lugar da foto pendente (ver o HTML): quando ela entrar, fica centralizada
+   acima das perguntas, no mesmo limite de largura do texto. */
+.v2-duvida__foto {
+  width: min(100%, 520px);
+  margin: 0 auto;
+}
+.v2-duvida__foto img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--tp-radius);
+  box-shadow: var(--tp-shadow-md);
+}
+
+/* "Você já passou por isso?" é a virada da dobra: a pergunta em destaque e,
+   embaixo, a frase que a pessoa diria a si mesma, como citação. */
+.v2-duvida__turn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .4rem;
+  margin-top: .5rem;
+}
+.v2-duvida__ask {
+  margin: 0;
+  font-size: clamp(1.25rem, 2.6vw, 1.6rem);
+  font-weight: var(--fw-extrabold);
+  letter-spacing: -.015em;
+  color: var(--tp-ink);
+}
+.v2-duvida__quote {
+  margin: 0;
+  font-size: clamp(1.02rem, 1.85vw, 1.18rem);
+  font-style: italic;
+  color: var(--tp-body);
+}
+
+/* =========================================================================
+   3. O QUE VOCÊ VAI APRENDER — lista com check
+
+   Um cartão por item: o começo de cada item é o que se aprende (em
+   negrito) e o resto é o medo que ele tira. Até o tablet é uma coluna só,
+   como lista; no desktop vira grade de três (ver o fim do bloco).
+   ========================================================================= */
+.v2-checks {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(.7rem, 1.6vw, .95rem);
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+.v2-checks li {
+  display: flex;
+  align-items: center;
+  gap: clamp(.9rem, 2.4vw, 1.4rem);
+  padding: clamp(1rem, 2.2vw, 1.3rem) clamp(1.1rem, 2.6vw, 1.6rem);
+  background: var(--tp-white);
+  border: 1px solid var(--tp-line-soft);
+  border-left: 3px solid #12854A;
+  border-radius: var(--tp-radius-sm);
+  box-shadow: var(--tp-shadow-sm);
+  font-size: clamp(.98rem, 1.6vw, 1.06rem);
+  line-height: 1.55;
+  color: var(--tp-body);
+}
+.v2-checks strong { color: var(--tp-ink); font-weight: var(--fw-bold); }
+
+/* Imagem à esquerda de cada item. O check e o texto vão juntos no
+   __body: o bloco centraliza na altura da imagem, e dentro dele o check
+   continua alinhado à primeira linha do texto. */
+.v2-checks__media {
+  flex: 0 0 auto;
+  width: clamp(5.5rem, 12vw, 7.5rem);
+  aspect-ratio: 1 / 1;
+  border-radius: calc(var(--tp-radius-sm) - 4px);
+  overflow: hidden;
+}
+.v2-checks__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.v2-checks__body {
+  display: flex;
+  align-items: flex-start;
+  gap: .9rem;
+}
+
+/* No celular, com a imagem ao lado, sobravam umas quinze letras por linha
+   para o texto. Ali a imagem sobe e ocupa a largura do cartão. */
+@media (max-width: 480px) {
+  .v2-checks li { flex-direction: column; align-items: stretch; }
+  .v2-checks__media { width: 100%; aspect-ratio: 16 / 9; }
+}
+
+/* No desktop os cinco ficam numa linha de três e outra de dois, com a
+   imagem em cima, como as perguntas da dobra 2. A grade tem seis trilhas
+   e cada cartão ocupa duas: é o que deixa o quarto começar no meio da
+   primeira coluna e a linha de dois sair centralizada. */
+@media (min-width: 1010px) {
+  .v2-checks {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: clamp(.85rem, 2vw, 1.25rem);
+    max-width: 1000px;
+  }
+  .v2-checks li {
+    grid-column: span 2;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  .v2-checks li:nth-child(4) { grid-column: 2 / span 2; }
+  .v2-checks__media { width: 100%; aspect-ratio: 4 / 3; }
+}
+
+/* O check é do verde do botão: o que se aprende e a ação de comprar ficam
+   na mesma cor, como o preço na oferta. */
+.v2-checks__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 1.75rem;
+  height: 1.75rem;
+  margin-top: -.05rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #12854A, #0D6E3C);
+  color: #fff;
+}
+.v2-checks__icon svg { width: 14px; height: 14px; }
+
+/* =========================================================================
+   4. O QUE VEM NO MANUAL — imagem e texto lado a lado, alternando
+
+   No celular a imagem vem sempre em cima. Do tablet para cima vira linha,
+   e as pares invertem o lado — o zigue-zague das referências, que deixa a
+   leitura descer em diagonal em vez de numa coluna só de cards.
+   ========================================================================= */
+.v2-feats {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  max-width: 980px;
+  margin-inline: auto;
+}
+.v2-feat {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.1rem, 3vw, 2.5rem);
+  align-items: center;
+}
+.v2-feat__media {
+  overflow: hidden;
+  aspect-ratio: 3 / 2;
+  border: 1px solid var(--tp-line-soft);
+  border-radius: var(--tp-radius);
+  background: var(--tp-white);
+  box-shadow: var(--tp-shadow-sm);
+}
+.v2-feat__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.v2-feat__body {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+}
+.v2-feat__num {
+  font-size: .78rem;
+  font-weight: var(--fw-extrabold);
+  letter-spacing: .16em;
+  color: var(--tp-rose);
+}
+.v2-feat__title {
+  margin: 0;
+  font-size: clamp(1.2rem, 2.3vw, 1.5rem);
+  font-weight: var(--fw-extrabold);
+  line-height: 1.25;
+  letter-spacing: -.015em;
+  color: var(--tp-ink);
+  text-wrap: balance;
+}
+.v2-feat__body p {
+  margin: 0;
+  font-size: clamp(.98rem, 1.6vw, 1.06rem);
+  line-height: 1.7;
+  color: var(--tp-body);
+}
+.v2-feat__body p strong { color: var(--tp-ink); font-weight: var(--fw-bold); }
+
+@media (min-width: 768px) {
+  .v2-feat { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); }
+  .v2-feat:nth-child(even) .v2-feat__media { order: 2; }
+}
+
+/* =========================================================================
+   5. BÔNUS — o quinto no meio
+
+   O manual.css põe os bônus em duas colunas a partir de 1010px. Com cinco,
+   o último ficava sozinho na esquerda, com um buraco ao lado. Aqui ele
+   ocupa a linha inteira mas fica com a largura de uma coluna, no centro.
+   ========================================================================= */
+@media (min-width: 1010px) {
+  .tp-bonus > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc((100% - clamp(1.25rem, 3vw, 1.9rem)) / 2);
+  }
+}
+
+/* =========================================================================
+   6. PARA QUEM É — o fecho "preste muita atenção"
+   ========================================================================= */
+.v2-callout {
+  max-width: 760px;
+  margin: clamp(2.25rem, 5vw, 3.25rem) auto 0;
+  padding: clamp(1.4rem, 3vw, 2rem) clamp(1.4rem, 3.4vw, 2.4rem);
+  border: 1px solid var(--tp-violet-soft);
+  border-radius: var(--tp-radius);
+  background: var(--tp-white);
+  box-shadow: var(--tp-shadow-md);
+  text-align: center;
+}
+.v2-callout p {
+  margin: 0;
+  font-size: clamp(1rem, 1.7vw, 1.12rem);
+  line-height: 1.7;
+  color: var(--tp-body);
+}
+.v2-callout strong { color: var(--tp-ink); font-weight: var(--fw-extrabold); }
+.v2-callout .v2-callout__kicker {
+  margin-bottom: .5rem;
+  font-size: clamp(1.15rem, 2.3vw, 1.4rem);
+  font-weight: var(--fw-extrabold);
+  letter-spacing: -.01em;
+  color: var(--tp-rose-deep);
+}
+
+/* =========================================================================
+   7. OFERTA — a pilha de valor
+
+   A caixa é a mesma da v1 (mockup, lista, preço). O que entra é o total
+   riscado logo depois da lista e a frase que faz a ponte para o preço.
+   ========================================================================= */
+.v2-total {
+  margin: 1.1rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--tp-line);
+  font-size: clamp(.98rem, 1.7vw, 1.08rem);
+  font-weight: var(--fw-bold);
+  line-height: 1.5;
+  color: var(--tp-ink);
+  text-align: center;
+}
+/* O mesmo vermelho riscado do preço antigo no manual.css: é a conta que
+   não vale mais. */
+.v2-total s {
+  white-space: nowrap;
+  color: #C62828;
+  text-decoration-color: #C62828;
+  text-decoration-thickness: 2px;
+  text-decoration-skip-ink: none;
+}
+
+.v2-price__lead {
+  max-width: 34ch;
+  margin: 0;
+  font-size: clamp(.98rem, 1.7vw, 1.08rem);
+  font-weight: var(--fw-semibold);
+  line-height: 1.5;
+  color: var(--tp-ink);
+  text-wrap: balance;
+}
+/* O "Por apenas" da segunda caixa vai numa linha própria, acima do
+   número: dentro do .tp-offer__installment ele quebrava sozinho no
+   desktop, onde o número é maior, e abria um vão no meio do preço. */
+.v2-price__por {
+  margin: .35rem 0 -.35rem;
+  font-size: .92rem;
+  font-weight: var(--fw-extrabold);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--tp-ink);
+}
+
+.v2-price__name {
+  margin: .35rem 0 0;
+  font-size: .76rem;
+  font-weight: var(--fw-extrabold);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--tp-rose-deep);
+}
+
+/* A nota do pagamento fica abaixo do botão, como no doc. */
+.tp-offer__price .tp-offer__note { margin-top: .9rem; }
+
+.v2-mail {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  margin: .35rem 0 0;
+  font-size: .9rem;
+  font-weight: var(--fw-semibold);
+  line-height: 1.45;
+  color: var(--tp-ink);
+  text-align: left;
+}
+.v2-mail svg { flex: 0 0 auto; color: var(--tp-rose); }
+
+/* =========================================================================
+   8. A ESCOLHA — continuar sem ou atender com o manual
+
+   Duas caixas lado a lado (uma em cima da outra no celular). A do "não" é
+   apagada de propósito: fundo neutro, ícone vermelho, sem sombra. A do
+   "sim" é a que brilha — branca, com borda verde e sombra —, para o olho
+   terminar nela.
+   ========================================================================= */
+.v2-choice {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1rem, 2.6vw, 1.5rem);
+  max-width: 900px;
+  margin-inline: auto;
+}
+@media (min-width: 768px) {
+  .v2-choice { grid-template-columns: 1fr 1fr; }
+}
+.v2-choice__card {
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+  padding: clamp(1.4rem, 3vw, 2rem);
+  border-radius: var(--tp-radius);
+}
+.v2-choice__card p {
+  margin: 0;
+  font-size: clamp(.96rem, 1.55vw, 1.03rem);
+  line-height: 1.68;
+  color: var(--tp-body);
+}
+.v2-choice__card--nao {
+  background: rgba(255, 255, 255, .55);
+  border: 1px dashed var(--tp-line);
+}
+.v2-choice__card--sim {
+  background: var(--tp-white);
+  border: 2px solid #12854A;
+  box-shadow: var(--tp-shadow-md);
+}
+.v2-choice__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  color: #fff;
+}
+.v2-choice__card--nao .v2-choice__icon { background: #C62828; }
+.v2-choice__card--sim .v2-choice__icon { background: linear-gradient(135deg, #12854A, #0D6E3C); }
+.v2-choice__title {
+  margin: 0;
+  font-size: clamp(1.08rem, 2vw, 1.25rem);
+  font-weight: var(--fw-extrabold);
+  line-height: 1.3;
+  letter-spacing: -.01em;
+  color: var(--tp-ink);
+}
+
+.v2-choice__close {
+  max-width: 640px;
+  margin: clamp(2rem, 4.5vw, 3rem) auto clamp(1.75rem, 4vw, 2.5rem);
+  text-align: center;
+}
+.v2-choice__close p {
+  margin: 0;
+  font-size: clamp(1rem, 1.7vw, 1.1rem);
+  line-height: 1.7;
+  color: var(--tp-body);
+}
+.v2-choice__close strong { color: var(--tp-ink); font-weight: var(--fw-bold); }
+.v2-choice__close .v2-choice__ask {
+  margin-bottom: .5rem;
+  font-size: clamp(1.15rem, 2.3vw, 1.4rem);
+  font-weight: var(--fw-extrabold);
+  letter-spacing: -.01em;
+  color: var(--tp-ink);
+}
+
+/* A segunda caixa de preço: só a coluna do preço, mais estreita que a da
+   oferta, porque não tem mockup nem lista para acomodar. */
+.v2-final { max-width: 520px; }
+.v2-final .tp-offer__price { border-top: 0; }
+
+/* =========================================================================
+   9. ESPAÇO DE IMAGEM — provisório
+
+   O mesmo tracejado do .mn-ph da v1: marca onde entra uma imagem que ainda
+   não chegou. Hoje são as caixas das perguntas (dobra 2) e os itens do que
+   se aprende (dobra 3). O tamanho vem do contêiner (__media); este bloco só
+   desenha. Sai quando a última imagem entrar.
+   ========================================================================= */
+.v2-ph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed var(--tp-violet-soft);
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      var(--tp-violet-wash) 0 12px,
+      var(--tp-white)       12px 24px
+    );
+}
+.v2-ph__tag {
+  font-size: .62rem;
+  font-weight: var(--fw-extrabold);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--tp-violet-deep);
+}
