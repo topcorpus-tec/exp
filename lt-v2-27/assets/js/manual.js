@@ -40,14 +40,13 @@
      O que muda entre as três páginas são as duas caixas de preço (dobras
      7 e 9) e esta constante.
 
-     As de 67 e 97 levam &checkoutMode=10, que é o modo de checkout que a
-     Hotmart pediu. A de 27 ainda não: veio sem ele quando as URLs foram
-     passadas, em 29/09/2026. Se for para valer nas três, é acrescentar o
-     mesmo parâmetro lá — a diferença é conhecida, não descuido.
+     As três levam &checkoutMode=10, que é o modo de checkout que a
+     Hotmart pediu. A de 27 veio sem ele em 29/09/2026 e ganhou o
+     parâmetro em 02/10/2026.
 
      Vazio aqui deixa todos os CTAs inertes de propósito (ver initCheckout).
      ======================================================================= */
-  var CHECKOUT_URL = "https://pay.hotmart.com/W95360090D?off=9z1ywsjs";
+  var CHECKOUT_URL = "https://pay.hotmart.com/W95360090D?off=9z1ywsjs&checkoutMode=10";
 
   /* =======================================================================
      DESTINO DO CTA DA OFERTA
