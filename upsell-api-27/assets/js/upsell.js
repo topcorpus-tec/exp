@@ -18,10 +18,9 @@
 
      É o mesmo href que está em todos os nove botões da página de origem.
 
-     ATENÇÃO: "link-pagina" tem cara de placeholder que ficou no ar — o
-     domínio evento.topcorpus.com.br é real, o caminho é que parece não ter
-     sido trocado pela URL do checkout. Copiei como está, que é o que foi
-     pedido; trocar aqui muda os nove botões de uma vez.
+     O "link-pagina" é o destino certo, não um placeholder: é a página de
+     vendas do MML 2.0, que leva ao checkout da Hotmart. Confirmado em
+     02/10/2026. Trocar aqui muda todos os botões [data-checkout] de uma vez.
      ======================================================================= */
   var CHECKOUT_URL = "https://evento.topcorpus.com.br/link-pagina";
 
