@@ -42,6 +42,16 @@
    linhas no desktop. */
 .mn-hero__inner .tp-hero__headline { max-width: 36ch; }
 
+/* No desktop ela fecha em três linhas: um corpo menor que os 2,7rem do
+   taping e uma medida mais larga. Abaixo de 1024px fica como está, porque
+   no celular a quebra é outra de qualquer jeito. */
+@media (min-width: 1024px) {
+  .mn-hero__inner .tp-hero__headline {
+    max-width: 46ch;
+    font-size: 2.2rem;
+  }
+}
+
 .v2-hero__badge {
   display: inline-flex;
   align-items: center;
@@ -57,14 +67,12 @@
 }
 .v2-hero__badge svg { flex: 0 0 auto; }
 
-/* A cena: a foto da massoterapeuta parada sobre a dor, e os três
-   pensamentos do doc em balões por cima. Os balões ficam onde a foto tem
-   parede livre — dois à direita, um à esquerda —, longe do rosto e das
-   mãos, e as posições são em % da foto, então acompanham qualquer largura.
-   A largura máxima de cada balão é o que impede que ele chegue ao rosto. */
+/* A cena: a arte da massoterapeuta parada sobre a dor, com os três
+   pensamentos do doc já desenhados nela. É vertical, então o teto é menor
+   que o do mockup da v1 — a 520px ela ainda cabe com o botão perto da
+   dobra no desktop, e o arquivo de 879px segue nítido nessa largura. */
 .v2-cena {
-  position: relative;
-  width: min(100%, 640px);
+  width: min(100%, 520px);
   margin: 0 auto;
 }
 .v2-cena img {
@@ -73,59 +81,6 @@
   height: auto;
   border-radius: var(--tp-radius);
   box-shadow: var(--tp-shadow-md);
-}
-.v2-cena__balao {
-  position: absolute;
-  max-width: 31%;
-  padding: .55em .85em;
-  border-radius: 1.1em;
-  background: var(--tp-white);
-  box-shadow: 0 6px 18px rgba(1, 51, 124, .22);
-  font-size: clamp(.66rem, 1.9vw, .98rem);
-  font-weight: var(--fw-bold);
-  font-style: italic;
-  line-height: 1.3;
-  color: var(--tp-ink);
-  text-align: center;
-  text-wrap: balance;
-  animation: v2-pensa .5s cubic-bezier(.2, .9, .3, 1.3) both;
-}
-/* O rastro de bolinhas que faz do balão um pensamento, saindo para o lado
-   da cabeça dela. */
-.v2-cena__balao::before,
-.v2-cena__balao::after {
-  content: "";
-  position: absolute;
-  border-radius: 50%;
-  background: var(--tp-white);
-  box-shadow: 0 3px 8px rgba(1, 51, 124, .2);
-}
-.v2-cena__balao::before { width: .75em; height: .75em; }
-.v2-cena__balao::after  { width: .45em; height: .45em; }
-
-.v2-cena__balao--1 { top: 5%;  right: 4%; animation-delay: .35s; }
-.v2-cena__balao--2 { top: 26%; right: 3%; animation-delay: .8s; }
-.v2-cena__balao--3 { top: 5%;  left: 4%;  animation-delay: 1.25s; }
-
-.v2-cena__balao--1::before,
-.v2-cena__balao--2::before { left: -.35em; bottom: -.45em; }
-.v2-cena__balao--1::after,
-.v2-cena__balao--2::after  { left: -.95em; bottom: -.95em; }
-.v2-cena__balao--3::before { right: -.35em; bottom: -.45em; }
-.v2-cena__balao--3::after  { right: -.95em; bottom: -.95em; }
-
-/* No celular os balões ficam proporcionalmente mais altos, e o do meio
-   encostava no de cima: ali ele desce um pouco. */
-@media (max-width: 640px) {
-  .v2-cena__balao--2 { top: 31%; }
-}
-
-@keyframes v2-pensa {
-  from { opacity: 0; transform: translateY(6px) scale(.9); }
-  to   { opacity: 1; transform: none; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .v2-cena__balao { animation: none; }
 }
 
 /* =========================================================================
