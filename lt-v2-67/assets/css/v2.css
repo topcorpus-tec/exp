@@ -42,19 +42,18 @@
 .tp-hero { padding-top: 0; }
 .mn-hero__inner { padding-top: clamp(1.25rem, 3vw, 1.75rem); }
 
-/* A manchete da v2 é mais longa que a da v1: em 33ch ela fechava em quatro
-   linhas no desktop. */
-.mn-hero__inner .tp-hero__headline { max-width: 36ch; }
-
-/* No desktop ela fecha em três linhas: um corpo menor que os 2,7rem do
-   taping e uma medida mais larga. Abaixo de 1024px fica como está, porque
-   no celular a quebra é outra de qualquer jeito. */
-@media (min-width: 1024px) {
-  .mn-hero__inner .tp-hero__headline {
-    max-width: 46ch;
-    font-size: 2.2rem;
-  }
+/* O logo do manual abre o hero, acima da manchete, como pede o doc. */
+.v2-hero__logo {
+  display: block;
+  width: min(52%, 200px);
+  height: auto;
+  margin: 0 auto;
 }
+
+/* A manchete é curta ("Alivie a dor que ninguém conseguiu aliviar!") e
+   fica no tamanho do taping, em duas linhas no desktop; o subtítulo logo
+   embaixo carrega o resto da promessa. */
+.mn-hero__inner .tp-hero__headline { max-width: 24ch; }
 
 .v2-hero__badge {
   display: inline-flex;
