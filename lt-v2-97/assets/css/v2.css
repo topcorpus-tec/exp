@@ -15,11 +15,12 @@
    ========================================================================= */
 
 /* =========================================================================
-   1. HERO — a caixa de chamada e o selo de "começando agora"
+   1. HERO — a caixa de chamada, o selo de "sem experiência" e a cena
 
    No doc as duas frases vêm em caixas próprias, separadas da manchete. A de
    cima é quem a página quer parar; a de baixo tira a objeção de quem acha
-   que não tem experiência para usar o manual.
+   que não tem experiência para usar o manual. Embaixo vem a cena da dúvida,
+   no lugar que na v1 era do mockup do manual.
    ========================================================================= */
 .v2-hero__pre {
   max-width: 44ch;
@@ -56,6 +57,77 @@
 }
 .v2-hero__badge svg { flex: 0 0 auto; }
 
+/* A cena: a foto da massoterapeuta parada sobre a dor, e os três
+   pensamentos do doc em balões por cima. Os balões ficam onde a foto tem
+   parede livre — dois à direita, um à esquerda —, longe do rosto e das
+   mãos, e as posições são em % da foto, então acompanham qualquer largura.
+   A largura máxima de cada balão é o que impede que ele chegue ao rosto. */
+.v2-cena {
+  position: relative;
+  width: min(100%, 640px);
+  margin: 0 auto;
+}
+.v2-cena img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--tp-radius);
+  box-shadow: var(--tp-shadow-md);
+}
+.v2-cena__balao {
+  position: absolute;
+  max-width: 31%;
+  padding: .55em .85em;
+  border-radius: 1.1em;
+  background: var(--tp-white);
+  box-shadow: 0 6px 18px rgba(1, 51, 124, .22);
+  font-size: clamp(.66rem, 1.9vw, .98rem);
+  font-weight: var(--fw-bold);
+  font-style: italic;
+  line-height: 1.3;
+  color: var(--tp-ink);
+  text-align: center;
+  text-wrap: balance;
+  animation: v2-pensa .5s cubic-bezier(.2, .9, .3, 1.3) both;
+}
+/* O rastro de bolinhas que faz do balão um pensamento, saindo para o lado
+   da cabeça dela. */
+.v2-cena__balao::before,
+.v2-cena__balao::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: var(--tp-white);
+  box-shadow: 0 3px 8px rgba(1, 51, 124, .2);
+}
+.v2-cena__balao::before { width: .75em; height: .75em; }
+.v2-cena__balao::after  { width: .45em; height: .45em; }
+
+.v2-cena__balao--1 { top: 5%;  right: 4%; animation-delay: .35s; }
+.v2-cena__balao--2 { top: 26%; right: 3%; animation-delay: .8s; }
+.v2-cena__balao--3 { top: 5%;  left: 4%;  animation-delay: 1.25s; }
+
+.v2-cena__balao--1::before,
+.v2-cena__balao--2::before { left: -.35em; bottom: -.45em; }
+.v2-cena__balao--1::after,
+.v2-cena__balao--2::after  { left: -.95em; bottom: -.95em; }
+.v2-cena__balao--3::before { right: -.35em; bottom: -.45em; }
+.v2-cena__balao--3::after  { right: -.95em; bottom: -.95em; }
+
+/* No celular os balões ficam proporcionalmente mais altos, e o do meio
+   encostava no de cima: ali ele desce um pouco. */
+@media (max-width: 640px) {
+  .v2-cena__balao--2 { top: 31%; }
+}
+
+@keyframes v2-pensa {
+  from { opacity: 0; transform: translateY(6px) scale(.9); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .v2-cena__balao { animation: none; }
+}
+
 /* =========================================================================
    2. A DÚVIDA
 
@@ -65,93 +137,107 @@
 .tp-manifest > .tp-title { max-width: 30ch; text-wrap: balance; }
 .tp-manifest > p strong { color: var(--tp-ink); font-weight: var(--fw-bold); }
 
-/* As quatro perguntas, uma por caixa. O taping faz a caixa e o ícone com o
-   rosa do TopTaping escrito à mão (borda e hover); aqui eles voltam para o
-   azul da capa. O texto inteiro da pergunta é o destaque.
-   Duas por linha, na largura do texto da dobra: em quatro colunas a
-   imagem de cada caixa ficava pequena demais para se ler. */
-.v2-asks {
-  grid-template-columns: repeat(2, 1fr);
-  max-width: 760px;
-}
-.v2-asks .tp-asks__box {
-  border-top-color: var(--tp-rose-soft);
-  font-size: clamp(1rem, 1.6vw, 1.08rem);
-  line-height: 1.45;
-}
-.v2-asks .tp-asks__icon { border-color: var(--tp-violet-soft); }
-.v2-asks .tp-asks__box:hover .tp-asks__icon {
-  background: linear-gradient(135deg, var(--tp-rose), var(--tp-violet-deep));
-}
-
-/* Imagem de cada pergunta, no topo da caixa, acima do ícone. Sempre
-   inteira: a altura vem da própria imagem, nunca de um recorte. */
-.v2-asks__media {
-  margin-bottom: 1rem;
-  border-radius: calc(var(--tp-radius-sm) - 4px);
-  overflow: hidden;
-}
-.v2-asks__media img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-/* No celular as caixas ficam uma por linha, e com o ícone em cima cada uma
-   gastava três linhas para uma pergunta de uma. Ali o ícone vai para o
-   lado. Pode ser flex porque aqui a caixa só tem um <strong> — o aviso do
-   taping sobre o flex quebrar a frase vale para texto com vários.
-   A imagem ocupa a linha de cima inteira; o flex: 1 1 0 do <strong> é o
-   que o mantém ao lado do ícone em vez de descer quando a frase é longa. */
-@media (max-width: 640px) {
-  .v2-asks { grid-template-columns: 1fr; }
-  .v2-asks .tp-asks__box {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: .85rem;
-  }
-  .v2-asks .tp-asks__icon { flex: 0 0 auto; margin-bottom: 0; }
-  .v2-asks .tp-asks__box strong { flex: 1 1 0; min-width: 0; }
-  .v2-asks__media { flex: 0 0 100%; margin-bottom: 0; }
-}
-
-/* A foto da profissional olhando para as mãos, centralizada acima das
-   perguntas, no mesmo limite de largura do texto. */
-.v2-duvida__foto {
-  width: min(100%, 520px);
+/* O celular com as pesquisas recentes dela. Só a metade de cima do
+   aparelho: a borda escura desce pelas laterais e a tela some num
+   esmaecimento, como se continuasse — o que importa é a lista. O
+   esmaecimento começa depois da última pesquisa, no respiro do pé, para
+   nunca apagar texto. */
+.v2-busca {
+  width: min(100%, 360px);
   margin: 0 auto;
 }
-.v2-duvida__foto img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: var(--tp-radius);
+.v2-busca__celular {
+  position: relative;
+  padding: 12px 16px 64px;
+  border: 10px solid var(--tp-ink);
+  border-bottom: 0;
+  border-radius: 44px 44px 0 0;
+  background: var(--tp-white);
   box-shadow: var(--tp-shadow-md);
+  text-align: left;
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - 56px), transparent);
+          mask-image: linear-gradient(to bottom, #000 calc(100% - 56px), transparent);
+}
+/* O entalhe da câmera, no meio da borda de cima. */
+.v2-busca__celular::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  width: 34%;
+  height: 22px;
+  border-radius: 0 0 14px 14px;
+  background: var(--tp-ink);
+  transform: translateX(-50%);
 }
 
-/* "Você já passou por isso?" é a virada da dobra: a pergunta em destaque e,
-   embaixo, a frase que a pessoa diria a si mesma, como citação. */
-.v2-duvida__turn {
+.v2-busca__status {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  gap: .4rem;
-  margin-top: .5rem;
-}
-.v2-duvida__ask {
-  margin: 0;
-  font-size: clamp(1.25rem, 2.6vw, 1.6rem);
+  padding: 0 .5rem;
+  font-size: .78rem;
   font-weight: var(--fw-extrabold);
-  letter-spacing: -.015em;
   color: var(--tp-ink);
 }
-.v2-duvida__quote {
-  margin: 0;
-  font-size: clamp(1.02rem, 1.85vw, 1.18rem);
-  font-style: italic;
-  color: var(--tp-body);
+.v2-busca__sinais { display: inline-flex; align-items: flex-end; gap: 2px; height: 10px; }
+.v2-busca__sinais i { display: block; width: 3px; border-radius: 1px; background: var(--tp-ink); }
+.v2-busca__sinais i:nth-child(1) { height: 4px; }
+.v2-busca__sinais i:nth-child(2) { height: 7px; }
+.v2-busca__sinais i:nth-child(3) { height: 10px; }
+
+.v2-busca__barra {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  margin-top: 16px;
+  padding: .75rem 1rem;
+  border: 1px solid var(--tp-line);
+  border-radius: var(--radius-pill);
+  background: var(--tp-white);
+  box-shadow: 0 2px 10px rgba(11, 37, 69, .1);
+  color: var(--tp-muted);
 }
+.v2-busca__barra svg { flex: 0 0 auto; }
+.v2-busca__cursor {
+  width: 2px;
+  height: 1.15em;
+  margin-right: -.3rem;
+  background: var(--tp-rose);
+  animation: v2-pisca 1.05s steps(1) infinite;
+}
+.v2-busca__dica { font-size: .95rem; }
+@keyframes v2-pisca { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .v2-busca__cursor { animation: none; }
+}
+
+.v2-busca__rotulo {
+  margin: 1.1rem .35rem .2rem;
+  font-size: .72rem;
+  font-weight: var(--fw-extrabold);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--tp-muted);
+}
+.v2-busca__lista {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.v2-busca__lista li {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .72rem .35rem;
+  border-bottom: 1px solid var(--tp-line);
+  font-size: .95rem;
+  line-height: 1.35;
+  color: var(--tp-ink);
+}
+.v2-busca__lista li:last-child { border-bottom: 0; }
+.v2-busca__lista li > svg { flex: 0 0 auto; color: var(--tp-muted); }
+.v2-busca__lista li > span { flex: 1 1 0; min-width: 0; }
 
 /* =========================================================================
    3. O QUE VOCÊ VAI APRENDER — lista com check
@@ -404,15 +490,6 @@
   letter-spacing: .04em;
   text-transform: uppercase;
   color: var(--tp-ink);
-}
-
-.v2-price__name {
-  margin: .35rem 0 0;
-  font-size: .76rem;
-  font-weight: var(--fw-extrabold);
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--tp-rose-deep);
 }
 
 /* A nota do pagamento fica abaixo do botão, como no doc. */
