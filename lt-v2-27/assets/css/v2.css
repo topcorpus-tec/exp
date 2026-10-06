@@ -9,32 +9,30 @@
    Aqui ficam só os blocos que a v1 não tinha. Tudo é escrito com os tokens
    que o manual.css já reatribuiu para o azul, então nada aqui fixa cor de
    marca à mão — exceto o verde do botão e o vermelho do preço riscado, que
-   na v1 também são fixos.
+   na v1 também são fixos, e o amarelo da faixa do topo, que a paleta do
+   manual não tem.
 
    Carregar DEPOIS de manual.css.
    ========================================================================= */
 
 /* =========================================================================
-   1. HERO — a caixa de chamada, o selo de "sem experiência" e a cena
+   1. HERO — a faixa do topo, o selo de "sem experiência" e a cena
 
-   No doc as duas frases vêm em caixas próprias, separadas da manchete. A de
-   cima é quem a página quer parar; a de baixo tira a objeção de quem acha
-   que não tem experiência para usar o manual. Embaixo vem a cena da dúvida,
-   no lugar que na v1 era do mockup do manual.
+   No doc as duas frases vêm separadas da manchete. A de cima é quem a
+   página quer parar, e vai numa faixa amarela de ponta a ponta acima do
+   hero; a de baixo tira a objeção de quem acha que não tem experiência
+   para usar o manual. Embaixo vem a cena da dúvida, no lugar que na v1 era
+   do mockup do manual.
    ========================================================================= */
-.v2-hero__pre {
-  max-width: 44ch;
-  margin: 0 auto;
-  padding: .75em 1.25em;
-  border: 1px solid var(--tp-violet-soft);
-  border-radius: var(--tp-radius-sm);
-  background: var(--tp-white);
-  box-shadow: var(--tp-shadow-sm);
-  font-size: clamp(.92rem, 1.5vw, 1.04rem);
-  font-weight: var(--fw-semibold);
-  font-style: italic;
-  line-height: 1.5;
-  color: var(--tp-rose-deep);
+.v2-topo {
+  margin: 0;
+  padding: .7rem clamp(1.25rem, 5vw, 2.5rem);
+  background: #FFD234;
+  font-size: clamp(.9rem, 1.5vw, 1.05rem);
+  font-weight: var(--fw-extrabold);
+  line-height: 1.4;
+  color: var(--tp-ink);
+  text-align: center;
   text-wrap: balance;
 }
 
