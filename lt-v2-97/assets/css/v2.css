@@ -42,14 +42,6 @@
 .tp-hero { padding-top: 0; }
 .mn-hero__inner { padding-top: clamp(1.25rem, 3vw, 1.75rem); }
 
-/* O logo do manual abre o hero, acima da manchete, como pede o doc. */
-.v2-hero__logo {
-  display: block;
-  width: min(52%, 200px);
-  height: auto;
-  margin: 0 auto;
-}
-
 /* A manchete é curta ("Alivie a dor que ninguém conseguiu aliviar!") e
    fica no tamanho do taping, em duas linhas no desktop; o subtítulo logo
    embaixo carrega o resto da promessa. */
