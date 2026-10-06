@@ -36,6 +36,12 @@
   text-wrap: balance;
 }
 
+/* Com a faixa amarela em cima, o respiro de topo do taping (no .tp-hero)
+   somado ao do miolo deixava o título longe dela, uns 88px no desktop.
+   Fica só um respiro curto, no miolo, e o título sobe para perto da faixa. */
+.tp-hero { padding-top: 0; }
+.mn-hero__inner { padding-top: clamp(1.25rem, 3vw, 1.75rem); }
+
 /* A manchete da v2 é mais longa que a da v1: em 33ch ela fechava em quatro
    linhas no desktop. */
 .mn-hero__inner .tp-hero__headline { max-width: 36ch; }
@@ -302,16 +308,28 @@
   max-width: 980px;
   margin-inline: auto;
 }
+/* Cada item é um bloco com um fundo azul leve, nos dois azuis claros da
+   paleta: separa um item do outro e dá moldura às páginas do manual, que
+   também são claras e se perdiam no fundo da seção. */
 .v2-feat {
   display: grid;
   grid-template-columns: 1fr;
   gap: clamp(1.1rem, 3vw, 2.5rem);
   align-items: center;
+  padding: clamp(1.1rem, 3vw, 2rem);
+  border: 1px solid var(--tp-line-soft);
+  border-radius: var(--tp-radius);
+  background: linear-gradient(135deg, var(--tp-ivory) 0%, var(--tp-gold-soft) 100%);
 }
+/* Cada imagem aparece inteira, na proporção do próprio arquivo: as páginas
+   do manual são verticais, e o quadro fixo de 3:2 que existia antes, feito
+   para as ilustrações horizontais da v1, cortava as verticais pela metade. */
+/* A borda é o azul claro da paleta, não a linha quase invisível de
+   antes: as páginas têm fundo claro, e sobre o bloco azul elas pediam um
+   contorno que se visse. */
 .v2-feat__media {
   overflow: hidden;
-  aspect-ratio: 3 / 2;
-  border: 1px solid var(--tp-line-soft);
+  border: 1px solid var(--tp-rose-soft);
   border-radius: var(--tp-radius);
   background: var(--tp-white);
   box-shadow: var(--tp-shadow-sm);
@@ -319,8 +337,7 @@
 .v2-feat__media img {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
 }
 .v2-feat__body {
   display: flex;
@@ -372,15 +389,19 @@
 
 /* =========================================================================
    6. PARA QUEM É — o fecho "preste muita atenção"
+
+   É um aviso: fundo amarelo claro, borda no mesmo amarelo da faixa do topo
+   e o triângulo de alerta antes do título. O amarelo é fixo pelo mesmo
+   motivo da faixa — a paleta do manual não tem um.
    ========================================================================= */
 .v2-callout {
   max-width: 760px;
   margin: clamp(2.25rem, 5vw, 3.25rem) auto 0;
   padding: clamp(1.4rem, 3vw, 2rem) clamp(1.4rem, 3.4vw, 2.4rem);
-  border: 1px solid var(--tp-violet-soft);
+  border: 2px solid #FFD234;
   border-radius: var(--tp-radius);
-  background: var(--tp-white);
-  box-shadow: var(--tp-shadow-md);
+  background: #FFF8DB;
+  box-shadow: 0 14px 40px rgba(140, 100, 0, .12);
   text-align: center;
 }
 .v2-callout p {
@@ -391,12 +412,17 @@
 }
 .v2-callout strong { color: var(--tp-ink); font-weight: var(--fw-extrabold); }
 .v2-callout .v2-callout__kicker {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;
   margin-bottom: .5rem;
   font-size: clamp(1.15rem, 2.3vw, 1.4rem);
   font-weight: var(--fw-extrabold);
   letter-spacing: -.01em;
-  color: var(--tp-rose-deep);
+  color: #6B4E00;   /* 7,4:1 sobre o amarelo claro */
 }
+.v2-callout__kicker svg { flex: 0 0 auto; color: #B07F00; }
 
 /* =========================================================================
    7. OFERTA — a pilha de valor
@@ -433,7 +459,7 @@
   color: var(--tp-ink);
   text-wrap: balance;
 }
-/* O "Por apenas" da segunda caixa vai numa linha própria, acima do
+/* O "Por apenas" das duas caixas vai numa linha própria, acima do
    número: dentro do .tp-offer__installment ele quebrava sozinho no
    desktop, onde o número é maior, e abria um vão no meio do preço. */
 .v2-price__por {
