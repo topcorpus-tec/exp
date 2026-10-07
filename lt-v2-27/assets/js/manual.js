@@ -51,10 +51,11 @@
   /* =======================================================================
      DESTINO DO CTA DA OFERTA
 
-     Dois botões saem da página: os das duas caixas de preço (dobras 7 e
-     9). O do hero é âncora estática para #oferta, escrita no HTML — quem
-     clica nele ainda não viu o preço, e mandar essa pessoa direto para a
-     Hotmart pula justamente a dobra que a faz comprar.
+     Dois botões saem da página: os das duas caixas de preço (a da oferta
+     e a do fecho, depois da bio). O hero não tem mais botão; se um voltar,
+     ele deve ser âncora para #oferta, e não checkout — quem clica ali
+     ainda não viu o preço, e mandar essa pessoa direto para a Hotmart pula
+     justamente a dobra que a faz comprar.
 
      Por isso este trecho continua procurando [data-checkout] no plural:
      se amanhã outro botão precisar ir para o checkout, basta marcá-lo.

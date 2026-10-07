@@ -16,12 +16,12 @@
    ========================================================================= */
 
 /* =========================================================================
-   1. HERO — a faixa do topo, o selo de "sem experiência" e a cena
+   1. HERO — a faixa do topo, o selo de "sem experiência" e o antes/depois
 
    No doc as duas frases vêm separadas da manchete. A de cima é quem a
    página quer parar, e vai numa faixa amarela de ponta a ponta acima do
    hero; a de baixo tira a objeção de quem acha que não tem experiência
-   para usar o manual. Embaixo vem a cena da dúvida, no lugar que na v1 era
+   para usar o manual. Embaixo vem o antes e depois, no lugar que na v1 era
    do mockup do manual.
    ========================================================================= */
 .v2-topo {
@@ -71,20 +71,111 @@
 }
 .v2-hero__badge svg { flex: 0 0 auto; }
 
-/* A cena: a arte da massoterapeuta parada sobre a dor, com os três
-   pensamentos do doc já desenhados nela. É vertical, então o teto é menor
-   que o do mockup da v1 — a 520px ela ainda cabe com o botão perto da
-   dobra no desktop, e o arquivo de 879px segue nítido nessa largura. */
-.v2-cena {
-  width: min(100%, 520px);
+/* O antes e depois: duas colunas, uma por lado, com as três falas de
+   cada um. O "antes" é neutro, com o ponto de interrogação; o "depois" é
+   verde, como o selo logo acima e o botão de compra. Lado a lado a partir
+   de 640px; abaixo disso uma embaixo da outra, o antes primeiro. */
+.v2-ad {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(.85rem, 2vw, 1.25rem);
+  width: min(100%, 760px);
   margin: 0 auto;
+  text-align: left;
 }
-.v2-cena img {
-  display: block;
-  width: 100%;
-  height: auto;
+@media (min-width: 640px) {
+  .v2-ad { grid-template-columns: 1fr 1fr; }
+}
+.v2-ad__col {
+  padding: clamp(1.1rem, 2.6vw, 1.5rem);
+  border: 1px solid var(--tp-line);
   border-radius: var(--tp-radius);
-  box-shadow: var(--tp-shadow-md);
+  background: var(--tp-white);
+  box-shadow: var(--tp-shadow-sm);
+}
+.v2-ad__col--depois {
+  border-color: rgba(18, 133, 74, .35);
+  background: #F1FAF4;
+}
+.v2-ad__rotulo {
+  margin: 0 0 .75rem;
+  font-size: .78rem;
+  font-weight: var(--fw-extrabold);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--tp-muted);
+}
+.v2-ad__col--depois .v2-ad__rotulo { color: #0D6E3C; }
+.v2-ad__falas {
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.v2-ad__falas li {
+  display: flex;
+  align-items: flex-start;
+  gap: .6rem;
+  font-size: clamp(.98rem, 1.6vw, 1.05rem);
+  font-style: italic;
+  line-height: 1.45;
+  color: var(--tp-body);
+}
+.v2-ad__falas li > span { flex: 1 1 0; min-width: 0; }
+.v2-ad__falas strong { color: var(--tp-ink); font-weight: var(--fw-bold); }
+.v2-ad__falas svg { flex: 0 0 auto; margin-top: .15rem; color: var(--tp-muted); }
+.v2-ad__col--depois .v2-ad__falas svg { color: #12854A; }
+
+/* =========================================================================
+   1b. DEPOIMENTOS — os quatro prints, cada um com a sua frase
+
+   Na ordem do doc. No desktop os dois prints largos e baixos ocupam a
+   linha inteira cada um — em meia coluna o post da Tatiane encolhia até a
+   letra ficar ilegível —, e os dois altos dividem a última linha. Cada
+   print aparece no tamanho do próprio arquivo, no máximo — são capturas
+   pequenas, e ampliadas elas borram —, centralizado no cartão.
+   ========================================================================= */
+.v2-depos {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.25rem, 3vw, 1.75rem);
+  max-width: 980px;
+  margin-inline: auto;
+}
+@media (min-width: 860px) {
+  .v2-depos { grid-template-columns: 1fr 1fr; }
+  .v2-depo--largo { grid-column: 1 / -1; }
+}
+.v2-depo {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 0;
+  padding: clamp(1.1rem, 2.6vw, 1.5rem);
+  border: 1px solid var(--tp-line-soft);
+  border-radius: var(--tp-radius);
+  background: var(--tp-white);
+  box-shadow: var(--tp-shadow-sm);
+}
+.v2-depo__titulo {
+  font-size: clamp(1.02rem, 1.8vw, 1.15rem);
+  font-weight: var(--fw-extrabold);
+  line-height: 1.35;
+  letter-spacing: -.01em;
+  color: var(--tp-ink);
+  text-align: center;
+  text-wrap: balance;
+}
+.v2-depo img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  margin: auto;
+  border: 1px solid var(--tp-line);
+  border-radius: 10px;
 }
 
 /* =========================================================================
@@ -471,21 +562,30 @@
   color: var(--tp-ink);
 }
 
-/* A nota do pagamento fica abaixo do botão, como no doc. */
+/* A nota do pagamento segue o doc: na primeira caixa vem antes do botão,
+   na segunda, depois. */
 .tp-offer__price .tp-offer__note { margin-top: .9rem; }
 
-.v2-mail {
-  display: inline-flex;
-  align-items: center;
-  gap: .55rem;
-  margin: .35rem 0 0;
-  font-size: .9rem;
+/* O valor de cada item, riscado, na ponta direita da linha — no mesmo
+   vermelho do total riscado, para a soma se ler de cima a baixo. */
+.tp-offer__items li .v2-item__de {
+  flex: 0 0 auto;
+  margin-left: auto;
+  padding-left: .75rem;
+  white-space: nowrap;
   font-weight: var(--fw-semibold);
-  line-height: 1.45;
-  color: var(--tp-ink);
-  text-align: left;
+  color: #C62828;
+  text-decoration-color: #C62828;
+  text-decoration-thickness: 1.5px;
 }
-.v2-mail svg { flex: 0 0 auto; color: var(--tp-rose); }
+
+/* O envelope do doc, dentro do botão, antes do texto. Inline: a regra
+   global deixa todo svg em bloco, e aí ele ia para a linha de cima. */
+.v2-btn__ico {
+  display: inline-block;
+  margin-right: .55rem;
+  vertical-align: -.22em;
+}
 
 /* =========================================================================
    8. QUEM É A ANA — a colagem encosta no texto
@@ -582,7 +682,8 @@
 }
 
 /* A segunda caixa de preço: só a coluna do preço, mais estreita que a da
-   oferta, porque não tem mockup nem lista para acomodar. */
-.v2-final { max-width: 520px; }
+   oferta, porque não tem mockup nem lista para acomodar. Vem depois da
+   bio, então ganha um respiro em cima para não colar na colagem. */
+.v2-final { max-width: 520px; margin-top: clamp(2.5rem, 6vw, 4rem); }
 .v2-final .tp-offer__price { border-top: 0; }
 
