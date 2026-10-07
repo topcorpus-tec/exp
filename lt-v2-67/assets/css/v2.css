@@ -34,7 +34,7 @@
 }
 .v2-hero__logo {
   display: block;
-  width: clamp(84px, 9vw, 110px);
+  width: clamp(110px, 11vw, 150px);
   height: auto;
   margin: 0 auto;
 }
@@ -518,6 +518,19 @@
   text-decoration-skip-ink: none;
 }
 
+/* O mockup da oferta desce da abertura da caixa para o topo da área do
+   preço, acima da frase "Mas hoje…". Solto, como no manual.css: o arquivo
+   tem alfa, e o degradê da área passa por trás dele. */
+.v2-oferta__mock {
+  width: 100%;
+  margin-bottom: .6rem;
+}
+.v2-oferta__mock img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .v2-price__lead {
   max-width: 34ch;
   margin: 0;
@@ -527,16 +540,34 @@
   color: var(--tp-ink);
   text-wrap: balance;
 }
-/* O "Por apenas" das duas caixas vai numa linha própria, acima do
-   número: dentro do .tp-offer__installment ele quebrava sozinho no
-   desktop, onde o número é maior, e abria um vão no meio do preço. */
-.v2-price__por {
-  margin: .35rem 0 -.35rem;
-  font-size: .92rem;
+/* O preço das duas caixas no formato das referências: "De R$ 297,00 por:",
+   o parcelado como o número grande e o à vista embaixo, menor. O número é
+   o verde do botão (6,4:1 sobre o cartão); o riscado herda o vermelho do
+   .tp-offer__from. */
+.v2-preco__de {
+  margin-top: .35rem;
+  font-size: clamp(1rem, 1.7vw, 1.1rem);
+  color: var(--tp-body);
+}
+.v2-preco__parcela {
+  margin: 0;
+  font-size: clamp(2.4rem, 6vw, 3.3rem);
   font-weight: var(--fw-extrabold);
-  letter-spacing: .04em;
-  text-transform: uppercase;
-  color: var(--tp-ink);
+  line-height: 1.05;
+  letter-spacing: -.03em;
+  white-space: nowrap;
+  color: #0D6E3C;
+}
+.v2-preco__ast {
+  margin-left: .05em;
+  font-size: .45em;
+  vertical-align: .9em;
+}
+.v2-preco__vista {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: var(--fw-semibold);
+  color: var(--tp-muted);
 }
 
 /* A nota do pagamento segue o doc: na primeira caixa vem antes do botão,
@@ -576,6 +607,18 @@
    ========================================================================= */
 @media (max-width: 899px) {
   .mn-bio__media { margin-bottom: calc(min(100%, 420px) * -119 / 700); }
+
+  /* Na coluna única o texto da bio é centralizado (manual.css), mas a lista
+     dos três fatos seguia alinhada à esquerda. Aqui cada item centraliza
+     também, com o check em linha, colado no começo da frase — como bloco
+     ao lado do texto ele ficaria longe dela nas frases de duas linhas. */
+  .mn-bio__facts { text-align: center; }
+  .mn-bio__facts li { display: block; text-wrap: balance; }
+  .mn-bio__facts svg {
+    display: inline-block;
+    margin: 0 .4rem 0 0;
+    vertical-align: -.15em;
+  }
 }
 
 /* =========================================================================

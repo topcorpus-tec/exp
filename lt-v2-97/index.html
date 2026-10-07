@@ -579,12 +579,6 @@
 
         <div class="tp-offer__box" data-reveal>
 
-          <div class="mn-offer__media">
-            <img src="assets/img/mockup-oferta.webp"
-                 alt="O Manual Ilustrado para Alívio da Dor ao centro, cercado pelos cinco bônus: o Mapa de Reflexologia dos Pés, o Mapa dos Pontos de Dor na Fibromialgia, o Guia Ilustrado de Drenagem Linfática, as videoaulas no notebook, no tablet e no celular, e o ícone do WhatsApp — com as páginas internas de anatomia abertas ao redor."
-                 width="1100" height="661" loading="lazy" decoding="async" />
-          </div>
-
           <div class="tp-offer__list">
             <ul class="tp-offer__items">
               <li><svg width="16" height="16" aria-hidden="true"><use href="#i-check" /></svg><span><strong>Manual completo</strong>, com mais de 70 manobras ilustradas</span><s class="v2-item__de">R$107,00</s></li>
@@ -601,11 +595,21 @@
           </div>
 
           <div class="tp-offer__price">
+            <!-- O mockup abre a área do preço, logo acima da frase que leva a
+                 ele: depois da lista, ele mostra junto tudo o que ela somou. -->
+            <div class="v2-oferta__mock">
+              <img src="assets/img/mockup-oferta.webp"
+                   alt="O Manual Ilustrado para Alívio da Dor ao centro, cercado pelos cinco bônus: o Mapa de Reflexologia dos Pés, o Mapa dos Pontos de Dor na Fibromialgia, o Guia Ilustrado de Drenagem Linfática, as videoaulas no notebook, no tablet e no celular, e o ícone do WhatsApp — com as páginas internas de anatomia abertas ao redor."
+                   width="1100" height="661" loading="lazy" decoding="async" />
+            </div>
+
             <p class="v2-price__lead">Mas hoje você vai ter acesso ao Manual e a todos os bônus por apenas:</p>
-            <p class="tp-offer__from">De <s>R$297,00</s></p>
-            <p class="v2-price__por">Por apenas</p>
-            <p class="tp-offer__installment"><small>R$</small>97 <small>à vista</small></p>
-            <p class="tp-offer__cash">ou 12 x de R$ 9,45*</p>
+
+            <!-- O preço no formato das referências: o parcelado é o número
+                 grande e o à vista vem embaixo, menor. -->
+            <p class="tp-offer__from v2-preco__de">De <s>R$ 297,00</s> por:</p>
+            <p class="v2-preco__parcela">12x de 9,45<span class="v2-preco__ast">*</span></p>
+            <p class="v2-preco__vista">ou 97,00 à vista</p>
 
             <p class="tp-offer__note">Pagamento único. Acesso vitalício. Sem mensalidade. Garantia de 7 dias</p>
 
@@ -700,10 +704,9 @@
              escolha. A lista do que vem já ficou na dobra da oferta. -->
         <div class="tp-offer__box v2-final" data-reveal>
           <div class="tp-offer__price">
-            <p class="tp-offer__from">De <s>R$297,00</s></p>
-            <p class="v2-price__por">Por apenas</p>
-            <p class="tp-offer__installment"><small>R$</small>97 <small>à vista</small></p>
-            <p class="tp-offer__cash">ou 12 x de R$ 9,45*</p>
+            <p class="tp-offer__from v2-preco__de">De <s>R$ 297,00</s> por:</p>
+            <p class="v2-preco__parcela">12x de 9,45<span class="v2-preco__ast">*</span></p>
+            <p class="v2-preco__vista">ou 97,00 à vista</p>
 
             <div class="tp-cta">
               <a class="btn btn--tp" href="#" data-checkout>
