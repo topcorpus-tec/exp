@@ -10,7 +10,6 @@
    página usa:
 
      - destino do CTA da oferta      ([data-checkout])
-     - entrada com desfoque          ([data-reveal])
      - FAQ, abrir uma fecha as demais (.tp-faq__item)
      - parada das âncoras da oferta   (a[href="#oferta"])
 
@@ -18,9 +17,8 @@
    por isso o código dos dois também saiu, em vez de ficar procurando
    elementos que não existem mais.
 
-   Atenção: no taping o observer do [data-reveal] mora no form-handler.js,
-   que esta página não carrega (não tem formulário). Sem ele o CSS deixaria
-   tudo em opacity:0 — por isso o observer está aqui.
+   A entrada com desfoque na rolagem também saiu: os blocos aparecem
+   direto, sem o [data-reveal] no HTML e sem o observer que o animava.
 
    Carregar com defer.
    ========================================================================= */
@@ -85,44 +83,6 @@
   }
 
   /* =======================================================================
-     ENTRADA COM DESFOQUE
-
-     O CSS deixa [data-reveal] em opacity:0 até a classe .is-revealed. O
-     .is-settled, depois, tira o filtro de cena para não manter uma camada
-     de composição viva em cada elemento revelado.
-     ======================================================================= */
-  var SETTLE_MS = 1100;   // 760ms de transição + 180ms de escalonamento + folga
-
-  function initReveal() {
-    var els = [].slice.call(document.querySelectorAll("[data-reveal]"));
-    if (!els.length) return;
-
-    function settle(el) {
-      if (el.__settle) return;
-      el.__settle = setTimeout(function () { el.classList.add("is-settled"); }, SETTLE_MS);
-    }
-
-    // Navegador sem IntersectionObserver: mostra tudo de uma vez, sem animar.
-    if (!("IntersectionObserver" in window)) {
-      els.forEach(function (el) {
-        el.classList.add("is-revealed", "is-settled");
-      });
-      return;
-    }
-
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        e.target.classList.add("is-revealed");
-        settle(e.target);
-        io.unobserve(e.target);
-      });
-    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
-
-    els.forEach(function (el) { io.observe(el); });
-  }
-
-  /* =======================================================================
      PARADA DAS ÂNCORAS DA OFERTA
 
      Sem JS o botão do hero para no topo da dobra 7, no "A condição de
@@ -132,10 +92,6 @@
      inteiros, e a borda de baixo da caixa mostra que ali termina a oferta.
      Se a tela for alta o bastante para caber a dobra inteira, ela para no
      topo da dobra, como sem JS.
-
-     A conta usa offsetTop, e não getBoundingClientRect, porque a caixa da
-     oferta ainda está deslocada 20px pelo [data-reveal] quando a pessoa
-     clica — com o rect, a parada sairia 20px abaixo do ponto certo.
      ======================================================================= */
   function topoNaPagina(el) {
     var y = 0;
@@ -186,7 +142,6 @@
      ======================================================================= */
   function boot() {
     initCheckout();
-    initReveal();
     initAncoras();
     initFaq();
   }
