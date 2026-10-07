@@ -9,41 +9,29 @@
    Aqui ficam só os blocos que a v1 não tinha. Tudo é escrito com os tokens
    que o manual.css já reatribuiu para o azul, então nada aqui fixa cor de
    marca à mão — exceto o verde do botão e o vermelho do preço riscado, que
-   na v1 também são fixos, e o amarelo da faixa do topo, que a paleta do
-   manual não tem.
+   na v1 também são fixos, e o amarelo do aviso, que a paleta do manual
+   não tem.
 
    Carregar DEPOIS de manual.css.
    ========================================================================= */
 
 /* =========================================================================
-   1. HERO — a faixa do topo, o selo de "sem experiência" e o antes/depois
+   1. HERO — o logo, a faixa, o selo de "sem experiência" e o antes/depois
 
    No doc as duas frases vêm separadas da manchete. A de cima é quem a
-   página quer parar, e vai numa faixa amarela de ponta a ponta acima do
-   hero; a de baixo tira a objeção de quem acha que não tem experiência
+   página quer parar, e vai numa faixa azul de ponta a ponta logo abaixo
+   do logo; a de baixo tira a objeção de quem acha que não tem experiência
    para usar o manual. Embaixo vem o antes e depois, no lugar que na v1 era
    do mockup do manual.
    ========================================================================= */
-.v2-topo {
-  margin: 0;
-  padding: .7rem clamp(1.25rem, 5vw, 2.5rem);
-  background: #FFD234;
-  font-size: clamp(.9rem, 1.5vw, 1.05rem);
-  font-weight: var(--fw-extrabold);
-  line-height: 1.4;
-  color: var(--tp-ink);
-  text-align: center;
-  text-wrap: balance;
+/* O logo do manual abre a página, pequeno, só como assinatura: quem fala é
+   o título. Os dois blocos de cima ficam acima da fita decorativa do hero,
+   que é absoluta. */
+.v2-hero__marca {
+  position: relative;
+  z-index: 1;
+  padding-block: clamp(.9rem, 2.2vw, 1.25rem);
 }
-
-/* Com a faixa amarela em cima, o respiro de topo do taping (no .tp-hero)
-   somado ao do miolo deixava o título longe dela, uns 88px no desktop.
-   Fica só um respiro curto, no miolo, e o título sobe para perto da faixa. */
-.tp-hero { padding-top: 0; }
-.mn-hero__inner { padding-top: clamp(1.25rem, 3vw, 1.75rem); }
-
-/* O logo do manual abre o hero, acima da manchete, como pede o doc —
-   pequeno, só como assinatura: quem fala é o título. */
 .v2-hero__logo {
   display: block;
   width: clamp(84px, 9vw, 110px);
@@ -51,10 +39,43 @@
   margin: 0 auto;
 }
 
+/* A faixa, de ponta a ponta, nos dois azuis escuros da capa: o branco tem
+   contraste de sobra nos dois (12,7:1 no navy e 6,6:1 no azul). */
+.v2-topo {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: .7rem clamp(1.25rem, 5vw, 2.5rem);
+  background: linear-gradient(90deg, var(--tp-violet-deep) 0%, var(--tp-rose-deep) 100%);
+  font-size: clamp(.9rem, 1.5vw, 1.05rem);
+  font-weight: var(--fw-extrabold);
+  line-height: 1.4;
+  color: #FFFFFF;
+  text-align: center;
+  text-wrap: balance;
+}
+
+/* Logo e faixa já abrem o hero: o respiro de topo do taping (no .tp-hero)
+   sai, e o miolo guarda só um respiro curto para o título não colar na
+   faixa. */
+.tp-hero { padding-top: 0; }
+.mn-hero__inner { padding-top: clamp(1.25rem, 3vw, 1.75rem); }
+
 /* A manchete é curta ("Alivie a dor que ninguém conseguiu aliviar!") e
    fica no tamanho do taping, em duas linhas no desktop; o subtítulo logo
    embaixo carrega o resto da promessa. */
 .mn-hero__inner .tp-hero__headline { max-width: 24ch; }
+
+/* "ninguém conseguiu aliviar" vai sublinhado, como no doc, no lugar da
+   faixa clara do .tp-hl: as duas marcas juntas pesavam. O azul fica. */
+.mn-hero__inner .tp-hero__headline .tp-hl {
+  background: none;
+  padding-inline: 0;
+  text-decoration: underline;
+  text-decoration-thickness: .07em;
+  text-underline-offset: .14em;
+  text-decoration-skip-ink: auto;
+}
 
 .v2-hero__badge {
   display: inline-flex;
@@ -71,62 +92,19 @@
 }
 .v2-hero__badge svg { flex: 0 0 auto; }
 
-/* O antes e depois: duas colunas, uma por lado, com as três falas de
-   cada um. O "antes" é neutro, com o ponto de interrogação; o "depois" é
-   verde, como o selo logo acima e o botão de compra. Lado a lado a partir
-   de 640px; abaixo disso uma embaixo da outra, o antes primeiro. */
-.v2-ad {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(.85rem, 2vw, 1.25rem);
+/* O antes e depois é uma arte só, com os dois lados e as falas. O arquivo
+   tem 1349px e fundo transparente em volta dos cartões, então fica solto
+   no fundo do hero, sem moldura, até 760px — a largura em que as falas
+   ainda se leem sem tomar a tela inteira no desktop. */
+.v2-antes-depois {
   width: min(100%, 760px);
   margin: 0 auto;
-  text-align: left;
 }
-@media (min-width: 640px) {
-  .v2-ad { grid-template-columns: 1fr 1fr; }
+.v2-antes-depois img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
-.v2-ad__col {
-  padding: clamp(1.1rem, 2.6vw, 1.5rem);
-  border: 1px solid var(--tp-line);
-  border-radius: var(--tp-radius);
-  background: var(--tp-white);
-  box-shadow: var(--tp-shadow-sm);
-}
-.v2-ad__col--depois {
-  border-color: rgba(18, 133, 74, .35);
-  background: #F1FAF4;
-}
-.v2-ad__rotulo {
-  margin: 0 0 .75rem;
-  font-size: .78rem;
-  font-weight: var(--fw-extrabold);
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: var(--tp-muted);
-}
-.v2-ad__col--depois .v2-ad__rotulo { color: #0D6E3C; }
-.v2-ad__falas {
-  display: flex;
-  flex-direction: column;
-  gap: .7rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.v2-ad__falas li {
-  display: flex;
-  align-items: flex-start;
-  gap: .6rem;
-  font-size: clamp(.98rem, 1.6vw, 1.05rem);
-  font-style: italic;
-  line-height: 1.45;
-  color: var(--tp-body);
-}
-.v2-ad__falas li > span { flex: 1 1 0; min-width: 0; }
-.v2-ad__falas strong { color: var(--tp-ink); font-weight: var(--fw-bold); }
-.v2-ad__falas svg { flex: 0 0 auto; margin-top: .15rem; color: var(--tp-muted); }
-.v2-ad__col--depois .v2-ad__falas svg { color: #12854A; }
 
 /* =========================================================================
    1b. DEPOIMENTOS — os quatro prints, cada um com a sua frase
@@ -134,8 +112,9 @@
    Na ordem do doc. No desktop os dois prints largos e baixos ocupam a
    linha inteira cada um — em meia coluna o post da Tatiane encolhia até a
    letra ficar ilegível —, e os dois altos dividem a última linha. Cada
-   print aparece no tamanho do próprio arquivo, no máximo — são capturas
-   pequenas, e ampliadas elas borram —, centralizado no cartão.
+   print aparece no tamanho do width do HTML, no máximo a largura do
+   cartão, centralizado. Sem width:auto aqui: ele trocaria o width do HTML
+   pelo tamanho do arquivo, e os prints em 2x apareceriam em dobro.
    ========================================================================= */
 .v2-depos {
   display: grid;
@@ -170,7 +149,6 @@
 }
 .v2-depo img {
   display: block;
-  width: auto;
   max-width: 100%;
   height: auto;
   margin: auto;
@@ -481,9 +459,8 @@
 /* =========================================================================
    6. PARA QUEM É — o fecho "preste muita atenção"
 
-   É um aviso: fundo amarelo claro, borda no mesmo amarelo da faixa do topo
-   e o triângulo de alerta antes do título. O amarelo é fixo pelo mesmo
-   motivo da faixa — a paleta do manual não tem um.
+   É um aviso: fundo amarelo claro, borda amarela e o triângulo de alerta
+   antes do título. O amarelo é fixo: a paleta do manual não tem um.
    ========================================================================= */
 .v2-callout {
   max-width: 760px;

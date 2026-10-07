@@ -63,9 +63,6 @@
     <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
       <line x1="12" y1="6" x2="12" y2="18" /><line x1="6" y1="12" x2="18" y2="12" />
     </symbol>
-    <symbol id="i-ask" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M7.6 8.4a4.5 4.5 0 0 1 8.8 1.3c0 3-4.4 3.6-4.4 6.3" /><line x1="12" y1="20.2" x2="12" y2="20.3" />
-    </symbol>
     <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
       <circle cx="10.5" cy="10.5" r="6.5" /><line x1="15.5" y1="15.5" x2="20.5" y2="20.5" />
     </symbol>
@@ -85,13 +82,6 @@
 
   <main>
 
-    <!-- ==================== FAIXA DO TOPO ====================
-         A chamada de quem a página quer parar, numa faixa amarela de ponta a
-         ponta acima do hero — fora do título, como no doc. -->
-    <p class="v2-topo">
-      Criado para você que sonha em aliviar a dor das pessoas com as suas mãos e não quer errar!
-    </p>
-
     <!-- ==================== DOBRA 1 — HERO ==================== -->
     <section class="tp-hero" aria-labelledby="hero-title">
       <svg class="tp-hero__ribbon" viewBox="0 0 1440 320" fill="none" aria-hidden="true" focusable="false" preserveAspectRatio="none">
@@ -107,11 +97,20 @@
         </defs>
       </svg>
 
-      <div class="tp-container mn-hero__inner">
-
+      <!-- O logo abre a página e a faixa vem logo abaixo dele. A faixa é
+           filha direta da seção, e não do container, para ir de ponta a
+           ponta da tela. -->
+      <div class="tp-container v2-hero__marca">
         <img class="v2-hero__logo" src="assets/img/logo-manual.webp"
              alt="Manual Ilustrado para Alívio da Dor"
              width="600" height="391" decoding="async" />
+      </div>
+
+      <p class="v2-topo">
+        Criado para você que sonha em aliviar a dor das pessoas com as suas mãos e não quer errar!
+      </p>
+
+      <div class="tp-container mn-hero__inner">
 
         <div class="tp-hero__copy">
           <h1 class="tp-hero__headline" id="hero-title">
@@ -128,31 +127,13 @@
           <span>Mesmo que você não tenha experiência</span>
         </p>
 
-        <!-- Antes e depois. O doc pede aqui duas imagens iguais — mesma sala,
-             mesma massoterapeuta, mesma cliente —, mudando só a atitude dela e
-             o que está em volta, cada uma com as três falas do seu lado.
-
-             PENDÊNCIA: enquanto as duas imagens não chegam, as falas ficam em
-             HTML, uma coluna para cada lado. Quando chegarem, cada imagem
-             entra no topo da sua coluna (.v2-ad__col), acima do rótulo. -->
-        <div class="v2-ad" role="group" aria-label="Antes e depois do Manual Ilustrado">
-          <div class="v2-ad__col v2-ad__col--antes">
-            <p class="v2-ad__rotulo">Antes</p>
-            <ul class="v2-ad__falas">
-              <li><svg width="18" height="18" aria-hidden="true"><use href="#i-ask" /></svg><span>&ldquo;Será que é <strong>aqui mesmo</strong>?&rdquo;</span></li>
-              <li><svg width="18" height="18" aria-hidden="true"><use href="#i-ask" /></svg><span>&ldquo;E se eu <strong>piorar a dor dela</strong>?&rdquo;</span></li>
-              <li><svg width="18" height="18" aria-hidden="true"><use href="#i-ask" /></svg><span>&ldquo;Já vi esse vídeo <strong>várias vezes</strong> e ainda não sei&rdquo;</span></li>
-            </ul>
-          </div>
-          <div class="v2-ad__col v2-ad__col--depois">
-            <p class="v2-ad__rotulo">Depois</p>
-            <ul class="v2-ad__falas">
-              <li><svg width="18" height="18" aria-hidden="true"><use href="#i-check" /></svg><span>&ldquo;É <strong>aqui mesmo</strong>, o desenho mostra&rdquo;</span></li>
-              <li><svg width="18" height="18" aria-hidden="true"><use href="#i-check" /></svg><span>&ldquo;Já sei a pressão certa. Agora eu faço <strong>tranquila</strong>&rdquo;</span></li>
-              <li><svg width="18" height="18" aria-hidden="true"><use href="#i-check" /></svg><span>&ldquo;Agora eu entendi, é só <strong>seguir o desenho</strong>&rdquo;</span></li>
-            </ul>
-          </div>
-        </div>
+        <!-- Antes e depois: a mesma sala, a mesma massoterapeuta e a mesma
+             cliente, sem o manual e com ele, cada lado com as suas falas. -->
+        <figure class="v2-antes-depois">
+          <img src="assets/img/hero-antes-depois.webp"
+               alt="Antes e depois da mesma cena. Sem o manual: a massoterapeuta, de jaleco escuro, com a mão no queixo e a outra parada sobre as costas da cliente, marcadas com pontos vermelhos, e um vídeo pausado ao lado; ela pensa &ldquo;Será que é aqui mesmo?&rdquo; e &ldquo;Já vi esse vídeo várias vezes e ainda não sei&rdquo;. Com o manual: de jaleco branco, ela massageia tranquila, com os pontos agora verdes e o manual aberto na página da lombar; ela pensa &ldquo;É aqui mesmo, o desenho mostra&rdquo;, &ldquo;Já sei a pressão certa. Agora eu faço tranquila&rdquo; e &ldquo;Agora eu entendi, é só seguir o desenho&rdquo;."
+               width="1349" height="951" fetchpriority="high" decoding="async" />
+        </figure>
 
       </div>
     </section>
@@ -182,9 +163,11 @@
 
     <!-- ==================== DOBRA 2 — DEPOIMENTOS ====================
          Os quatro prints do doc, cada um com a frase que o resume em cima.
-         Cada print aparece no tamanho do arquivo, sem ampliar: são capturas
-         de tela pequenas, e esticadas elas borram. O alt transcreve o texto
-         do print, que numa imagem não chega ao leitor de tela. -->
+         O width de cada <img> é o tamanho em que ele aparece: nos prints em
+         2x (os dois primeiros) é a metade do arquivo, para ficarem nítidos
+         em tela de alta densidade; nos de 1x, o próprio arquivo, sem
+         ampliar, porque esticados eles borram. O alt transcreve o texto do
+         print, que numa imagem não chega ao leitor de tela. -->
     <section class="tp-section tp-section--ivory" aria-labelledby="depo-title">
       <div class="tp-container">
         <div class="tp-head" data-reveal>
@@ -197,14 +180,14 @@
             <figcaption class="v2-depo__titulo">A cliente saiu da sala sem dor e, no dia seguinte, estava renovada</figcaption>
             <img src="assets/img/depo-1-renovada.webp"
                  alt="Comentário de Kely Fabiana Bufalo: &ldquo;Outra cliente com dores no corpo classificou a massagem que fiz como SURREAL... disse que saiu da sala sem dor e no dia seguinte estava NOVA. Isso é a massagem humanizada Top Corpus.&rdquo;"
-                 width="470" height="127" loading="lazy" decoding="async" />
+                 width="520" height="146" loading="lazy" decoding="async" />
           </figure>
 
           <figure class="v2-depo v2-depo--largo" data-reveal>
             <figcaption class="v2-depo__titulo">Ela deixou o cargo público e a agenda de massagens começou a encher</figcaption>
             <img src="assets/img/depo-2-cargo-publico.webp"
                  alt="Post de Tatiane Cristina Santos Silva: &ldquo;Meu broche chegou. Agradeço a Deus e a vida da nossa professora Ana Martha. Esse broche simboliza o início de uma nova etapa na minha vida. Esse mês de março deixei meu cargo público, comecei a me dedicar integralmente à massoterapia. Está sendo maravilhoso, a agenda começou a encher, está uma benção. Realmente o que a Ana nos ensina e nos fala que vai acontecer, de fato acontece. Só temos que acreditar e tomar atitudes. Eu fiquei com muito medo no início, mas graças a Deus venci esse medo e estou aqui. Se você está com medo, enfrente, porque vai dar certo. As pessoas precisam de nossas mãos para levar saúde e bem estar para elas.&rdquo;"
-                 width="671" height="208" loading="lazy" decoding="async" />
+                 width="699" height="217" loading="lazy" decoding="async" />
           </figure>
 
           <figure class="v2-depo" data-reveal>
