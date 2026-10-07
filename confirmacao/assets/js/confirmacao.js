@@ -25,7 +25,7 @@
      vez de abrir o leitor do Drive e pedir mais um clique de quem acabou
      de pagar.
 
-     O arquivo tem 9,3 MB — abaixo dos 25 MB em que o Drive passa a
+     O arquivo tem 9,6 MB — abaixo dos 25 MB em que o Drive passa a
      interpor o aviso de "não foi possível verificar o vírus". Se ele for
      trocado por uma versão maior, o download volta a ter essa tela no
      meio, e aí a página de visualização vira a opção menos ruim.
@@ -36,7 +36,7 @@
      É o único lugar da página que precisa ser editado: todos os botões de
      download apontam para cá através do [data-ebook].
      ======================================================================= */
-  var EBOOK_URL = "https://drive.google.com/uc?export=download&id=1S8sO9CNm0sf_-IfushxgkZMbgkAg3tbu";
+  var EBOOK_URL = "https://drive.google.com/uc?export=download&id=1lHPYh3z6lt_Lxg-NyafG3fpfQRq-kw5Q";
 
   function initDownload() {
     var botoes = [].slice.call(document.querySelectorAll("[data-ebook]"));
