@@ -63,15 +63,6 @@
     <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
       <line x1="12" y1="6" x2="12" y2="18" /><line x1="6" y1="12" x2="18" y2="12" />
     </symbol>
-    <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-      <circle cx="10.5" cy="10.5" r="6.5" /><line x1="15.5" y1="15.5" x2="20.5" y2="20.5" />
-    </symbol>
-    <symbol id="i-history" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M3.5 12a8.5 8.5 0 1 0 2.6-6.1" /><polyline points="3.5 4 3.5 8.5 8 8.5" /><polyline points="12 7.5 12 12 15 14" />
-    </symbol>
-    <symbol id="i-fill" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="17" y1="17" x2="7" y2="7" /><polyline points="7 15 7 7 15 7" />
-    </symbol>
     <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" /><line x1="12" y1="9.5" x2="12" y2="13.5" /><line x1="12" y1="17" x2="12" y2="17.1" />
     </symbol>
@@ -272,28 +263,12 @@
 
           <p><strong>Então você pega o celular e digita:</strong></p>
 
-          <!-- As pesquisas recentes dela, num celular desenhado em HTML: o texto
-               é o conteúdo da dobra, então fica legível e indexável, e não
-               preso numa imagem. A barra de busca e os ícones são enfeite. -->
+          <!-- O celular com as pesquisas recentes dela no Google. As quatro
+               pesquisas estão na imagem, então o alt as repete. -->
           <figure class="v2-busca">
-            <div class="v2-busca__celular">
-              <div class="v2-busca__status" aria-hidden="true">
-                <span>9:41</span>
-                <span class="v2-busca__sinais"><i></i><i></i><i></i></span>
-              </div>
-              <div class="v2-busca__barra" aria-hidden="true">
-                <svg width="18" height="18"><use href="#i-search" /></svg>
-                <span class="v2-busca__cursor"></span>
-                <span class="v2-busca__dica">Pesquisar</span>
-              </div>
-              <figcaption class="v2-busca__rotulo">Pesquisas recentes</figcaption>
-              <ul class="v2-busca__lista">
-                <li><svg width="18" height="18" aria-hidden="true"><use href="#i-history" /></svg><span>como saber se é nervo ou músculo na lombar?</span><svg class="v2-busca__seta" width="16" height="16" aria-hidden="true"><use href="#i-fill" /></svg></li>
-                <li><svg width="18" height="18" aria-hidden="true"><use href="#i-history" /></svg><span>pressão certa para massagem nas costas?</span><svg class="v2-busca__seta" width="16" height="16" aria-hidden="true"><use href="#i-fill" /></svg></li>
-                <li><svg width="18" height="18" aria-hidden="true"><use href="#i-history" /></svg><span>posso machucar fazendo massagem errada?</span><svg class="v2-busca__seta" width="16" height="16" aria-hidden="true"><use href="#i-fill" /></svg></li>
-                <li><svg width="18" height="18" aria-hidden="true"><use href="#i-history" /></svg><span>como fazer massagem para dor no quadril?</span><svg class="v2-busca__seta" width="16" height="16" aria-hidden="true"><use href="#i-fill" /></svg></li>
-              </ul>
-            </div>
+            <img src="assets/img/celular-pesquisas.webp"
+                 alt="Um celular aberto no Google, com as pesquisas recentes: &ldquo;como saber se é nervo ou músculo na lombar?&rdquo;, &ldquo;pressão certa para massagem nas costas?&rdquo;, &ldquo;posso machucar fazendo massagem errada?&rdquo; e &ldquo;como fazer massagem para dor no quadril?&rdquo;"
+                 width="469" height="886" loading="lazy" decoding="async" />
           </figure>
 
           <p>
