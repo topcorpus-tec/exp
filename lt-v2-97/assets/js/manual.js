@@ -12,6 +12,7 @@
      - destino do CTA da oferta      ([data-checkout])
      - FAQ, abrir uma fecha as demais (.tp-faq__item)
      - parada das âncoras da oferta   (a[href="#oferta"])
+     - setas do carrossel de depoimentos ([data-carrossel])
 
    O contador de oferta e o botão flutuante saíram na revisão de 25/09 —
    por isso o código dos dois também saiu, em vez de ficar procurando
@@ -139,12 +140,62 @@
   }
 
   /* =======================================================================
+     CARROSSEL DOS DEPOIMENTOS
+
+     No desktop a fileira de depoimentos rola de lado, com encaixe em cada
+     cartão (CSS). As setas andam um cartão por vez e se apagam nas pontas.
+     No celular os cartões ficam empilhados e as setas nem aparecem; o
+     código continua ligado, mas não tem o que mover.
+     ======================================================================= */
+  function initCarrossel() {
+    var trilho = document.querySelector("[data-carrossel]");
+    var ant = document.querySelector("[data-carrossel-ant]");
+    var prox = document.querySelector("[data-carrossel-prox]");
+    if (!trilho || !ant || !prox) return;
+
+    function passo() {
+      var card = trilho.firstElementChild;
+      if (!card) return trilho.clientWidth;
+      var gap = parseFloat(getComputedStyle(trilho).columnGap) || 0;
+      return card.getBoundingClientRect().width + gap;
+    }
+
+    // Cada seta apaga quando o cartão da sua ponta já está inteiro na
+    // fileira. Pela posição da rolagem não dava: o encaixe para alguns
+    // pixels antes do fim, por causa do respiro da fileira.
+    function atualiza() {
+      var caixa = trilho.getBoundingClientRect();
+      var primeiro = trilho.firstElementChild;
+      var ultimo = trilho.lastElementChild;
+      if (!primeiro || !ultimo) return;
+      ant.disabled = primeiro.getBoundingClientRect().left >= caixa.left - 2;
+      prox.disabled = ultimo.getBoundingClientRect().right <= caixa.right + 2;
+    }
+
+    // Depois do clique as setas se reconferem quando a rolagem suave já
+    // terminou, sem depender só do evento de scroll, que nem todo
+    // navegador entrega a cada quadro.
+    function anda(sentido) {
+      trilho.scrollBy({ left: sentido * passo() });
+      setTimeout(atualiza, 450);
+    }
+
+    ant.addEventListener("click", function () { anda(-1); });
+    prox.addEventListener("click", function () { anda(1); });
+    trilho.addEventListener("scroll", atualiza, { passive: true });
+    trilho.addEventListener("scrollend", atualiza);
+    window.addEventListener("resize", atualiza);
+    atualiza();
+  }
+
+  /* =======================================================================
      BOOT
      ======================================================================= */
   function boot() {
     initCheckout();
     initAncoras();
     initFaq();
+    initCarrossel();
   }
 
   if (document.readyState === "loading") {

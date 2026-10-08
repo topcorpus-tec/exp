@@ -131,7 +131,7 @@
              cliente, sem o manual e com ele, cada lado com as suas falas. -->
         <figure class="v2-antes-depois">
           <img src="assets/img/hero-antes-depois.webp"
-               alt="Antes e depois da mesma cena. Sem o manual: a massoterapeuta, de jaleco escuro, com a mão no queixo e a outra parada sobre as costas da cliente, marcadas com pontos vermelhos, e um vídeo pausado ao lado; ela pensa &ldquo;Será que é aqui mesmo?&rdquo; e &ldquo;Já vi esse vídeo várias vezes e ainda não sei&rdquo;. Com o manual: de jaleco branco, ela massageia tranquila, com os pontos agora verdes e o manual aberto na página da lombar; ela pensa &ldquo;É aqui mesmo, o desenho mostra&rdquo;, &ldquo;Já sei a pressão certa. Agora eu faço tranquila&rdquo; e &ldquo;Agora eu entendi, é só seguir o desenho&rdquo;."
+               alt="Antes e depois da mesma cena. Sem o manual: a massoterapeuta, de jaleco escuro, com a mão no queixo e a outra parada sobre as costas da cliente, marcadas com pontos vermelhos, e um vídeo pausado ao lado; ela pensa &ldquo;Será que é aqui mesmo?&rdquo;, &ldquo;E se eu piorar a dor dela?&rdquo; e &ldquo;Já vi esse vídeo várias vezes e ainda não sei&rdquo;. Com o manual: de jaleco branco, ela massageia tranquila, com os pontos agora verdes e o manual aberto na página da lombar; ela pensa &ldquo;É aqui mesmo, o desenho mostra&rdquo;, &ldquo;Já sei a pressão certa. Agora eu faço tranquila&rdquo; e &ldquo;Agora eu entendi, é só seguir o desenho&rdquo;."
                width="1349" height="951" fetchpriority="high" decoding="async" />
         </figure>
 
@@ -162,12 +162,18 @@
     </div>
 
     <!-- ==================== DOBRA 2 — DEPOIMENTOS ====================
-         Os quatro prints do doc, cada um com a frase que o resume em cima.
-         O width de cada <img> é o tamanho em que ele aparece: nos prints em
-         2x (os dois primeiros) é a metade do arquivo, para ficarem nítidos
-         em tela de alta densidade; nos de 1x, o próprio arquivo, sem
-         ampliar, porque esticados eles borram. O alt transcreve o texto do
-         print, que numa imagem não chega ao leitor de tela. -->
+         Os quatro depoimentos do doc, cada um redesenhado em HTML com a cara
+         do lugar de onde veio o print — comentário do YouTube, post do
+         Facebook, conversa da caixa de mensagens e mensagem do Telegram no
+         tema escuro —, com a frase que o resume em cima. O texto é o que a
+         aluna escreveu, sem correção; o grifo amarelo da Claudia é o que já
+         estava no print dela. Foto e nome são os do perfil de cada uma;
+         Kely e Claudia não tinham foto, só a inicial.
+
+         Carrossel no desktop, dois por vez, com as setas embaixo; empilhados
+         no celular, onde as setas somem. No desktop o carrossel abre com
+         Jessica e Claudia, por isso elas vêm primeiro aqui; no celular o CSS
+         devolve a ordem do doc (Kely, Tatiane, Jessica, Claudia). -->
     <section class="tp-section tp-section--ivory" aria-labelledby="depo-title">
       <div class="tp-container">
         <div class="tp-head">
@@ -175,34 +181,80 @@
           <h2 class="tp-title" id="depo-title">Veja o que as pessoas que já aplicam o meu método dizem:</h2>
         </div>
 
-        <div class="v2-depos">
-          <figure class="v2-depo v2-depo--largo">
-            <figcaption class="v2-depo__titulo">A cliente saiu da sala sem dor e, no dia seguinte, estava renovada</figcaption>
-            <img src="assets/img/depo-1-renovada.webp"
-                 alt="Comentário de Kely Fabiana Bufalo: &ldquo;Outra cliente com dores no corpo classificou a massagem que fiz como SURREAL... disse que saiu da sala sem dor e no dia seguinte estava NOVA. Isso é a massagem humanizada Top Corpus.&rdquo;"
-                 width="520" height="146" loading="lazy" decoding="async" />
+        <div class="v2-deps" id="depoimentos" role="region" aria-label="Depoimentos" tabindex="0" data-carrossel>
+
+          <figure class="v2-dep v2-dep--jessica">
+            <figcaption class="v2-dep__titulo">Ela atendeu fibromialgia e puérpera e as duas dormiram na sessão</figcaption>
+            <div class="v2-msg">
+              <div class="v2-msg__topo">
+                <img class="v2-msg__av" src="assets/img/avatar-jessica.webp" alt=""
+                     width="44" height="44" loading="lazy" decoding="async" />
+                <p class="v2-msg__quem">
+                  <span class="v2-msg__nome">Jessica Santos / Massagem com Propósito</span>
+                  <span class="v2-msg__sub" aria-hidden="true">Atribuir esta conversa &#9662;</span>
+                </p>
+                <span class="v2-msg__mais" aria-hidden="true">&middot;&middot;&middot;</span>
+              </div>
+              <div class="v2-msg__conversa">
+                <img class="v2-msg__av-mini" src="assets/img/avatar-jessica.webp" alt=""
+                     width="44" height="44" loading="lazy" decoding="async" />
+                <p class="v2-msg__balao v2-msg__balao--primeiro">Ana.<br />
+                  Preciso te contar o que aconteceu comigo.<br />
+                  Atendi duas clientes. Uma puérpera e a outra com artrose e fibromialgia.<br />
+                  Fiz anamnese antes. Não fiz massagem nos pés da cliente com fibromialgia(porque ela não gosta, sente cócegas) não fiz massagem na barriga da puérpera(2 meses de parto).<br />
+                  Fiz TopCorpus na puérpera e TopRelax na fibromialgica. Elas amaram e dormiram durante a sessão. Dormiram tanto que não viram o tempo passar. Nossa!<br />
+                  Ainda recebi feedback da que tinha fibromialgia que nem precisou tomar remédio para dormir, que estava sem dores e dormiu tranquilamente.<br />
+                  A puérpera que tinha umas dores localizadas, me falou que acordou sem dor.</p>
+                <p class="v2-msg__balao">Isso mostra Ana, o quanto seu curso é válido. O quanto vc ensina e trás resultados se aplicados conforme vc ensina.</p>
+                <p class="v2-msg__balao">Estou tão feliz e realizada.</p>
+              </div>
+            </div>
           </figure>
 
-          <figure class="v2-depo v2-depo--largo">
-            <figcaption class="v2-depo__titulo">Ela deixou o cargo público e a agenda de massagens começou a encher</figcaption>
-            <img src="assets/img/depo-2-cargo-publico.webp"
-                 alt="Post de Tatiane Cristina Santos Silva: &ldquo;Meu broche chegou. Agradeço a Deus e a vida da nossa professora Ana Martha. Esse broche simboliza o início de uma nova etapa na minha vida. Esse mês de março deixei meu cargo público, comecei a me dedicar integralmente à massoterapia. Está sendo maravilhoso, a agenda começou a encher, está uma benção. Realmente o que a Ana nos ensina e nos fala que vai acontecer, de fato acontece. Só temos que acreditar e tomar atitudes. Eu fiquei com muito medo no início, mas graças a Deus venci esse medo e estou aqui. Se você está com medo, enfrente, porque vai dar certo. As pessoas precisam de nossas mãos para levar saúde e bem estar para elas.&rdquo;"
-                 width="699" height="217" loading="lazy" decoding="async" />
+          <figure class="v2-dep v2-dep--claudia">
+            <figcaption class="v2-dep__titulo">As clientes dela enviam áudios agradecendo a melhora que tiveram</figcaption>
+            <div class="v2-tg">
+              <span class="v2-tg__av" aria-hidden="true">CB</span>
+              <div class="v2-tg__msg">
+                <p class="v2-tg__cab"><span class="v2-tg__nome">Claudia Batista Lavor Claulavor</span> <span class="v2-tg__hora">20:54</span></p>
+                <p class="v2-tg__balao">Ana Marta, tenho percebido <mark class="v2-tg__grifo">um retorno muito positivo das minhas clientes</mark> em relação aos atendimentos. A massagem, por si só, já tem sido extremamente elogiada, mas potencializei ainda mais os resultados ao integrar a reflexologia com o escalda-pés, criando uma experiência mais completa de relaxamento e equilíbrio. Além da sensação imediata de bem-estar, muitas relatam melhora significativa em tensões musculares, qualidade do sono e até no estado emocional. Outro ponto que tem feito diferença é o <mark class="v2-tg__grifo">uso do taping, que tem contribuído de forma muito eficaz na manutenção dos resultados pós-atendimento, auxiliando no suporte muscular, na redução de dores e na continuidade do efeito terapêutico</mark> no dia a dia. Tenho <mark class="v2-tg__grifo">recebido não só feedbacks escritos, inclusive após o PIX, mas também áudios cheios de gratidão e encantamento, destacando o quanto se sentem renovadas após cada sessão.</mark> Isso mostra o quanto esse cuidado mais integral tem realmente feito a diferença.</p>
+              </div>
+            </div>
           </figure>
 
-          <figure class="v2-depo">
-            <figcaption class="v2-depo__titulo">Ela atendeu fibromialgia e puérpera e as duas dormiram na sessão</figcaption>
-            <img src="assets/img/depo-3-fibromialgia.webp"
-                 alt="Mensagem de Jessica Santos, da Massagem com Propósito: &ldquo;Ana, preciso te contar o que aconteceu comigo. Atendi duas clientes, uma puérpera e a outra com artrose e fibromialgia. Fiz anamnese antes. Fiz TopCorpus na puérpera e TopRelax na fibromiálgica. Elas amaram e dormiram durante a sessão. Ainda recebi feedback da que tinha fibromialgia que nem precisou tomar remédio para dormir, que estava sem dores e dormiu tranquilamente. A puérpera, que tinha umas dores localizadas, me falou que acordou sem dor. Isso mostra, Ana, o quanto seu curso é válido. Estou tão feliz e realizada.&rdquo;"
-                 width="437" height="575" loading="lazy" decoding="async" />
+          <figure class="v2-dep v2-dep--kely">
+            <figcaption class="v2-dep__titulo">A cliente saiu da sala sem dor e, no dia seguinte, estava renovada</figcaption>
+            <div class="v2-yt">
+              <span class="v2-yt__av" aria-hidden="true">K</span>
+              <p class="v2-yt__texto"><span class="v2-yt__nome">Kely Fabiana Bufalo</span> Outra cliente com dores no corpo classificou a massagem que fiz como SURREAL....disse que saiu da sala sem dor e no dia seguinte estava NOVA 😍💜 Isso é a massagem humanizada Top Corpus</p>
+            </div>
           </figure>
 
-          <figure class="v2-depo">
-            <figcaption class="v2-depo__titulo">As clientes dela enviam áudios agradecendo a melhora que tiveram</figcaption>
-            <img src="assets/img/depo-4-audios.webp"
-                 alt="Mensagem de Claudia Batista Lavor: &ldquo;Ana Marta, tenho percebido um retorno muito positivo das minhas clientes em relação aos atendimentos. A massagem, por si só, já tem sido extremamente elogiada, mas potencializei ainda mais os resultados ao integrar a reflexologia com o escalda-pés. Muitas relatam melhora significativa em tensões musculares, qualidade do sono e até no estado emocional. Outro ponto que tem feito diferença é o uso do taping, que tem contribuído de forma muito eficaz na manutenção dos resultados pós-atendimento. Tenho recebido não só feedbacks escritos, inclusive após o PIX, mas também áudios cheios de gratidão e encantamento, destacando o quanto se sentem renovadas após cada sessão.&rdquo;"
-                 width="313" height="630" loading="lazy" decoding="async" />
+          <figure class="v2-dep v2-dep--tatiane">
+            <figcaption class="v2-dep__titulo">Ela deixou o cargo público e a agenda de massagens começou a encher</figcaption>
+            <div class="v2-fb">
+              <div class="v2-fb__topo">
+                <img class="v2-fb__av" src="assets/img/avatar-tatiane.webp" alt=""
+                     width="85" height="85" loading="lazy" decoding="async" />
+                <p class="v2-fb__quem">
+                  <span class="v2-fb__nome">Tatiane Cristina Santos Silva</span>
+                  <span class="v2-fb__data">· 21 de março às 18:28 · <svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.4" /><path d="M1.6 8h12.8M8 1.5c2 2.1 2 10.9 0 13M8 1.5c-2 2.1-2 10.9 0 13" fill="none" stroke="currentColor" stroke-width="1.2" /></svg></span>
+                </p>
+                <span class="v2-fb__mais" aria-hidden="true">&middot;&middot;&middot;</span>
+              </div>
+              <p class="v2-fb__texto">Meu broche chegou. Agradeço a Deus e a vida da nossa professora Ana Martha. Esse broche simboliza o início de uma nova etapa na minha vida. Esse mês de março deixei meu cargo público comecei a me dedicar integralmente a massoterapia. Está sendo maravilhoso, a agenda começou a encher, está uma benção. Realmente o que a Ana nos ensina e nos falando que vai acontecer, de fato acontece. Só temos que acreditar e tomar atitudes. Eu fiquei com muito medo no início, mas graças a Deus venci esse medo e estou aqui. Se você está com medo, enfrente, porque vai dar certo. Às pessoas precisam de nossas mãos para levar saúde e bem estar para elas.</p>
+            </div>
           </figure>
+
+        </div>
+
+        <div class="v2-deps__nav">
+          <button class="v2-deps__seta" type="button" aria-controls="depoimentos" aria-label="Depoimentos anteriores" data-carrossel-ant>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 5 8 12 15 19" /></svg>
+          </button>
+          <button class="v2-deps__seta" type="button" aria-controls="depoimentos" aria-label="Próximos depoimentos" data-carrossel-prox>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 5 16 12 9 19" /></svg>
+          </button>
         </div>
       </div>
     </section>
