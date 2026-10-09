@@ -1,0 +1,65 @@
+/* =========================================================================
+   Manual Ilustrado — v3.css
+
+   A lt-v3 nasceu em 09/10/2026 como cópia da lt-v1 (design-system + taping
+   + manual, que seguem sem alteração). Aqui ficam só as mudanças da v3,
+   escritas com os tokens que o manual.css já reatribuiu para o azul.
+
+   Carregar DEPOIS de manual.css.
+   ========================================================================= */
+
+/* =========================================================================
+   1. HERO — a manchete nova e o "assista ao vídeo"
+
+   A manchete da v3 é uma frase mais longa que a da v1, então ela desce um
+   pouco de tamanho para não virar um bloco alto demais. Logo abaixo, a
+   chamada para o vídeo, em caixa alta como no doc, no lugar do subtítulo
+   da v1.
+   ========================================================================= */
+.mn-hero__inner .tp-hero__headline {
+  max-width: 30ch;
+  font-size: clamp(1.5rem, 3.6vw, 2.4rem);
+}
+.v3-assista {
+  margin: clamp(.9rem, 2.2vw, 1.25rem) auto 0;
+  font-size: clamp(.95rem, 1.6vw, 1.1rem);
+  font-weight: var(--fw-extrabold);
+  letter-spacing: .04em;
+  color: var(--tp-ink);
+  text-align: center;
+}
+
+/* Espaço do vídeo, no lugar do mockup da v1. Por enquanto é a caixa
+   reservada: o azul do manual com um play no meio, na proporção 16:9.
+   A proporção fica na caixa e não no player, para que o embed, quando
+   entrar, não mude a altura da dobra. */
+.v3-video {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: .75rem;
+  width: min(100%, 760px);
+  margin: clamp(1.25rem, 3vw, 1.75rem) auto 0;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--tp-radius);
+  background: linear-gradient(160deg, var(--tp-violet-deep) 0%, var(--tp-rose-deep) 100%);
+  box-shadow: var(--tp-shadow-md);
+  color: #FFFFFF;
+}
+.v3-video__play {
+  display: grid;
+  place-items: center;
+  width: clamp(60px, 9vw, 88px);
+  aspect-ratio: 1;
+  border: 2px solid rgba(255, 255, 255, .65);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .14);
+}
+.v3-video__play svg { width: 42%; height: 42%; margin-left: 8%; fill: #FFFFFF; }
+.v3-video__rot {
+  font-size: .8rem;
+  font-weight: var(--fw-bold);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .85);
+}

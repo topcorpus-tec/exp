@@ -16,6 +16,13 @@
 /lt-v2-*
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
 
+# A v3 (lt-v3-27, -67 e -97) nasceu em 09/10/2026 como cópia da v1, para
+# virar uma terceira versão da página no tráfego pago. Fora dos buscadores
+# pelo mesmo motivo da v2: indexada junto com a v1, disputaria a mesma
+# busca com ela.
+/lt-v3-*
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+
 # Páginas de funil do Método Mãos Lucrativas (upsell, downsell e a
 # conclusão do pedido): só devem ser alcançadas dentro do fluxo de compra,
 # nunca pela busca.
