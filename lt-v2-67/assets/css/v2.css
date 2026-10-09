@@ -110,10 +110,9 @@
    1b. DEPOIMENTOS — os prints redesenhados, em carrossel
 
    Cada cartão: a frase que resume o depoimento e, embaixo, o depoimento
-   com a cara do lugar de onde veio — comentário do YouTube, post do
-   Facebook, conversa da caixa de mensagens e Telegram no tema escuro. As
-   cores e as fontes de cada bloco são as da plataforma, não as da página:
-   é isso que faz ele ler como print. Cada cartão tem a altura do próprio
+   com a cara do lugar de onde veio — comentários do YouTube e conversa da
+   caixa de mensagens do Facebook. As cores e as fontes de cada bloco são
+   as da plataforma, não as da página: é isso que faz ele ler como print. Cada cartão tem a altura do próprio
    conteúdo.
 
    No celular, um embaixo do outro. No desktop, carrossel: dois cartões
@@ -211,24 +210,16 @@
    Windows, Roboto no Android —, que é o que essas plataformas usam em cada
    um. Fonte nomeada primeiro escolhia o que estivesse instalado, e numa
    máquina com Roboto ativada por gerenciador o texto saía pesado. */
-.v2-yt, .v2-fb, .v2-msg, .v2-tg {
+.v2-yt, .v2-msg {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   font-size: 15px;
   line-height: 1.34;
   text-align: left;
 }
-.v2-yt p, .v2-fb p, .v2-msg p, .v2-tg p { margin: 0; }
-.v2-fb__mais, .v2-msg__mais {
-  flex: 0 0 auto;
-  margin-left: auto;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -1px;
-  color: #65676B;
-}
-
-/* ---- Comentário do YouTube (Kely) ---- */
+.v2-yt p, .v2-msg p { margin: 0; }
+/* ---- Comentários do YouTube ----
+   Kely e Dilce no layout antigo, com o nome cinza na frente do texto;
+   Lenek3 no novo (--novo), com @, selo e hora numa linha em cima. */
 .v2-yt {
   display: flex;
   align-items: flex-start;
@@ -252,51 +243,33 @@
 }
 .v2-yt__texto { padding-top: 2px; font-size: 15px; line-height: 1.45; color: #0F0F0F; }
 .v2-yt__nome { margin-right: .35em; font-weight: 500; color: #606060; }
+img.v2-yt__av { object-fit: cover; background: none; }
+.v2-yt__av--pequeno { width: 32px; height: 32px; }
 
-/* ---- Post do Facebook (Tatiane) ---- */
-.v2-fb {
-  padding: 12px 16px 14px;
-  border: 1px solid #DADDE1;
-  border-radius: 8px;
-  background: #FFFFFF;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, .12);
+.v2-yt__corpo { min-width: 0; }
+.v2-yt .v2-yt__cab {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 4px;
+  font-size: 13px;
+  color: #606060;
 }
-.v2-fb__topo { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
-.v2-fb__av { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
-.v2-fb__quem { display: flex; flex-direction: column; min-width: 0; }
-.v2-fb__nome { font-size: 15px; font-weight: 600; color: #050505; }
-.v2-fb__data { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; color: #65676B; }
-.v2-fb__data svg { display: inline-block; }
-.v2-fb__texto { color: #050505; }
+.v2-yt--novo .v2-yt__nome { margin-right: 0; }
+.v2-yt__selo { display: block; flex: 0 0 auto; }
+.v2-yt__hora { font-size: 12px; }
+.v2-yt--novo .v2-yt__texto { padding-top: 0; font-size: 14px; }
 
 /* ---- Caixa de mensagens do Facebook (Jessica) ----
-   O primeiro balão leva a foto dela no pé, como no Messenger; os outros
-   dois ficam alinhados a ele, sem foto, com um vão menor entre si. */
+   Só as bolhas, sem o cabeçalho da conversa. O primeiro balão leva a foto
+   dela no pé, como no Messenger; os outros dois ficam alinhados a ele, sem
+   foto, com um vão menor entre si. */
 .v2-msg {
   border: 1px solid #DADDE1;
   border-radius: 8px;
   background: #FFFFFF;
   overflow: hidden;
-}
-.v2-msg__topo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 14px;
-  border-bottom: 1px solid #E4E6EB;
-}
-.v2-msg__av { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
-.v2-msg__quem { display: flex; flex-direction: column; min-width: 0; }
-.v2-msg__nome { font-size: 15px; font-weight: 600; color: #1C1E21; }
-.v2-msg__sub { font-size: 12px; color: #65676B; }
-.v2-msg__mais {
-  display: grid;
-  place-items: center;
-  width: 34px;
-  height: 30px;
-  border: 1px solid #CED0D4;
-  border-radius: 6px;
-  font-size: 16px;
 }
 .v2-msg__conversa {
   display: grid;
@@ -324,59 +297,17 @@
 }
 .v2-msg__balao--primeiro { grid-row: 1; margin-bottom: 8px; }
 
-/* ---- Telegram, tema escuro (Claudia) ----
-   O grifo amarelo é o que já vinha no print dela, de marca-texto. */
-.v2-tg {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 12px 12px 14px;
-  border-radius: 10px;
-  background: #17181A;
-}
-.v2-tg__av {
-  flex: 0 0 auto;
-  display: grid;
-  place-items: center;
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
-  background: #3BA55C;
-  color: #FFFFFF;
-  font-size: 15px;
-  font-weight: 600;
-}
-.v2-tg__msg { min-width: 0; }
-.v2-tg__cab { margin-bottom: 4px !important; font-size: 14px; }
-.v2-tg__nome { font-weight: 600; color: #5EA2E8; }
-.v2-tg__hora { margin-left: 4px; font-size: 13px; color: #8A8F96; }
-.v2-tg__balao {
-  padding: 8px 12px 10px;
-  border-radius: 4px 14px 14px 14px;
-  background: #2A2B2E;
-  line-height: 1.45;
-  color: #ECECEC;
-}
-.v2-tg__grifo {
-  padding: .04em .15em;
-  border-radius: 3px;
-  background: rgba(190, 190, 40, .72);
-  color: #FFFFFF;
-  -webkit-box-decoration-break: clone;
-          box-decoration-break: clone;
-}
-
 /* No celular a moldura do cartão por fora e a do print por dentro comiam
    a largura do texto, então ali o respiro do cartão encolhe. */
 @media (max-width: 899px) {
   .v2-dep { padding: 1rem .85rem; }
 
-  /* No HTML a Jessica e a Claudia vêm primeiro, porque é com elas que o
-     carrossel do desktop abre. Empilhado, volta a ordem do doc. */
+  /* No HTML a Jessica vem primeiro, porque é com ela que o carrossel do
+     desktop abre. Empilhado, volta a ordem do doc. */
   .v2-dep--kely    { order: 1; }
-  .v2-dep--tatiane { order: 2; }
-  .v2-dep--jessica { order: 3; }
-  .v2-dep--claudia { order: 4; }
+  .v2-dep--jessica { order: 2; }
+  .v2-dep--lenek   { order: 3; }
+  .v2-dep--dilce   { order: 4; }
 }
 
 /* =========================================================================
@@ -462,10 +393,13 @@
   list-style: none;
 }
 .v2-checks li {
+  --v2-check-pad-y: clamp(1rem, 2.2vw, 1.3rem);
+  --v2-check-pad-x: clamp(1.1rem, 2.6vw, 1.6rem);
   display: flex;
   align-items: center;
   gap: clamp(.9rem, 2.4vw, 1.4rem);
-  padding: clamp(1rem, 2.2vw, 1.3rem) clamp(1.1rem, 2.6vw, 1.6rem);
+  padding: var(--v2-check-pad-y) var(--v2-check-pad-x);
+  overflow: hidden;
   background: var(--tp-white);
   border: 1px solid var(--tp-line-soft);
   border-radius: var(--tp-radius-sm);
@@ -481,7 +415,7 @@
    imagem, e dentro dele o check continua alinhado à primeira linha. */
 .v2-checks__media {
   flex: 0 0 auto;
-  width: clamp(5.5rem, 12vw, 7.5rem);
+  width: clamp(7rem, 20vw, 10.5rem);
   border-radius: calc(var(--tp-radius-sm) - 4px);
   overflow: hidden;
 }
@@ -497,22 +431,29 @@
 }
 
 /* No celular, com a imagem ao lado, sobravam umas quinze letras por linha
-   para o texto. Ali a imagem sobe e ocupa a largura do cartão. */
+   para o texto. Ali a imagem sobe e vai de borda a borda do cartão: a
+   margem negativa desfaz o padding, e o cartão, com overflow escondido,
+   arredonda os cantos de cima dela. */
 @media (max-width: 480px) {
   .v2-checks li { flex-direction: column; align-items: stretch; }
-  .v2-checks__media { width: 100%; }
+  .v2-checks__media {
+    width: auto;
+    margin: calc(-1 * var(--v2-check-pad-y)) calc(-1 * var(--v2-check-pad-x)) 0;
+    border-radius: 0;
+  }
 }
 
 /* No desktop os cinco ficam numa linha de três e outra de dois, com a
    imagem em cima, como as perguntas da dobra 2. A grade tem seis trilhas
    e cada cartão ocupa duas: é o que deixa o quarto começar no meio da
-   primeira coluna e a linha de dois sair centralizada. */
+   primeira coluna e a linha de dois sair centralizada. A imagem vai de
+   borda a borda, como no celular. */
 @media (min-width: 1010px) {
   .v2-checks {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: clamp(.85rem, 2vw, 1.25rem);
-    max-width: 1000px;
+    max-width: 1120px;
   }
   .v2-checks li {
     grid-column: span 2;
@@ -521,7 +462,11 @@
     gap: 1rem;
   }
   .v2-checks li:nth-child(4) { grid-column: 2 / span 2; }
-  .v2-checks__media { width: 100%; }
+  .v2-checks__media {
+    width: auto;
+    margin: calc(-1 * var(--v2-check-pad-y)) calc(-1 * var(--v2-check-pad-x)) 0;
+    border-radius: 0;
+  }
 }
 
 /* O check é do verde do botão: o que se aprende e a ação de comprar ficam
