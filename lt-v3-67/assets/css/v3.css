@@ -29,37 +29,22 @@
   text-align: center;
 }
 
-/* Espaço do vídeo, no lugar do mockup da v1. Por enquanto é a caixa
-   reservada: o azul do manual com um play no meio, na proporção 16:9.
-   A proporção fica na caixa e não no player, para que o embed, quando
-   entrar, não mude a altura da dobra. */
-.v3-video {
-  display: grid;
-  place-content: center;
-  justify-items: center;
-  gap: .75rem;
-  width: min(100%, 760px);
+/* VSL, no lugar do mockup da v1.
+
+   O embed da VTurb já traz a largura máxima (400px) e a proporção vertical
+   no inline style; repetir essas medidas aqui faria as duas brigarem pela
+   mesma caixa. Aqui fica só a margem e o acabamento: canto arredondado e
+   sombra, como os cartões da página.
+
+   width:100% não é enfeite: o hero é um flex column centralizado, e um item
+   sem largura encolhe até o conteúdo. O conteúdo é um iframe absoluto, que
+   não mede nada, e a caixa ficaria com 0 de largura e 0 de altura. */
+.v3-vsl {
+  width: 100%;
   margin: clamp(1.25rem, 3vw, 1.75rem) auto 0;
-  aspect-ratio: 16 / 9;
+}
+.v3-vsl__caixa {
   border-radius: var(--tp-radius);
-  background: linear-gradient(160deg, var(--tp-violet-deep) 0%, var(--tp-rose-deep) 100%);
+  overflow: hidden;
   box-shadow: var(--tp-shadow-md);
-  color: #FFFFFF;
-}
-.v3-video__play {
-  display: grid;
-  place-items: center;
-  width: clamp(60px, 9vw, 88px);
-  aspect-ratio: 1;
-  border: 2px solid rgba(255, 255, 255, .65);
-  border-radius: 50%;
-  background: rgba(255, 255, 255, .14);
-}
-.v3-video__play svg { width: 42%; height: 42%; margin-left: 8%; fill: #FFFFFF; }
-.v3-video__rot {
-  font-size: .8rem;
-  font-weight: var(--fw-bold);
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, .85);
 }

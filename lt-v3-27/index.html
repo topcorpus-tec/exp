@@ -96,13 +96,21 @@
           <p class="v3-assista">ASSISTA AO VÍDEO ATÉ O FINAL</p>
         </div>
 
-        <!-- Espaço do vídeo, no lugar do mockup da v1. Ainda é só a caixa
-             reservada, em 16:9: quando o embed chegar, ele entra aqui dentro
-             no lugar do botão de play. Se o vídeo vier em outra proporção,
-             a caixa muda junto (aspect-ratio no v3.css). -->
-        <div class="v3-video" role="img" aria-label="Espaço reservado para o vídeo">
-          <span class="v3-video__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z" /></svg></span>
-          <span class="v3-video__rot" aria-hidden="true">Vídeo</span>
+        <!-- VSL da v3 (VTurb / ConverteAI, player 6acee926d4fbe9c43a4643bf), no
+             lugar do mockup da v1. O embed vem como a plataforma entrega: vídeo
+             vertical, com a largura máxima de 400px e a proporção (o padding
+             de 177,78%) no próprio style. A nossa folha só dá a margem e
+             arredonda a caixa (.v3-vsl no v3.css). -->
+        <div class="v3-vsl">
+          <script type="text/javascript">
+            var s = document.createElement("script");
+            s.src = "https://scripts.converteai.net/lib/js/smartplayer-wc/v4/sdk.js", s.async = !0, document.head.appendChild(s);
+          </script>
+          <div id="ifr_6acee926d4fbe9c43a4643bf_wrapper" style="margin: 0 auto; width: 100%; max-width: 400px;">
+            <div class="v3-vsl__caixa" style="position: relative; padding: 177.77777777777777% 0 0 0;" id="ifr_6acee926d4fbe9c43a4643bf_aspect">
+              <iframe frameborder="0" allowfullscreen src="about:blank" id="ifr_6acee926d4fbe9c43a4643bf" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" referrerpolicy="origin" onload=" this.onload=null, this.src='https://scripts.converteai.net/02abf0a0-3315-4bbc-83ab-8116ca43936a/players/6acee926d4fbe9c43a4643bf/v4/embed.html' +(location.search||'?') +'&vl=' +encodeURIComponent(location.href)"></iframe>
+            </div>
+          </div>
         </div>
 
         <div class="tp-cta">
