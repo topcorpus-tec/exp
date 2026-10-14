@@ -20,6 +20,19 @@
   max-width: 30ch;
   font-size: clamp(1.5rem, 3.6vw, 2.4rem);
 }
+/* No celular a manchete ocupava cinco linhas e empurrava a VSL para baixo
+   da dobra. Ali ela encolhe e solta a largura, para caber em menos linhas,
+   e sobe: o respiro de cima do hero (o da seção e o da coluna, que somavam
+   uns 50px) cai para 1rem. Tudo para deixar mais do vídeo na primeira
+   tela. */
+@media (max-width: 767px) {
+  .tp-hero { padding-top: 0; }
+  .mn-hero__inner { padding-top: 1rem; }
+  .mn-hero__inner .tp-hero__headline {
+    max-width: none;
+    font-size: 1.25rem;
+  }
+}
 .v3-assista {
   margin: clamp(.9rem, 2.2vw, 1.25rem) auto 0;
   font-size: clamp(.95rem, 1.6vw, 1.1rem);
