@@ -43,9 +43,16 @@
      Hotmart pediu. A de 27 veio sem ele em 29/09/2026 e ganhou o
      parâmetro em 02/10/2026.
 
+     Desde 15/10/2026 esta página não aponta mais direto para a Hotmart:
+     o botão passa pelo funil do SF (sf.topcorpus.com.br, sfunnel=31, o de
+     a v2), que redireciona para a mesma oferta de R$27 (off=9z1ywsjs).
+     Cada versão da página tem o seu sfunnel, para separar as vendas de
+     cada uma. O redirecionamento do SF chega à Hotmart sem o
+     &checkoutMode=10; se ele for necessário, é no SF que se acrescenta.
+
      Vazio aqui deixa todos os CTAs inertes de propósito (ver initCheckout).
      ======================================================================= */
-  var CHECKOUT_URL = "https://pay.hotmart.com/W95360090D?off=9z1ywsjs&checkoutMode=10";
+  var CHECKOUT_URL = "https://sf.topcorpus.com.br/sf/?sfunnel=31";
 
   /* =======================================================================
      DESTINO DO CTA DA OFERTA

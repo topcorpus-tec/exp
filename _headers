@@ -23,6 +23,13 @@
 /lt-v3-*
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
 
+# A lt-v1-27-sf nasceu em 15/10/2026 como cópia da lt-v1-27. Fora dos
+# buscadores pelo mesmo motivo da v2 e da v3: igual à v1, disputaria a
+# mesma busca com ela. Sem hífen antes do asterisco, para pegar a própria
+# /lt-v1-27-sf e não encostar na /lt-v1-27/, que segue indexável.
+/lt-v1-27-sf*
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+
 # Páginas de funil do Método Mãos Lucrativas (upsell, downsell e a
 # conclusão do pedido): só devem ser alcançadas dentro do fluxo de compra,
 # nunca pela busca.
