@@ -109,6 +109,24 @@
   }
 
   /* =======================================================================
+     FORMULÁRIO DA PESQUISA (protótipo visual)
+
+     A pesquisa do Tally refeita como formulário na página. Ainda não grava
+     as respostas: o navegador confere os campos obrigatórios (required no
+     HTML) e, com tudo preenchido, o botão abre o download, como o botão
+     que ficava abaixo da pesquisa.
+     ======================================================================= */
+  function initFormulario() {
+    var form = document.querySelector("[data-form-pesquisa]");
+    if (!form) return;
+
+    form.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      if (EBOOK_URL) window.open(EBOOK_URL, "_blank", "noopener");
+    });
+  }
+
+  /* =======================================================================
      CONFETES
 
      Saem do selo de compra aprovada assim que a página abre.
@@ -326,6 +344,7 @@
   function boot() {
     initConfete();
     initPesquisa();
+    initFormulario();
     initDownload();
     initReveal();
     initFaq();
