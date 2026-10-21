@@ -73,3 +73,8 @@
 # Página de pós-compra do Manual: só é alcançada por quem acabou de pagar.
 /confirmacao/*
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+
+# A confirmacao-v2 nasceu em 21/10/2026 como cópia da /confirmacao/. Fora
+# dos buscadores pelo mesmo motivo: também é pós-compra.
+/confirmacao-v2/*
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet

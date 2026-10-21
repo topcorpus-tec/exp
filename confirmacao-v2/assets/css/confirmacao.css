@@ -1,0 +1,670 @@
+/* =========================================================================
+   Confirmação de compra — confirmacao.css
+
+   Camada de cima sobre design-system.css + taping.css. É a página de
+   obrigado do Manual Ilustrado: a pessoa já comprou, então aqui não se
+   vende nada — a página só precisa entregar, com o mínimo de atrito, o
+   caminho até o produto.
+
+   Duas coisas moram aqui:
+     1. A IDENTIDADE AZUL do Manual, igual à das /lt-v1-* — a pessoa acabou
+        de sair de lá e precisa reconhecer que chegou no lugar certo. O
+        bloco de tokens é o mesmo, palavra por palavra.
+     2. Os poucos componentes que só esta página tem: o selo de compra
+        aprovada, o vídeo em pé, os passos numerados, o cartão da dica e o
+        cartão de suporte.
+
+   Carregar DEPOIS de taping.css.
+   ========================================================================= */
+
+/* =========================================================================
+   1. IDENTIDADE AZUL — a capa do manual
+
+   Mesma técnica das outras páginas: em vez de repintar componente por
+   componente, os tokens são reatribuídos. Cada um mantém o PAPEL que tinha
+   (destaque, hover, faixa alternada) e só troca de matiz.
+
+     rose   (destaque, marca)  → azul vivo, o "DOR" da capa
+     violet (estrutura)        → navy, o "ALÍVIO DA" da capa
+   ========================================================================= */
+:root {
+  /* ---- Base clara: os brancos quentes esfriam ---- */
+  --tp-cream:      #FBFDFF;
+  --tp-ivory:      #F1F8FE;
+  --tp-blush:      #E9F4FD;
+  --tp-lilac:      #EEF6FE;
+  --tp-mist:       #F1F6FB;
+
+  /* ---- Marca ---- */
+  --tp-rose:       #0285D3;   /* azul vivo da capa (o "DOR")                  */
+  --tp-rose-deep:  #0A5C9E;   /* texto de destaque — 6,6:1 sobre branco       */
+  --tp-rose-soft:  #9BD1F2;
+  --tp-rose-wash:  #E3F1FC;
+  --tp-violet:     #14528F;
+  --tp-violet-lift:#1C6BB0;
+  --tp-violet-deep:#01337C;   /* navy da capa (o "ALÍVIO DA")                 */
+  --tp-violet-soft:#CDE4F7;
+  --tp-violet-wash:#E9F3FD;
+  --tp-gold:       #0285D3;   /* não há dourado na capa: vira o azul vivo     */
+  --tp-gold-soft:  #DCEEFB;
+
+  /* ---- Texto: a ameixa escura vira navy ---- */
+  --tp-ink:        #0B2545;
+  --tp-body:       #3C5772;   /* 7,5:1                                        */
+  --tp-muted:      #5E7695;   /* 4,6:1 — o mínimo para legendas em caixa alta */
+
+  /* ---- Traços e sombras rebaseados no navy ---- */
+  --tp-line:       rgba(11, 37, 69, .12);
+  --tp-line-soft:  rgba(11, 37, 69, .07);
+  --tp-shadow-xs:  0 1px 2px rgba(11, 37, 69, .05);
+  --tp-shadow-sm:  0 4px 16px rgba(10, 60, 120, .08);
+  --tp-shadow-md:  0 14px 40px rgba(10, 60, 120, .11);
+  --tp-shadow-lg:  0 26px 70px rgba(10, 60, 120, .14);
+
+  --color-bg-footer: #EDF4FA;
+
+  /* O anel de foco e a barra de rolagem do design-system eram roxos. */
+  --color-primary:      #14528F;
+  --color-primary-dark: #01337C;
+}
+
+/* As manchas de luz do hero e a base do degradê estão escritas em hex e
+   rgba, fora dos tokens — por isso a declaração inteira volta aqui. */
+.tp-hero {
+  background:
+    radial-gradient(58% 44% at 50% -6%, rgba(2, 133, 211, .14) 0%, transparent 68%),
+    radial-gradient(46% 38% at 88% 22%, rgba(1,  51, 124, .10) 0%, transparent 70%),
+    radial-gradient(52% 40% at 8%  72%, rgba(2, 133, 211, .09) 0%, transparent 72%),
+    linear-gradient(180deg, #F3FAFF 0%, var(--tp-cream) 55%, var(--tp-ivory) 100%);
+}
+
+/* A faixa escura desta página é a do suporte, e reusa a .tp-section--offer
+   do taping — que vinha num rosa escuro fixo. Vira o navy da capa: com
+   texto branco dá 10,9:1. */
+.tp-section--offer {
+  background: linear-gradient(135deg, #01468F 0%, #013A80 52%, #012F6B 100%);
+}
+.tp-section--offer::before {
+  background: radial-gradient(closest-side, rgba(2, 133, 211, .55) 0%, rgba(2, 133, 211, 0) 100%);
+}
+.tp-section--offer::after {
+  background: radial-gradient(closest-side, rgba(1, 74, 155, .75) 0%, rgba(1, 74, 155, 0) 100%);
+}
+
+/* =========================================================================
+   2. CTA VERDE
+
+   Mesmo botão das /lt-v1-*: a escolha do tom é de contraste. O rótulo é
+   branco em ~15px bold — abaixo do que a WCAG considera "texto grande",
+   então vale o mínimo de 4.5:1. Num degradê quem manda é a ponta clara:
+   #12854A dá 4,69:1 sobre branco e é o ponto mais alto que passa.
+   ========================================================================= */
+.btn--tp {
+  background: linear-gradient(135deg, #12854A 0%, #0D6E3C 45%, #095A30 100%);
+  box-shadow: 0 12px 30px rgba(13, 110, 60, .28), inset 0 1px 0 rgba(255, 255, 255, .22);
+}
+.btn--tp:hover,
+.btn--tp:focus-visible {
+  background: linear-gradient(135deg, #0D6E3C 0%, #095A30 100%);
+  box-shadow: 0 18px 42px rgba(13, 110, 60, .36), inset 0 1px 0 rgba(255, 255, 255, .22);
+}
+/* O anel de foco do design-system usa a cor primária (azul) e destoaria do
+   botão verde. */
+.btn--tp:focus-visible { outline-color: #0D6E3C; }
+
+/* =========================================================================
+   3. HERO — "Parabéns!"
+
+   O hero do taping é uma grade de 2 colunas (logo | foto) com a copy na
+   linha de baixo. Aqui é uma coluna só, centralizada: logo, selo, título
+   e a frase da compra aprovada.
+   ========================================================================= */
+.cf-hero__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 1.45rem);
+  padding-block: clamp(2rem, 5vw, 3.25rem);
+  text-align: center;
+}
+
+/* A grade de 2 colunas do taping volta a valer a partir de 900px e jogaria
+   tudo para a esquerda; os recuos da copy existiam só para encostar na foto
+   da Ana, que aqui não existe. */
+.cf-hero__inner .tp-hero__copy {
+  margin-top: 0;
+  padding-bottom: 0;
+  text-align: center;
+}
+.cf-hero__inner .tp-hero__headline,
+.cf-hero__inner .tp-hero__sub { margin-inline: auto; }
+
+/* O logo do produto. Bem maior que o .tp-hero__logo do taping (que era uma
+   marca d'água ao lado da foto): aqui ele é o primeiro sinal de que a
+   pessoa chegou no lugar certo, logo depois de pagar. */
+.cf-logo {
+  width: min(58%, 205px);
+  height: auto;
+  margin: 0 auto;
+}
+
+/* Selo de compra aprovada. É a informação que a pessoa veio buscar, então
+   vem antes do título e não depois. */
+.cf-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  padding: .62em 1.35em;
+  border-radius: var(--radius-pill);
+  background: rgba(18, 133, 74, .1);
+  color: #0D6E3C;                 /* 6,4:1 sobre o fundo claro do hero */
+  font-size: clamp(.88rem, 1.9vw, 1.02rem);
+  font-weight: var(--fw-extrabold);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.cf-badge svg { flex: 0 0 auto; }
+
+/* ---- Confetes ------------------------------------------------------------
+   Saem do selo, uma vez só, quando a página abre.
+
+   Aqui o CSS quase não manda: quem move cada peça é o confirmacao.js, um
+   quadro de cada vez, com gravidade, arrasto do ar e bamboleio. Uma
+   animação em keyframes daria a todas a mesma trajetória, e é isso que
+   faz confete parecer gráfico em vez de papel.
+
+   O que o CSS precisa garantir é a perspectiva: sem ela o giro nos eixos
+   X e Y não encurtaria a peça, e ela nunca mostraria o perfil. É esse
+   virar de lado — a peça afinando até quase sumir e voltando a abrir —
+   que dá a leitura de papel caindo.
+
+   Tamanho, cor e forma de cada peça também vêm do JS: sortear no script é
+   o que evita a chuva sair de um molde só.
+   -------------------------------------------------------------------------- */
+.cf-celebra { position: relative; display: inline-block; }
+
+/* Nasce aqui, no centro do selo, e o JS a move para a viewport logo em
+   seguida — ver o comentário em initConfete(). */
+.cf-confete {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  perspective: 760px;
+}
+.cf-confete i {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: block;
+  opacity: 0;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+/* Quem pediu menos movimento no sistema não recebe confete nenhum — e o
+   JS nem chega a criar as peças. */
+@media (prefers-reduced-motion: reduce) {
+  .cf-confete { display: none; }
+}
+
+/* "Parabéns!" sozinho é curto e o 21ch do taping não atrapalha, mas o
+   tamanho sim: numa palavra só ele pode crescer mais que num título de
+   venda de duas linhas. */
+.cf-hero__inner .tp-hero__headline {
+  max-width: 20ch;
+  font-size: clamp(2.1rem, 6.5vw, 3.4rem);
+}
+
+/* =========================================================================
+   3a. HERO DA PESQUISA — a primeira dobra da v2
+
+   O "Parabéns!" dá lugar a um pedido: barra de progresso, título de
+   alerta, a pesquisa embutida numa caixa e, logo abaixo, o botão de
+   baixar. Continua uma coluna só, centralizada, no .cf-hero__inner.
+   ========================================================================= */
+
+/* A manchete deixou de ser uma palavra e virou uma frase: volta a um
+   tamanho de título de duas linhas. */
+.cf-pesq .tp-hero__headline {
+  max-width: 18ch;
+  font-size: clamp(1.85rem, 5.4vw, 3rem);
+}
+
+/* No desktop o taping alinha o botão do hero à esquerda, ao lado da foto
+   da Ana. Aqui não há foto: ele fica no eixo da caixa. No celular segue
+   ocupando a largura toda, como no resto do site — para isso o .tp-cta
+   precisa da largura da caixa, já que o .cf-hero__inner centraliza e
+   encolheria ele até o tamanho do botão. */
+.cf-pesq .tp-cta { width: 100%; max-width: 720px; }
+@media (min-width: 900px) {
+  .cf-pesq .tp-cta { align-items: center; }
+}
+
+/* ---- Barra de progresso -------------------------------------------------
+   Diz que o acesso está quase pronto e só falta esta etapa. É parada: sem
+   crescer ao abrir e sem as listras correrem. */
+.cf-progresso {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  width: min(100%, 420px);
+}
+.cf-progresso__trilho {
+  flex: 1;
+  height: 12px;
+  border-radius: var(--radius-pill);
+  background: var(--tp-violet-soft);
+  overflow: hidden;
+}
+.cf-progresso__barra {
+  display: block;
+  width: var(--cf-progresso, 0%);
+  height: 100%;
+  border-radius: inherit;
+  background:
+    repeating-linear-gradient(-45deg,
+      rgba(255, 255, 255, .22) 0 8px, rgba(255, 255, 255, 0) 8px 16px),
+    linear-gradient(90deg, #12854A 0%, #22C55E 100%);
+  background-size: 22.6px 22.6px, 100% 100%;
+}
+/* #0D6E3C dá 6,4:1 sobre o fundo claro do hero, o mesmo do selo. */
+.cf-progresso__num {
+  font-size: .95rem;
+  font-weight: var(--fw-extrabold);
+  font-variant-numeric: tabular-nums;
+  color: #0D6E3C;
+}
+
+/* ---- Caixa da pesquisa --------------------------------------------------
+   Cartão branco com o aviso numa faixa no topo e o iframe ocupando o
+   resto. A altura é fixa porque a página de fora não conta a sua: o
+   iframe rola por dentro quando a pesquisa for mais alta. */
+.cf-pesquisa {
+  width: 100%;
+  max-width: 720px;
+  margin-top: clamp(.35rem, 1.2vw, .75rem);
+  overflow: hidden;
+
+  border: 1px solid var(--tp-line-soft);
+  border-radius: var(--tp-radius);
+  background: var(--tp-white);
+  box-shadow: var(--tp-shadow-md);
+}
+
+.cf-pesquisa__aviso {
+  margin: 0;
+  padding: .95rem clamp(1rem, 3vw, 1.5rem);
+  border-bottom: 1px solid var(--tp-line-soft);
+  background: var(--tp-rose-wash);
+  font-size: clamp(.98rem, 1.6vw, 1.08rem);
+  line-height: 1.5;
+  color: var(--tp-ink);
+  text-align: center;
+}
+.cf-pesquisa__aviso strong { color: var(--tp-rose-deep); font-weight: var(--fw-extrabold); }
+
+.cf-pesquisa__frame { height: clamp(540px, 78vh, 760px); }
+.cf-pesquisa__frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Sem PESQUISA_URL no confirmacao.js: um espaço reservado do tamanho da
+   pesquisa, para o layout já ficar no lugar. */
+.cf-pesquisa__frame.is-pending {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: clamp(.75rem, 2vw, 1rem);
+  height: calc(clamp(540px, 78vh, 760px) - 2 * clamp(.75rem, 2vw, 1rem));
+  border: 2px dashed var(--tp-violet-soft);
+  border-radius: calc(var(--tp-radius) - 6px);
+  font-size: .95rem;
+  color: var(--tp-muted);
+}
+
+/* =========================================================================
+   3b. FAIXA NAVY
+
+   O navy da capa serve de fundo em duas partes da página: a dobra do
+   vídeo e o cartão da dica. É o mesmo azul da .tp-section--offer, mas sem
+   as manchas que derivam por trás dela — aqui a faixa é só fundo, não
+   precisa de movimento.
+
+   Sobre este navy o branco dá 10,9:1, então o texto de apoio pode descer
+   até 88% de opacidade e ainda passar folgado.
+   ========================================================================= */
+.cf-section--azul {
+  background: linear-gradient(135deg, #01468F 0%, #013A80 52%, #012F6B 100%);
+}
+.cf-section--azul .tp-eyebrow { color: rgba(255, 255, 255, .78); }
+.cf-section--azul .tp-title   { color: #fff; }
+.cf-section--azul .tp-lead    { color: rgba(255, 255, 255, .9); }
+.cf-section--azul .tp-lead strong { color: #fff; }
+
+/* =========================================================================
+   4. DOBRA DO DOWNLOAD
+   ========================================================================= */
+
+/* Ícone dentro do rótulo de um botão. Precisa voltar a ser inline: o
+   design-system deixa todo svg em display:block, e em bloco ele quebraria
+   a linha do rótulo. */
+.cf-btn-icon {
+  display: inline-block;
+  vertical-align: -3px;
+  margin-right: .5rem;
+}
+
+/* A frase que leva ao botão. O respiro acima dela é o do .tp-head, que
+   já fecha a distância do título — por isso ela não traz margem própria. */
+.cf-after {
+  max-width: 46ch;
+  margin: 0 auto;
+  font-size: clamp(1.1rem, 2vw, 1.28rem);
+  line-height: 1.68;
+  color: var(--tp-body);
+  text-align: center;
+}
+.cf-after strong { color: var(--tp-ink); font-weight: var(--fw-bold); }
+
+.cf-section--azul .cf-after { color: rgba(255, 255, 255, .9); }
+.cf-section--azul .cf-after strong { color: #fff; }
+
+/* =========================================================================
+   5. PASSOS NUMERADOS
+
+   O .tp-step do taping é um card com imagem em cima e o número flutuando
+   sobre ela. Aqui não há imagem nenhuma, e o número é o próprio conteúdo:
+   card simples, número em disco, texto embaixo.
+   ========================================================================= */
+.cf-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+  max-width: 940px;
+  margin-inline: auto;
+}
+
+.cf-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .85rem;
+  padding: clamp(1.5rem, 3.2vw, 2rem) clamp(1.25rem, 2.6vw, 1.6rem);
+  text-align: center;
+
+  border: 1px solid var(--tp-line-soft);
+  border-radius: var(--tp-radius);
+  background: var(--tp-white);
+  box-shadow: var(--tp-shadow-sm);
+  transition: transform var(--dur-base) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out);
+}
+.cf-step:hover { transform: translateY(-4px); box-shadow: var(--tp-shadow-md); }
+
+/* Navy, não o azul vivo: o branco sobre #0285D3 dá só 3,96:1, e o número
+   é pequeno. Sobre #14528F sobe para 8,0:1. */
+.cf-step__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  background: var(--tp-violet);
+  color: #fff;
+  font-size: .95rem;
+  font-weight: var(--fw-extrabold);
+  letter-spacing: -.01em;
+}
+
+.cf-step__text {
+  margin: 0;
+  font-size: clamp(1.04rem, 1.7vw, 1.16rem);
+  line-height: 1.6;
+  color: var(--tp-body);
+}
+.cf-step__text strong { color: var(--tp-ink); font-weight: var(--fw-extrabold); }
+
+/* =========================================================================
+   6. DICA EXTRA — o aplicativo da Hotmart
+
+   Na página original este cartão é amarelo, a única cor quente da página.
+   Aqui ele não precisa gritar: não é um aviso, é uma sugestão depois de a
+   entrega já estar resolvida. Fica no azul claro da paleta, com o fio do
+   topo separando-o do resto.
+   ========================================================================= */
+.cf-tip {
+  max-width: 620px;
+  margin-inline: auto;
+  padding: clamp(1.6rem, 3.6vw, 2.25rem) clamp(1.35rem, 3vw, 2rem);
+  text-align: center;
+
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: var(--tp-radius);
+  background: linear-gradient(135deg, #01468F 0%, #013A80 52%, #012F6B 100%);
+  box-shadow: 0 24px 60px rgba(1, 28, 66, .26);
+}
+/* O design-system deixa todo svg em display:block, então o text-align do
+   cartão não o alcança — quem centraliza é a margem automática. */
+.cf-tip__icon { display: block; color: #7FC4EC; }
+.cf-tip__icon svg { margin-inline: auto; }
+
+.cf-tip__title {
+  margin: .5rem 0 .75rem;
+  font-size: clamp(1.15rem, 2.6vw, 1.5rem);
+  font-weight: var(--fw-extrabold);
+  letter-spacing: -.02em;
+  color: #fff;
+}
+
+.cf-tip__text {
+  max-width: 40ch;
+  margin: 0 auto;
+  font-size: clamp(1.04rem, 1.7vw, 1.16rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, .9);
+}
+.cf-tip__text strong { color: #fff; font-weight: var(--fw-extrabold); }
+
+/* As duas lojas são a mesma ação em dois sistemas: lado a lado, com o mesmo
+   peso, e nenhuma das duas competindo com o botão verde da dobra anterior.
+   Por isso são botões de contorno, não sólidos. */
+.cf-tip__apps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .75rem;
+  margin: clamp(1.15rem, 2.6vw, 1.5rem) 0 0;
+}
+.cf-tip__apps .btn--tp-ghost {
+  flex: 1 1 200px;
+  background: var(--tp-white);
+  border-color: var(--tp-violet-soft);
+  color: var(--tp-violet-deep);
+}
+.cf-tip__apps .btn--tp-ghost:hover,
+.cf-tip__apps .btn--tp-ghost:focus-visible {
+  background: var(--tp-white);
+  border-color: var(--tp-violet);
+  color: var(--tp-violet-deep);
+}
+
+.cf-tip__note {
+  max-width: 42ch;
+  margin: clamp(1.15rem, 2.6vw, 1.4rem) auto 0;
+  font-size: .98rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, .86);
+}
+.cf-tip__note strong { color: #fff; font-weight: var(--fw-extrabold); }
+
+/* =========================================================================
+   7. SUPORTE
+
+   Cartão claro sobre a faixa navy, como na página original. O botão aqui é
+   o mesmo verde do resto — o WhatsApp tem verde próprio, mas usá-lo faria
+   a página ter dois verdes diferentes na mesma rolagem.
+   ========================================================================= */
+.cf-support {
+  max-width: 640px;
+  margin-inline: auto;
+  padding: clamp(1.85rem, 4vw, 2.85rem) clamp(1.35rem, 3.4vw, 2.25rem);
+  text-align: center;
+
+  border-radius: clamp(20px, 3vw, 28px);
+  background: var(--tp-white);
+  box-shadow: 0 30px 80px rgba(1, 28, 66, .42);
+}
+.cf-support__icon { display: block; color: var(--tp-rose); }
+.cf-support__icon svg { margin-inline: auto; }
+
+.cf-support__title {
+  margin: .6rem 0 .75rem;
+  font-size: clamp(1.35rem, 3.2vw, 2rem);
+  font-weight: var(--fw-extrabold);
+  line-height: 1.18;
+  letter-spacing: -.025em;
+  color: var(--tp-ink);
+  text-wrap: balance;
+}
+
+.cf-support__text {
+  max-width: 44ch;
+  margin: 0 auto;
+  font-size: clamp(1.04rem, 1.7vw, 1.16rem);
+  line-height: 1.65;
+  color: var(--tp-body);
+}
+
+.cf-support .tp-cta { margin-top: clamp(1.35rem, 3vw, 1.85rem); width: 100%; }
+.cf-support .btn--tp { width: 100%; }
+
+.cf-support__or {
+  margin: clamp(1.1rem, 2.4vw, 1.4rem) 0 0;
+  font-size: .86rem;
+  line-height: 1.5;
+  color: var(--tp-muted);
+}
+
+/* O número escrito por extenso, para quem prefere ligar ou salvar. Vira
+   link tel: no celular e continua legível no desktop. */
+.cf-support__phone {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  margin-top: .35rem;
+  font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+  font-weight: var(--fw-extrabold);
+  letter-spacing: -.01em;
+  color: var(--tp-rose-deep);
+  text-decoration: none;
+}
+.cf-support__phone:hover,
+.cf-support__phone:focus-visible { color: var(--tp-violet-deep); }
+.cf-support__phone svg { flex: 0 0 auto; }
+
+/* =========================================================================
+   8. BOTÃO SEM DESTINO
+
+   Enquanto EBOOK_URL estiver vazio o botão continua verde, igual ao
+   definitivo — só o cursor muda, porque clicar ainda não leva a lugar
+   nenhum. O aviso, agora, é só no console.
+   ========================================================================= */
+.btn--tp.is-pending { cursor: not-allowed; }
+
+/* =========================================================================
+   8b. BOTÃO SOBRE O NAVY
+
+   Na dobra escura o verde escuro do resto da página quase desaparece: ele
+   e o fundo têm valores parecidos, e o que separa um botão do fundo é o
+   valor, não o matiz. Aqui ele inverte — verde claro com o rótulo escuro.
+
+   As contas, com o rótulo em #04331C:
+     #5AE78F  8,9:1   (ponta clara do degradê)
+     #22C55E  6,2:1   (ponta escura)
+   E o botão inteiro contra o navy fica em 6,3:1, então ele se destaca do
+   fundo tanto quanto o texto se destaca dele.
+
+   Só vale dentro da faixa navy: no cartão branco do suporte um verde claro
+   perderia o contorno contra o fundo.
+   ========================================================================= */
+.cf-section--azul .btn--tp {
+  background: linear-gradient(135deg, #5AE78F 0%, #35D177 48%, #22C55E 100%);
+  color: #04331C;
+  box-shadow: 0 12px 30px rgba(3, 40, 20, .34), inset 0 1px 0 rgba(255, 255, 255, .35);
+}
+.cf-section--azul .btn--tp:hover,
+.cf-section--azul .btn--tp:focus-visible {
+  background: linear-gradient(135deg, #6BF09C 0%, #3ADB80 100%);
+  color: #04331C;
+  box-shadow: 0 18px 42px rgba(3, 40, 20, .42), inset 0 1px 0 rgba(255, 255, 255, .35);
+}
+.cf-section--azul .btn--tp:focus-visible { outline-color: #5AE78F; }
+
+/* =========================================================================
+   9. PULSO DO BOTÃO DE DOWNLOAD
+
+   É o único botão da página que resolve o motivo da visita, e ele está
+   sobre o navy, no meio de uma dobra sem mais nada competindo. O pulso é
+   de escala pequena (3,5%) mais um anel que se abre e some: chama o olho
+   sem virar um botão que treme.
+
+   O .btn--tp do taping declara animation: none — esta camada carrega
+   depois, então a regra abaixo ganha.
+   ========================================================================= */
+.btn--tp.cf-pulso {
+  animation: cfPulso 2.4s var(--ease-in-out, cubic-bezier(.4, 0, .2, 1)) infinite;
+}
+
+/* No hover o botão tem o seu próprio transform (sobe um pouco). Uma
+   animação infinita no mesmo transform ganharia dele e o hover ficaria
+   morto — por isso o pulso sai de cena enquanto o ponteiro está em cima. */
+.btn--tp.cf-pulso:hover,
+.btn--tp.cf-pulso:focus-visible { animation: none; }
+
+/* Dentro da faixa navy o anel do pulso é o verde claro do próprio botão —
+   o verde escuro sumiria no fundo. */
+.cf-section--azul .btn--tp.cf-pulso {
+  animation-name: cfPulsoClaro;
+}
+
+@keyframes cfPulsoClaro {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 12px 30px rgba(3, 40, 20, .34),
+                0 0 0 0 rgba(90, 231, 143, .55),
+                inset 0 1px 0 rgba(255, 255, 255, .35);
+  }
+  50% {
+    transform: scale(1.035);
+    box-shadow: 0 16px 38px rgba(3, 40, 20, .42),
+                0 0 0 12px rgba(90, 231, 143, 0),
+                inset 0 1px 0 rgba(255, 255, 255, .35);
+  }
+}
+
+@keyframes cfPulso {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 12px 30px rgba(13, 110, 60, .28),
+                0 0 0 0 rgba(18, 133, 74, .5),
+                inset 0 1px 0 rgba(255, 255, 255, .22);
+  }
+  50% {
+    transform: scale(1.035);
+    box-shadow: 0 16px 38px rgba(13, 110, 60, .36),
+                0 0 0 12px rgba(18, 133, 74, 0),
+                inset 0 1px 0 rgba(255, 255, 255, .22);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn--tp.cf-pulso { animation: none; }
+}
