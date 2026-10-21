@@ -410,6 +410,29 @@ select.cf-campo {
 }
 
 /* =========================================================================
+   3b. FAIXA AZUL
+
+   O navy da capa como fundo da dobra do e-mail, logo depois da pesquisa:
+   é o mesmo azul da .tp-section--offer, mas sem as manchas que derivam por
+   trás dela — aqui a faixa é só fundo. Os cartões dos passos continuam
+   brancos por cima.
+
+   Sobre este navy o branco dá 10,9:1. O destaque do título passa para o
+   azul-claro da capa (#7FC4EC, 7,6:1), com a faixa de marca-texto em
+   branco translúcido: o azul-escuro do resto da página sumiria no fundo.
+   ========================================================================= */
+.cf-section--azul {
+  background: linear-gradient(135deg, #01468F 0%, #013A80 52%, #012F6B 100%);
+}
+.cf-section--azul .tp-eyebrow { color: rgba(255, 255, 255, .78); }
+.cf-section--azul .tp-title   { color: #FFFFFF; }
+.cf-section--azul .tp-hl {
+  color: #7FC4EC;
+  background-image: linear-gradient(180deg, transparent 62%, rgba(255, 255, 255, .14) 62%);
+}
+.cf-section--azul .cf-step { border-color: transparent; box-shadow: 0 14px 34px rgba(0, 18, 48, .32); }
+
+/* =========================================================================
    4. ÍCONE NOS BOTÕES
 
    A dobra própria do download saiu em 21/10/2026: o botão de baixar
