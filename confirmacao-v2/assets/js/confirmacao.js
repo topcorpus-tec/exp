@@ -4,10 +4,12 @@
    Página de obrigado do Manual Ilustrado. Não há checkout aqui: a compra
    já aconteceu. O que roda:
 
-     - pesquisa embutida            (um lugar só para trocar a URL)
      - link de download do e-book   (um lugar só para trocar a URL)
      - entrada com desfoque         ([data-reveal])
      - sanfona do FAQ               (uma pergunta aberta por vez)
+
+   A pesquisa da primeira dobra é o embed do Tally, que traz o próprio
+   script no HTML; nada dela passa por aqui.
 
    Atenção: no taping o observer do [data-reveal] mora no form-handler.js,
    que esta página não carrega. Sem ele o CSS deixaria tudo em opacity:0 —
@@ -66,64 +68,6 @@
         "botão de download não leva a lugar nenhum."
       );
     }
-  }
-
-  /* =======================================================================
-     PESQUISA
-
-     A pesquisa da primeira dobra é uma página de fora, embutida num
-     iframe. O endereço mora aqui pelo mesmo motivo do EBOOK_URL: um lugar
-     só para trocar.
-
-     Vazio, a caixa mostra um espaço reservado no lugar da pesquisa e o
-     console avisa — a página não quebra, mas também não pergunta nada.
-     ======================================================================= */
-  // Com a barra no fim: sem ela a Inlead responde com um redirecionamento
-  // antes de abrir, e o iframe demora um passo a mais.
-  var PESQUISA_URL = "https://inlead.digital/teste-do-toque-seguro/";
-
-  function initPesquisa() {
-    var caixa = document.querySelector("[data-pesquisa]");
-    if (!caixa) return;
-
-    if (!PESQUISA_URL) {
-      caixa.classList.add("is-pending");
-      caixa.textContent = "A pesquisa entra aqui.";
-      if (window.console && console.warn) {
-        console.warn(
-          "[confirmacao] PESQUISA_URL está vazia em assets/js/confirmacao.js: " +
-          "a caixa da pesquisa fica sem pesquisa."
-        );
-      }
-      return;
-    }
-
-    var frame = document.createElement("iframe");
-    frame.src = PESQUISA_URL;
-    frame.title = "Pesquisa sobre o seu Manual";
-    // Está na primeira dobra: carregar sob demanda só atrasaria o que a
-    // pessoa já está vendo.
-    frame.loading = "eager";
-    frame.setAttribute("allow", "clipboard-write");
-    caixa.appendChild(frame);
-  }
-
-  /* =======================================================================
-     FORMULÁRIO DA PESQUISA (protótipo visual)
-
-     A pesquisa do Tally refeita como formulário na página. Ainda não grava
-     as respostas: o navegador confere os campos obrigatórios (required no
-     HTML) e, com tudo preenchido, o botão abre o download, como o botão
-     que ficava abaixo da pesquisa.
-     ======================================================================= */
-  function initFormulario() {
-    var form = document.querySelector("[data-form-pesquisa]");
-    if (!form) return;
-
-    form.addEventListener("submit", function (ev) {
-      ev.preventDefault();
-      if (EBOOK_URL) window.open(EBOOK_URL, "_blank", "noopener");
-    });
   }
 
   /* =======================================================================
@@ -343,8 +287,6 @@
      ======================================================================= */
   function boot() {
     initConfete();
-    initPesquisa();
-    initFormulario();
     initDownload();
     initReveal();
     initFaq();

@@ -290,9 +290,8 @@
 }
 
 /* ---- Caixa da pesquisa --------------------------------------------------
-   Cartão branco com o aviso numa faixa no topo e o iframe ocupando o
-   resto. A altura é fixa porque a página de fora não conta a sua: o
-   iframe rola por dentro quando a pesquisa for mais alta. */
+   Cartão branco com o aviso numa faixa no topo e a pesquisa do Tally
+   embaixo. */
 .cf-pesquisa {
   width: 100%;
   max-width: 720px;
@@ -317,97 +316,9 @@
 }
 .cf-pesquisa__aviso strong { color: var(--tp-rose-deep); font-weight: var(--fw-extrabold); }
 
-.cf-pesquisa__frame { height: clamp(540px, 78vh, 760px); }
-.cf-pesquisa__frame iframe {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-
-/* ---- A pesquisa como formulário (protótipo visual) ----------------------
-   No formato do print de referência: a chamada "Importante" como título da
-   caixa, sem a faixa azul; os campos em duas colunas, com a pergunta como
-   texto de dentro de cada um e contorno escuro; o botão de baixar no pé,
-   da largura da grade. No celular, uma coluna só. */
-.cf-form { padding: clamp(1.1rem, 3vw, 1.75rem); }
-.cf-form .cf-pesquisa__aviso {
-  padding: 0 0 clamp(1rem, 2.4vw, 1.25rem);
-  border-bottom: 0;
-  background: none;
-  font-size: clamp(1.05rem, 1.9vw, 1.2rem);
-  text-wrap: balance;
-}
-.cf-form .cf-pesquisa__aviso strong { color: var(--tp-ink); }
-
-.cf-form__grade {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: .75rem;
-}
-@media (max-width: 599px) {
-  .cf-form__grade { grid-template-columns: minmax(0, 1fr); }
-  /* As perguntas mais longas cabiam por pouco: a letra desce um tico e a
-     seta ocupa menos, para elas não cortarem em reticências. */
-  .cf-form { padding-inline: .85rem; }
-  .cf-campo { padding-inline: .9rem; font-size: .95rem; }
-  select.cf-campo { padding-right: 2.1rem; background-position: right .8rem center; }
-}
-
-.cf-campo {
-  width: 100%;
-  min-width: 0;
-  height: 48px;
-  margin: 0;
-  padding: 0 1rem;
-  border: 1.5px solid var(--tp-ink);
-  border-radius: 12px;
-  background: #FFFFFF;
-  font: inherit;
-  font-size: 1rem;
-  color: var(--tp-ink);
-}
-.cf-campo::placeholder { color: var(--tp-muted); opacity: 1; }
-.cf-campo:focus {
-  outline: none;
-  border-color: var(--tp-rose);
-  box-shadow: 0 0 0 3px rgba(2, 133, 211, .18);
-}
-/* A seta do select é a do print, um triângulo cheio. A pergunta longa
-   corta com reticências em vez de passar por baixo da seta. */
-select.cf-campo {
-  -webkit-appearance: none;
-          appearance: none;
-  padding-right: 2.4rem;
-  background: #FFFFFF url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 7'%3E%3Cpath d='M0 0h12L6 7z' fill='%230B2545'/%3E%3C/svg%3E") no-repeat right .95rem center / 11px 7px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  cursor: pointer;
-}
-.cf-campo--largo,
-.cf-form__enviar { grid-column: 1 / -1; }
-
-.cf-form__enviar {
-  width: 100%;
-  margin-top: .4rem;
-  border: 0;
-  cursor: pointer;
-}
-
-/* Sem PESQUISA_URL no confirmacao.js: um espaço reservado do tamanho da
-   pesquisa, para o layout já ficar no lugar. */
-.cf-pesquisa__frame.is-pending {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: clamp(.75rem, 2vw, 1rem);
-  height: calc(clamp(540px, 78vh, 760px) - 2 * clamp(.75rem, 2vw, 1rem));
-  border: 2px dashed var(--tp-violet-soft);
-  border-radius: calc(var(--tp-radius) - 6px);
-  font-size: .95rem;
-  color: var(--tp-muted);
-}
+/* O embed do Tally ajusta a própria altura; aqui só o respiro em volta. */
+.cf-pesquisa__tally { padding: clamp(.75rem, 2.4vw, 1.25rem) clamp(.75rem, 2.4vw, 1.5rem) 0; }
+.cf-pesquisa__tally iframe { display: block; width: 100%; border: 0; }
 
 /* =========================================================================
    3b. FAIXA AZUL
@@ -436,7 +347,7 @@ select.cf-campo {
    4. ÍCONE NOS BOTÕES
 
    A dobra própria do download saiu em 21/10/2026: o botão de baixar
-   ficou só no pé do formulário da pesquisa.
+   ficou só logo abaixo da pesquisa, na primeira dobra.
    ========================================================================= */
 
 /* Ícone dentro do rótulo de um botão. Precisa voltar a ser inline: o
@@ -654,8 +565,8 @@ select.cf-campo {
 /* =========================================================================
    9. PULSO DO BOTÃO DE DOWNLOAD
 
-   É o único botão da página que resolve o motivo da visita, e ele fecha
-   o formulário da pesquisa, na primeira dobra. O pulso é
+   É o único botão da página que resolve o motivo da visita, e ele fica
+   logo abaixo da pesquisa, na primeira dobra. O pulso é
    de escala pequena (3,5%) mais um anel que se abre e some: chama o olho
    sem virar um botão que treme.
 

@@ -112,122 +112,30 @@
           </p>
         </div>
 
-        <!-- PROTÓTIPO VISUAL, 21/10/2026: a pesquisa de onboarding do Tally
-             (taly.topcorpus.com.br/manualilustrado) refeita como formulário na
-             própria página, no formato de um print de referência: campos lado
-             a lado, as perguntas como texto de dentro de cada campo e o botão
-             de baixar no pé. Mais curta que a do Tally: ficam o nome, o e-mail,
-             o CPF e as dez perguntas de escolha; as seis abertas e a escala de
-             0 a 10 saíram. Opções iguais às do Tally.
-
-             AINDA NÃO GRAVA AS RESPOSTAS EM LUGAR NENHUM. O botão só confere
-             se tudo foi preenchido e abre o download (confirmacao.js). Este
-             bloco substitui o quiz da Inlead que o confirmacao.js montava no
-             [data-pesquisa]. -->
-        <form class="cf-pesquisa cf-form" data-form-pesquisa>
+        <!-- A pesquisa de onboarding do Tally (formulário rjeMVN), embutida
+             como o Tally entrega: o iframe nasce com data-tally-src e o
+             widget deles (embed.js) preenche o src e ajusta a altura ao
+             conteúdo (dynamicHeight=1), então a caixa não precisa de altura
+             fixa. Fundo transparente: aparece o branco do cartão. Entrou em
+             22/10/2026 no lugar do formulário provisório feito na página. -->
+        <div class="cf-pesquisa">
           <p class="cf-pesquisa__aviso">
             <strong>Importante:</strong> Responda todas as perguntas e tenha acesso ao seu Manual
           </p>
-          <div class="cf-form__grade">
-            <input class="cf-campo" type="text" name="nome" placeholder="Nome completo" aria-label="Nome completo" autocomplete="name" required />
-            <input class="cf-campo" type="email" name="email" placeholder="E-mail (o mesmo da Hotmart)" aria-label="E-mail, o mesmo cadastrado na Hotmart" autocomplete="email" required />
-            <input class="cf-campo" type="text" name="cpf" placeholder="CPF (só números)" aria-label="CPF, só números" inputmode="numeric" maxlength="11" pattern="[0-9]{11}" required />
-            <select class="cf-campo" name="idade" aria-label="Quantos anos você tem?" required>
-              <option value="" disabled selected hidden>Quantos anos você tem?</option>
-              <option>De 18 a 24 anos.</option>
-              <option>De 25 a 34 anos.</option>
-              <option>De 35 a 44 anos.</option>
-              <option>De 45 a 54 anos.</option>
-              <option>De 55 a 64 anos.</option>
-              <option>65 anos ou mais.</option>
-            </select>
-            <select class="cf-campo" name="escolaridade" aria-label="Qual a sua escolaridade?" required>
-              <option value="" disabled selected hidden>Qual a sua escolaridade?</option>
-              <option>Ensino Fundamental.</option>
-              <option>Ensino Médio.</option>
-              <option>Ensino Superior.</option>
-              <option>Pós-graduação ou Especialização.</option>
-            </select>
-            <select class="cf-campo" name="area" aria-label="Em qual área você trabalha?" required>
-              <option value="" disabled selected hidden>Em qual área você trabalha?</option>
-              <option>Massoterapeuta</option>
-              <option>Área da beleza (esteticista, manicure, cabeleireira, depiladora, designer de sobrancelha, maquiadora, etc.)</option>
-              <option>Área da saúde (psicóloga, fisioterapeuta, nutricionista, enfermeira, técnica de enfermagem, cuidadora, professora de pilates, farmacêutica, personal trainer, técnica em radiologia, etc.)</option>
-              <option>Área de educação (professora, pedagoga, assistente escolar, supervisora, coordenadora, secretária, etc.)</option>
-              <option>Área de terapia (terapia holística, terapia integrativa, reikiana, etc.)</option>
-              <option>Área de comércio (vendedora, atendente, recepcionista, balconista, operadora de caixa, secretária, gerente de loja, corretora de imóveis, etc.)</option>
-              <option>Área de serviços (operadora de telemarketing, auxiliar de serviços gerais, faxineira, empregada doméstica, diarista, babá, costureira, bordadeira, etc.)</option>
-              <option>Área de alimentação (confeiteira, cozinheira, ajudante de cozinha, garçonete, etc.)</option>
-              <option>Área administrativa (assistente administrativo, engenharia, financeiro, logística, indústria, contabilidade, RH, etc.)</option>
-              <option>Estudante</option>
-              <option>Aposentada/Pensionista</option>
-              <option>Dona de casa</option>
-              <option>Desempregada</option>
-              <option>Outra</option>
-            </select>
-            <select class="cf-campo" name="renda" aria-label="Qual a sua renda familiar mensal?" required>
-              <option value="" disabled selected hidden>Qual a sua renda familiar?</option>
-              <option>Nenhuma renda.</option>
-              <option>Até 1 salário mínimo (até R$ 1.400,00).</option>
-              <option>De 1 a 3 salários mínimos (de R$ 1.400,01 até R$ 4.200,00)</option>
-              <option>De 3 a 6 salários mínimos (de R$ 4.200,01 até R$ 8.400,00).</option>
-              <option>De 6 a 9 salários mínimos (de R$ 8.400,01 até R$ 12.600,00).</option>
-              <option>Mais de 9 salários mínimos (mais de R$ 12.600,01).</option>
-            </select>
-            <select class="cf-campo" name="situacao" aria-label="Como está a sua situação financeira nos últimos meses?" required>
-              <option value="" disabled selected hidden>Sua situação financeira mudou?</option>
-              <option>Piorou.</option>
-              <option>Não mudou.</option>
-              <option>Melhorou.</option>
-            </select>
-            <select class="cf-campo" name="origem" aria-label="Como você me conheceu?" required>
-              <option value="" disabled selected hidden>Como você me conheceu?</option>
-              <option>Instagram: vi uma publicação sua, um vídeo ou conheci o seu perfil.</option>
-              <option>YouTube: estava assistindo a vídeos sobre massagem e encontrei você.</option>
-              <option>TikTok: vi um dos seus vídeos e fiquei curiosa para conhecer melhor o seu trabalho.</option>
-              <option>Facebook: vi uma publicação sua ou um anúncio.</option>
-              <option>Indicação: uma amiga, aluna ou conhecida me falou de você.</option>
-              <option>Google: estava pesquisando sobre massagem ou cursos e encontrei você.</option>
-              <option>LinkedIn: conheci você por lá ou vi algum conteúdo seu.</option>
-            </select>
-            <select class="cf-campo" name="tempo" aria-label="Há quanto tempo você me conhece?" required>
-              <option value="" disabled selected hidden>Há quanto tempo me conhece?</option>
-              <option>Acabei de conhecer (menos de 1 mês)</option>
-              <option>Mais ou menos 2 meses.</option>
-              <option>Mais ou menos 6 meses.</option>
-              <option>Há pelo menos 1 ano.</option>
-            </select>
-            <select class="cf-campo" name="objetivo" aria-label="Qual o seu objetivo com o Manual?" required>
-              <option value="" disabled selected hidden>Qual o seu objetivo?</option>
-              <option>Quero ter uma profissão e trabalhar com massagem.</option>
-              <option>Quero mudar de carreira/trabalho e trabalhar só com massagem</option>
-              <option>Quero me atualizar profissionalmente</option>
-              <option>Quero aprender para fazer massagem em alguém que conheço.</option>
-              <option>Quero ter uma renda extra trabalhando com massagem.</option>
-              <option>Comprei porque achei legal e barato</option>
-              <option>Não sei bem porquê comprei esse Manual Ilustrado.</option>
-              <option>Outro</option>
-            </select>
-            <select class="cf-campo" name="ja_fez" aria-label="Você já fez massagem em alguém?" required>
-              <option value="" disabled selected hidden>Já fez massagem em alguém?</option>
-              <option>Sim</option>
-              <option>Não</option>
-            </select>
-            <select class="cf-campo cf-campo--largo" name="conhecimento" aria-label="Quanto você conhece sobre massagem?" required>
-              <option value="" disabled selected hidden>Quanto conhece de massagem?</option>
-              <option>Não sei nada sobre o assunto, nem nunca fiz uma massagem.</option>
-              <option>Sei um pouco, mas não trabalho com isso.</option>
-              <option>Já fiz cursos de massagem, mas ainda não atendo profissionalmente (não recebo pela sessão).</option>
-              <option>Já sou massoterapeuta e estou atendendo profissionalmente, aceitando pela sessão</option>
-            </select>
-            <button class="btn btn--tp cf-pulso cf-form__enviar" type="submit">
-              <span>
-                <svg class="cf-btn-icon" width="17" height="17" aria-hidden="true"><use href="#i-download" /></svg>
-                Baixar o meu Manual
-              </span>
-            </button>
+          <div class="cf-pesquisa__tally">
+            <iframe data-tally-src="https://tally.so/embed/rjeMVN?alignLeft=1&amp;hideTitle=1&amp;transparentBackground=1&amp;dynamicHeight=1" loading="lazy" width="100%" height="579" frameborder="0" marginheight="0" marginwidth="0" title="[EXP] Pesquisa Onboarding - MANUAL ILUSTRADO PARA ALÍVIO DA DOR COM MASSAGEM"></iframe>
+            <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))};if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
           </div>
-        </form>
+        </div>
+
+        <div class="tp-cta">
+          <a class="btn btn--tp cf-pulso" href="#" data-ebook>
+            <span>
+              <svg class="cf-btn-icon" width="17" height="17" aria-hidden="true"><use href="#i-download" /></svg>
+              Baixar o meu Manual
+            </span>
+          </a>
+        </div>
 
       </div>
     </section>
