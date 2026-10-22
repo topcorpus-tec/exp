@@ -415,6 +415,28 @@
   color: #FFFFFF;
 }
 
+/* ---- No celular, o botão na primeira tela ----
+   Com o logo e a manchete no tamanho do desktop, o botão da pesquisa só
+   aparecia depois de rolar. Aqui o topo inteiro encolhe — logo, selo,
+   barra (com a frase ao lado, não embaixo), manchete e os espaços entre
+   eles — e o cartão aperta as letras, para o botão abrir já visível
+   num celular comum. */
+@media (max-width: 599px) {
+  .cf-v3 .cf-hero__inner { gap: .6rem; padding-top: .7rem; }
+  .cf-v3 .cf-logo { width: 96px; }
+  .cf-v3 .cf-badge { padding: .45em 1em; font-size: .74rem; }
+  .cf-v3 .cf-progresso { flex-wrap: nowrap; gap: .55rem; }
+  .cf-v3 .cf-progresso__trilho { flex: 1 1 auto; height: 11px; }
+  .cf-v3 .cf-progresso__num { font-size: .68rem; letter-spacing: .03em; }
+  .cf-v3 .tp-hero__headline { font-size: 1.4rem; }
+  .cf-v3 .tp-hero__sub { margin-top: .35rem; font-size: .92rem; line-height: 1.5; }
+
+  .cf-convite { gap: .55rem; margin-top: .2rem; padding: 1.1rem 1rem 1.25rem; }
+  .cf-convite__titulo { font-size: 1.12rem; }
+  .cf-convite__texto { font-size: .92rem; line-height: 1.5; }
+  .cf-convite .tp-cta { margin-top: .3rem; }
+}
+
 /* ---- Rodapé secundário, em letra menor ---- */
 .cf-secundario {
   display: grid;
