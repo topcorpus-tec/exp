@@ -9,7 +9,8 @@
      - sanfona do FAQ               (uma pergunta aberta por vez)
 
    A pesquisa da primeira dobra é o embed do Tally, que traz o próprio
-   script no HTML; nada dela passa por aqui.
+   script no HTML. Daqui só se ouve o aviso de envio dela, que libera o
+   botão de baixar.
 
    Atenção: no taping o observer do [data-reveal] mora no form-handler.js,
    que esta página não carrega. Sem ele o CSS deixaria tudo em opacity:0 —
@@ -68,6 +69,54 @@
         "botão de download não leva a lugar nenhum."
       );
     }
+  }
+
+  /* =======================================================================
+     BOTÃO DE DOWNLOAD SÓ DEPOIS DA PESQUISA
+
+     A pesquisa do Tally roda num iframe e, quando a pessoa envia, avisa a
+     página por postMessage com o evento "Tally.FormSubmitted" (é o jeito
+     que o Tally documenta para ouvir envios de um embed). Só então o
+     botão de baixar aparece, e a página rola até ele.
+
+     O envio fica guardado no navegador: quem já respondeu e volta depois
+     (ou recarrega a página) encontra o botão direto, sem precisar
+     responder de novo. Se o navegador bloquear o armazenamento, só se
+     perde essa lembrança — o botão continua aparecendo após o envio.
+     ======================================================================= */
+  var ORIGEM_TALLY = "https://tally.so";
+  var CHAVE_PESQUISA = "cf-v2-pesquisa-enviada";
+
+  function initLiberaDownload() {
+    var caixa = document.querySelector("[data-libera-download]");
+    if (!caixa) return;
+
+    function libera(rolar) {
+      if (!caixa.hidden) return;
+      caixa.hidden = false;
+      if (rolar) {
+        var calmo = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+        caixa.scrollIntoView({ behavior: calmo ? "auto" : "smooth", block: "center" });
+      }
+    }
+
+    try {
+      if (localStorage.getItem(CHAVE_PESQUISA) === "1") libera(false);
+    } catch (e) { /* armazenamento bloqueado: segue sem lembrar */ }
+
+    window.addEventListener("message", function (ev) {
+      if (ev.origin !== ORIGEM_TALLY) return;
+
+      var dados = ev.data;
+      if (typeof dados === "string") {
+        if (dados.indexOf("Tally.FormSubmitted") === -1) return;
+        try { dados = JSON.parse(dados); } catch (e) { return; }
+      }
+      if (!dados || dados.event !== "Tally.FormSubmitted") return;
+
+      try { localStorage.setItem(CHAVE_PESQUISA, "1"); } catch (e) { /* idem */ }
+      libera(true);
+    });
   }
 
   /* =======================================================================
@@ -288,6 +337,7 @@
   function boot() {
     initConfete();
     initDownload();
+    initLiberaDownload();
     initReveal();
     initFaq();
   }

@@ -246,6 +246,10 @@
    precisa da largura da caixa, já que o .cf-hero__inner centraliza e
    encolheria ele até o tamanho do botão. */
 .cf-pesq .tp-cta { width: 100%; max-width: 720px; }
+/* O botão de baixar fica escondido até a pesquisa ser enviada. O
+   [hidden] precisa ser reforçado: o .tp-cta declara display:flex, que
+   ganharia do display:none do navegador. */
+.cf-pesq .tp-cta[hidden] { display: none; }
 @media (min-width: 900px) {
   .cf-pesq .tp-cta { align-items: center; }
 }
