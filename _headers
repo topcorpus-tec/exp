@@ -78,3 +78,8 @@
 # dos buscadores pelo mesmo motivo: também é pós-compra.
 /confirmacao-v2/*
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+
+# A confirmacao-v3 nasceu em 21/10/2026, com a pesquisa como ação principal.
+# Fora dos buscadores pelo mesmo motivo: também é pós-compra.
+/confirmacao-v3/*
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
