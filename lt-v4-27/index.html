@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#FAF8F2" />
+  <meta name="theme-color" content="#FBFDFF" />
   <meta name="description" content="Antes do próximo remédio, experimente usar as mãos: mais de 70 massagens ilustradas que mostram onde tocar, como tocar e qual pressão usar em cada região do corpo. Por Ana Martha, fisioterapeuta e fundadora do TopCorpus." />
 
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
@@ -21,14 +21,11 @@
   <title>Manual Ilustrado para Alívio da Dor com Massagem</title>
 
   <!-- ==================== Fontes ====================
-       Manrope vem do CDN do TopCorpus, como nas outras versões. A Fraunces
-       (títulos) é a novidade da v4 e mora na própria pasta: é a única
-       página que a usa, e assim ela não depende do Google para carregar. -->
+       Manrope, do CDN do TopCorpus, como na v1: é a única família da página. -->
   <link rel="preconnect" href="https://pcm.topcorpus.com.br" crossorigin />
   <link rel="dns-prefetch" href="https://pcm.topcorpus.com.br" />
   <link rel="preload" as="font" type="font/woff2" href="https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-400.woff2" crossorigin />
   <link rel="preload" as="font" type="font/woff2" href="https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-800.woff2" crossorigin />
-  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-latin.woff2" crossorigin />
 
   <!-- ==================== dataLayer init ANTES do env-config ==================== -->
   <script>window.dataLayer = window.dataLayer || [];</script>
@@ -38,8 +35,9 @@
   <script src="assets/js/gtm-loader.js"></script>
 
   <!-- ==================== CSS ====================
-       Um arquivo só. A v4 tem identidade própria (verde e mel sobre creme,
-       Fraunces nos títulos), então não herda o design-system, o taping nem
+       Um arquivo só. A v4 usa as cores e a letra da v1 (navy e azul da
+       capa, botão verde, Manrope), mas com componentes próprios, então não
+       herda o design-system, o taping nem
        o manual.css das versões anteriores: todo o visual está no v4.css. -->
   <link rel="stylesheet" href="assets/css/v4.css" />
 
@@ -72,9 +70,9 @@
   <main>
 
     <!-- ==================== DOBRA 1 — HERO ====================
-         No celular a ordem é a do doc: título, a frase das massagens, o
-         Manual, o botão e os dois ✅. No desktop o Manual vai para a
-         coluna da direita.
+         Uma coluna centralizada, como a hero da v1, em qualquer tela, na
+         ordem do doc: título, a frase das massagens, o Manual, o botão e os
+         dois ✅.
 
          O "mockup do manual com foto da Ana Martha" é o mesmo da hero da
          v1: o Manual ao centro, com a Ana na capa, cercado pelos bônus e
@@ -86,8 +84,6 @@
       <div class="v4-wrap v4-hero__grade">
 
         <div class="v4-hero__copy">
-          <p class="v4-selo">Manual Ilustrado para Alívio da Dor com Massagem</p>
-
           <h1 class="v4-hero__titulo" id="hero-title">
             Antes do próximo remédio, <em>experimente usar as mãos</em>
           </h1>
@@ -131,9 +127,11 @@
          por isso cada item leva a sua coluna e a sua linha da grade
          (--col, --lin).
 
-         No celular, onde o texto ao lado da figura ficaria pequeno demais
-         (o doc pede atenção a isso), a ligação é pelo número: o ponto e o
-         item têm o mesmo, e a lista vem embaixo na ordem do doc. -->
+         No celular os títulos ficam em cima da figura, cada um ao lado do
+         seu ponto (a posição da etiqueta vai em --ex e --ey, e data-lado diz
+         para que lado do ponto ela cresce). O texto de cada dor fica fechado,
+         para não cobrir o corpo: um toque no título ou no ponto abre o texto
+         daquela dor e fecha o das outras. -->
     <section class="v4-sec v4-sec--areia" aria-labelledby="dores-title">
       <div class="v4-wrap">
         <h2 class="v4-titulo v4-titulo--centro" id="dores-title">
@@ -159,50 +157,41 @@
           </figure>
 
           <ol class="v4-dores" role="list">
-            <li class="v4-dor v4-dor--esq" data-dor="1" style="--col:1; --lin:3">
-              <span class="v4-dor__n" aria-hidden="true">1</span>
-              <h3 class="v4-dor__titulo">Lombar travada</h3>
-              <p>Levanta da cadeira e já reclama. No fim do dia não aguenta mais de tanta dor.</p>
+            <li class="v4-dor v4-dor--esq" data-dor="1" data-lado="esq" style="--col:1; --lin:3; --ex:46.4%; --ey:39.2%">
+              <h3 class="v4-dor__titulo"><button class="v4-dor__btn" type="button" aria-expanded="false" aria-controls="dor-1">Lombar travada</button></h3>
+              <p id="dor-1">Levanta da cadeira e já reclama. No fim do dia não aguenta mais de tanta dor.</p>
             </li>
-            <li class="v4-dor" data-dor="2" style="--col:3; --lin:1">
-              <span class="v4-dor__n" aria-hidden="true">2</span>
-              <h3 class="v4-dor__titulo">Pescoço duro que vira dor de cabeça</h3>
-              <p>A nuca endurece, a tensão sobe até as têmporas.</p>
+            <li class="v4-dor" data-dor="2" data-lado="dir" style="--col:3; --lin:1; --ex:59.4%; --ey:8.7%">
+              <h3 class="v4-dor__titulo"><button class="v4-dor__btn" type="button" aria-expanded="false" aria-controls="dor-2">Pescoço duro que vira dor de cabeça</button></h3>
+              <p id="dor-2">A nuca endurece, a tensão sobe até as têmporas.</p>
             </li>
-            <li class="v4-dor" data-dor="3" style="--col:3; --lin:2">
-              <span class="v4-dor__n" aria-hidden="true">3</span>
-              <h3 class="v4-dor__titulo">Ombros tensos</h3>
-              <p>O estresse do dia acumula e os ombros ficam quase &ldquo;colados&rdquo; na orelha.</p>
+            <li class="v4-dor" data-dor="3" data-lado="dir" style="--col:3; --lin:2; --ex:67.3%; --ey:17.6%">
+              <h3 class="v4-dor__titulo"><button class="v4-dor__btn" type="button" aria-expanded="false" aria-controls="dor-3">Ombros tensos</button></h3>
+              <p id="dor-3">O estresse do dia acumula e os ombros ficam quase &ldquo;colados&rdquo; na orelha.</p>
             </li>
-            <li class="v4-dor v4-dor--esq" data-dor="4" style="--col:1; --lin:2">
-              <span class="v4-dor__n" aria-hidden="true">4</span>
-              <h3 class="v4-dor__titulo">Nó no meio das costas</h3>
-              <p>Aquela dor entre as escápulas, que não vai embora.</p>
+            <li class="v4-dor v4-dor--esq" data-dor="4" data-lado="esq" style="--col:1; --lin:2; --ex:44.5%; --ey:24.5%">
+              <h3 class="v4-dor__titulo"><button class="v4-dor__btn" type="button" aria-expanded="false" aria-controls="dor-4">Nó no meio das costas</button></h3>
+              <p id="dor-4">Aquela dor entre as escápulas, que não vai embora.</p>
             </li>
-            <li class="v4-dor v4-dor--esq" data-dor="5" style="--col:1; --lin:5">
-              <span class="v4-dor__n" aria-hidden="true">5</span>
-              <h3 class="v4-dor__titulo">Dor que desce pela perna</h3>
-              <p>Choque, queimação e formigamento.</p>
+            <li class="v4-dor v4-dor--esq" data-dor="5" data-lado="dir" style="--col:1; --lin:5; --ex:0.6%; --ey:65.0%">
+              <h3 class="v4-dor__titulo"><button class="v4-dor__btn" type="button" aria-expanded="false" aria-controls="dor-5">Dor que desce pela perna</button></h3>
+              <p id="dor-5">Choque, queimação e formigamento.</p>
             </li>
-            <li class="v4-dor" data-dor="6" style="--col:3; --lin:4">
-              <span class="v4-dor__n" aria-hidden="true">6</span>
-              <h3 class="v4-dor__titulo">Glúteo e quadril que doem e se espalham</h3>
-              <p>Um ponto sensível que endurece e espalha o desconforto.</p>
+            <li class="v4-dor" data-dor="6" data-lado="dir" style="--col:3; --lin:4; --ex:63.0%; --ey:47.7%">
+              <h3 class="v4-dor__titulo"><button class="v4-dor__btn" type="button" aria-expanded="false" aria-controls="dor-6">Glúteo e quadril que doem e se espalham</button></h3>
+              <p id="dor-6">Um ponto sensível que endurece e espalha o desconforto.</p>
             </li>
-            <li class="v4-dor" data-dor="7" style="--col:3; --lin:5">
-              <span class="v4-dor__n" aria-hidden="true">7</span>
-              <h3 class="v4-dor__titulo">Pernas pesadas no fim do dia</h3>
-              <p>Depois de horas em pé ou sentado, as pernas pesam e parecem inchadas.</p>
+            <li class="v4-dor" data-dor="7" data-lado="dir" style="--col:3; --lin:5; --ex:66.0%; --ey:76.0%">
+              <h3 class="v4-dor__titulo"><button class="v4-dor__btn" type="button" aria-expanded="false" aria-controls="dor-7">Pernas pesadas no fim do dia</button></h3>
+              <p id="dor-7">Depois de horas em pé ou sentado, as pernas pesam e parecem inchadas.</p>
             </li>
-            <li class="v4-dor v4-dor--esq" data-dor="8" style="--col:1; --lin:1">
-              <span class="v4-dor__n" aria-hidden="true">8</span>
-              <h3 class="v4-dor__titulo">Mandíbula tensa ao acordar</h3>
-              <p>Dura, com dor perto das têmporas.</p>
+            <li class="v4-dor v4-dor--esq" data-dor="8" data-lado="esq" style="--col:1; --lin:1; --ex:36.4%; --ey:9.4%">
+              <h3 class="v4-dor__titulo"><button class="v4-dor__btn" type="button" aria-expanded="false" aria-controls="dor-8">Mandíbula tensa ao acordar</button></h3>
+              <p id="dor-8">Dura, com dor perto das têmporas.</p>
             </li>
-            <li class="v4-dor v4-dor--esq" data-dor="9" style="--col:1; --lin:4">
-              <span class="v4-dor__n" aria-hidden="true">9</span>
-              <h3 class="v4-dor__titulo">Braços e punhos cansados</h3>
-              <p>De tanto digitar e segurar o celular.</p>
+            <li class="v4-dor v4-dor--esq" data-dor="9" data-lado="dir" style="--col:1; --lin:4; --ex:0.6%; --ey:54.5%">
+              <h3 class="v4-dor__titulo"><button class="v4-dor__btn" type="button" aria-expanded="false" aria-controls="dor-9">Braços e punhos cansados</button></h3>
+              <p id="dor-9">De tanto digitar e segurar o celular.</p>
             </li>
           </ol>
 
@@ -369,7 +358,7 @@
     <!-- ==================== /DOBRA 4 ==================== -->
 
     <!-- ==================== DOBRA 5 — O QUE QUASE TODO MUNDO FAZ ==================== -->
-    <section class="v4-sec v4-sec--mata" aria-labelledby="remedio-title">
+    <section class="v4-sec v4-sec--navy" aria-labelledby="remedio-title">
       <div class="v4-wrap v4-estreito v4-remedio">
         <h2 class="v4-titulo" id="remedio-title">Quando a dor aparece, quase todo mundo faz a mesma coisa&hellip;</h2>
 
@@ -465,9 +454,9 @@
     <!-- ==================== /DOBRA 6 ==================== -->
 
     <!-- ==================== DOBRAS 7 E 8 — A HISTÓRIA ====================
-         As duas dobras moram na mesma seção, com o mesmo fundo e um fio
-         que desce de uma para a outra: o doc pede que a 8 continue a 7, sem
-         uma divisão clara entre elas.
+         As duas dobras moram na mesma seção, com o mesmo fundo, e a 8 não
+         tem título: o texto das alunas vem logo depois do botão da 7. O doc
+         pede que a 8 continue a 7, sem uma divisão clara entre elas.
 
          FOTO PENDENTE: a foto da Ana com os pais ainda não chegou. Até lá
          fica o espaço marcado (.v4-foto-falta); quando chegar, trocar o
@@ -528,14 +517,10 @@
           <svg width="20" height="20" aria-hidden="true"><use href="#i-seta" /></svg>
         </a>
 
-        <!-- ===== DOBRA 8 — continua a 7 ===== -->
-        <div class="v4-elo" aria-hidden="true"></div>
-
-        <h2 class="v4-titulo" id="familia-title">
-          Eu comecei pelo meu pai. <em>Muitas alunas começaram pela família</em>
-        </h2>
-
-        <p>
+        <!-- ===== DOBRA 8 — continua a 7 =====
+             Sem título nem divisória: o texto das alunas começa logo depois
+             do botão, como continuação da história. -->
+        <p class="v4-continua">
           Muitas das minhas alunas começaram do mesmo jeito: aliviando a dor de alguém de casa.
           Primeiro o marido, depois a mãe, depois a amiga que ficou sabendo.
         </p>
@@ -572,7 +557,7 @@
          outros botões da página trazem para cá. O manual.js para a rolagem
          com o pé deste cartão dentro da tela, para o preço e o botão
          aparecerem juntos. -->
-    <section class="v4-sec v4-sec--mata v4-oferta" id="oferta" aria-labelledby="oferta-title">
+    <section class="v4-sec v4-sec--navy v4-oferta" id="oferta" aria-labelledby="oferta-title">
       <div class="v4-wrap">
         <h2 class="v4-titulo v4-titulo--centro" id="oferta-title">Veja tudo que você recebe hoje:</h2>
 
@@ -714,6 +699,15 @@
                  width="640" height="906" loading="lazy" decoding="async" />
           </div>
         </div>
+      </div>
+
+      <!-- O último botão antes das perguntas frequentes. Como os outros fora
+           da oferta, ele leva para #oferta. -->
+      <div class="v4-wrap v4-consulta__cta">
+        <a class="v4-btn v4-btn--centro" href="#oferta">
+          <span>Quero o Manual e todos os bônus</span>
+          <svg width="20" height="20" aria-hidden="true"><use href="#i-seta" /></svg>
+        </a>
       </div>
     </section>
     <!-- ==================== /DOBRA 11 ==================== -->

@@ -1,32 +1,21 @@
 /* =========================================================================
    Manual Ilustrado — v4.css (lt-v4)
 
-   A v4 é a Página de Vendas #4, para público frio, e o doc pede um design
-   diferente das outras páginas. A v1 à v3 são azul da capa + Manrope; aqui
-   a identidade é outra:
+   A v4 é a Página de Vendas #4, para público frio. A estrutura e os
+   componentes são dela, mas a identidade visual é a mesma da v1 (pedido
+   de 27/10/2026, depois de uma primeira versão em argila e outra em verde
+   e mel):
 
-     - cor: verde-eucalipto sobre creme e areia, com o verde-mata escuro
-       nas dobras de virada e na oferta, e mel nos botões (como os botões
-       amarelos da referência de oferta do doc). Nada de vermelho nem de
-       terracota: numa página sobre dor, o vermelho lembra a própria dor.
-       A capa do Manual, que é azul, aparece como contraste;
-     - letra: Fraunces nos títulos (serifa macia, a pasta tem o arquivo) e
-       Manrope no texto, a mesma das outras versões.
+     - cor: o navy e o azul vivo da capa do Manual, fundo branco azulado,
+       a faixa navy na oferta e o botão verde. Os valores são os do
+       manual.css da v1;
+     - letra: Manrope em tudo, títulos em 800, e o destaque dos títulos é o
+       sublinhado suave da v1 (.tp-hl), não itálico.
 
    Todos os pares de cor de texto passam de 4,5:1 (WCAG AA). Celular
    primeiro; os saltos são em 600, 900 e 1100px.
    ========================================================================= */
 
-@font-face {
-  font-family: "Fraunces";
-  src: url("../fonts/fraunces-latin.woff2") format("woff2");
-  font-weight: 500 700; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: "Fraunces";
-  src: url("../fonts/fraunces-latin-italic.woff2") format("woff2");
-  font-weight: 500 600; font-style: italic; font-display: swap;
-}
 @font-face {
   font-family: "Manrope";
   src: url("https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-400.woff2") format("woff2");
@@ -44,33 +33,34 @@
 }
 
 :root {
-  --creme:        #FAF8F2;
-  --areia:        #EFEEE4;
-  --areia-forte:  #DEDDCF;
+  --creme:        #FBFDFF;   /* fundo da página (--tp-cream da v1)         */
+  --areia:        #EEF6FE;   /* faixa alternada (--tp-lilac)                */
+  --areia-forte:  #D3E3F2;
   --branco:       #FFFFFF;
 
-  --tinta:        #1F2A24;
-  --tinta-suave:  #4F5C54;
+  --tinta:        #0B2545;   /* --tp-ink                                    */
+  --tinta-suave:  #3C5772;   /* --tp-body, 7,5:1                            */
 
-  --verde:        #2C6A52;   /* texto em destaque: 6:1 no creme */
-  --verde-claro:  #DDEBE2;
-  --cta:          #F2B233;   /* botão mel: a tinta por cima dá 7,9:1 */
-  --cta-escuro:   #E5A11C;
-  --cta-texto:    #1F2A24;
+  --azul:         #0A5C9E;   /* destaque (--tp-rose-deep), 6,6:1 no branco  */
+  --azul-claro:   #E3F1FC;   /* sublinhado do destaque (--tp-rose-wash)     */
+  --azul-vivo:    #0285D3;   /* o "DOR" da capa                             */
+  --cta:          #0D6E3C;   /* botão verde da v1                           */
+  --cta-claro:    #12854A;   /* ponta clara do degradê: 4,69:1 com branco   */
+  --cta-escuro:   #095A30;
+  --cta-texto:    #FFFFFF;
 
-  --mata:         #1E3B32;
-  --mata-texto:   #D3E0D8;
-  --mata-realce:  #F4C766;
+  --navy:         #01337C;   /* o "ALÍVIO DA" da capa                       */
+  --navy-texto:   rgba(255, 255, 255, .88);
+  --navy-realce:  #9BD1F2;
 
-  --salvia:       #3F7058;
-  --salvia-clara: #E1ECE4;
+  --salvia:       #0D6E3C;
+  --salvia-clara: #E2F3E9;
 
-  --serifa: "Fraunces", Georgia, "Times New Roman", serif;
   --sans:   "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
 
   --raio:    18px;
   --raio-sm: 12px;
-  --sombra:  0 1px 2px rgba(31, 42, 36, .06), 0 12px 32px rgba(31, 42, 36, .10);
+  --sombra:  0 1px 2px rgba(11, 37, 69, .06), 0 12px 32px rgba(11, 37, 69, .10);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -99,14 +89,14 @@ h1, h2, h3, p, ul, ol, figure, blockquote { margin: 0; }
    do jeito normal. */
 p, li { text-wrap: pretty; }
 h1, h2, h3, figcaption, summary, blockquote p,
-.v4-selo, .v4-hero__sub, .v4-lead, .v4-chamada, .v4-fecho, .v4-poder,
+.v4-hero__sub, .v4-lead, .v4-chamada, .v4-fecho, .v4-poder,
 .v4-dor p, .v4-fibro p, .v4-oks li, .v4-nota-ok,
 .v4-remedio p, .v4-oferta__card p, .v4-oferta__itens li > span:first-of-type,
 .v4-rodape p { text-wrap: balance; }
 ul, ol { padding: 0; list-style: none; }
 strong { font-weight: 800; }
 
-:focus-visible { outline: 3px solid var(--verde); outline-offset: 3px; border-radius: 6px; }
+:focus-visible { outline: 3px solid var(--azul); outline-offset: 3px; border-radius: 6px; }
 
 /* ==================== Estrutura ==================== */
 
@@ -122,7 +112,7 @@ strong { font-weight: 800; }
 .v4-sec { padding-block: clamp(56px, 9vw, 104px); }
 .v4-sec--areia  { background: var(--areia); }
 .v4-sec--branco { background: var(--branco); }
-.v4-sec--mata  { background: var(--mata); color: var(--mata-texto); }
+.v4-sec--navy  { background: linear-gradient(135deg, #01468F 0%, #013A80 52%, #012F6B 100%); color: var(--navy-texto); }
 
 /* Respiro entre parágrafos seguidos. O :where zera a especificidade, para
    qualquer classe de bloco (preço, citação, balão) mandar na própria margem. */
@@ -131,16 +121,16 @@ strong { font-weight: 800; }
 /* ==================== Títulos ==================== */
 
 .v4-titulo {
-  font-family: var(--serifa);
-  font-weight: 600;
-  font-size: clamp(1.75rem, 1.25rem + 2.2vw, 2.75rem);
-  line-height: 1.12;
-  letter-spacing: -.01em;
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: clamp(1.65rem, 4.1vw, 2.6rem);
+  line-height: 1.16;
+  letter-spacing: -.025em;
   color: var(--tinta);
   text-wrap: balance;
   margin-bottom: clamp(24px, 4vw, 40px);
 }
-.v4-titulo em { font-style: italic; color: var(--verde); }
+.v4-titulo em { font-style: normal; color: var(--azul); background-image: linear-gradient(180deg, transparent 62%, var(--azul-claro) 62%); padding-inline: .06em; }
 .v4-titulo--centro { text-align: center; max-width: 820px; margin-inline: auto; }
 .v4-titulo__linha2 {
   display: block;
@@ -151,8 +141,8 @@ strong { font-weight: 800; }
   letter-spacing: 0;
   color: var(--tinta);
 }
-.v4-sec--mata .v4-titulo { color: var(--creme); }
-.v4-sec--mata .v4-titulo em { color: var(--mata-realce); }
+.v4-sec--navy .v4-titulo { color: var(--creme); }
+.v4-sec--navy .v4-titulo em { color: var(--navy-realce); background-image: linear-gradient(180deg, transparent 62%, rgba(255, 255, 255, .18) 62%); }
 
 .v4-lead { font-size: 1.1875rem; line-height: 1.5; }
 
@@ -167,7 +157,7 @@ strong { font-weight: 800; }
   min-height: 60px;
   padding: 16px 22px;
   border-radius: 14px;
-  background: var(--cta);
+  background: linear-gradient(135deg, var(--cta-claro) 0%, var(--cta) 45%, var(--cta-escuro) 100%);
   color: var(--cta-texto);
   font-family: var(--sans);
   font-weight: 800;
@@ -177,13 +167,13 @@ strong { font-weight: 800; }
   text-transform: uppercase;
   text-align: center;
   text-decoration: none;
-  box-shadow: 0 2px 0 var(--cta-escuro), 0 14px 28px rgba(201, 141, 18, .34);
+  box-shadow: 0 12px 30px rgba(13, 110, 60, .28), inset 0 1px 0 rgba(255, 255, 255, .22);
   transition: background-color .2s ease, transform .2s ease, box-shadow .2s ease;
 }
 .v4-btn svg { flex: none; transition: transform .2s ease; }
-.v4-btn:hover { background: var(--cta-escuro); }
+.v4-btn:hover { background: linear-gradient(135deg, var(--cta) 0%, var(--cta-escuro) 100%); }
 .v4-btn:hover svg { transform: translateX(4px); }
-.v4-btn:active { transform: translateY(1px); box-shadow: 0 1px 0 var(--cta-escuro), 0 8px 18px rgba(201, 141, 18, .28); }
+.v4-btn:active { transform: translateY(1px); box-shadow: 0 8px 20px rgba(13, 110, 60, .26), inset 0 1px 0 rgba(255, 255, 255, .22); }
 .v4-btn[aria-disabled="true"] { cursor: not-allowed; }
 
 @media (min-width: 600px) {
@@ -206,59 +196,57 @@ strong { font-weight: 800; }
 
 /* ==================== DOBRA 1 — HERO ==================== */
 
+/* Uma coluna só, centralizada, como a hero da v1: os elementos empilhados
+   na ordem do doc (título, frase, mockup, botão, ✅), em qualquer tela. */
 .v4-hero {
   position: relative;
   overflow: hidden;
-  padding-block: 28px clamp(56px, 8vw, 96px);
+  padding-block: 40px clamp(56px, 8vw, 96px);
   background:
-    radial-gradient(60% 45% at 85% 30%, rgba(244, 199, 102, .30) 0%, rgba(244, 199, 102, 0) 70%),
-    var(--creme);
+    radial-gradient(58% 44% at 50% -6%, rgba(2, 133, 211, .14) 0%, transparent 68%),
+    radial-gradient(46% 38% at 88% 22%, rgba(1, 51, 124, .10) 0%, transparent 70%),
+    radial-gradient(52% 40% at 8% 72%, rgba(2, 133, 211, .09) 0%, transparent 72%),
+    linear-gradient(180deg, #F3FAFF 0%, var(--creme) 55%, #F1F8FE 100%);
+  text-align: center;
 }
 
 .v4-hero__grade {
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 22px;
 }
 
-.v4-selo {
-  display: inline-block;
-  margin-bottom: 18px;
-  padding: 7px 14px;
-  border: 1px solid var(--areia-forte);
-  border-radius: 999px;
-  background: var(--branco);
-  font-size: .8125rem;
-  font-weight: 800;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-  color: var(--verde);
-}
-
 .v4-hero__titulo {
-  font-family: var(--serifa);
-  font-weight: 600;
-  font-size: clamp(2.125rem, 1.4rem + 3.6vw, 3.625rem);
-  line-height: 1.05;
-  letter-spacing: -.02em;
+  max-width: 18ch;
+  margin-inline: auto;
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: clamp(1.9rem, 1.3rem + 3vw, 3rem);
+  line-height: 1.14;
+  letter-spacing: -.028em;
   text-wrap: balance;
 }
-.v4-hero__titulo em { font-style: italic; color: var(--verde); }
+.v4-hero__titulo em { font-style: normal; color: var(--azul); background-image: linear-gradient(180deg, transparent 62%, var(--azul-claro) 62%); padding-inline: .06em; }
 
 .v4-hero__sub {
-  margin-top: 16px;
+  max-width: 34em;
+  margin: 16px auto 0;
   font-size: 1.125rem;
   line-height: 1.5;
   color: var(--tinta-suave);
-  max-width: 34em;
 }
 .v4-hero__sub strong { color: var(--tinta); }
 
-/* O mockup da v1 (fundo transparente): no celular ocupa a largura toda,
-   um pouco além do respiro lateral, para o Manual ler bem. */
-.v4-hero__mock { margin-inline: -8px; }
+/* O mockup da v1 tem fundo transparente e vai sem moldura. Com as mesmas
+   medidas de lá: até 470px no celular e, do tablet para cima, crescendo
+   com a tela até 820px. */
+.v4-hero__mock { width: min(100%, 470px); }
 .v4-hero__mock img { width: 100%; }
 
-.v4-oks { display: grid; gap: 10px; margin-top: 20px; }
+.v4-hero__acao { display: flex; flex-direction: column; align-items: center; width: 100%; }
+
+.v4-oks { display: grid; gap: 10px; margin-top: 20px; text-align: left; }
 .v4-oks li {
   display: flex;
   align-items: center;
@@ -268,29 +256,32 @@ strong { font-weight: 800; }
   line-height: 1.35;
 }
 
+@media (min-width: 768px) {
+  .v4-hero__mock { width: min(100%, clamp(580px, 60vw, 820px)); }
+}
 @media (min-width: 900px) {
   .v4-hero { padding-top: 56px; }
-  .v4-hero__grade {
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas: "copy mock" "acao mock";
-    column-gap: 48px;
-    row-gap: 32px;
-    align-items: center;
-  }
-  .v4-hero__copy { grid-area: copy; align-self: end; }
-  .v4-hero__acao { grid-area: acao; align-self: start; }
-  .v4-hero__mock { grid-area: mock; margin-inline: 0 -20px; }
   .v4-hero__sub { font-size: 1.25rem; }
 }
 
 /* ==================== DOBRA 2 — DORES NO CORPO ==================== */
 
-.v4-mapa { position: relative; }
+/* Celular e tablet: a figura num cartão branco e, por cima dela, a lista
+   das dores virada em etiquetas, cada uma ao lado do seu ponto. Figura e
+   lista ocupam a mesma célula da grade; a margem da lista é o respiro do
+   cartão, então as duas medem exatamente a área da imagem e as posições
+   em % (dos pontos e das etiquetas) batem. */
+.v4-mapa {
+  position: relative;
+  display: grid;
+  width: min(100%, 420px);
+  margin-inline: auto;
+}
 
 .v4-mapa__fig {
+  grid-area: 1 / 1;
   position: relative;
-  width: min(72vw, 300px);
-  margin-inline: auto;
+  width: 100%;
   padding: 18px 10px;
   border-radius: 28px;
   background: var(--branco);
@@ -299,22 +290,20 @@ strong { font-weight: 800; }
 .v4-mapa__corpo { position: relative; }
 .v4-mapa__corpo img { width: 100%; }
 
-/* --x e --y vêm do HTML, em % da imagem. */
+/* --x e --y vêm do HTML, em % da imagem. O número fica só no HTML: na
+   tela o ponto é liso, e quem nomeia a dor é a etiqueta ao lado. */
 .v4-pino {
   position: absolute;
   left: var(--x);
   top: var(--y);
-  display: grid;
-  place-items: center;
-  width: 24px;
-  height: 24px;
-  margin: -12px 0 0 -12px;
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0 -9px;
   border-radius: 50%;
-  background: var(--verde);
-  color: var(--branco);
-  font-size: .75rem;
-  font-weight: 800;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, .9), 0 2px 6px rgba(31, 42, 36, .35);
+  background: var(--azul);
+  font-size: 0;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, .9), 0 2px 6px rgba(11, 37, 69, .35);
+  cursor: pointer;
   z-index: 2;
 }
 .v4-pino::after {      /* onda saindo do ponto */
@@ -322,12 +311,13 @@ strong { font-weight: 800; }
   position: absolute;
   inset: -3px;
   border-radius: 50%;
-  border: 2px solid var(--verde);
+  border: 2px solid var(--azul);
   opacity: 0;
   animation: v4-onda 2.6s ease-out infinite;
 }
 .v4-pino:nth-of-type(2n)::after { animation-delay: .9s; }
 .v4-pino:nth-of-type(3n)::after { animation-delay: 1.7s; }
+.v4-pino.is-ativo { background: var(--cta); }
 @keyframes v4-onda {
   0%   { transform: scale(1);   opacity: .7; }
   100% { transform: scale(2.4); opacity: 0; }
@@ -335,39 +325,84 @@ strong { font-weight: 800; }
 @media (prefers-reduced-motion: reduce) { .v4-pino::after { animation: none; } }
 
 .v4-dores {
-  display: grid;
-  gap: 12px;
-  margin-top: 28px;
-}
-.v4-dor {
+  grid-area: 1 / 1;
   position: relative;
-  padding: 14px 16px 14px 56px;
-  border-radius: var(--raio-sm);
-  background: var(--branco);
-  box-shadow: 0 1px 2px rgba(31, 42, 36, .06);
+  margin: 18px 10px;
+  z-index: 3;
+  pointer-events: none;   /* o toque fora das etiquetas chega aos pontos */
 }
-.v4-dor__n {
+
+/* A etiqueta: --ex e --ey é o ponto de ancoragem, em % da imagem. Do lado
+   "dir" ela cresce para a direita; do lado "esq", para a esquerda. */
+.v4-dor {
   position: absolute;
-  left: 16px;
-  top: 14px;
-  display: grid;
-  place-items: center;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: var(--verde);
-  color: var(--branco);
-  font-size: .8125rem;
-  font-weight: 800;
+  left: var(--ex);
+  top: var(--ey);
+  max-width: 36%;
+  transform: translateY(-50%);
+  pointer-events: auto;
 }
-.v4-dor__titulo { font-size: 1.0625rem; font-weight: 800; line-height: 1.3; }
-.v4-dor p { margin-top: 4px; font-size: 1rem; line-height: 1.5; color: var(--tinta-suave); }
+.v4-dor[data-lado="esq"] { transform: translate(-100%, -50%); }
+
+.v4-dor__titulo { font-size: inherit; line-height: inherit; }
+.v4-dor__btn {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 6px 22px 6px 9px;
+  border: 1px solid var(--areia-forte);
+  border-radius: 10px;
+  background: var(--branco);
+  box-shadow: 0 2px 8px rgba(11, 37, 69, .16);
+  font: 800 clamp(11.5px, 3.3vw, 13px) / 1.25 var(--sans);
+  color: var(--tinta);
+  text-align: left;
+  text-wrap: balance;
+  cursor: pointer;
+  position: relative;
+}
+.v4-dor__btn::after {   /* o "+" que avisa que dá para abrir */
+  content: "+";
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-52%);
+  font-size: 1.15em;
+  color: var(--azul);
+}
+.v4-dor p { display: none; }
+
+/* Aberta: a etiqueta vira um cartão centralizado na altura do ponto, com o
+   texto embaixo do título. */
+.v4-dor.is-aberta,
+.v4-dor.is-aberta[data-lado="esq"] {
+  left: 50%;
+  width: 84%;
+  max-width: 84%;
+  transform: translate(-50%, -50%);
+  padding: 12px 14px 14px;
+  border: 1.5px solid var(--azul);
+  border-radius: 14px;
+  background: var(--branco);
+  box-shadow: 0 10px 30px rgba(11, 37, 69, .28);
+  z-index: 4;
+}
+.v4-dor.is-aberta .v4-dor__btn {
+  padding: 0 24px 0 0;
+  border: 0;
+  box-shadow: none;
+  font-size: 1rem;
+}
+.v4-dor.is-aberta .v4-dor__btn::after { content: "\00d7"; right: 0; }
+.v4-dor.is-aberta p {
+  display: block;
+  margin-top: 6px;
+  font-size: .9375rem;
+  line-height: 1.45;
+  color: var(--tinta-suave);
+}
 
 .v4-mapa__linhas { display: none; }
-
-@media (min-width: 600px) {
-  .v4-dores { grid-template-columns: 1fr 1fr; }
-}
 
 /* Desktop: as dores dos dois lados da figura, ligadas por linhas. A lista
    vira parte da grade do mapa (display: contents) para cada item ir para a
@@ -389,12 +424,7 @@ strong { font-weight: 800; }
     box-shadow: none;
     padding: 0;
   }
-  .v4-pino {
-    width: 18px;
-    height: 18px;
-    margin: -9px 0 0 -9px;
-    font-size: 0;
-  }
+  .v4-pino { cursor: default; }
   /* A figura tem fundo transparente; no desktop ela fica sobre um halo
      branco, sem o cartão do celular. */
   .v4-mapa__fig::before {
@@ -407,18 +437,32 @@ strong { font-weight: 800; }
   }
   .v4-mapa__fig { z-index: 0; }
 
+  .v4-mapa { width: auto; }
   .v4-dores { display: contents; }
-  .v4-dor {
+  /* No desktop nada abre nem fecha: título e texto sempre à vista, e o
+     botão do título fica com cara de texto comum. */
+  .v4-dor,
+  .v4-dor[data-lado="esq"] {
+    position: static;
     grid-column: var(--col);
     grid-row: var(--lin);
-    padding: 0;
-    background: none;
-    box-shadow: none;
     max-width: 300px;
+    transform: none;
   }
   .v4-dor--esq { justify-self: end; text-align: right; }
-  .v4-dor__n { display: none; }
-  .v4-dor__titulo { font-size: 1.125rem; }
+  .v4-dor__titulo { font-size: 1.125rem; font-weight: 800; line-height: 1.3; }
+  .v4-dor__btn {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    font: inherit;
+    text-align: inherit;
+    cursor: default;
+  }
+  .v4-dor__btn::after { content: none; }
+  .v4-dor p { display: block; margin-top: 4px; font-size: 1rem; line-height: 1.5; color: var(--tinta-suave); }
 
   .v4-mapa__linhas {
     display: block;
@@ -432,12 +476,12 @@ strong { font-weight: 800; }
   }
   .v4-mapa__linhas path {
     fill: none;
-    stroke: var(--verde);
+    stroke: var(--azul);
     stroke-width: 1.5;
     stroke-linecap: round;
     stroke-dasharray: 2 5;
   }
-  .v4-mapa__linhas circle { fill: var(--verde); }
+  .v4-mapa__linhas circle { fill: var(--azul); }
 }
 
 .v4-fibro {
@@ -447,9 +491,9 @@ strong { font-weight: 800; }
   max-width: 560px;
   margin: 32px auto 0;
   padding: 18px 20px;
-  border: 1.5px solid var(--verde);
+  border: 1.5px solid var(--azul);
   border-radius: var(--raio);
-  background: var(--verde-claro);
+  background: var(--azul-claro);
 }
 .v4-fibro__ico {
   flex: none;
@@ -458,17 +502,17 @@ strong { font-weight: 800; }
   width: 46px;
   height: 46px;
   border-radius: 50%;
-  background: var(--verde);
+  background: var(--azul);
   color: var(--branco);
 }
-.v4-fibro__titulo { font-family: var(--serifa); font-weight: 600; font-size: 1.375rem; line-height: 1.2; }
+.v4-fibro__titulo { font-family: var(--sans); font-weight: 800; font-size: 1.375rem; line-height: 1.2; }
 .v4-fibro p { margin-top: 2px; font-size: 1rem; }
 
 /* ==================== Página do Manual (imagem) ==================== */
 
 .v4-pagina img {
   border-radius: 6px;
-  box-shadow: 0 1px 2px rgba(31, 42, 36, .1), 0 18px 40px rgba(31, 42, 36, .16);
+  box-shadow: 0 1px 2px rgba(11, 37, 69, .1), 0 18px 40px rgba(11, 37, 69, .16);
 }
 .v4-pagina figcaption {
   margin-top: 12px;
@@ -498,12 +542,12 @@ strong { font-weight: 800; }
 .v4-fecho {
   margin: 1.4em 0 28px;
   padding-left: 16px;
-  border-left: 4px solid var(--cta);
-  font-family: var(--serifa);
+  border-left: 4px solid var(--azul-vivo);
+  font-family: var(--sans);
   font-size: 1.375rem;
   line-height: 1.3;
 }
-.v4-fecho strong { font-weight: 600; }
+.v4-fecho strong { font-weight: 800; }
 
 @media (min-width: 900px) {
   .v4-serio { grid-template-columns: 1.1fr .9fr; gap: 72px; align-items: center; }
@@ -532,8 +576,8 @@ strong { font-weight: 800; }
   background: var(--creme);
 }
 .v4-passo__titulo {
-  font-family: var(--serifa);
-  font-weight: 600;
+  font-family: var(--sans);
+  font-weight: 800;
   font-size: 1.5rem;
   line-height: 1.2;
   margin-bottom: 8px;
@@ -550,7 +594,7 @@ strong { font-weight: 800; }
   left: 50%;
   width: 40%;
   border-radius: 4px;
-  box-shadow: 0 10px 24px rgba(31, 42, 36, .18);
+  box-shadow: 0 10px 24px rgba(11, 37, 69, .18);
   transform-origin: 50% 100%;
 }
 .v4-leque img:nth-child(1) { transform: translateX(-112%) rotate(-7deg); }
@@ -572,7 +616,7 @@ strong { font-weight: 800; }
   left: 21px;
   top: -10px;
   height: 20px;
-  border-left: 2px dotted var(--verde);
+  border-left: 2px dotted var(--azul);
 }
 .v4-adeir__letra {
   flex: none;
@@ -582,11 +626,11 @@ strong { font-weight: 800; }
   height: 44px;
   border-radius: 50%;
   background: var(--branco);
-  border: 2px solid var(--verde);
-  font-family: var(--serifa);
-  font-weight: 600;
+  border: 2px solid var(--azul);
+  font-family: var(--sans);
+  font-weight: 800;
   font-size: 1.375rem;
-  color: var(--verde);
+  color: var(--azul);
 }
 
 .v4-nota-ok {
@@ -608,8 +652,8 @@ strong { font-weight: 800; }
   background: var(--areia);
 }
 .v4-pressao__titulo {
-  font-family: var(--serifa);
-  font-weight: 600;
+  font-family: var(--sans);
+  font-weight: 800;
   font-size: 1.625rem;
   line-height: 1.15;
   margin-bottom: 8px;
@@ -631,8 +675,8 @@ strong { font-weight: 800; }
 .v4-escala__barra .is-leve  { background: var(--salvia-clara); color: var(--salvia); }
 .v4-escala__barra .is-media { background: var(--salvia); color: var(--branco); }
 .v4-escala__barra .is-fora  {
-  background: repeating-linear-gradient(-45deg, #E6E6DD 0 6px, #F0F0E9 6px 12px);
-  color: #585E57;
+  background: repeating-linear-gradient(-45deg, #E1E9F2 0 6px, #EDF2F8 6px 12px);
+  color: #4F647C;
   text-decoration: line-through;
 }
 .v4-escala__legenda {
@@ -664,21 +708,21 @@ strong { font-weight: 800; }
 .v4-remedio { text-align: center; }
 .v4-remedio .v4-titulo { margin-bottom: 20px; }
 .v4-remedio__gesto {
-  font-family: var(--serifa);
-  font-style: italic;
-  font-size: 1.375rem;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 1.25rem;
   color: var(--creme);
 }
 .v4-remedio__virada {
   margin: 28px 0;
-  font-family: var(--serifa);
+  font-family: var(--sans);
   font-size: clamp(1.75rem, 1.3rem + 2vw, 2.5rem);
   line-height: 1.15;
-  color: var(--mata-realce);
+  color: var(--navy-realce);
 }
-.v4-remedio__virada strong { font-weight: 600; }
+.v4-remedio__virada strong { font-weight: 800; }
 .v4-remedio strong { color: var(--creme); }
-.v4-remedio__virada strong { color: var(--mata-realce); }
+.v4-remedio__virada strong { color: var(--navy-realce); }
 
 /* ==================== DOBRA 6 — BÔNUS ==================== */
 
@@ -698,8 +742,8 @@ strong { font-weight: 800; }
   display: inline-block;
   padding: 4px 10px;
   border-radius: 999px;
-  background: var(--verde-claro);
-  color: var(--verde);
+  background: var(--azul-claro);
+  color: var(--azul);
   font-size: .75rem;
   font-weight: 800;
   letter-spacing: .06em;
@@ -707,8 +751,8 @@ strong { font-weight: 800; }
 }
 .v4-bonus__titulo {
   margin: 10px 0 6px;
-  font-family: var(--serifa);
-  font-weight: 600;
+  font-family: var(--sans);
+  font-weight: 800;
   font-size: 1.375rem;
   line-height: 1.2;
 }
@@ -755,18 +799,18 @@ strong { font-weight: 800; }
   position: absolute;
   top: -18px;
   left: 18px;
-  font-family: var(--serifa);
+  font-family: var(--sans);
   font-size: 4.5rem;
   line-height: 1;
-  color: var(--cta);
+  color: var(--azul-vivo);
 }
 .v4-citacao p {
-  font-family: var(--serifa);
-  font-style: italic;
-  font-weight: 500;
-  font-size: 1.375rem;
-  line-height: 1.35;
-  color: var(--tinta);
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  letter-spacing: -.01em;
+  color: var(--azul);
 }
 
 .v4-assina {
@@ -791,21 +835,16 @@ strong { font-weight: 800; }
 
 .v4-poder {
   margin: 32px 0 24px;
-  font-family: var(--serifa);
-  font-weight: 600;
+  font-family: var(--sans);
+  font-weight: 800;
   font-size: clamp(1.5rem, 1.15rem + 1.6vw, 2rem);
   line-height: 1.2;
   text-align: center;
-  color: var(--verde);
+  color: var(--azul);
 }
 
-/* O fio que liga a dobra 7 à 8, no lugar de uma divisão. */
-.v4-elo {
-  width: 2px;
-  height: 72px;
-  margin: 40px auto;
-  background: repeating-linear-gradient(to bottom, var(--verde) 0 4px, transparent 4px 10px);
-}
+/* A dobra 8 começa logo depois do botão da 7, sem título nem divisória. */
+.v4-continua { margin-top: 40px; }
 
 /* ==================== DOBRA 9 — OFERTA ==================== */
 
@@ -816,13 +855,13 @@ strong { font-weight: 800; }
   border-radius: 24px;
   background: var(--branco);
   color: var(--tinta);
-  box-shadow: 0 0 0 4px rgba(244, 199, 102, .35), 0 24px 60px rgba(0, 0, 0, .35);
+  box-shadow: 0 0 0 4px rgba(155, 209, 242, .35), 0 24px 60px rgba(0, 0, 0, .35);
   text-align: center;
 }
 .v4-oferta__mock {
   padding: 14px 8px;
   border-radius: 16px;
-  background: linear-gradient(180deg, var(--areia), var(--verde-claro));
+  background: linear-gradient(180deg, var(--areia), var(--azul-claro));
 }
 
 .v4-oferta__itens {
@@ -846,7 +885,7 @@ strong { font-weight: 800; }
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--verde);
+  background: var(--azul);
   margin-right: -4px;
 }
 .v4-oferta__itens li > span:first-of-type { flex: 1; }
@@ -861,19 +900,19 @@ strong { font-weight: 800; }
   margin: 22px auto;
   border: 0;
   border-radius: 2px;
-  background: var(--cta);
+  background: var(--azul-vivo);
 }
 
 .v4-oferta__de { font-size: 1.125rem; font-weight: 600; }
 .v4-oferta__de s { color: var(--tinta-suave); font-weight: 800; }
 .v4-oferta__preco {
   margin-top: 2px;
-  font-family: var(--serifa);
-  font-weight: 700;
+  font-family: var(--sans);
+  font-weight: 800;
   font-size: clamp(4rem, 3rem + 6vw, 5.5rem);
   line-height: 1;
   letter-spacing: -.03em;
-  color: var(--verde);
+  color: var(--azul);
 }
 .v4-oferta__rs { font-size: .4em; letter-spacing: 0; vertical-align: .9em; margin-right: 4px; }
 .v4-oferta__economia {
@@ -896,7 +935,7 @@ strong { font-weight: 800; }
   font-weight: 600;
   color: var(--tinta-suave);
 }
-.v4-oferta__entrega svg { flex: none; color: var(--verde); }
+.v4-oferta__entrega svg { flex: none; color: var(--azul); }
 
 .v4-btn--compra { width: 100%; display: flex; min-height: 64px; font-size: 1.0625rem; }
 
@@ -917,8 +956,8 @@ strong { font-weight: 800; }
   position: relative;
   margin-bottom: 14px;
   padding-left: 18px;
-  font-family: var(--serifa);
-  font-weight: 600;
+  font-family: var(--sans);
+  font-weight: 800;
   font-size: 1.3125rem;
   line-height: 1.25;
 }
@@ -930,7 +969,7 @@ strong { font-weight: 800; }
   bottom: .2em;
   width: 4px;
   border-radius: 2px;
-  background: var(--cta);
+  background: var(--azul-vivo);
 }
 .v4-depo__print {
   padding: 12px;
@@ -1013,7 +1052,7 @@ strong { font-weight: 800; }
   top: 6%;
   width: 58%;
   border-radius: 3px;
-  box-shadow: 0 16px 36px rgba(31, 42, 36, .18);
+  box-shadow: 0 16px 36px rgba(11, 37, 69, .18);
   transform: rotate(-6deg);
 }
 .v4-celular {
@@ -1024,8 +1063,8 @@ strong { font-weight: 800; }
   aspect-ratio: 9 / 19;
   padding: 10px 8px;
   border-radius: 34px;
-  background: #17201C;
-  box-shadow: inset 0 0 0 2px #3A4640, 0 22px 44px rgba(31, 42, 36, .32);
+  background: #0B1B30;
+  box-shadow: inset 0 0 0 2px #2A3E58, 0 22px 44px rgba(11, 37, 69, .32);
   transform: rotate(4deg);
 }
 .v4-celular::before {   /* câmera */
@@ -1037,7 +1076,7 @@ strong { font-weight: 800; }
   height: 12px;
   margin-left: -13%;
   border-radius: 8px;
-  background: #17201C;
+  background: #0B1B30;
   z-index: 2;
 }
 /* A página inteira na tela, como num leitor de PDF: sobra fundo em cima e
@@ -1053,6 +1092,9 @@ strong { font-weight: 800; }
 @media (min-width: 900px) {
   .v4-consulta { grid-template-columns: 1fr 1fr; gap: 64px; }
 }
+
+/* O último botão da página, entre a dobra 11 e o FAQ. */
+.v4-consulta__cta { margin-top: clamp(40px, 6vw, 56px); }
 
 /* ==================== DOBRA 12 — FAQ ==================== */
 
@@ -1077,7 +1119,7 @@ strong { font-weight: 800; }
 .v4-faq__item summary::-webkit-details-marker { display: none; }
 .v4-faq__item summary svg {
   flex: none;
-  color: var(--verde);
+  color: var(--azul);
   transition: transform .2s ease;
 }
 .v4-faq__item[open] summary svg { transform: rotate(45deg); }
@@ -1091,8 +1133,8 @@ strong { font-weight: 800; }
 
 .v4-rodape {
   padding-block: 40px 48px;
-  background: var(--mata);
-  color: var(--mata-texto);
+  background: var(--navy);
+  color: var(--navy-texto);
   font-size: .875rem;
   line-height: 1.55;
   text-align: center;

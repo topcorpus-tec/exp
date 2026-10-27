@@ -10,6 +10,7 @@
      - parada das âncoras da oferta   (a[href="#oferta"])
      - FAQ, abrir uma fecha as demais (.v4-faq__item)
      - linhas do mapa das dores       ([data-mapa])
+     - etiquetas do mapa no celular   ([data-dor], [data-pino])
 
    Carregar com defer.
    ========================================================================= */
@@ -188,6 +189,59 @@
   }
 
   /* =======================================================================
+     ETIQUETAS DO MAPA NO CELULAR
+
+     Abaixo de 900px cada dor é uma etiqueta ao lado do seu ponto, com o
+     texto fechado. Um toque no título ou no ponto abre o texto daquela dor
+     e fecha o das outras; um toque de novo, ou fora do mapa, fecha. No
+     desktop não há o que abrir (título e texto ficam sempre à vista), então
+     o clique é ignorado e, se a tela crescer com uma aberta, ela fecha.
+     ======================================================================= */
+  function initDores() {
+    var mapa = document.querySelector("[data-mapa]");
+    if (!mapa || !window.matchMedia) return;
+
+    var largo = matchMedia("(min-width: 900px)");
+    var itens = [].slice.call(mapa.querySelectorAll("[data-dor]"));
+
+    function marca(item, aberto) {
+      item.classList.toggle("is-aberta", aberto);
+      var btn = item.querySelector(".v4-dor__btn");
+      if (btn) btn.setAttribute("aria-expanded", aberto ? "true" : "false");
+      var pino = mapa.querySelector('[data-pino="' + item.getAttribute("data-dor") + '"]');
+      if (pino) pino.classList.toggle("is-ativo", aberto);
+    }
+
+    function alterna(item) {
+      if (largo.matches) return;
+      var abrir = !item.classList.contains("is-aberta");
+      itens.forEach(function (outro) { marca(outro, outro === item && abrir); });
+    }
+
+    itens.forEach(function (item) {
+      var btn = item.querySelector(".v4-dor__btn");
+      if (btn) btn.addEventListener("click", function () { alterna(item); });
+    });
+
+    [].slice.call(mapa.querySelectorAll("[data-pino]")).forEach(function (pino) {
+      pino.addEventListener("click", function () {
+        var item = mapa.querySelector('[data-dor="' + pino.getAttribute("data-pino") + '"]');
+        if (item) alterna(item);
+      });
+    });
+
+    document.addEventListener("click", function (e) {
+      if (!mapa.contains(e.target)) itens.forEach(function (item) { marca(item, false); });
+    });
+
+    if (largo.addEventListener) {
+      largo.addEventListener("change", function () {
+        if (largo.matches) itens.forEach(function (item) { marca(item, false); });
+      });
+    }
+  }
+
+  /* =======================================================================
      BOOT
      ======================================================================= */
   function boot() {
@@ -195,6 +249,7 @@
     initAncoras();
     initFaq();
     initMapa();
+    initDores();
   }
 
   if (document.readyState === "loading") {
