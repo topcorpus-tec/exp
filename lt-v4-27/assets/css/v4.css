@@ -5,9 +5,11 @@
    diferente das outras páginas. A v1 à v3 são azul da capa + Manrope; aqui
    a identidade é outra:
 
-     - cor: argila (terracota) sobre creme e areia, com o barro escuro nas
-       dobras de virada e na oferta, e sálvia nos ✅. Calor de mão, não
-       hospital. A capa do Manual, que é azul, aparece como contraste;
+     - cor: verde-eucalipto sobre creme e areia, com o verde-mata escuro
+       nas dobras de virada e na oferta, e mel nos botões (como os botões
+       amarelos da referência de oferta do doc). Nada de vermelho nem de
+       terracota: numa página sobre dor, o vermelho lembra a própria dor.
+       A capa do Manual, que é azul, aparece como contraste;
      - letra: Fraunces nos títulos (serifa macia, a pasta tem o arquivo) e
        Manrope no texto, a mesma das outras versões.
 
@@ -42,32 +44,33 @@
 }
 
 :root {
-  --creme:        #FBF6F0;
-  --areia:        #F4E9DD;
-  --areia-forte:  #E9D7C4;
+  --creme:        #FAF8F2;
+  --areia:        #EFEEE4;
+  --areia-forte:  #DEDDCF;
   --branco:       #FFFFFF;
 
-  --tinta:        #2B1E18;
-  --tinta-suave:  #64504A;
+  --tinta:        #1F2A24;
+  --tinta-suave:  #4F5C54;
 
-  --argila:       #A9472A;   /* texto em destaque: 5,4:1 no creme */
-  --argila-clara: #F6DCCB;
-  --cta:          #B8492A;   /* botão: branco por cima dá 5,2:1 */
-  --cta-escuro:   #9C3B20;
+  --verde:        #2C6A52;   /* texto em destaque: 6:1 no creme */
+  --verde-claro:  #DDEBE2;
+  --cta:          #F2B233;   /* botão mel: a tinta por cima dá 7,9:1 */
+  --cta-escuro:   #E5A11C;
+  --cta-texto:    #1F2A24;
 
-  --barro:        #3A2620;
-  --barro-texto:  #D9C6B8;
-  --barro-realce: #F2C6A8;
+  --mata:         #1E3B32;
+  --mata-texto:   #D3E0D8;
+  --mata-realce:  #F4C766;
 
-  --salvia:       #4E6B4A;
-  --salvia-clara: #E3EADD;
+  --salvia:       #3F7058;
+  --salvia-clara: #E1ECE4;
 
   --serifa: "Fraunces", Georgia, "Times New Roman", serif;
   --sans:   "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
 
   --raio:    18px;
   --raio-sm: 12px;
-  --sombra:  0 1px 2px rgba(58, 38, 32, .06), 0 12px 32px rgba(58, 38, 32, .10);
+  --sombra:  0 1px 2px rgba(31, 42, 36, .06), 0 12px 32px rgba(31, 42, 36, .10);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -91,7 +94,7 @@ h1, h2, h3, p, ul, ol, figure, blockquote { margin: 0; }
 ul, ol { padding: 0; list-style: none; }
 strong { font-weight: 800; }
 
-:focus-visible { outline: 3px solid var(--argila); outline-offset: 3px; border-radius: 6px; }
+:focus-visible { outline: 3px solid var(--verde); outline-offset: 3px; border-radius: 6px; }
 
 /* ==================== Estrutura ==================== */
 
@@ -107,7 +110,7 @@ strong { font-weight: 800; }
 .v4-sec { padding-block: clamp(56px, 9vw, 104px); }
 .v4-sec--areia  { background: var(--areia); }
 .v4-sec--branco { background: var(--branco); }
-.v4-sec--barro  { background: var(--barro); color: var(--barro-texto); }
+.v4-sec--mata  { background: var(--mata); color: var(--mata-texto); }
 
 /* Respiro entre parágrafos seguidos. O :where zera a especificidade, para
    qualquer classe de bloco (preço, citação, balão) mandar na própria margem. */
@@ -125,7 +128,7 @@ strong { font-weight: 800; }
   text-wrap: balance;
   margin-bottom: clamp(24px, 4vw, 40px);
 }
-.v4-titulo em { font-style: italic; color: var(--argila); }
+.v4-titulo em { font-style: italic; color: var(--verde); }
 .v4-titulo--centro { text-align: center; max-width: 820px; margin-inline: auto; }
 .v4-titulo__linha2 {
   display: block;
@@ -136,8 +139,8 @@ strong { font-weight: 800; }
   letter-spacing: 0;
   color: var(--tinta);
 }
-.v4-sec--barro .v4-titulo { color: var(--creme); }
-.v4-sec--barro .v4-titulo em { color: var(--barro-realce); }
+.v4-sec--mata .v4-titulo { color: var(--creme); }
+.v4-sec--mata .v4-titulo em { color: var(--mata-realce); }
 
 .v4-lead { font-size: 1.1875rem; line-height: 1.5; }
 
@@ -153,7 +156,7 @@ strong { font-weight: 800; }
   padding: 16px 22px;
   border-radius: 14px;
   background: var(--cta);
-  color: var(--branco);
+  color: var(--cta-texto);
   font-family: var(--sans);
   font-weight: 800;
   font-size: 1rem;
@@ -162,13 +165,13 @@ strong { font-weight: 800; }
   text-transform: uppercase;
   text-align: center;
   text-decoration: none;
-  box-shadow: 0 2px 0 var(--cta-escuro), 0 14px 28px rgba(184, 73, 42, .32);
+  box-shadow: 0 2px 0 var(--cta-escuro), 0 14px 28px rgba(201, 141, 18, .34);
   transition: background-color .2s ease, transform .2s ease, box-shadow .2s ease;
 }
 .v4-btn svg { flex: none; transition: transform .2s ease; }
 .v4-btn:hover { background: var(--cta-escuro); }
 .v4-btn:hover svg { transform: translateX(4px); }
-.v4-btn:active { transform: translateY(1px); box-shadow: 0 1px 0 var(--cta-escuro), 0 8px 18px rgba(184, 73, 42, .28); }
+.v4-btn:active { transform: translateY(1px); box-shadow: 0 1px 0 var(--cta-escuro), 0 8px 18px rgba(201, 141, 18, .28); }
 .v4-btn[aria-disabled="true"] { cursor: not-allowed; }
 
 @media (min-width: 600px) {
@@ -196,7 +199,7 @@ strong { font-weight: 800; }
   overflow: hidden;
   padding-block: 28px clamp(56px, 8vw, 96px);
   background:
-    radial-gradient(60% 45% at 85% 30%, rgba(246, 220, 203, .9) 0%, rgba(246, 220, 203, 0) 70%),
+    radial-gradient(60% 45% at 85% 30%, rgba(244, 199, 102, .30) 0%, rgba(244, 199, 102, 0) 70%),
     var(--creme);
 }
 
@@ -216,7 +219,7 @@ strong { font-weight: 800; }
   font-weight: 800;
   letter-spacing: .04em;
   text-transform: uppercase;
-  color: var(--argila);
+  color: var(--verde);
 }
 
 .v4-hero__titulo {
@@ -227,7 +230,7 @@ strong { font-weight: 800; }
   letter-spacing: -.02em;
   text-wrap: balance;
 }
-.v4-hero__titulo em { font-style: italic; color: var(--argila); }
+.v4-hero__titulo em { font-style: italic; color: var(--verde); }
 
 .v4-hero__sub {
   margin-top: 16px;
@@ -254,7 +257,7 @@ strong { font-weight: 800; }
   position: absolute;
   inset: auto -6% -7% 4%;
   height: 16%;
-  background: radial-gradient(closest-side, rgba(58, 38, 32, .35), rgba(58, 38, 32, 0));
+  background: radial-gradient(closest-side, rgba(31, 42, 36, .35), rgba(31, 42, 36, 0));
   filter: blur(6px);
   z-index: -1;
 }
@@ -264,10 +267,10 @@ strong { font-weight: 800; }
   border-radius: 3px 8px 8px 3px;
   box-shadow:
     inset 6px 0 10px -6px rgba(0, 0, 0, .45),
-    1px 1px 0 #F3EEE7, 2px 2px 0 #E2DACF,
-    3px 3px 0 #F3EEE7, 4px 4px 0 #E2DACF,
-    5px 5px 0 #F3EEE7, 6px 6px 0 #D6CCBF,
-    18px 26px 40px rgba(58, 38, 32, .28);
+    1px 1px 0 #F4F3EE, 2px 2px 0 #E2E1D8,
+    3px 3px 0 #F4F3EE, 4px 4px 0 #E2E1D8,
+    5px 5px 0 #F4F3EE, 6px 6px 0 #D3D2C7,
+    18px 26px 40px rgba(31, 42, 36, .28);
 }
 .v4-livro::after {    /* brilho da lombada */
   content: "";
@@ -332,11 +335,11 @@ strong { font-weight: 800; }
   height: 24px;
   margin: -12px 0 0 -12px;
   border-radius: 50%;
-  background: var(--cta);
+  background: var(--verde);
   color: var(--branco);
   font-size: .75rem;
   font-weight: 800;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, .9), 0 2px 6px rgba(58, 38, 32, .35);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, .9), 0 2px 6px rgba(31, 42, 36, .35);
   z-index: 2;
 }
 .v4-pino::after {      /* onda saindo do ponto */
@@ -344,7 +347,7 @@ strong { font-weight: 800; }
   position: absolute;
   inset: -3px;
   border-radius: 50%;
-  border: 2px solid var(--cta);
+  border: 2px solid var(--verde);
   opacity: 0;
   animation: v4-onda 2.6s ease-out infinite;
 }
@@ -366,7 +369,7 @@ strong { font-weight: 800; }
   padding: 14px 16px 14px 56px;
   border-radius: var(--raio-sm);
   background: var(--branco);
-  box-shadow: 0 1px 2px rgba(58, 38, 32, .06);
+  box-shadow: 0 1px 2px rgba(31, 42, 36, .06);
 }
 .v4-dor__n {
   position: absolute;
@@ -377,7 +380,7 @@ strong { font-weight: 800; }
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: var(--cta);
+  background: var(--verde);
   color: var(--branco);
   font-size: .8125rem;
   font-weight: 800;
@@ -454,12 +457,12 @@ strong { font-weight: 800; }
   }
   .v4-mapa__linhas path {
     fill: none;
-    stroke: var(--argila);
+    stroke: var(--verde);
     stroke-width: 1.5;
     stroke-linecap: round;
     stroke-dasharray: 2 5;
   }
-  .v4-mapa__linhas circle { fill: var(--argila); }
+  .v4-mapa__linhas circle { fill: var(--verde); }
 }
 
 .v4-fibro {
@@ -469,9 +472,9 @@ strong { font-weight: 800; }
   max-width: 560px;
   margin: 32px auto 0;
   padding: 18px 20px;
-  border: 1.5px solid var(--cta);
+  border: 1.5px solid var(--verde);
   border-radius: var(--raio);
-  background: var(--argila-clara);
+  background: var(--verde-claro);
 }
 .v4-fibro__ico {
   flex: none;
@@ -480,7 +483,7 @@ strong { font-weight: 800; }
   width: 46px;
   height: 46px;
   border-radius: 50%;
-  background: var(--cta);
+  background: var(--verde);
   color: var(--branco);
 }
 .v4-fibro__titulo { font-family: var(--serifa); font-weight: 600; font-size: 1.375rem; line-height: 1.2; }
@@ -490,7 +493,7 @@ strong { font-weight: 800; }
 
 .v4-pagina img {
   border-radius: 6px;
-  box-shadow: 0 1px 2px rgba(58, 38, 32, .1), 0 18px 40px rgba(58, 38, 32, .16);
+  box-shadow: 0 1px 2px rgba(31, 42, 36, .1), 0 18px 40px rgba(31, 42, 36, .16);
 }
 .v4-pagina figcaption {
   margin-top: 12px;
@@ -562,7 +565,7 @@ strong { font-weight: 800; }
   left: 50%;
   width: 40%;
   border-radius: 4px;
-  box-shadow: 0 10px 24px rgba(58, 38, 32, .18);
+  box-shadow: 0 10px 24px rgba(31, 42, 36, .18);
   transform-origin: 50% 100%;
 }
 .v4-leque img:nth-child(1) { transform: translateX(-112%) rotate(-7deg); }
@@ -584,7 +587,7 @@ strong { font-weight: 800; }
   left: 21px;
   top: -10px;
   height: 20px;
-  border-left: 2px dotted var(--argila);
+  border-left: 2px dotted var(--verde);
 }
 .v4-adeir__letra {
   flex: none;
@@ -594,11 +597,11 @@ strong { font-weight: 800; }
   height: 44px;
   border-radius: 50%;
   background: var(--branco);
-  border: 2px solid var(--cta);
+  border: 2px solid var(--verde);
   font-family: var(--serifa);
   font-weight: 600;
   font-size: 1.375rem;
-  color: var(--argila);
+  color: var(--verde);
 }
 
 .v4-nota-ok {
@@ -643,8 +646,8 @@ strong { font-weight: 800; }
 .v4-escala__barra .is-leve  { background: var(--salvia-clara); color: var(--salvia); }
 .v4-escala__barra .is-media { background: var(--salvia); color: var(--branco); }
 .v4-escala__barra .is-fora  {
-  background: repeating-linear-gradient(-45deg, #E7DCD2 0 6px, #F1E8DF 6px 12px);
-  color: #8A7A72;
+  background: repeating-linear-gradient(-45deg, #E6E6DD 0 6px, #F0F0E9 6px 12px);
+  color: #585E57;
   text-decoration: line-through;
 }
 .v4-escala__legenda {
@@ -686,11 +689,11 @@ strong { font-weight: 800; }
   font-family: var(--serifa);
   font-size: clamp(1.75rem, 1.3rem + 2vw, 2.5rem);
   line-height: 1.15;
-  color: var(--barro-realce);
+  color: var(--mata-realce);
 }
 .v4-remedio__virada strong { font-weight: 600; }
 .v4-remedio strong { color: var(--creme); }
-.v4-remedio__virada strong { color: var(--barro-realce); }
+.v4-remedio__virada strong { color: var(--mata-realce); }
 
 /* ==================== DOBRA 6 — BÔNUS ==================== */
 
@@ -710,8 +713,8 @@ strong { font-weight: 800; }
   display: inline-block;
   padding: 4px 10px;
   border-radius: 999px;
-  background: var(--argila-clara);
-  color: var(--argila);
+  background: var(--verde-claro);
+  color: var(--verde);
   font-size: .75rem;
   font-weight: 800;
   letter-spacing: .06em;
@@ -808,7 +811,7 @@ strong { font-weight: 800; }
   font-size: clamp(1.5rem, 1.15rem + 1.6vw, 2rem);
   line-height: 1.2;
   text-align: center;
-  color: var(--argila);
+  color: var(--verde);
 }
 
 /* O fio que liga a dobra 7 à 8, no lugar de uma divisão. */
@@ -816,7 +819,7 @@ strong { font-weight: 800; }
   width: 2px;
   height: 72px;
   margin: 40px auto;
-  background: repeating-linear-gradient(to bottom, var(--argila) 0 4px, transparent 4px 10px);
+  background: repeating-linear-gradient(to bottom, var(--verde) 0 4px, transparent 4px 10px);
 }
 
 /* ==================== DOBRA 9 — OFERTA ==================== */
@@ -828,13 +831,13 @@ strong { font-weight: 800; }
   border-radius: 24px;
   background: var(--branco);
   color: var(--tinta);
-  box-shadow: 0 0 0 4px rgba(242, 198, 168, .35), 0 24px 60px rgba(0, 0, 0, .35);
+  box-shadow: 0 0 0 4px rgba(244, 199, 102, .35), 0 24px 60px rgba(0, 0, 0, .35);
   text-align: center;
 }
 .v4-oferta__mock {
   padding: 14px 8px;
   border-radius: 16px;
-  background: linear-gradient(180deg, var(--areia), var(--argila-clara));
+  background: linear-gradient(180deg, var(--areia), var(--verde-claro));
 }
 
 .v4-oferta__itens {
@@ -858,14 +861,14 @@ strong { font-weight: 800; }
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--cta);
+  background: var(--verde);
   margin-right: -4px;
 }
 .v4-oferta__itens li > span:first-of-type { flex: 1; }
 .v4-oferta__valor { flex: none; color: var(--tinta-suave); font-weight: 600; white-space: nowrap; }
 
 .v4-oferta__total { margin-top: 16px; font-size: 1rem; }
-.v4-oferta__total s { font-weight: 800; color: var(--argila); }
+.v4-oferta__total s { font-weight: 800; color: var(--tinta-suave); }
 
 .v4-oferta__fio {
   width: 120px;
@@ -877,7 +880,7 @@ strong { font-weight: 800; }
 }
 
 .v4-oferta__de { font-size: 1.125rem; font-weight: 600; }
-.v4-oferta__de s { color: var(--argila); font-weight: 800; }
+.v4-oferta__de s { color: var(--tinta-suave); font-weight: 800; }
 .v4-oferta__preco {
   margin-top: 2px;
   font-family: var(--serifa);
@@ -885,7 +888,7 @@ strong { font-weight: 800; }
   font-size: clamp(4rem, 3rem + 6vw, 5.5rem);
   line-height: 1;
   letter-spacing: -.03em;
-  color: var(--argila);
+  color: var(--verde);
 }
 .v4-oferta__rs { font-size: .4em; letter-spacing: 0; vertical-align: .9em; margin-right: 4px; }
 .v4-oferta__economia {
@@ -908,7 +911,7 @@ strong { font-weight: 800; }
   font-weight: 600;
   color: var(--tinta-suave);
 }
-.v4-oferta__entrega svg { flex: none; color: var(--argila); }
+.v4-oferta__entrega svg { flex: none; color: var(--verde); }
 
 .v4-btn--compra { width: 100%; display: flex; min-height: 64px; font-size: 1.0625rem; }
 
@@ -1025,7 +1028,7 @@ strong { font-weight: 800; }
   top: 6%;
   width: 58%;
   border-radius: 3px;
-  box-shadow: 0 16px 36px rgba(58, 38, 32, .18);
+  box-shadow: 0 16px 36px rgba(31, 42, 36, .18);
   transform: rotate(-6deg);
 }
 .v4-celular {
@@ -1036,8 +1039,8 @@ strong { font-weight: 800; }
   aspect-ratio: 9 / 19;
   padding: 10px 8px;
   border-radius: 34px;
-  background: #1E1613;
-  box-shadow: inset 0 0 0 2px #4A3A33, 0 22px 44px rgba(58, 38, 32, .32);
+  background: #17201C;
+  box-shadow: inset 0 0 0 2px #3A4640, 0 22px 44px rgba(31, 42, 36, .32);
   transform: rotate(4deg);
 }
 .v4-celular::before {   /* câmera */
@@ -1049,7 +1052,7 @@ strong { font-weight: 800; }
   height: 12px;
   margin-left: -13%;
   border-radius: 8px;
-  background: #1E1613;
+  background: #17201C;
   z-index: 2;
 }
 /* A página inteira na tela, como num leitor de PDF: sobra fundo em cima e
@@ -1089,7 +1092,7 @@ strong { font-weight: 800; }
 .v4-faq__item summary::-webkit-details-marker { display: none; }
 .v4-faq__item summary svg {
   flex: none;
-  color: var(--argila);
+  color: var(--verde);
   transition: transform .2s ease;
 }
 .v4-faq__item[open] summary svg { transform: rotate(45deg); }
@@ -1103,8 +1106,8 @@ strong { font-weight: 800; }
 
 .v4-rodape {
   padding-block: 40px 48px;
-  background: var(--barro);
-  color: var(--barro-texto);
+  background: var(--mata);
+  color: var(--mata-texto);
   font-size: .875rem;
   line-height: 1.55;
   text-align: center;
