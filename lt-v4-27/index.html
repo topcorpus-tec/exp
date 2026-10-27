@@ -76,9 +76,9 @@
          Manual, o botão e os dois ✅. No desktop o Manual vai para a
          coluna da direita.
 
-         O "mockup do manual com foto da Ana Martha" é a própria capa (a
-         foto da Ana está nela), tirada do PDF e montada em livro no CSS,
-         sem imagem gerada.
+         O "mockup do manual com foto da Ana Martha" é o mesmo da hero da
+         v1: o Manual ao centro, com a Ana na capa, cercado pelos bônus e
+         pelas páginas internas.
 
          Todos os botões que não são o da oferta levam para #oferta, como
          o doc pede ("todos os botões devem encaminhar para a oferta"). -->
@@ -98,13 +98,11 @@
           </p>
         </div>
 
-        <div class="v4-hero__livro">
-          <div class="v4-livro">
-            <img class="v4-livro__capa" src="assets/img/capa-manual.webp"
-                 alt="A capa do Manual Ilustrado para Alívio da Dor: a Ana Martha, de jaleco branco, massageando as costas de uma paciente, com setas que mostram o sentido do movimento, e as regiões do corpo que o manual cobre — pescoço e ombros, ombros e trapézio, costas e escápulas, lombar e glúteos, pernas e pés."
-                 width="720" height="1080" fetchpriority="high" decoding="async" />
-          </div>
-        </div>
+        <figure class="v4-hero__mock">
+          <img src="assets/img/mockup-manual.webp"
+               alt="O Manual Ilustrado para Alívio da Dor ao centro, com o Mapa dos Pontos de Dor na Fibromialgia e o Mapa de Reflexologia dos Pés à esquerda e o Guia Ilustrado de Drenagem Linfática à direita, cercados pelas páginas internas: pranchas de anatomia e as aplicações passo a passo para pescoço, braços, mãos e pés."
+               width="1536" height="1024" fetchpriority="high" decoding="async" />
+        </figure>
 
         <div class="v4-hero__acao">
           <a class="v4-btn" href="#oferta">
@@ -225,10 +223,11 @@
     <!-- ==================== /DOBRA 2 ==================== -->
 
     <!-- ==================== DOBRA 3 — E SE FOR ALGO MAIS SÉRIO? ====================
-         A página 8 do Manual ("Antes de começar") entra como prova do que
-         o texto diz: é ali que estão os sinais para não massagear e procurar
-         um profissional. O doc não pede imagem nesta dobra; se ela sair, o
-         texto continua de pé sozinho. -->
+         Duas páginas do Manual entram como prova do que o texto diz: a 8
+         ("Antes de começar"), com onde não massagear e quando procurar um
+         profissional, e a 152 ("Quando encaminhar"), com os doze sinais de
+         alerta, entre eles o inchaço súbito numa perna só. O doc não pede
+         imagem nesta dobra; se ela sair, o texto continua de pé sozinho. -->
     <section class="v4-sec" aria-labelledby="serio-title">
       <div class="v4-wrap v4-serio">
 
@@ -260,10 +259,15 @@
         </div>
 
         <figure class="v4-pagina v4-serio__pagina">
-          <img src="assets/img/pagina-008-antes-de-comecar.webp"
-               alt="A página 8 do Manual, &ldquo;Antes de começar&rdquo;: de um lado, as regiões onde não se deve massagear diretamente, como feridas abertas, inflamação importante, suspeita de fratura e suspeita de trombose; do outro, os sinais que pedem avaliação profissional, como dor muito forte e repentina, febre associada à dor e perda de força."
-               width="720" height="1019" loading="lazy" decoding="async" />
-          <figcaption>Página 8 do Manual</figcaption>
+          <div class="v4-serio__par">
+            <img src="assets/img/pagina-152-quando-encaminhar.webp"
+                 alt="A página 152 do Manual, &ldquo;Quando encaminhar&rdquo;: os doze sinais que pedem avaliação profissional, como perda de força, dor intensa e progressiva, febre, falta de ar, dor no peito e inchaço súbito unilateral."
+                 width="720" height="1019" loading="lazy" decoding="async" />
+            <img src="assets/img/pagina-008-antes-de-comecar.webp"
+                 alt="A página 8 do Manual, &ldquo;Antes de começar&rdquo;: de um lado, as regiões onde não se deve massagear diretamente, como feridas abertas, inflamação importante, suspeita de fratura e suspeita de trombose; do outro, os sinais que pedem avaliação profissional, como dor muito forte e repentina, febre associada à dor e perda de força."
+                 width="720" height="1019" loading="lazy" decoding="async" />
+          </div>
+          <figcaption>Páginas 8 e 152 do Manual</figcaption>
         </figure>
 
       </div>
