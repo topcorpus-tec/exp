@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#FBF6F0" />
+  <meta name="description" content="Antes do próximo remédio, experimente usar as mãos: mais de 70 massagens ilustradas que mostram onde tocar, como tocar e qual pressão usar em cada região do corpo. Por Ana Martha, fisioterapeuta e fundadora do TopCorpus." />
+
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=()" />
+
+  <meta property="og:title"       content="Antes do próximo remédio, experimente usar as mãos" />
+  <meta property="og:description" content="Mais de 70 massagens ilustradas e 5 bônus. Manual Ilustrado para Alívio da Dor com Massagem por R$27." />
+  <meta property="og:type"        content="website" />
+  <meta property="og:locale"      content="pt_BR" />
+
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <title>Manual Ilustrado para Alívio da Dor com Massagem</title>
+
+  <!-- ==================== Fontes ====================
+       Manrope vem do CDN do TopCorpus, como nas outras versões. A Fraunces
+       (títulos) é a novidade da v4 e mora na própria pasta: é a única
+       página que a usa, e assim ela não depende do Google para carregar. -->
+  <link rel="preconnect" href="https://pcm.topcorpus.com.br" crossorigin />
+  <link rel="dns-prefetch" href="https://pcm.topcorpus.com.br" />
+  <link rel="preload" as="font" type="font/woff2" href="https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-400.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-800.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/fraunces-latin.woff2" crossorigin />
+
+  <!-- ==================== dataLayer init ANTES do env-config ==================== -->
+  <script>window.dataLayer = window.dataLayer || [];</script>
+
+  <!-- ==================== Site config + GTM ==================== -->
+  <script src="assets/js/env-config.js"></script>
+  <script src="assets/js/gtm-loader.js"></script>
+
+  <!-- ==================== CSS ====================
+       Um arquivo só. A v4 tem identidade própria (argila sobre creme,
+       Fraunces nos títulos), então não herda o design-system, o taping nem
+       o manual.css das versões anteriores: todo o visual está no v4.css. -->
+  <link rel="stylesheet" href="assets/css/v4.css" />
+
+  <script src="assets/js/manual.js" defer></script>
+</head>
+<body>
+
+  <!-- ==================== Sprite de ícones (usado via <use>) ==================== -->
+  <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12" />
+    </symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+      <line x1="12" y1="6" x2="12" y2="18" /><line x1="6" y1="12" x2="18" y2="12" />
+    </symbol>
+    <symbol id="i-seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="5" y1="12" x2="19" y2="12" /><polyline points="13 6 19 12 13 18" />
+    </symbol>
+    <symbol id="i-pare" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8.2 2.5h7.6l5.7 5.7v7.6l-5.7 5.7H8.2l-5.7-5.7V8.2z" /><line x1="12" y1="7.5" x2="12" y2="12.5" /><line x1="12" y1="16.3" x2="12" y2="16.4" />
+    </symbol>
+    <symbol id="i-presente" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="8" width="18" height="4.5" rx="1" /><path d="M5 12.5V21h14v-8.5" /><line x1="12" y1="8" x2="12" y2="21" /><path d="M12 8H8.3a2.3 2.3 0 1 1 0-4.6C11 3.4 12 8 12 8zM12 8h3.7a2.3 2.3 0 1 0 0-4.6C13 3.4 12 8 12 8z" />
+    </symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="5" width="18" height="14" rx="2.5" /><polyline points="3.5 6.5 12 13 20.5 6.5" />
+    </symbol>
+  </svg>
+
+  <main>
+
+    <!-- ==================== DOBRA 1 — HERO ====================
+         No celular a ordem é a do doc: título, a frase das massagens, o
+         Manual, o botão e os dois ✅. No desktop o Manual vai para a
+         coluna da direita.
+
+         O "mockup do manual com foto da Ana Martha" é a própria capa (a
+         foto da Ana está nela), tirada do PDF e montada em livro no CSS,
+         sem imagem gerada.
+
+         Todos os botões que não são o da oferta levam para #oferta, como
+         o doc pede ("todos os botões devem encaminhar para a oferta"). -->
+    <section class="v4-hero" aria-labelledby="hero-title">
+      <div class="v4-wrap v4-hero__grade">
+
+        <div class="v4-hero__copy">
+          <p class="v4-selo">Manual Ilustrado para Alívio da Dor com Massagem</p>
+
+          <h1 class="v4-hero__titulo" id="hero-title">
+            Antes do próximo remédio, <em>experimente usar as mãos</em>
+          </h1>
+
+          <p class="v4-hero__sub">
+            <strong>Alivie a dor com mais de 70 Massagens Ilustradas</strong> mostrando onde tocar,
+            como tocar e qual pressão usar em cada região do corpo
+          </p>
+        </div>
+
+        <div class="v4-hero__livro">
+          <div class="v4-livro">
+            <img class="v4-livro__capa" src="assets/img/capa-manual.webp"
+                 alt="A capa do Manual Ilustrado para Alívio da Dor: a Ana Martha, de jaleco branco, massageando as costas de uma paciente, com setas que mostram o sentido do movimento, e as regiões do corpo que o manual cobre — pescoço e ombros, ombros e trapézio, costas e escápulas, lombar e glúteos, pernas e pés."
+                 width="720" height="1080" fetchpriority="high" decoding="async" />
+          </div>
+        </div>
+
+        <div class="v4-hero__acao">
+          <a class="v4-btn" href="#oferta">
+            <span>Quero aliviar a dor com minhas mãos</span>
+            <svg width="20" height="20" aria-hidden="true"><use href="#i-seta" /></svg>
+          </a>
+
+          <ul class="v4-oks">
+            <li><span class="v4-ok" aria-hidden="true"><svg width="14" height="14"><use href="#i-check" /></svg></span>Mesmo que você nunca tenha feito massagem</li>
+            <li><span class="v4-ok" aria-hidden="true"><svg width="14" height="14"><use href="#i-check" /></svg></span>Criado por uma fisioterapeuta com 20 anos de prática</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 1 ==================== -->
+
+    <!-- ==================== DOBRA 2 — AS DORES ====================
+         A figura de costas é a do mapa do corpo do próprio Manual (p. 149),
+         sem as duas setas verdes da página. Cada dor tem um ponto na
+         figura; a posição do ponto vai em --x e --y, em % da imagem.
+
+         No desktop as dores ficam dos dois lados da figura e o manual.js
+         desenha a linha de cada uma até o seu ponto. Os lados e as linhas
+         seguem a altura do ponto no corpo, para nenhuma linha cruzar outra:
+         por isso cada item leva a sua coluna e a sua linha da grade
+         (--col, --lin).
+
+         No celular, onde o texto ao lado da figura ficaria pequeno demais
+         (o doc pede atenção a isso), a ligação é pelo número: o ponto e o
+         item têm o mesmo, e a lista vem embaixo na ordem do doc. -->
+    <section class="v4-sec v4-sec--areia" aria-labelledby="dores-title">
+      <div class="v4-wrap">
+        <h2 class="v4-titulo v4-titulo--centro" id="dores-title">
+          Veja algumas <em>dores</em> que o Manual Ilustrado <em>te ensina a aliviar</em>
+        </h2>
+
+        <div class="v4-mapa" data-mapa>
+          <figure class="v4-mapa__fig">
+            <div class="v4-mapa__corpo">
+              <img src="assets/img/corpo-costas.webp"
+                   alt="A musculatura do corpo humano vista de costas, da cabeça aos pés, com um ponto em cada região de dor da lista."
+                   width="653" height="1225" loading="lazy" decoding="async" />
+              <span class="v4-pino" style="--x:49.9%; --y:39.2%" data-pino="1" aria-hidden="true">1</span>
+              <span class="v4-pino" style="--x:51.0%; --y:15.2%" data-pino="2" aria-hidden="true">2</span>
+              <span class="v4-pino" style="--x:63.6%; --y:17.6%" data-pino="3" aria-hidden="true">3</span>
+              <span class="v4-pino" style="--x:48.2%; --y:24.5%" data-pino="4" aria-hidden="true">4</span>
+              <span class="v4-pino" style="--x:40.6%; --y:60.4%" data-pino="5" aria-hidden="true">5</span>
+              <span class="v4-pino" style="--x:59.4%; --y:46.9%" data-pino="6" aria-hidden="true">6</span>
+              <span class="v4-pino" style="--x:62.0%; --y:75.9%" data-pino="7" aria-hidden="true">7</span>
+              <span class="v4-pino" style="--x:41.0%; --y:9.4%" data-pino="8" aria-hidden="true">8</span>
+              <span class="v4-pino" style="--x:11.9%; --y:48.8%" data-pino="9" aria-hidden="true">9</span>
+            </div>
+          </figure>
+
+          <ol class="v4-dores" role="list">
+            <li class="v4-dor v4-dor--esq" data-dor="1" style="--col:1; --lin:3">
+              <span class="v4-dor__n" aria-hidden="true">1</span>
+              <h3 class="v4-dor__titulo">Lombar travada</h3>
+              <p>Levanta da cadeira e já reclama. No fim do dia não aguenta mais de tanta dor.</p>
+            </li>
+            <li class="v4-dor" data-dor="2" style="--col:3; --lin:1">
+              <span class="v4-dor__n" aria-hidden="true">2</span>
+              <h3 class="v4-dor__titulo">Pescoço duro que vira dor de cabeça</h3>
+              <p>A nuca endurece, a tensão sobe até as têmporas.</p>
+            </li>
+            <li class="v4-dor" data-dor="3" style="--col:3; --lin:2">
+              <span class="v4-dor__n" aria-hidden="true">3</span>
+              <h3 class="v4-dor__titulo">Ombros tensos</h3>
+              <p>O estresse do dia acumula e os ombros ficam quase &ldquo;colados&rdquo; na orelha.</p>
+            </li>
+            <li class="v4-dor v4-dor--esq" data-dor="4" style="--col:1; --lin:2">
+              <span class="v4-dor__n" aria-hidden="true">4</span>
+              <h3 class="v4-dor__titulo">Nó no meio das costas</h3>
+              <p>Aquela dor entre as escápulas, que não vai embora.</p>
+            </li>
+            <li class="v4-dor v4-dor--esq" data-dor="5" style="--col:1; --lin:5">
+              <span class="v4-dor__n" aria-hidden="true">5</span>
+              <h3 class="v4-dor__titulo">Dor que desce pela perna</h3>
+              <p>Choque, queimação e formigamento.</p>
+            </li>
+            <li class="v4-dor" data-dor="6" style="--col:3; --lin:4">
+              <span class="v4-dor__n" aria-hidden="true">6</span>
+              <h3 class="v4-dor__titulo">Glúteo e quadril que doem e se espalham</h3>
+              <p>Um ponto sensível que endurece e espalha o desconforto.</p>
+            </li>
+            <li class="v4-dor" data-dor="7" style="--col:3; --lin:5">
+              <span class="v4-dor__n" aria-hidden="true">7</span>
+              <h3 class="v4-dor__titulo">Pernas pesadas no fim do dia</h3>
+              <p>Depois de horas em pé ou sentado, as pernas pesam e parecem inchadas.</p>
+            </li>
+            <li class="v4-dor v4-dor--esq" data-dor="8" style="--col:1; --lin:1">
+              <span class="v4-dor__n" aria-hidden="true">8</span>
+              <h3 class="v4-dor__titulo">Mandíbula tensa ao acordar</h3>
+              <p>Dura, com dor perto das têmporas.</p>
+            </li>
+            <li class="v4-dor v4-dor--esq" data-dor="9" style="--col:1; --lin:4">
+              <span class="v4-dor__n" aria-hidden="true">9</span>
+              <h3 class="v4-dor__titulo">Braços e punhos cansados</h3>
+              <p>De tanto digitar e segurar o celular.</p>
+            </li>
+          </ol>
+
+          <svg class="v4-mapa__linhas" aria-hidden="true" focusable="false" data-mapa-linhas></svg>
+        </div>
+
+        <!-- A fibromialgia fica embaixo do corpo, com um destaque leve, como
+             o doc pede: ela não é de uma região só. -->
+        <div class="v4-fibro">
+          <span class="v4-fibro__ico" aria-hidden="true"><svg width="22" height="22"><use href="#i-presente" /></svg></span>
+          <div>
+            <h3 class="v4-fibro__titulo">Fibromialgia</h3>
+            <p>Bônus com o mapa dos 18 pontos sensíveis.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 2 ==================== -->
+
+    <!-- ==================== DOBRA 3 — E SE FOR ALGO MAIS SÉRIO? ====================
+         A página 8 do Manual ("Antes de começar") entra como prova do que
+         o texto diz: é ali que estão os sinais para não massagear e procurar
+         um profissional. O doc não pede imagem nesta dobra; se ela sair, o
+         texto continua de pé sozinho. -->
+    <section class="v4-sec" aria-labelledby="serio-title">
+      <div class="v4-wrap v4-serio">
+
+        <div class="v4-serio__texto">
+          <h2 class="v4-titulo" id="serio-title">
+            E se a dor for <em>indício de algo mais sério?</em>
+            <span class="v4-titulo__linha2">O Manual serve mesmo assim?</span>
+          </h2>
+
+          <p class="v4-lead">Serve sim, e foi por isso que eu fiz do jeito que fiz.</p>
+
+          <p>
+            O Manual mostra quando <strong>NÃO massagear</strong> e encaminhar para um profissional de
+            saúde, como dor forte e repentina, febre junto com a dor, perda de força e inchaço súbito
+            em uma perna.
+          </p>
+
+          <p>
+            Aqui você encontra onde tocar, qual pressão usar, por quanto tempo, e o que não é para
+            mexer de jeito nenhum, para cada região.
+          </p>
+
+          <p class="v4-fecho"><strong>Afinal, saber a hora de parar também faz parte da massagem.</strong></p>
+
+          <a class="v4-btn" href="#oferta">
+            <span>Quero o meu Manual Ilustrado</span>
+            <svg width="20" height="20" aria-hidden="true"><use href="#i-seta" /></svg>
+          </a>
+        </div>
+
+        <figure class="v4-pagina v4-serio__pagina">
+          <img src="assets/img/pagina-008-antes-de-comecar.webp"
+               alt="A página 8 do Manual, &ldquo;Antes de começar&rdquo;: de um lado, as regiões onde não se deve massagear diretamente, como feridas abertas, inflamação importante, suspeita de fratura e suspeita de trombose; do outro, os sinais que pedem avaliação profissional, como dor muito forte e repentina, febre associada à dor e perda de força."
+               width="720" height="1019" loading="lazy" decoding="async" />
+          <figcaption>Página 8 do Manual</figcaption>
+        </figure>
+
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 3 ==================== -->
+
+    <!-- ==================== DOBRA 4 — CADA DOR TEM UMA PÁGINA ====================
+         A foto das mãos é uma das fotos do próprio Manual (p. 53), sem as
+         setas de instrução que ela tem lá.
+
+         As páginas do mapa do corpo são as 148, 149 e 150. O doc fala em
+         "pp. 146 a 148", mas a 146 e a 147 são de pés; o mapa começa na 148. -->
+    <section class="v4-sec v4-sec--branco" aria-labelledby="pagina-title">
+      <div class="v4-wrap">
+        <h2 class="v4-titulo v4-titulo--centro" id="pagina-title">
+          Cada dor tem uma página. <em>E a página diz o que fazer</em>
+        </h2>
+
+        <figure class="v4-maos">
+          <img src="assets/img/maos-costas.webp"
+               alt="Duas mãos pousadas com cuidado no alto das costas de uma pessoa deitada na maca."
+               width="937" height="460" loading="lazy" decoding="async" />
+        </figure>
+
+        <div class="v4-estreito">
+          <p class="v4-lead">Lombar travada, pescoço duro, perna pesada&hellip;</p>
+          <p>
+            Para cada uma, o Manual mostra a foto do lugar, onde pôr a mão, quanto apertar e por
+            quanto tempo.
+          </p>
+          <p class="v4-chamada"><strong>Abriu na região que dói, já dá para começar:</strong></p>
+        </div>
+
+        <article class="v4-passo">
+          <div class="v4-passo__media v4-leque">
+            <img src="assets/img/pagina-148-mapa-frente.webp"
+                 alt="A página 148 do Manual, &ldquo;Seu mapa rápido do corpo&rdquo;, com a musculatura vista de frente."
+                 width="640" height="906" loading="lazy" decoding="async" />
+            <img src="assets/img/pagina-149-mapa-costas.webp"
+                 alt="A página 149, o mesmo mapa visto de costas."
+                 width="640" height="906" loading="lazy" decoding="async" />
+            <img src="assets/img/pagina-150-mapa-lista.webp"
+                 alt="A página 150, com a lista das regiões para consulta: cabeça, cervical, ombros, trapézio, escápulas, torácica, lombar, glúteos, braços, antebraços, mãos, coxas, panturrilhas e pés."
+                 width="640" height="906" loading="lazy" decoding="async" />
+          </div>
+          <div class="v4-passo__texto">
+            <h3 class="v4-passo__titulo">Encontre onde dói e vá direto para a página certa</h3>
+            <p>O mapa do corpo te leva até a região, sem precisar procurar vídeo salvo no celular.</p>
+          </div>
+        </article>
+
+        <article class="v4-passo v4-passo--adeir">
+          <div class="v4-passo__texto">
+            <h3 class="v4-passo__titulo">Cinco etapas, sempre na mesma ordem</h3>
+            <p>
+              O Método Validado que eu uso há anos. Cada manobra segue a mesma sequência, do primeiro
+              toque até o relaxamento final:
+            </p>
+          </div>
+          <ol class="v4-adeir">
+            <li><span class="v4-adeir__letra" aria-hidden="true">A</span><span><strong>Anestesiar</strong> &ndash; preparar a região para receber o toque</span></li>
+            <li><span class="v4-adeir__letra" aria-hidden="true">D</span><span><strong>Drenar</strong> &ndash; levar o líquido acumulado embora</span></li>
+            <li><span class="v4-adeir__letra" aria-hidden="true">E</span><span><strong>Esquentar</strong> &ndash; aquecer o músculo antes de trabalhar nele</span></li>
+            <li><span class="v4-adeir__letra" aria-hidden="true">I</span><span><strong>Investigar</strong> &ndash; encontrar o ponto que está realmente tenso</span></li>
+            <li><span class="v4-adeir__letra" aria-hidden="true">R</span><span><strong>Relaxar</strong> &ndash; fechar com movimentos que acalmam</span></li>
+          </ol>
+        </article>
+
+        <p class="v4-nota-ok">
+          <span class="v4-ok" aria-hidden="true"><svg width="14" height="14"><use href="#i-check" /></svg></span>
+          <span><strong>Sem termos técnicos:</strong> linguagem direta, com fotos em cada manobra.</span>
+        </p>
+
+        <!-- A escala é a da página 9 do Manual ("A regra de ouro"): 1 a 3
+             leve, 4 a 6 moderada, 7 em diante fora do padrão do Manual. -->
+        <div class="v4-pressao">
+          <div class="v4-pressao__texto">
+            <h3 class="v4-pressao__titulo">Você não vai apertar demais.</h3>
+            <p>
+              O Manual trabalha numa escala de 1 a 10 e nunca passa de 6. A regra que eu ensino há
+              anos: <strong>o corpo não precisa lutar contra as suas mãos</strong>.
+            </p>
+          </div>
+          <div class="v4-escala" role="img" aria-label="Escala de pressão de 1 a 10: de 1 a 3 é leve, de 4 a 6 é moderada, e de 7 a 10 fica fora do Manual.">
+            <ol class="v4-escala__barra" aria-hidden="true">
+              <li class="is-leve">1</li><li class="is-leve">2</li><li class="is-leve">3</li>
+              <li class="is-media">4</li><li class="is-media">5</li><li class="is-media">6</li>
+              <li class="is-fora">7</li><li class="is-fora">8</li><li class="is-fora">9</li><li class="is-fora">10</li>
+            </ol>
+            <div class="v4-escala__legenda" aria-hidden="true">
+              <span class="is-leve">Leve</span>
+              <span class="is-media">Moderada</span>
+              <span class="is-fora">Fora do Manual</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 4 ==================== -->
+
+    <!-- ==================== DOBRA 5 — O QUE QUASE TODO MUNDO FAZ ==================== -->
+    <section class="v4-sec v4-sec--barro" aria-labelledby="remedio-title">
+      <div class="v4-wrap v4-estreito v4-remedio">
+        <h2 class="v4-titulo" id="remedio-title">Quando a dor aparece, quase todo mundo faz a mesma coisa&hellip;</h2>
+
+        <p class="v4-remedio__gesto">Toma um remédio, deita e espera passar.</p>
+
+        <p class="v4-remedio__virada"><strong>Mas suas mãos também podem ajudar</strong>.</p>
+
+        <p>
+          A maioria das dores do dia a dia nasce de um músculo sobrecarregado, tenso, sensível e
+          cansado. E um toque bem feito, no lugar certo, com a pressão certa e na direção certa, traz
+          alívio de verdade.
+        </p>
+
+        <p>A massagem não substitui o tratamento, nem a orientação do médico.</p>
+
+        <p>
+          Ela é uma aliada, que somada aos cuidados que a pessoa já tem, <strong>traz mais alívio e de
+          forma mais rápida.</strong>
+        </p>
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 5 ==================== -->
+
+    <!-- ==================== DOBRA 6 — BÔNUS ====================
+         As cinco artes dos bônus são as mesmas da v1 à v3: mostram o
+         material de cada um por dentro. -->
+    <section class="v4-sec" aria-labelledby="bonus-title">
+      <div class="v4-wrap">
+        <h2 class="v4-titulo v4-titulo--centro" id="bonus-title">
+          Junto com o Manual, você leva mais <em>5 bônus incríveis e totalmente gratuitos:</em>
+        </h2>
+
+        <div class="v4-bonus">
+
+          <article class="v4-bonus__card">
+            <img src="assets/img/bonus-1-videoaulas.webp"
+                 alt="A Ana Martha aplicando as manobras em vídeo, na tela do notebook, do tablet e do celular ao mesmo tempo."
+                 width="720" height="480" loading="lazy" decoding="async" />
+            <div class="v4-bonus__corpo">
+              <span class="v4-bonus__rot">Bônus 1</span>
+              <h3 class="v4-bonus__titulo">Vídeo-aula das manobras</h3>
+              <p>Uma sessão de massagem nas costas, com o passo a passo completo de onde colocar as mãos, quanto de pressão usar em cada movimento e onde não encostar.</p>
+            </div>
+          </article>
+
+          <article class="v4-bonus__card">
+            <img src="assets/img/bonus-2-whatsapp.webp"
+                 alt="A Ana Martha com o celular na mão diante do ícone do WhatsApp, ao lado de um balão de mensagem enviada."
+                 width="720" height="480" loading="lazy" decoding="async" />
+            <div class="v4-bonus__corpo">
+              <span class="v4-bonus__rot">Bônus 2</span>
+              <h3 class="v4-bonus__titulo">Meu contato direto no WhatsApp</h3>
+              <p>Você manda sua dúvida direto pelo WhatsApp e recebe resposta na hora. Seja sábado, domingo, feriado ou de madrugada.</p>
+            </div>
+          </article>
+
+          <article class="v4-bonus__card">
+            <img src="assets/img/bonus-3-reflexologia.webp"
+                 alt="O Mapa de Reflexologia dos Pés cercado pelas páginas internas, com o mapa colorido das regiões reflexas dos pés."
+                 width="720" height="480" loading="lazy" decoding="async" />
+            <div class="v4-bonus__corpo">
+              <span class="v4-bonus__rot">Bônus 3</span>
+              <h3 class="v4-bonus__titulo">Mapa ilustrado de reflexologia</h3>
+              <p>A reflexologia é uma técnica milenar que trabalha pontos específicos dos pés para aliviar dores em outras partes do corpo. Aqui você recebe um mapa ilustrado desses pontos, para ampliar seu repertório.</p>
+            </div>
+          </article>
+
+          <article class="v4-bonus__card">
+            <img src="assets/img/bonus-4-drenagem.webp"
+                 alt="O Guia Ilustrado de Drenagem Linfática cercado pelas páginas internas, com as manobras e o sentido de cada movimento em setas."
+                 width="720" height="480" loading="lazy" decoding="async" />
+            <div class="v4-bonus__corpo">
+              <span class="v4-bonus__rot">Bônus 4</span>
+              <h3 class="v4-bonus__titulo">Guia ilustrado de drenagem linfática</h3>
+              <p>Um guia visual com as principais regiões linfáticas, os caminhos e o sentido de cada movimento, para você aplicar a drenagem sem ficar adivinhando para que lado ela deve ir.</p>
+            </div>
+          </article>
+
+          <article class="v4-bonus__card">
+            <img src="assets/img/bonus-5-fibromialgia.webp"
+                 alt="O Mapa dos Pontos de Dor na Fibromialgia cercado pelas páginas internas, com o mapa dos 18 pontos nas vistas de frente e de costas."
+                 width="720" height="480" loading="lazy" decoding="async" />
+            <div class="v4-bonus__corpo">
+              <span class="v4-bonus__rot">Bônus 5</span>
+              <h3 class="v4-bonus__titulo">Mapa dos Pontos de Dor na Fibromialgia</h3>
+              <p>Conheça os 18 pontos sensíveis e tenha um guia visual para manobras mais seguras e humanizadas.</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 6 ==================== -->
+
+    <!-- ==================== DOBRAS 7 E 8 — A HISTÓRIA ====================
+         As duas dobras moram na mesma seção, com o mesmo fundo e um fio
+         que desce de uma para a outra: o doc pede que a 8 continue a 7, sem
+         uma divisão clara entre elas.
+
+         FOTO PENDENTE: a foto da Ana com os pais ainda não chegou. Até lá
+         fica o espaço marcado (.v4-foto-falta); quando chegar, trocar o
+         <div> por um <img> com width e height. -->
+    <section class="v4-sec v4-sec--areia v4-historia" aria-labelledby="historia-title">
+      <div class="v4-wrap v4-estreito">
+
+        <div class="v4-foto-falta" role="img" aria-label="Espaço da foto da Ana Martha com os pais">
+          <span>Foto: Ana Martha com os pais</span>
+        </div>
+
+        <h2 class="v4-titulo" id="historia-title">
+          Eu tinha 6 anos quando descobri <em>o que as minhas mãos podiam fazer</em>
+        </h2>
+
+        <p>
+          Meu pai, que sempre foi o meu herói, sofreu um grave acidente. Quebrou os ossos da perna,
+          gemia de dor e, mesmo tomando vários remédios, não conseguia dormir direito.
+        </p>
+        <p>
+          Eu era só uma criança e queria muito aliviar a dor dele, mas eu não tinha técnica, nem
+          conhecimento. Eu só tinha as minhas mãos, tão pequenas ainda.
+        </p>
+        <p>Mesmo assim, comecei a fazer massagem na perna dele, com todo o meu amor.</p>
+        <p>Até que um dia ele me disse algo que eu nunca mais esqueci:</p>
+
+        <blockquote class="v4-citacao">
+          <p>&ldquo;Filha, hoje eu dormi sem dor porque você fez massagem em mim. Suas mãos são top.&rdquo;</p>
+        </blockquote>
+
+        <p>Ali eu tive certeza: queria usar as minhas mãos para aliviar dores.</p>
+        <p>Cresci, me formei em Fisioterapia e transformei isso em profissão.</p>
+
+        <div class="v4-assina">
+          <img src="assets/img/ana-retrato.webp" alt="A Ana Martha, sorrindo, de roupa branca."
+               width="480" height="801" loading="lazy" decoding="async" />
+          <p><strong>Muito prazer, eu sou a Ana Martha,</strong> fisioterapeuta e fundadora do TopCorpus.</p>
+        </div>
+
+        <p>
+          Sou casada, mãe de duas meninas, atuo há 20 anos aliviando dores com massagem humanizada.
+        </p>
+        <p>
+          Já ganhei prêmio internacional nos Estados Unidos, fui a vários programas de TV e criei o
+          maior curso de massoterapia humanizada do Brasil, com mais de <strong>60 mil alunas em 60
+          países</strong>.
+        </p>
+        <p>
+          E foi pensando naquela menina de 6 anos, que só tinha as mãos e muita vontade de ajudar,
+          que eu coloquei nesse <strong>Manual o passo a passo para você aliviar a dor</strong> de quem
+          precisa.
+        </p>
+
+        <p class="v4-poder">Você tem mais poder nas suas mãos do que imagina.</p>
+
+        <a class="v4-btn v4-btn--centro" href="#oferta">
+          <span>Quero aliviar dores</span>
+          <svg width="20" height="20" aria-hidden="true"><use href="#i-seta" /></svg>
+        </a>
+
+        <!-- ===== DOBRA 8 — continua a 7 ===== -->
+        <div class="v4-elo" aria-hidden="true"></div>
+
+        <h2 class="v4-titulo" id="familia-title">
+          Eu comecei pelo meu pai. <em>Muitas alunas começaram pela família</em>
+        </h2>
+
+        <p>
+          Muitas das minhas alunas começaram do mesmo jeito: aliviando a dor de alguém de casa.
+          Primeiro o marido, depois a mãe, depois a amiga que ficou sabendo.
+        </p>
+        <p>
+          E um dia perceberam que aquilo que faziam por amor tinha valor. Que tinha gente procurando
+          exatamente isso.
+        </p>
+        <p>
+          Hoje muitas delas fizeram da massagem uma profissão, e algumas uma renda extra que cabe na
+          rotina.
+        </p>
+        <p>
+          Não precisa ser o seu plano agora. O Manual começa pela pessoa que você ama. Mas é bom saber
+          que essa porta existe, e que ela começa exatamente aqui.
+        </p>
+
+        <p class="v4-poder">Você tem mais poder nas suas mãos do que imagina.</p>
+
+        <a class="v4-btn v4-btn--centro" href="#oferta">
+          <span>Quero começar pelo Manual</span>
+          <svg width="20" height="20" aria-hidden="true"><use href="#i-seta" /></svg>
+        </a>
+
+      </div>
+    </section>
+    <!-- ==================== /DOBRAS 7 E 8 ==================== -->
+
+    <!-- ==================== DOBRA 9 — OFERTA ====================
+         O cartão segue a referência de oferta do doc (Musicograma, Pais e
+         Professores): a arte do que vem no alto, a lista, um fio, o "de/por",
+         o preço grande, a economia e o botão largo.
+
+         É a única dobra com botão de compra ([data-checkout]); todos os
+         outros botões da página trazem para cá. O manual.js para a rolagem
+         com o pé deste cartão dentro da tela, para o preço e o botão
+         aparecerem juntos. -->
+    <section class="v4-sec v4-sec--barro v4-oferta" id="oferta" aria-labelledby="oferta-title">
+      <div class="v4-wrap">
+        <h2 class="v4-titulo v4-titulo--centro" id="oferta-title">Veja tudo que você recebe hoje:</h2>
+
+        <div class="v4-oferta__card">
+          <div class="v4-oferta__mock">
+            <img src="assets/img/mockup-oferta.webp"
+                 alt="O Manual Ilustrado para Alívio da Dor ao centro, cercado pelos cinco bônus: o Mapa de Reflexologia dos Pés, o Mapa dos Pontos de Dor na Fibromialgia, o Guia Ilustrado de Drenagem Linfática, as videoaulas e o WhatsApp."
+                 width="1100" height="661" loading="lazy" decoding="async" />
+          </div>
+
+          <ul class="v4-oferta__itens">
+            <li><span><strong>Manual completo</strong>, com mais de 70 manobras ilustradas</span><span class="v4-oferta__valor">R$107,00</span></li>
+            <li><span><strong>Bônus 1</strong> &ndash; Vídeo-aula das manobras</span><span class="v4-oferta__valor">R$57,00</span></li>
+            <li><span><strong>Bônus 2</strong> &ndash; Meu contato no WhatsApp para tirar dúvidas</span><span class="v4-oferta__valor">R$29,00</span></li>
+            <li><span><strong>Bônus 3</strong> &ndash; Mapa ilustrado de reflexologia</span><span class="v4-oferta__valor">R$20,00</span></li>
+            <li><span><strong>Bônus 4</strong> &ndash; Guia ilustrado de drenagem linfática</span><span class="v4-oferta__valor">R$37,00</span></li>
+            <li><span><strong>Bônus 5</strong> &ndash; Mapa dos Pontos de Dor na Fibromialgia</span><span class="v4-oferta__valor">R$47,00</span></li>
+          </ul>
+
+          <p class="v4-oferta__total">
+            <strong>Juntando tudo isso, o valor total seria:</strong> <s>R$297,00</s>
+          </p>
+
+          <hr class="v4-oferta__fio" />
+
+          <p class="v4-oferta__de">De <s>R$297,00</s> por</p>
+          <p class="v4-oferta__preco"><span class="v4-oferta__rs">R$</span>27</p>
+          <p class="v4-oferta__economia">você economiza R$ 270</p>
+
+          <p class="v4-oferta__entrega">
+            <svg width="18" height="18" aria-hidden="true"><use href="#i-mail" /></svg>
+            Garanta o seu e receba agora mesmo por e-mail
+          </p>
+
+          <a class="v4-btn v4-btn--compra" href="#" data-checkout>
+            <span>Quero o Manual e todos os bônus</span>
+            <svg width="20" height="20" aria-hidden="true"><use href="#i-seta" /></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 9 ==================== -->
+
+    <!-- ==================== DOBRA 10 — DEPOIMENTOS ====================
+         Os quatro depoimentos do doc. O da Kely e o da Jessica são os
+         prints, como vieram; do da Jessica saíram só o "Atribuir esta
+         conversa" e o botão ···, que são da tela de quem recebeu a mensagem,
+         e o pedaço de balão cortado no pé.
+
+         O da Josiane e o da Betina são largos demais: como imagem, a letra
+         ficava ilegível no celular. Os dois foram redesenhados em HTML com a
+         cara do print e o texto exato, sem correção, inclusive o trecho que
+         a Betina destacou em amarelo. Do da Josiane saiu a etiqueta "GUEST"
+         da plataforma. -->
+    <section class="v4-sec" aria-labelledby="depo-title">
+      <div class="v4-wrap">
+        <h2 class="v4-titulo v4-titulo--centro" id="depo-title">
+          Veja o que acontece quando <em>as mãos sabem o que estão fazendo:</em>
+        </h2>
+
+        <div class="v4-depos">
+
+          <figure class="v4-depo">
+            <figcaption class="v4-depo__titulo">Ela saiu da massagem sem dor e, no dia seguinte, estava renovada</figcaption>
+            <div class="v4-depo__print">
+              <img src="assets/img/depo-kely.webp"
+                   alt="Comentário de Kely Fabiana Bufalo: &ldquo;Outra cliente com dores no corpo classificou a massagem que fiz como SURREAL....disse que saiu da sala sem dor e no dia seguinte estava NOVA. Isso é a massagem humanizada Top Corpus&rdquo;."
+                   width="470" height="127" loading="lazy" decoding="async" />
+            </div>
+          </figure>
+
+          <figure class="v4-depo">
+            <figcaption class="v4-depo__titulo">Ela fez massagem para fibromialgia e em uma puérpera e as duas dormiram na sessão</figcaption>
+            <div class="v4-depo__print">
+              <img src="assets/img/depo-jessica.webp"
+                   alt="Mensagem de Jessica Santos para a Ana: atendeu duas clientes, uma puérpera e outra com artrose e fibromialgia; as duas amaram e dormiram durante a sessão. A que tinha fibromialgia nem precisou tomar remédio para dormir e estava sem dores, e a puérpera acordou sem dor. &ldquo;Estou tão feliz e realizada.&rdquo;"
+                   width="437" height="569" loading="lazy" decoding="async" />
+            </div>
+          </figure>
+
+          <figure class="v4-depo">
+            <figcaption class="v4-depo__titulo">Chegou sem conseguir sair do carro sozinha e saiu andando.</figcaption>
+            <div class="v4-depo__print">
+              <div class="v4-coment">
+                <span class="v4-coment__av" aria-hidden="true">JG</span>
+                <div class="v4-coment__corpo">
+                  <p class="v4-coment__cab"><strong>Josiane Gomes Machado</strong> <span>Ontem, 20:13</span></p>
+                  <p class="v4-coment__texto">Eu tenho uma sala de atendimento na minha casa, já trabalhava como terapeuta integrativa e agora já estou tendo minhas primeiras clientes de Massoterapia e estou muito feliz com os resultados. Ontem atendi uma senhora com dores no corpo que quase não conseguiu sair sozinha do carro, veio com a filha, as duas fizeram massagem comigo e a senhorinha saiu andando muito melhor e entrou tranquilamente no carro. Hoje falei com ela pra saber como está e fiquei muito feliz com o resultado, disse que dormiu bem e que as dores diminuíram muito. Fiquei mega feliz. Sou de Canoas, RS.</p>
+                </div>
+              </div>
+            </div>
+          </figure>
+
+          <figure class="v4-depo">
+            <figcaption class="v4-depo__titulo">Chegou com dor 10. Saiu com dor 2.</figcaption>
+            <div class="v4-depo__print">
+              <div class="v4-msg">
+                <p class="v4-msg__cab">
+                  <img src="assets/img/avatar-betina.webp" alt="" width="96" height="96" loading="lazy" decoding="async" />
+                  <strong>Betina Chaluppe | Massoterapeuta</strong>
+                </p>
+                <div class="v4-msg__conversa">
+                  <p class="v4-msg__balao">Boa tarde Ana Martha, tudo bem?<br />
+                    Mas meu relato de hoje é sobre o quão fantástico é podermos diminuir a dor de alguém, hoje agorinha de pouco, fiz um atendimento numa paciente com escoliose, chegou com dor 10, nas costas e nos braços. Ela optou por fazer a sessão inteira só nessas regiões e eu atendi, quando finalizei a sessão ela demorou mais 10 min pra sair da maca, pois estava dormindo, e quando levantou olhou pra mim e disse, <mark>nossa você tirou um peso gigante de mim. A dor está em 2.</mark><br />
+                    Fiquei até sem reação por um instante, mas logo processei que tudo é fruto do meu esforço e do seu direcionamento. Obrigada</p>
+                  <p class="v4-msg__balao">Esse atendimento mudou o meu dia, e me fez perceber mais ainda, que sou capaz de fazer a diferença.</p>
+                </div>
+              </div>
+            </div>
+          </figure>
+
+        </div>
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 10 ==================== -->
+
+    <!-- ==================== DOBRA 11 — PARA CONSULTAR SEMPRE ====================
+         O celular e a folha impressa são montados no CSS com páginas reais
+         do Manual: a 93 (as fotos da manobra) na tela e a 92 (onde tocar,
+         onde evitar e as etapas) na folha. -->
+    <section class="v4-sec v4-sec--areia" aria-labelledby="consulta-title">
+      <div class="v4-wrap v4-consulta">
+        <div class="v4-consulta__texto">
+          <h2 class="v4-titulo" id="consulta-title">
+            Um Manual para consultar <em>sempre que a dor aparecer</em>
+          </h2>
+          <p class="v4-lead"><strong>Você pode imprimir ou usar direto pelo celular</strong>, sem instalar nada.</p>
+          <p>
+            Abriu o mapa do corpo, encontrou a região que dói e a página já mostra onde tocar, como
+            tocar e qual pressão usar.
+          </p>
+        </div>
+
+        <div class="v4-consulta__cena" aria-hidden="true">
+          <img class="v4-folha" src="assets/img/pagina-092-aplicacao-lombar.webp" alt=""
+               width="640" height="906" loading="lazy" decoding="async" />
+          <div class="v4-celular">
+            <img src="assets/img/pagina-093-anestesiar-drenar.webp" alt=""
+                 width="640" height="906" loading="lazy" decoding="async" />
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 11 ==================== -->
+
+    <!-- ==================== DOBRA 12 — FAQ ==================== -->
+    <section class="v4-sec" aria-labelledby="faq-title">
+      <div class="v4-wrap v4-estreito">
+        <h2 class="v4-titulo v4-titulo--centro" id="faq-title">Perguntas frequentes</h2>
+
+        <div class="v4-faq">
+
+          <details class="v4-faq__item">
+            <summary>Preciso ter experiência para usar o Manual?<svg width="16" height="16" aria-hidden="true"><use href="#i-plus" /></svg></summary>
+            <p>Não. O Manual foi feito tanto para quem nunca fez massagem, quanto para quem já tem prática, com linguagem direta e sem termos técnicos complicados.</p>
+          </details>
+
+          <details class="v4-faq__item">
+            <summary>Preciso ser profissional para usar?<svg width="16" height="16" aria-hidden="true"><use href="#i-plus" /></svg></summary>
+            <p>Não. O Manual foi feito para qualquer pessoa que queira aliviar a dor de alguém, seja numa maca ou no sofá de casa.</p>
+          </details>
+
+          <details class="v4-faq__item">
+            <summary>Posso usar com clientes, em atendimento?<svg width="16" height="16" aria-hidden="true"><use href="#i-plus" /></svg></summary>
+            <p>Pode. Muita gente imprime e usa ele aberto do lado da maca, justamente para consultar na hora do atendimento.</p>
+          </details>
+
+          <details class="v4-faq__item">
+            <summary>Preciso de algum equipamento?<svg width="16" height="16" aria-hidden="true"><use href="#i-plus" /></svg></summary>
+            <p>Não. Todas as manobras usam só as suas mãos.</p>
+          </details>
+
+          <details class="v4-faq__item">
+            <summary>Como eu recebo o acesso?<svg width="16" height="16" aria-hidden="true"><use href="#i-plus" /></svg></summary>
+            <p>O Manual é enviado para o seu e-mail assim que o pagamento for confirmado.</p>
+          </details>
+
+          <details class="v4-faq__item">
+            <summary>Funciona para casos como hérnia, gravidez ou escoliose?<svg width="16" height="16" aria-hidden="true"><use href="#i-plus" /></svg></summary>
+            <p>Essas situações pedem mais cuidado. O Manual traz os alertas de cada região e mostra quando é melhor não massagear e procurar um profissional de saúde. Ele não substitui avaliação médica ou fisioterapêutica.</p>
+          </details>
+
+          <details class="v4-faq__item">
+            <summary>E quem toma remédio ou faz algum tratamento médico, pode fazer?<svg width="16" height="16" aria-hidden="true"><use href="#i-plus" /></svg></summary>
+            <p>Depende do caso. A massagem ajuda junto com o tratamento e nunca no lugar dele. Com o Manual, você fica sabendo como e quando pode fazer.</p>
+          </details>
+
+          <details class="v4-faq__item">
+            <summary>E se eu não tiver certeza se a dor é só tensão muscular?<svg width="16" height="16" aria-hidden="true"><use href="#i-plus" /></svg></summary>
+            <p>Cada região do Manual tem uma seção de alertas com os sinais de que a dor pode ser mais do que tensão. Se aparecer algum, o Manual orienta a parar e procurar um profissional de saúde. Ele também mostra quando NÃO massagear: inflamação, suspeita de fratura, sinais de trombose e outras situações.</p>
+          </details>
+
+          <details class="v4-faq__item">
+            <summary>E se eu me arrepender?<svg width="16" height="16" aria-hidden="true"><use href="#i-plus" /></svg></summary>
+            <p>Você tem 7 dias de garantia. Se achar que não é o que você precisa no momento, devolvemos todo o seu investimento.</p>
+          </details>
+
+        </div>
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 12 ==================== -->
+
+  </main>
+
+  <!-- ==================== RODAPÉ ====================
+       A primeira linha é a do doc. Razão social, CNPJ e o aviso legal
+       seguem as outras versões. Os links de privacidade e termos das
+       outras versões ficaram de fora: os dois respondem 404. -->
+  <footer class="v4-rodape">
+    <div class="v4-wrap">
+      <p class="v4-rodape__direitos">Todos os direitos reservados &ndash; TOPCORPUS&reg; &ndash; 2026</p>
+      <p class="v4-rodape__empresa">ANA MARTHA CURSOS ONLINE LTDA &middot; CNPJ 41.219.310/0001-89</p>
+      <p class="v4-rodape__aviso">
+        <strong>Aviso Legal:</strong>
+        Os resultados podem variar de pessoa para pessoa. Este método tem caráter educacional e de
+        desenvolvimento pessoal, não garantindo ganhos financeiros imediatos ou específicos. O sucesso
+        depende da aplicação prática de cada participante. Este site não é afiliado, endossado ou
+        patrocinado pelo Google ou Meta.
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
