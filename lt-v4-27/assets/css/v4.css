@@ -91,6 +91,18 @@ body {
 
 img { display: block; max-width: 100%; height: auto; }
 h1, h2, h3, p, ul, ol, figure, blockquote { margin: 0; }
+
+/* Quebra de linha equilibrada na página toda. Títulos, legendas, perguntas
+   e os blocos curtos ou centralizados dividem o texto em linhas de largura
+   parecida (balance); os parágrafos corridos e os itens de lista evitam a
+   palavra sozinha na última linha (pretty). Navegador sem suporte quebra
+   do jeito normal. */
+p, li { text-wrap: pretty; }
+h1, h2, h3, figcaption, summary, blockquote p,
+.v4-selo, .v4-hero__sub, .v4-lead, .v4-chamada, .v4-fecho, .v4-poder,
+.v4-dor p, .v4-fibro p, .v4-oks li, .v4-nota-ok,
+.v4-remedio p, .v4-oferta__card p, .v4-oferta__itens li > span:first-of-type,
+.v4-rodape p { text-wrap: balance; }
 ul, ol { padding: 0; list-style: none; }
 strong { font-weight: 800; }
 
