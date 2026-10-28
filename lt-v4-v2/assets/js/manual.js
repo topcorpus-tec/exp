@@ -20,24 +20,19 @@
   /* =======================================================================
      DESTINO DA COMPRA
 
-     PENDENTE: o funil do SF desta versão.
+     Desde 27/10/2026 o botão da oferta vai direto para a Hotmart, com o
+     mesmo link da lt-v1-27: a oferta de R$27 (off=9z1ywsjs) com o
+     &checkoutMode=10. A lt-v4-27 e a lt-v4-v2 usam o mesmo.
 
-     Desde 15/10/2026 as páginas de 27 passam pelo funil do SF
-     (sf.topcorpus.com.br), cada versão com o seu sfunnel, para separar as
-     vendas de cada uma: a lt-v1-27-sf usa o 30, a lt-v2-27 o 31 e a
-     lt-v3-27 o 46. Esta página (lt-v4-v2) precisa de um sfunnel só dela,
-     diferente do da lt-v4-27, para as vendas das duas cores da v4 não se
-     misturarem. Ele é criado no SF e redireciona para a oferta de R$27 da
-     Hotmart (off=9z1ywsjs).
-
-     Enquanto ele não existir, a constante fica vazia e o botão da oferta
-     fica inerte de propósito (ver initCheckout): mandar direto para a
-     Hotmart misturaria as vendas da v4 com as da lt-v1-27, que usa a mesma
-     oferta. Quando o número chegar:
+     Consequência: as vendas desta página caem junto com as da lt-v1-27 e
+     da outra cor da v4, sem como separar uma da outra na Hotmart. As
+     páginas de 27 que separam vendas passam pelo funil do SF, cada uma com
+     o seu sfunnel (lt-v1-27-sf 30, lt-v2-27 31, lt-v3-27 46). Para separar
+     a v4, é criar um sfunnel por página no SF e trocar a linha abaixo por:
 
          var CHECKOUT_URL = "https://sf.topcorpus.com.br/sf/?sfunnel=NN";
      ======================================================================= */
-  var CHECKOUT_URL = "";
+  var CHECKOUT_URL = "https://pay.hotmart.com/W95360090D?off=9z1ywsjs&checkoutMode=10";
 
   /* =======================================================================
      DESTINO DO CTA DA OFERTA
