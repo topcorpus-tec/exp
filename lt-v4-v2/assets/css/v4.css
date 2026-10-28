@@ -99,7 +99,7 @@ h1, h2, h3, p, ul, ol, figure, blockquote { margin: 0; }
 p, li { text-wrap: pretty; }
 h1, h2, h3, figcaption, summary, blockquote p,
 .v4-hero__sub, .v4-lead, .v4-chamada, .v4-fecho, .v4-poder,
-.v4-dor p, .v4-fibro p, .v4-oks li, .v4-nota-ok,
+.v4-dor p, .v4-oks li, .v4-nota-ok,
 .v4-remedio p, .v4-oferta__card p, .v4-oferta__itens li > span:first-of-type,
 .v4-rodape p { text-wrap: balance; }
 ul, ol { padding: 0; list-style: none; }
@@ -243,7 +243,33 @@ strong { font-weight: 800; }
   line-height: 1.5;
   color: var(--tinta-suave);
 }
-.v4-hero__sub strong { color: var(--tinta); }
+/* "Alivie a dor muscular com mais de 70 Massagens Ilustradas" é a
+   promessa: linha própria, letra maior e o mesmo destaque dos títulos. O
+   realce fica no <span> de dentro, linha a linha, colado ao texto; o
+   bloco de fora só cuida da quebra equilibrada. O resto da frase vem
+   embaixo, em tom de apoio. */
+.v4-hero__promessa {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 1.3em;
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: -.015em;
+  color: var(--verde);
+  text-wrap: balance;
+}
+.v4-hero__promessa span {
+  background-image: linear-gradient(180deg, transparent 58%, var(--verde-claro) 58%);
+  padding-inline: .12em;
+  -webkit-box-decoration-break: clone;
+          box-decoration-break: clone;
+}
+.v4-hero__resto {
+  display: block;
+  max-width: 30em;
+  margin-inline: auto;
+  text-wrap: balance;
+}
 
 /* O mockup da v1 tem fundo transparente e vai sem moldura. Com as mesmas
    medidas de lá: até 470px no celular e, do tablet para cima, crescendo
@@ -490,30 +516,6 @@ strong { font-weight: 800; }
   }
   .v4-mapa__linhas circle { fill: var(--verde); }
 }
-
-.v4-fibro {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  max-width: 560px;
-  margin: 32px auto 0;
-  padding: 18px 20px;
-  border: 1.5px solid var(--verde);
-  border-radius: var(--raio);
-  background: var(--verde-claro);
-}
-.v4-fibro__ico {
-  flex: none;
-  display: grid;
-  place-items: center;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  background: var(--verde);
-  color: var(--branco);
-}
-.v4-fibro__titulo { font-family: var(--serifa); font-weight: 600; font-size: 1.375rem; line-height: 1.2; }
-.v4-fibro p { margin-top: 2px; font-size: 1rem; }
 
 /* ==================== Mockups ==================== */
 
