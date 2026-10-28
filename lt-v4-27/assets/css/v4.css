@@ -508,36 +508,19 @@ strong { font-weight: 800; }
 .v4-fibro__titulo { font-family: var(--sans); font-weight: 800; font-size: 1.375rem; line-height: 1.2; }
 .v4-fibro p { margin-top: 2px; font-size: 1rem; }
 
-/* ==================== Página do Manual (imagem) ==================== */
+/* ==================== Mockups ==================== */
 
-.v4-pagina img {
-  border-radius: 6px;
-  box-shadow: 0 1px 2px rgba(11, 37, 69, .1), 0 18px 40px rgba(11, 37, 69, .16);
-}
-.v4-pagina figcaption {
-  margin-top: 12px;
-  font-size: .875rem;
-  font-weight: 600;
-  text-align: center;
-  color: var(--tinta-suave);
-}
+/* Os mockups (fundo transparente, sem moldura): a imagem ocupa a largura
+   da figura. */
+.v4-mock { margin: 0; }
+.v4-mock img { width: 100%; }
 
 /* ==================== DOBRA 3 — ALGO MAIS SÉRIO ==================== */
 
 .v4-serio { display: grid; gap: 40px; }
 .v4-serio__texto .v4-titulo { margin-bottom: 20px; }
 .v4-serio__texto .v4-lead { font-weight: 600; }
-/* As duas páginas quase lado a lado, encostando só na borda: a 152 atrás,
-   à direita e mais alta; a 8 na frente, à esquerda e mais baixa. Assim o
-   título das duas fica à vista. */
 .v4-serio__pagina { width: min(100%, 520px); margin-inline: auto; }
-.v4-serio__par { position: relative; aspect-ratio: 1 / .86; }
-.v4-serio__par img {
-  position: absolute;
-  width: 53%;
-}
-.v4-serio__par img:first-child { top: 0; right: 0; transform: rotate(3deg); }
-.v4-serio__par img:last-child  { bottom: 0; left: 0; transform: rotate(-2deg); }
 
 .v4-fecho {
   margin: 1.4em 0 28px;
@@ -583,23 +566,9 @@ strong { font-weight: 800; }
   margin-bottom: 8px;
 }
 
-/* As três páginas do mapa em leque. */
-.v4-leque {
-  position: relative;
-  height: clamp(220px, 62vw, 320px);
-}
-.v4-leque img {
-  position: absolute;
-  top: 6%;
-  left: 50%;
-  width: 40%;
-  border-radius: 4px;
-  box-shadow: 0 10px 24px rgba(11, 37, 69, .18);
-  transform-origin: 50% 100%;
-}
-.v4-leque img:nth-child(1) { transform: translateX(-112%) rotate(-7deg); }
-.v4-leque img:nth-child(2) { transform: translateX(-50%) translateY(-4%); z-index: 2; }
-.v4-leque img:nth-child(3) { transform: translateX(12%) rotate(7deg); }
+/* O mockup do mapa do corpo é mais largo que alto: no celular ocupa o
+   cartão todo, um pouco além do respiro. */
+.v4-passo__media.v4-mock { margin-inline: -8px; }
 
 .v4-adeir { display: grid; gap: 0; counter-reset: none; }
 .v4-adeir li {
@@ -1039,55 +1008,7 @@ strong { font-weight: 800; }
 
 .v4-consulta { display: grid; gap: 40px; align-items: center; }
 
-.v4-consulta__cena {
-  position: relative;
-  height: clamp(340px, 98vw, 470px);
-  max-width: 460px;
-  width: 100%;
-  margin-inline: auto;
-}
-.v4-folha {
-  position: absolute;
-  left: 2%;
-  top: 6%;
-  width: 58%;
-  border-radius: 3px;
-  box-shadow: 0 16px 36px rgba(11, 37, 69, .18);
-  transform: rotate(-6deg);
-}
-.v4-celular {
-  position: absolute;
-  right: 4%;
-  top: 0;
-  width: 46%;
-  aspect-ratio: 9 / 19;
-  padding: 10px 8px;
-  border-radius: 34px;
-  background: #0B1B30;
-  box-shadow: inset 0 0 0 2px #2A3E58, 0 22px 44px rgba(11, 37, 69, .32);
-  transform: rotate(4deg);
-}
-.v4-celular::before {   /* câmera */
-  content: "";
-  position: absolute;
-  top: 16px;
-  left: 50%;
-  width: 26%;
-  height: 12px;
-  margin-left: -13%;
-  border-radius: 8px;
-  background: #0B1B30;
-  z-index: 2;
-}
-/* A página inteira na tela, como num leitor de PDF: sobra fundo em cima e
-   embaixo, mas nada da página é cortado. */
-.v4-celular img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  border-radius: 26px;
-  background: #F5F8FC;
-}
+.v4-consulta__cena { width: min(100%, 460px); margin-inline: auto; }
 
 @media (min-width: 900px) {
   .v4-consulta { grid-template-columns: 1fr 1fr; gap: 64px; }
