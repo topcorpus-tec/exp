@@ -740,19 +740,17 @@ strong { font-weight: 800; }
 
 .v4-historia .v4-titulo { text-align: left; }
 
-.v4-foto-falta {
-  display: grid;
-  place-items: center;
-  aspect-ratio: 4 / 3;
-  max-width: 520px;
-  margin: 0 auto 36px;
-  border: 2px dashed var(--areia-forte);
-  border-radius: var(--raio);
-  background: var(--creme);
-  color: var(--tinta-suave);
-  font-weight: 600;
-  text-align: center;
-  padding: 20px;
+/* A Ana com as mãos abertas abre a história. A foto tem fundo
+   transparente e termina no peito, então vai sem moldura e encostada no
+   título. */
+.v4-ana-maos {
+  width: min(100%, 420px);
+  margin: 0 auto 8px;
+}
+.v4-ana-maos img {
+  width: 100%;
+  -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
 }
 
 .v4-citacao {
