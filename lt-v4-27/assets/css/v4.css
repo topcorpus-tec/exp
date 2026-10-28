@@ -1099,6 +1099,7 @@ strong { font-weight: 800; }
 /* ==================== DOBRA 12 — FAQ ==================== */
 
 .v4-faq { display: grid; gap: 10px; }
+.v4-faq__cta { margin-top: clamp(32px, 5vw, 48px); }
 .v4-faq__item {
   border: 1px solid var(--areia-forte);
   border-radius: var(--raio-sm);
