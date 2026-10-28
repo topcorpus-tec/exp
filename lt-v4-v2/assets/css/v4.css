@@ -1,0 +1,1159 @@
+/* =========================================================================
+   Manual Ilustrado — v4.css (lt-v4)
+
+   Esta é a lt-v4-v2: a mesma página da lt-v4-27, com a identidade verde
+   que a v4 teve antes de passar para as cores da v1 (pedido de 27/10/2026):
+
+     - cor: verde-eucalipto sobre creme e areia, com o verde-mata escuro
+       nas dobras de virada e na oferta, e mel nos botões (como os botões
+       amarelos da referência de oferta do doc). Nada de vermelho nem de
+       terracota: numa página sobre dor, o vermelho lembra a própria dor;
+     - letra: Fraunces nos títulos, com o destaque em itálico verde, e
+       Manrope no texto.
+
+   Todos os pares de cor de texto passam de 4,5:1 (WCAG AA). Celular
+   primeiro; os saltos são em 600, 900 e 1100px.
+   ========================================================================= */
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("../fonts/fraunces-latin.woff2") format("woff2");
+  font-weight: 500 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Fraunces";
+  src: url("../fonts/fraunces-latin-italic.woff2") format("woff2");
+  font-weight: 500 600; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-400.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-600.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-800.woff2") format("woff2");
+  font-weight: 800; font-style: normal; font-display: swap;
+}
+
+:root {
+  --creme:        #FAF8F2;
+  --areia:        #EFEEE4;
+  --areia-forte:  #DEDDCF;
+  --branco:       #FFFFFF;
+
+  --tinta:        #1F2A24;
+  --tinta-suave:  #4F5C54;
+
+  --verde:        #2C6A52;   /* texto em destaque: 6:1 no creme */
+  --verde-claro:  #DDEBE2;
+  --mel:          #F2B233;   /* acentos (fios, aspas, barras)   */
+  --cta:          #F2B233;   /* botão mel: a tinta por cima dá 7,9:1 */
+  --cta-escuro:   #E5A11C;
+  --cta-texto:    #1F2A24;
+
+  --mata:         #1E3B32;
+  --mata-texto:   #D3E0D8;
+  --mata-realce:  #F4C766;
+
+  --salvia:       #3F7058;
+  --salvia-clara: #E1ECE4;
+
+  --serifa: "Fraunces", Georgia, "Times New Roman", serif;
+  --sans:   "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --raio:    18px;
+  --raio-sm: 12px;
+  --sombra:  0 1px 2px rgba(31, 42, 36, .06), 0 12px 32px rgba(31, 42, 36, .10);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--creme);
+  color: var(--tinta);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+h1, h2, h3, p, ul, ol, figure, blockquote { margin: 0; }
+
+/* Quebra de linha equilibrada na página toda. Títulos, legendas, perguntas
+   e os blocos curtos ou centralizados dividem o texto em linhas de largura
+   parecida (balance); os parágrafos corridos e os itens de lista evitam a
+   palavra sozinha na última linha (pretty). Navegador sem suporte quebra
+   do jeito normal. */
+p, li { text-wrap: pretty; }
+h1, h2, h3, figcaption, summary, blockquote p,
+.v4-hero__sub, .v4-lead, .v4-chamada, .v4-fecho, .v4-poder,
+.v4-dor p, .v4-fibro p, .v4-oks li, .v4-nota-ok,
+.v4-remedio p, .v4-oferta__card p, .v4-oferta__itens li > span:first-of-type,
+.v4-rodape p { text-wrap: balance; }
+ul, ol { padding: 0; list-style: none; }
+strong { font-weight: 800; }
+
+:focus-visible { outline: 3px solid var(--verde); outline-offset: 3px; border-radius: 6px; }
+
+/* ==================== Estrutura ==================== */
+
+.v4-wrap {
+  width: 100%;
+  max-width: 1120px;
+  margin-inline: auto;
+  padding-inline: 20px;
+}
+.v4-estreito { max-width: 720px; margin-inline: auto; }
+.v4-wrap.v4-estreito { max-width: 760px; }
+
+.v4-sec { padding-block: clamp(56px, 9vw, 104px); }
+.v4-sec--areia  { background: var(--areia); }
+.v4-sec--branco { background: var(--branco); }
+.v4-sec--mata  { background: var(--mata); color: var(--mata-texto); }
+
+/* Respiro entre parágrafos seguidos. O :where zera a especificidade, para
+   qualquer classe de bloco (preço, citação, balão) mandar na própria margem. */
+:where(.v4-sec, .v4-estreito) p + p { margin-top: 1em; }
+
+/* ==================== Títulos ==================== */
+
+.v4-titulo {
+  font-family: var(--serifa);
+  font-weight: 600;
+  font-size: clamp(1.75rem, 1.25rem + 2.2vw, 2.75rem);
+  line-height: 1.12;
+  letter-spacing: -.01em;
+  color: var(--tinta);
+  text-wrap: balance;
+  margin-bottom: clamp(24px, 4vw, 40px);
+}
+.v4-titulo em { font-style: italic; color: var(--verde); }
+.v4-titulo--centro { text-align: center; max-width: 820px; margin-inline: auto; }
+.v4-titulo__linha2 {
+  display: block;
+  margin-top: .45em;
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: .62em;
+  letter-spacing: 0;
+  color: var(--tinta);
+}
+.v4-sec--mata .v4-titulo { color: var(--creme); }
+.v4-sec--mata .v4-titulo em { color: var(--mata-realce); }
+
+.v4-lead { font-size: 1.1875rem; line-height: 1.5; }
+
+/* ==================== Botão ==================== */
+
+.v4-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 60px;
+  padding: 16px 22px;
+  border-radius: 14px;
+  background: var(--cta);
+  color: var(--cta-texto);
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: 1rem;
+  line-height: 1.25;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 2px 0 var(--cta-escuro), 0 14px 28px rgba(201, 141, 18, .34);
+  transition: background-color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.v4-btn svg { flex: none; transition: transform .2s ease; }
+.v4-btn:hover { background: var(--cta-escuro); }
+.v4-btn:hover svg { transform: translateX(4px); }
+.v4-btn:active { transform: translateY(1px); box-shadow: 0 1px 0 var(--cta-escuro), 0 8px 18px rgba(201, 141, 18, .28); }
+.v4-btn[aria-disabled="true"] { cursor: not-allowed; }
+
+@media (min-width: 600px) {
+  .v4-btn { width: auto; display: inline-flex; padding-inline: 34px; font-size: 1.0625rem; }
+  .v4-btn--centro { display: flex; width: fit-content; margin-inline: auto; }
+}
+
+/* ==================== ✅ ==================== */
+
+.v4-ok {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--salvia);
+  color: var(--branco);
+}
+
+/* ==================== DOBRA 1 — HERO ==================== */
+
+/* Uma coluna só, centralizada, como a hero da v1: os elementos empilhados
+   na ordem do doc (título, frase, mockup, botão, ✅), em qualquer tela. */
+.v4-hero {
+  position: relative;
+  overflow: hidden;
+  padding-block: 40px clamp(56px, 8vw, 96px);
+  background:
+    radial-gradient(60% 40% at 50% 55%, rgba(244, 199, 102, .30) 0%, rgba(244, 199, 102, 0) 70%),
+    var(--creme);
+  text-align: center;
+}
+
+.v4-hero__grade {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+
+.v4-hero__titulo {
+  max-width: 18ch;
+  margin-inline: auto;
+  font-family: var(--serifa);
+  font-weight: 600;
+  font-size: clamp(2.125rem, 1.4rem + 3.6vw, 3.625rem);
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  text-wrap: balance;
+}
+.v4-hero__titulo em { font-style: italic; color: var(--verde); }
+
+.v4-hero__sub {
+  max-width: 34em;
+  margin: 16px auto 0;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: var(--tinta-suave);
+}
+.v4-hero__sub strong { color: var(--tinta); }
+
+/* O mockup da v1 tem fundo transparente e vai sem moldura. Com as mesmas
+   medidas de lá: até 470px no celular e, do tablet para cima, crescendo
+   com a tela até 820px. */
+.v4-hero__mock { width: min(100%, 470px); }
+.v4-hero__mock img { width: 100%; }
+
+.v4-hero__acao { display: flex; flex-direction: column; align-items: center; width: 100%; }
+
+.v4-oks { display: grid; gap: 10px; margin-top: 20px; text-align: left; }
+.v4-oks li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+@media (min-width: 768px) {
+  .v4-hero__mock { width: min(100%, clamp(580px, 60vw, 820px)); }
+}
+@media (min-width: 900px) {
+  .v4-hero { padding-top: 56px; }
+  .v4-hero__sub { font-size: 1.25rem; }
+}
+
+/* ==================== DOBRA 2 — DORES NO CORPO ==================== */
+
+/* Celular e tablet: a figura num cartão branco e, por cima dela, a lista
+   das dores virada em etiquetas, cada uma ao lado do seu ponto. Figura e
+   lista ocupam a mesma célula da grade; a margem da lista é o respiro do
+   cartão, então as duas medem exatamente a área da imagem e as posições
+   em % (dos pontos e das etiquetas) batem. */
+.v4-mapa {
+  position: relative;
+  display: grid;
+  width: min(100%, 420px);
+  margin-inline: auto;
+}
+
+.v4-mapa__fig {
+  grid-area: 1 / 1;
+  position: relative;
+  width: 100%;
+  padding: 18px 10px;
+  border-radius: 28px;
+  background: var(--branco);
+  box-shadow: var(--sombra);
+}
+.v4-mapa__corpo { position: relative; }
+.v4-mapa__corpo img { width: 100%; }
+
+/* --x e --y vêm do HTML, em % da imagem. O número fica só no HTML: na
+   tela o ponto é liso, e quem nomeia a dor é a etiqueta ao lado. */
+.v4-pino {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0 -9px;
+  border-radius: 50%;
+  background: var(--verde);
+  font-size: 0;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, .9), 0 2px 6px rgba(31, 42, 36, .35);
+  cursor: pointer;
+  z-index: 2;
+}
+.v4-pino::after {      /* onda saindo do ponto */
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 2px solid var(--verde);
+  opacity: 0;
+  animation: v4-onda 2.6s ease-out infinite;
+}
+.v4-pino:nth-of-type(2n)::after { animation-delay: .9s; }
+.v4-pino:nth-of-type(3n)::after { animation-delay: 1.7s; }
+.v4-pino.is-ativo { background: var(--cta); }
+@keyframes v4-onda {
+  0%   { transform: scale(1);   opacity: .7; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .v4-pino::after { animation: none; } }
+
+.v4-dores {
+  grid-area: 1 / 1;
+  position: relative;
+  margin: 18px 10px;
+  z-index: 3;
+  pointer-events: none;   /* o toque fora das etiquetas chega aos pontos */
+}
+
+/* A etiqueta: --ex e --ey é o ponto de ancoragem, em % da imagem. Do lado
+   "dir" ela cresce para a direita; do lado "esq", para a esquerda. */
+.v4-dor {
+  position: absolute;
+  left: var(--ex);
+  top: var(--ey);
+  max-width: 36%;
+  transform: translateY(-50%);
+  pointer-events: auto;
+}
+.v4-dor[data-lado="esq"] { transform: translate(-100%, -50%); }
+
+.v4-dor__titulo { font-size: inherit; line-height: inherit; }
+.v4-dor__btn {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 6px 22px 6px 9px;
+  border: 1px solid var(--areia-forte);
+  border-radius: 10px;
+  background: var(--branco);
+  box-shadow: 0 2px 8px rgba(31, 42, 36, .16);
+  font: 800 clamp(11.5px, 3.3vw, 13px) / 1.25 var(--sans);
+  color: var(--tinta);
+  text-align: left;
+  text-wrap: balance;
+  cursor: pointer;
+  position: relative;
+}
+.v4-dor__btn::after {   /* o "+" que avisa que dá para abrir */
+  content: "+";
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-52%);
+  font-size: 1.15em;
+  color: var(--verde);
+}
+.v4-dor p { display: none; }
+
+/* Aberta: a etiqueta vira um cartão centralizado na altura do ponto, com o
+   texto embaixo do título. */
+.v4-dor.is-aberta,
+.v4-dor.is-aberta[data-lado="esq"] {
+  left: 50%;
+  width: 84%;
+  max-width: 84%;
+  transform: translate(-50%, -50%);
+  padding: 12px 14px 14px;
+  border: 1.5px solid var(--verde);
+  border-radius: 14px;
+  background: var(--branco);
+  box-shadow: 0 10px 30px rgba(31, 42, 36, .28);
+  z-index: 4;
+}
+.v4-dor.is-aberta .v4-dor__btn {
+  padding: 0 24px 0 0;
+  border: 0;
+  box-shadow: none;
+  font-size: 1rem;
+}
+.v4-dor.is-aberta .v4-dor__btn::after { content: "\00d7"; right: 0; }
+.v4-dor.is-aberta p {
+  display: block;
+  margin-top: 6px;
+  font-size: .9375rem;
+  line-height: 1.45;
+  color: var(--tinta-suave);
+}
+
+.v4-mapa__linhas { display: none; }
+
+/* Desktop: as dores dos dois lados da figura, ligadas por linhas. A lista
+   vira parte da grade do mapa (display: contents) para cada item ir para a
+   sua coluna e linha; role="list" no HTML mantém a semântica de lista. */
+@media (min-width: 900px) {
+  .v4-mapa {
+    display: grid;
+    grid-template-columns: 1fr minmax(300px, 360px) 1fr;
+    grid-template-rows: repeat(5, auto);
+    column-gap: 56px;
+    row-gap: 18px;
+    align-items: center;
+  }
+  .v4-mapa__fig {
+    grid-column: 2;
+    grid-row: 1 / span 5;
+    width: 100%;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+  }
+  .v4-pino { cursor: default; }
+  /* A figura tem fundo transparente; no desktop ela fica sobre um halo
+     branco, sem o cartão do celular. */
+  .v4-mapa__fig::before {
+    content: "";
+    position: absolute;
+    inset: 4% -12%;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, var(--branco) 62%, rgba(255, 255, 255, 0));
+    z-index: -1;
+  }
+  .v4-mapa__fig { z-index: 0; }
+
+  .v4-mapa { width: auto; }
+  .v4-dores { display: contents; }
+  /* No desktop nada abre nem fecha: título e texto sempre à vista, e o
+     botão do título fica com cara de texto comum. */
+  .v4-dor,
+  .v4-dor[data-lado="esq"] {
+    position: static;
+    grid-column: var(--col);
+    grid-row: var(--lin);
+    max-width: 300px;
+    transform: none;
+  }
+  .v4-dor--esq { justify-self: end; text-align: right; }
+  .v4-dor__titulo { font-size: 1.125rem; font-weight: 800; line-height: 1.3; }
+  .v4-dor__btn {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    font: inherit;
+    text-align: inherit;
+    cursor: default;
+  }
+  .v4-dor__btn::after { content: none; }
+  .v4-dor p { display: block; margin-top: 4px; font-size: 1rem; line-height: 1.5; color: var(--tinta-suave); }
+
+  .v4-mapa__linhas {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .v4-mapa__linhas path {
+    fill: none;
+    stroke: var(--verde);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-dasharray: 2 5;
+  }
+  .v4-mapa__linhas circle { fill: var(--verde); }
+}
+
+.v4-fibro {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 560px;
+  margin: 32px auto 0;
+  padding: 18px 20px;
+  border: 1.5px solid var(--verde);
+  border-radius: var(--raio);
+  background: var(--verde-claro);
+}
+.v4-fibro__ico {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--verde);
+  color: var(--branco);
+}
+.v4-fibro__titulo { font-family: var(--serifa); font-weight: 600; font-size: 1.375rem; line-height: 1.2; }
+.v4-fibro p { margin-top: 2px; font-size: 1rem; }
+
+/* ==================== Página do Manual (imagem) ==================== */
+
+.v4-pagina img {
+  border-radius: 6px;
+  box-shadow: 0 1px 2px rgba(31, 42, 36, .1), 0 18px 40px rgba(31, 42, 36, .16);
+}
+.v4-pagina figcaption {
+  margin-top: 12px;
+  font-size: .875rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--tinta-suave);
+}
+
+/* ==================== DOBRA 3 — ALGO MAIS SÉRIO ==================== */
+
+.v4-serio { display: grid; gap: 40px; }
+.v4-serio__texto .v4-titulo { margin-bottom: 20px; }
+.v4-serio__texto .v4-lead { font-weight: 600; }
+/* As duas páginas quase lado a lado, encostando só na borda: a 152 atrás,
+   à direita e mais alta; a 8 na frente, à esquerda e mais baixa. Assim o
+   título das duas fica à vista. */
+.v4-serio__pagina { width: min(100%, 520px); margin-inline: auto; }
+.v4-serio__par { position: relative; aspect-ratio: 1 / .86; }
+.v4-serio__par img {
+  position: absolute;
+  width: 53%;
+}
+.v4-serio__par img:first-child { top: 0; right: 0; transform: rotate(3deg); }
+.v4-serio__par img:last-child  { bottom: 0; left: 0; transform: rotate(-2deg); }
+
+.v4-fecho {
+  margin: 1.4em 0 28px;
+  padding-left: 16px;
+  border-left: 4px solid var(--mel);
+  font-family: var(--serifa);
+  font-size: 1.375rem;
+  line-height: 1.3;
+}
+.v4-fecho strong { font-weight: 600; }
+
+@media (min-width: 900px) {
+  .v4-serio { grid-template-columns: 1.1fr .9fr; gap: 72px; align-items: center; }
+  .v4-serio__pagina { width: 100%; max-width: 560px; }
+}
+
+/* ==================== DOBRA 4 — CADA DOR TEM UMA PÁGINA ==================== */
+
+.v4-maos {
+  max-width: 760px;
+  margin: 0 auto 32px;
+  overflow: hidden;
+  border-radius: var(--raio);
+  box-shadow: var(--sombra);
+}
+.v4-maos img { width: 100%; }
+
+.v4-chamada { font-size: 1.1875rem; }
+
+.v4-passo {
+  display: grid;
+  gap: 24px;
+  margin-top: 48px;
+  padding: 24px 20px;
+  border-radius: var(--raio);
+  background: var(--creme);
+}
+.v4-passo__titulo {
+  font-family: var(--serifa);
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+/* As três páginas do mapa em leque. */
+.v4-leque {
+  position: relative;
+  height: clamp(220px, 62vw, 320px);
+}
+.v4-leque img {
+  position: absolute;
+  top: 6%;
+  left: 50%;
+  width: 40%;
+  border-radius: 4px;
+  box-shadow: 0 10px 24px rgba(31, 42, 36, .18);
+  transform-origin: 50% 100%;
+}
+.v4-leque img:nth-child(1) { transform: translateX(-112%) rotate(-7deg); }
+.v4-leque img:nth-child(2) { transform: translateX(-50%) translateY(-4%); z-index: 2; }
+.v4-leque img:nth-child(3) { transform: translateX(12%) rotate(7deg); }
+
+.v4-adeir { display: grid; gap: 0; counter-reset: none; }
+.v4-adeir li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 0;
+  line-height: 1.4;
+}
+.v4-adeir li + li::before {   /* o fio entre as letras */
+  content: "";
+  position: absolute;
+  left: 21px;
+  top: -10px;
+  height: 20px;
+  border-left: 2px dotted var(--verde);
+}
+.v4-adeir__letra {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--branco);
+  border: 2px solid var(--verde);
+  font-family: var(--serifa);
+  font-weight: 600;
+  font-size: 1.375rem;
+  color: var(--verde);
+}
+
+.v4-nota-ok {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  max-width: 720px;
+  margin: 32px auto 0;
+}
+.v4-nota-ok .v4-ok { margin-top: 2px; }
+
+.v4-pressao {
+  display: grid;
+  gap: 22px;
+  max-width: 880px;
+  margin: 40px auto 0;
+  padding: 26px 22px;
+  border-radius: var(--raio);
+  background: var(--areia);
+}
+.v4-pressao__titulo {
+  font-family: var(--serifa);
+  font-weight: 600;
+  font-size: 1.625rem;
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+
+.v4-escala__barra {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 4px;
+}
+.v4-escala__barra li {
+  display: grid;
+  place-items: center;
+  height: 40px;
+  border-radius: 6px;
+  font-weight: 800;
+  font-size: .9375rem;
+}
+.v4-escala__barra .is-leve  { background: var(--salvia-clara); color: var(--salvia); }
+.v4-escala__barra .is-media { background: var(--salvia); color: var(--branco); }
+.v4-escala__barra .is-fora  {
+  background: repeating-linear-gradient(-45deg, #E6E6DD 0 6px, #F0F0E9 6px 12px);
+  color: #585E57;
+  text-decoration: line-through;
+}
+.v4-escala__legenda {
+  display: grid;
+  grid-template-columns: 3fr 3fr 4fr;
+  gap: 4px;
+  margin-top: 8px;
+  font-size: .8125rem;
+  font-weight: 800;
+  text-align: center;
+}
+.v4-escala__legenda .is-leve  { color: var(--salvia); }
+.v4-escala__legenda .is-media { color: var(--salvia); }
+.v4-escala__legenda .is-fora  { color: var(--tinta-suave); }
+
+@media (min-width: 900px) {
+  .v4-passo {
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    padding: 40px 44px;
+  }
+  .v4-passo--adeir .v4-passo__texto { align-self: center; }
+  .v4-pressao { grid-template-columns: 1fr 1.1fr; align-items: center; gap: 40px; padding: 36px 40px; }
+}
+
+/* ==================== DOBRA 5 — O REMÉDIO ==================== */
+
+.v4-remedio { text-align: center; }
+.v4-remedio .v4-titulo { margin-bottom: 20px; }
+.v4-remedio__gesto {
+  font-family: var(--serifa);
+  font-weight: 500;
+  font-size: 1.375rem;
+  color: var(--creme);
+  font-style: italic;
+}
+.v4-remedio__virada {
+  margin: 28px 0;
+  font-family: var(--serifa);
+  font-size: clamp(1.75rem, 1.3rem + 2vw, 2.5rem);
+  line-height: 1.15;
+  color: var(--mata-realce);
+}
+.v4-remedio__virada strong { font-weight: 600; }
+.v4-remedio strong { color: var(--creme); }
+.v4-remedio__virada strong { color: var(--mata-realce); }
+
+/* ==================== DOBRA 6 — BÔNUS ==================== */
+
+.v4-bonus {
+  display: grid;
+  gap: 20px;
+}
+.v4-bonus__card {
+  overflow: hidden;
+  border-radius: var(--raio);
+  background: var(--branco);
+  box-shadow: var(--sombra);
+}
+.v4-bonus__card img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+.v4-bonus__corpo { padding: 20px 22px 24px; }
+.v4-bonus__rot {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--verde-claro);
+  color: var(--verde);
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.v4-bonus__titulo {
+  margin: 10px 0 6px;
+  font-family: var(--serifa);
+  font-weight: 600;
+  font-size: 1.375rem;
+  line-height: 1.2;
+}
+.v4-bonus__corpo p { font-size: 1rem; color: var(--tinta-suave); }
+
+@media (min-width: 700px) {
+  .v4-bonus { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1100px) {
+  .v4-bonus { grid-template-columns: repeat(6, 1fr); gap: 24px; }
+  .v4-bonus__card { grid-column: span 2; }
+  .v4-bonus__card:nth-child(4) { grid-column: 2 / span 2; }
+}
+
+/* ==================== DOBRAS 7 E 8 — A HISTÓRIA ==================== */
+
+.v4-historia .v4-titulo { text-align: left; }
+
+.v4-foto-falta {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 3;
+  max-width: 520px;
+  margin: 0 auto 36px;
+  border: 2px dashed var(--areia-forte);
+  border-radius: var(--raio);
+  background: var(--creme);
+  color: var(--tinta-suave);
+  font-weight: 600;
+  text-align: center;
+  padding: 20px;
+}
+
+.v4-citacao {
+  position: relative;
+  margin: 28px 0;
+  padding: 26px 24px 24px;
+  border-radius: var(--raio);
+  background: var(--branco);
+  box-shadow: var(--sombra);
+}
+.v4-citacao::before {
+  content: "\201C";
+  position: absolute;
+  top: -18px;
+  left: 18px;
+  font-family: var(--serifa);
+  font-size: 4.5rem;
+  line-height: 1;
+  color: var(--mel);
+}
+.v4-citacao p {
+  font-family: var(--serifa);
+  font-weight: 500;
+  font-size: 1.375rem;
+  line-height: 1.35;
+  color: var(--tinta);
+  font-style: italic;
+}
+
+.v4-assina {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 28px 0 0;
+  padding: 14px 18px 14px 14px;
+  border-radius: 999px;
+  background: var(--branco);
+}
+.v4-assina img {
+  flex: none;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 12%;
+}
+.v4-assina p { font-size: 1rem; line-height: 1.4; }
+.v4-assina + p { margin-top: 20px; }
+
+.v4-poder {
+  margin: 32px 0 24px;
+  font-family: var(--serifa);
+  font-weight: 600;
+  font-size: clamp(1.5rem, 1.15rem + 1.6vw, 2rem);
+  line-height: 1.2;
+  text-align: center;
+  color: var(--verde);
+}
+
+/* A dobra 8 começa logo depois do botão da 7, sem título nem divisória. */
+.v4-continua { margin-top: 40px; }
+
+/* ==================== DOBRA 9 — OFERTA ==================== */
+
+.v4-oferta__card {
+  max-width: 520px;
+  margin-inline: auto;
+  padding: 16px 16px 24px;
+  border-radius: 24px;
+  background: var(--branco);
+  color: var(--tinta);
+  box-shadow: 0 0 0 4px rgba(244, 199, 102, .35), 0 24px 60px rgba(0, 0, 0, .35);
+  text-align: center;
+}
+.v4-oferta__mock {
+  padding: 14px 8px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, var(--areia), var(--verde-claro));
+}
+
+.v4-oferta__itens {
+  margin: 20px 4px 0;
+  text-align: left;
+}
+.v4-oferta__itens li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--areia);
+  font-size: .9375rem;
+  line-height: 1.4;
+}
+.v4-oferta__itens li::before {
+  content: "";
+  flex: none;
+  align-self: center;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--verde);
+  margin-right: -4px;
+}
+.v4-oferta__itens li > span:first-of-type { flex: 1; }
+.v4-oferta__valor { flex: none; color: var(--tinta-suave); font-weight: 600; white-space: nowrap; }
+
+.v4-oferta__total { margin-top: 16px; font-size: 1rem; }
+.v4-oferta__total s { font-weight: 800; color: var(--tinta-suave); }
+
+.v4-oferta__fio {
+  width: 120px;
+  height: 3px;
+  margin: 22px auto;
+  border: 0;
+  border-radius: 2px;
+  background: var(--mel);
+}
+
+.v4-oferta__de { font-size: 1.125rem; font-weight: 600; }
+.v4-oferta__de s { color: var(--tinta-suave); font-weight: 800; }
+.v4-oferta__preco {
+  margin-top: 2px;
+  font-family: var(--serifa);
+  font-weight: 700;
+  font-size: clamp(4rem, 3rem + 6vw, 5.5rem);
+  line-height: 1;
+  letter-spacing: -.03em;
+  color: var(--verde);
+}
+.v4-oferta__rs { font-size: .4em; letter-spacing: 0; vertical-align: .9em; margin-right: 4px; }
+.v4-oferta__economia {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--salvia-clara);
+  color: var(--salvia);
+  font-weight: 800;
+  font-size: .9375rem;
+}
+.v4-oferta__entrega {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 20px 0 14px;
+  font-size: .9375rem;
+  font-weight: 600;
+  color: var(--tinta-suave);
+}
+.v4-oferta__entrega svg { flex: none; color: var(--verde); }
+
+.v4-btn--compra { width: 100%; display: flex; min-height: 64px; font-size: 1.0625rem; }
+
+@media (min-width: 600px) {
+  .v4-oferta__card { padding: 22px 28px 32px; }
+  .v4-oferta__itens li { font-size: 1rem; }
+}
+
+/* ==================== DOBRA 10 — DEPOIMENTOS ==================== */
+
+.v4-depos {
+  display: grid;
+  gap: 32px;
+  max-width: 1000px;
+  margin-inline: auto;
+}
+.v4-depo__titulo {
+  position: relative;
+  margin-bottom: 14px;
+  padding-left: 18px;
+  font-family: var(--serifa);
+  font-weight: 600;
+  font-size: 1.3125rem;
+  line-height: 1.25;
+}
+.v4-depo__titulo::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .2em;
+  bottom: .2em;
+  width: 4px;
+  border-radius: 2px;
+  background: var(--mel);
+}
+.v4-depo__print {
+  padding: 12px;
+  border: 1px solid var(--areia-forte);
+  border-radius: var(--raio);
+  background: var(--branco);
+  box-shadow: var(--sombra);
+}
+.v4-depo__print > img { width: 100%; border-radius: 8px; }
+
+/* Josiane: comentário de plataforma, com a inicial no círculo roxo. */
+.v4-coment { display: flex; gap: 12px; align-items: flex-start; }
+.v4-coment__av {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #8E4FB3;
+  color: var(--branco);
+  font-size: .875rem;
+  font-weight: 600;
+}
+.v4-coment__cab { font-size: .9375rem; line-height: 1.3; }
+.v4-coment__cab span { margin-left: 4px; font-size: .8125rem; color: #6F6A75; }
+.v4-coment__texto {
+  margin-top: 8px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #F1F2F6;
+  font-size: .9375rem;
+  line-height: 1.5;
+  color: #2A2A33;
+}
+
+/* Betina: conversa da caixa de mensagens, com o trecho que ela grifou. */
+.v4-msg__cab {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #E8E8EC;
+  font-size: .9375rem;
+}
+.v4-msg__cab img { width: 40px; height: 40px; border-radius: 50%; }
+.v4-msg__conversa { display: grid; gap: 8px; margin-top: 12px; }
+.v4-msg__balao {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 18px;
+  background: #F0F0F2;
+  font-size: .9375rem;
+  line-height: 1.5;
+  color: #2A2A33;
+}
+.v4-msg__balao mark { background: #FFF06A; color: inherit; padding: 0 2px; }
+
+/* No desktop, duas colunas corridas: Kely e Jessica de um lado, Josiane e
+   Betina do outro, que dão alturas parecidas. */
+@media (min-width: 900px) {
+  .v4-depos { display: block; columns: 2; column-gap: 40px; }
+  .v4-depo { break-inside: avoid; margin-bottom: 48px; }
+}
+
+/* ==================== DOBRA 11 — CONSULTA ==================== */
+
+.v4-consulta { display: grid; gap: 40px; align-items: center; }
+
+.v4-consulta__cena {
+  position: relative;
+  height: clamp(340px, 98vw, 470px);
+  max-width: 460px;
+  width: 100%;
+  margin-inline: auto;
+}
+.v4-folha {
+  position: absolute;
+  left: 2%;
+  top: 6%;
+  width: 58%;
+  border-radius: 3px;
+  box-shadow: 0 16px 36px rgba(31, 42, 36, .18);
+  transform: rotate(-6deg);
+}
+.v4-celular {
+  position: absolute;
+  right: 4%;
+  top: 0;
+  width: 46%;
+  aspect-ratio: 9 / 19;
+  padding: 10px 8px;
+  border-radius: 34px;
+  background: #17201C;
+  box-shadow: inset 0 0 0 2px #3A4640, 0 22px 44px rgba(31, 42, 36, .32);
+  transform: rotate(4deg);
+}
+.v4-celular::before {   /* câmera */
+  content: "";
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  width: 26%;
+  height: 12px;
+  margin-left: -13%;
+  border-radius: 8px;
+  background: #17201C;
+  z-index: 2;
+}
+/* A página inteira na tela, como num leitor de PDF: sobra fundo em cima e
+   embaixo, mas nada da página é cortado. */
+.v4-celular img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 26px;
+  background: #F5F8FC;
+}
+
+@media (min-width: 900px) {
+  .v4-consulta { grid-template-columns: 1fr 1fr; gap: 64px; }
+}
+
+/* O último botão da página, entre a dobra 11 e o FAQ. */
+.v4-consulta__cta { margin-top: clamp(40px, 6vw, 56px); }
+
+/* ==================== DOBRA 12 — FAQ ==================== */
+
+.v4-faq { display: grid; gap: 10px; }
+.v4-faq__cta { margin-top: clamp(32px, 5vw, 48px); }
+.v4-faq__item {
+  border: 1px solid var(--areia-forte);
+  border-radius: var(--raio-sm);
+  background: var(--branco);
+}
+.v4-faq__item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 20px;
+  font-weight: 800;
+  font-size: 1.0625rem;
+  line-height: 1.35;
+  cursor: pointer;
+  list-style: none;
+}
+.v4-faq__item summary::-webkit-details-marker { display: none; }
+.v4-faq__item summary svg {
+  flex: none;
+  color: var(--verde);
+  transition: transform .2s ease;
+}
+.v4-faq__item[open] summary svg { transform: rotate(45deg); }
+.v4-faq__item p {
+  padding: 0 20px 20px;
+  color: var(--tinta-suave);
+  font-size: 1rem;
+}
+
+/* ==================== RODAPÉ ==================== */
+
+.v4-rodape {
+  padding-block: 40px 48px;
+  background: var(--mata);
+  color: var(--mata-texto);
+  font-size: .875rem;
+  line-height: 1.55;
+  text-align: center;
+}
+.v4-rodape__direitos { font-weight: 800; color: var(--creme); }
+.v4-rodape__empresa { margin-top: 4px; }
+.v4-rodape__aviso {
+  max-width: 760px;
+  margin: 20px auto 0;
+  font-size: .8125rem;
+  opacity: .85;
+}
+.v4-rodape__aviso strong { color: var(--creme); }
