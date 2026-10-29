@@ -20,19 +20,19 @@
   /* =======================================================================
      DESTINO DA COMPRA
 
-     Desde 27/10/2026 o botão da oferta vai direto para a Hotmart, com o
-     mesmo link da lt-v1-27: a oferta de R$27 (off=9z1ywsjs) com o
-     &checkoutMode=10. A lt-v4-27 e a lt-v4-v2 usam o mesmo.
+     Desde 29/10/2026 o botão da oferta passa pelo funil do SF
+     (sf.topcorpus.com.br), no sfunnel 119, o da v4. A lt-v4-27 e a
+     lt-v4-v2 usam o mesmo, então as vendas das duas cores da v4 caem
+     juntas no funil, separadas das outras páginas de 27 (lt-v1-27-sf 30,
+     lt-v2-27 31, lt-v3-27 46). Para separar as duas cores, é criar um
+     segundo sfunnel no SF e trocar a linha abaixo em uma delas.
 
-     Consequência: as vendas desta página caem junto com as da lt-v1-27 e
-     da outra cor da v4, sem como separar uma da outra na Hotmart. As
-     páginas de 27 que separam vendas passam pelo funil do SF, cada uma com
-     o seu sfunnel (lt-v1-27-sf 30, lt-v2-27 31, lt-v3-27 46). Para separar
-     a v4, é criar um sfunnel por página no SF e trocar a linha abaixo por:
-
-         var CHECKOUT_URL = "https://sf.topcorpus.com.br/sf/?sfunnel=NN";
+     Antes (27 a 29/10/2026) o botão ia direto para a Hotmart, com o link
+     da lt-v1-27. O 119 redireciona para a mesma oferta, já com o
+     &checkoutMode=10: pay.hotmart.com/W95360090D?off=9z1ywsjs
+     &checkoutMode=10&xcod=0&external_code=0 (conferido em 29/10/2026).
      ======================================================================= */
-  var CHECKOUT_URL = "https://pay.hotmart.com/W95360090D?off=9z1ywsjs&checkoutMode=10";
+  var CHECKOUT_URL = "https://sf.topcorpus.com.br/sf/?sfunnel=119";
 
   /* =======================================================================
      DESTINO DO CTA DA OFERTA
