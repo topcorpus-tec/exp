@@ -43,8 +43,24 @@
      parâmetro em 02/10/2026.
 
      Vazio aqui deixa todos os CTAs inertes de propósito (ver initCheckout).
+
+     UM DESTINO POR SUBDOMÍNIO (desde 30/10/2026)
+
+     O mesmo arquivo é publicado em exp-fb (Meta) e exp-gg (Google). No
+     Google o botão passa pelo funil do SF, no sfunnel 131, para separar as
+     vendas dessa fonte; o 131 redireciona para a mesma oferta de R$27, já
+     com o &checkoutMode=10. Na Meta (e em qualquer outro endereço, como o
+     servidor local) continua o link direto da Hotmart.
+
+     É a única detecção de host deste arquivo, e serve só para escolher o
+     destino da compra: a identidade do deploy (key e GTM) segue vindo do
+     env-config.js, sem olhar o endereço.
      ======================================================================= */
-  var CHECKOUT_URL = "https://pay.hotmart.com/W95360090D?off=9z1ywsjs&checkoutMode=10";
+  var CHECKOUT_URL_PADRAO = "https://pay.hotmart.com/W95360090D?off=9z1ywsjs&checkoutMode=10";
+  var CHECKOUT_URL_GOOGLE = "https://sf.topcorpus.com.br/sf/?sfunnel=131";
+  var CHECKOUT_URL = location.hostname.indexOf("exp-gg.") === 0
+    ? CHECKOUT_URL_GOOGLE
+    : CHECKOUT_URL_PADRAO;
 
   /* =======================================================================
      DESTINO DO CTA DA OFERTA
