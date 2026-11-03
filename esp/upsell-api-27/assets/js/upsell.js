@@ -1,0 +1,179 @@
+/* =========================================================================
+   Método Mãos Lucrativas — /upsell-api-27/ — upsell.js
+
+   O que roda aqui:
+
+     - destino dos botões de compra   ([data-checkout])
+     - botão do suporte               ([data-whats])
+     - esteira de prints              ([data-esteira])
+     - FAQ, abrir uma fecha as demais
+
+   Carregar com defer.
+   ========================================================================= */
+(function () {
+  "use strict";
+
+  /* =======================================================================
+     DESTINO DA COMPRA
+
+     É o mesmo href que está em todos os nove botões da página de origem.
+
+     O "link-pagina" é o destino certo, não um placeholder: é a página de
+     vendas do MML 2.0, que leva ao checkout da Hotmart. Confirmado em
+     02/10/2026. Trocar aqui muda todos os botões [data-checkout] de uma vez.
+     ======================================================================= */
+  /* ESPAÑOL (/esp/): a compra está desligada nesta cópia até existirem
+     as ofertas em espanhol. Vazio deixa os botões de compra inertes. */
+  var CHECKOUT_URL = "";
+
+  /* A revisão do doc tirou as duas dobras de WhatsApp — "Fale diretamente com
+     minha equipe" e "Precisa de ajuda?" —, então não sobrou nenhum botão
+     [data-whats] e o initWhats saiu junto. O número do suporte era
+     5512936182269; se alguma delas voltar, é por aqui que ela se liga. */
+
+  function avisa(msg) {
+    if (window.console && console.warn) console.warn("[upsell-api-27] " + msg);
+  }
+
+  /* =======================================================================
+     BOTÕES
+     ======================================================================= */
+  function initLinks(seletor, url, rotulo) {
+    var els = [].slice.call(document.querySelectorAll(seletor));
+    if (!els.length) return;
+
+    if (!url) {
+      els.forEach(function (a) {
+        a.removeAttribute("href");
+        a.setAttribute("aria-disabled", "true");
+      });
+      avisa(rotulo + " está vazia: " + els.length + " botão(ões) sem destino.");
+      return;
+    }
+
+    els.forEach(function (a) {
+      a.href = url;
+      a.removeAttribute("aria-disabled");
+    });
+  }
+
+  /* =======================================================================
+     ÂNCORAS PARA A OFERTA
+
+     Dos nove botões, oito rolam até a dobra da oferta — só o que está dentro
+     dela vai para o checkout. O href já está no HTML, então o botão funciona
+     sem JS; aqui entram a medição, para não perder de vista qual dobra
+     empurrou a pessoa para a oferta, e o ponto de parada.
+
+     Sem JS a rolagem para com o riscado no topo, e em tela baixa o botão do
+     checkout fica abaixo da dobra. Aqui, quando o botão não cabe, a rolagem
+     desce até ele ficar no pé da tela, com uma folga — o riscado sai por
+     cima, mas o preço e o botão aparecem. Quando cabe, ela para no riscado,
+     como no CSS.
+     ======================================================================= */
+  function alvoDaOferta() {
+    var riscado = document.getElementById("oferta");
+    var botao = document.querySelector(".dw-btn--oferta");
+    if (!riscado || !botao) return null;
+
+    var folga = 24;
+    var topoRiscado = riscado.getBoundingClientRect().top + window.pageYOffset
+      - (parseFloat(getComputedStyle(riscado).scrollMarginTop) || 0);
+    var peBotao = botao.getBoundingClientRect().bottom + window.pageYOffset;
+    return Math.max(topoRiscado, peBotao + folga - window.innerHeight);
+  }
+
+  function initAncoras() {
+    [].slice.call(document.querySelectorAll("[data-ancora]")).forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        var y = alvoDaOferta();
+        if (y !== null) {
+          e.preventDefault();
+          var calmo = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+          window.scrollTo({ top: y, behavior: calmo ? "auto" : "smooth" });
+          if (history.replaceState) history.replaceState(null, "", "#oferta");
+        }
+
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: "clique_oferta",
+          pagina: "upsell-api-27",
+          rotulo: (a.textContent || "").trim()
+        });
+      });
+    });
+  }
+
+  function initCheckout() {
+    initLinks("[data-checkout]", CHECKOUT_URL, "CHECKOUT_URL");
+    if (!CHECKOUT_URL) return;
+
+    // O evento sai antes da navegação, para a campanha contar o clique
+    // mesmo quando a próxima página demora a carregar.
+    [].slice.call(document.querySelectorAll("[data-checkout]")).forEach(function (a) {
+      a.addEventListener("click", function () {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          event: "clique_checkout",
+          pagina: "upsell-api-27",
+          rotulo: (a.textContent || "").trim()
+        });
+      });
+    });
+  }
+
+  /* =======================================================================
+     ESTEIRA DE PRINTS
+
+     O CSS desliza a faixa em -50%. Para que -50% caia exatamente onde o
+     laço começou, a faixa precisa ter a lista duas vezes — a cópia é feita
+     aqui e não no HTML para não repetir sete <img> no documento e não
+     deixar imagens duplicadas na árvore de acessibilidade.
+     ======================================================================= */
+  function initEsteira() {
+    var caixas = [].slice.call(document.querySelectorAll("[data-esteira]"));
+    caixas.forEach(function (caixa) {
+      var faixa = caixa.querySelector(".dw-esteira__faixa");
+      if (!faixa || faixa.dataset.duplicada === "1") return;
+
+      var originais = [].slice.call(faixa.children);
+      originais.forEach(function (li) {
+        var copia = li.cloneNode(true);
+        copia.setAttribute("aria-hidden", "true");
+        var img = copia.querySelector("img");
+        if (img) img.setAttribute("alt", "");
+        faixa.appendChild(copia);
+      });
+      faixa.dataset.duplicada = "1";
+    });
+  }
+
+  /* =======================================================================
+     FAQ — abrir uma pergunta fecha as demais
+     ======================================================================= */
+  function initFaq() {
+    var items = [].slice.call(document.querySelectorAll(".dw-faq__item"));
+    items.forEach(function (item) {
+      item.addEventListener("toggle", function () {
+        if (!item.open) return;
+        items.forEach(function (o) { if (o !== item) o.open = false; });
+      });
+    });
+  }
+
+  /* =======================================================================
+     BOOT
+     ======================================================================= */
+  function boot() {
+    initAncoras();
+    initCheckout();
+    initEsteira();
+    initFaq();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot, { once: true });
+  } else {
+    boot();
+  }
+})();

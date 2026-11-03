@@ -30,6 +30,12 @@
 /lt-v4-*
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
 
+# As cópias em espanhol de todo o funil (e o índice delas, em português)
+# moram em /esp/ desde 03/11/2026. Fora dos buscadores enquanto a compra
+# estiver desligada e as imagens forem as da versão em português.
+/esp/*
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+
 # A lt-v1-27-sf nasceu em 15/10/2026 como cópia da lt-v1-27. Fora dos
 # buscadores pelo mesmo motivo da v2 e da v3: igual à v1, disputaria a
 # mesma busca com ela. Sem hífen antes do asterisco, para pegar a própria

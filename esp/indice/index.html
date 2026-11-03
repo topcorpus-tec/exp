@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#0B1220" />
+
+<!-- Índice interno: nunca deve ser encontrado na busca. O _headers da raiz
+     reforça com X-Robots-Tag em /indice/*. -->
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+<meta name="googlebot" content="noindex, nofollow" />
+<meta http-equiv="X-Content-Type-Options" content="nosniff" />
+
+  <!-- Favicon do TopCorpus, na raiz do site: um arquivo só serve todas as
+       rotas, e o caminho absoluto funciona de qualquer pasta. O .ico leva
+       16, 32 e 48 px dentro, que cobre aba, atalho e barra de tarefas. -->
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<title>Índice do fluxo em espanhol — EXP</title>
+
+<link rel="preconnect" href="https://pcm.topcorpus.com.br" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-400.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-600.woff2" crossorigin />
+<link rel="preload" as="font" type="font/woff2" href="https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-800.woff2" crossorigin />
+
+<style>
+/* =========================================================================
+   Índice das páginas — EXP
+
+   Página interna, feita para caber na tela: uma grade de blocos, um por
+   página, cada um com nome, slug, endereço e o botão que abre.
+
+   A grade é auto-fill com mínimo de 270px — o número de colunas sai da
+   largura da janela, sem breakpoint escrito à mão.
+   ========================================================================= */
+
+@font-face { font-family: Manrope; font-weight: 400; font-display: swap;
+  src: url(https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-400.woff2) format("woff2"); }
+@font-face { font-family: Manrope; font-weight: 600; font-display: swap;
+  src: url(https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-600.woff2) format("woff2"); }
+@font-face { font-family: Manrope; font-weight: 800; font-display: swap;
+  src: url(https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-800.woff2) format("woff2"); }
+
+/* Paleta neutra: a página indexa um funil azul e um verde, então ela
+   própria não puxa para nenhum dos dois. Cada funil se identifica por um
+   fio de cor no topo do bloco. */
+:root {
+  --ink:      #0B1220;
+  --ink-2:    #1E293B;
+  --body:     #4A5A6E;
+  --muted:    #8494A8;
+  --faint:    #AAB6C4;
+  --line:     #E4E9F0;
+  --surface:  #FFFFFF;
+  --canvas:   #F7F9FC;
+
+  --azul:     #0873B8;
+  --azul-bg:  #EAF4FC;
+  --verde:    #0D6E3C;
+  --verde-bg: #E7F4EC;
+  --ambar:    #A55A09;
+  --ambar-bg: #FDF3E4;
+
+  /* O amarelo do ticket 67 tem dois tons de propósito: o escuro é o que
+     carrega texto (legível sobre o creme), e o vivo é só o fio do topo do
+     bloco, onde a cor não precisa ser lida, precisa ser vista. Um tom só
+     daria ou um fio marrom ou um rótulo ilegível. */
+  --amarelo:      #8A6100;
+  --amarelo-fio:  #E8B004;
+  --amarelo-bg:   #FDF6DE;
+
+  /* Meio-tom de cada cor, para a borda do bloco. O tom de texto seria forte
+     demais numa moldura, e o de fundo sumiria contra o próprio fundo. */
+  --azul-linha:    #B9D9F0;
+  --amarelo-linha: #EBD9A0;
+  --verde-linha:   #BFE3CD;
+  --neutro:   #7C8CA0;
+  --neutro-bg:#F1F5F9;
+
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  padding-bottom: clamp(2.5rem, 6vw, 4rem);
+  font-family: Manrope, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--body);
+  background: var(--canvas);
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 1180px; margin-inline: auto; padding-inline: clamp(1.15rem, 4vw, 2.25rem); }
+
+/* =========================================================================
+   Cabeçalho — compacto de propósito, para a grade começar cedo na tela
+   ========================================================================= */
+.head {
+  padding: clamp(1.6rem, 4vw, 2.4rem) 0 clamp(1.4rem, 3vw, 1.9rem);
+  background: linear-gradient(135deg, #0B1220 0%, #121F35 100%);
+  color: #fff;
+}
+.head__row { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem 1.1rem; }
+.head h1 { margin: 0; font-size: clamp(1.3rem, 3.4vw, 1.7rem); font-weight: 800; letter-spacing: -.02em; color: #fff; }
+.head__sub { margin: 0; font-size: .88rem; color: #9FB0C6; }
+
+/* A legenda das cores de ticket, no próprio cabeçalho: é onde o olho cai
+   antes de bater nos blocos coloridos, então é onde a chave tem de estar.
+
+   As bolinhas não repetem as cores dos blocos — as de lá são feitas para
+   fundo claro e sumiriam neste azul quase preto. Aqui vai o tom vivo de
+   cada uma, que é o mesmo par que o fio do topo do bloco usa. */
+.cores {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .35rem .85rem;
+  margin: .7rem 0 0; padding: 0; list-style: none;
+  font-size: .78rem; color: #9FB0C6;
+}
+.cores__rot { font-weight: 800; letter-spacing: .1em; text-transform: uppercase; font-size: .62rem; color: #6F819A; }
+.cores li { display: inline-flex; align-items: center; gap: .4rem; }
+.cores__p { width: 10px; height: 10px; border-radius: 3px; flex: 0 0 auto; }
+.cores__p--t27 { background: #58B0EC; }
+.cores__p--t67 { background: var(--amarelo-fio); }
+.cores__p--t97 { background: #3FBF77; }
+.cores__p--n   { background: #5C6E85; }
+.cores b { color: #DCE6F2; font-weight: 800; }
+
+.head__ir {
+  margin-left: auto;
+  padding: .4em .8em; border-radius: 8px;
+  border: 1px solid #2B3B57; background: transparent; color: #CBD7E6;
+  font-size: .78rem; font-weight: 700; text-decoration: none;
+}
+.head__ir:hover, .head__ir:focus-visible { background: #17233A; color: #fff; }
+
+/* =========================================================================
+   Grupos e grade
+   ========================================================================= */
+.grupo { margin-top: clamp(1.6rem, 4vw, 2.4rem); }
+.grupo__cab { display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem .8rem; margin-bottom: .85rem; }
+.grupo h2 { margin: 0; font-size: 1.02rem; font-weight: 800; letter-spacing: -.01em; color: var(--ink); }
+.grupo__n { font-size: .8rem; color: var(--faint); }
+.grupo__rot {
+  padding: .22em .7em; border-radius: 999px;
+  font-size: .62rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+}
+.grupo__rot--azul   { background: var(--azul-bg);   color: var(--azul); }
+.grupo__rot--neutro { background: var(--neutro-bg); color: var(--neutro); }
+
+/* =========================================================================
+   A cor do ticket
+
+   Cada preço do Manual tem uma cor, e ela acompanha o funil inteiro: a
+   página de venda e as três etapas de pós-compra daquele ticket. Serve
+   para achar de relance todas as páginas de um funil no meio das treze —
+   e para perceber na hora se uma URL de 67 foi parar no funil do 27.
+
+       27  azul     67  amarelo     97  verde
+   ========================================================================= */
+.grupo__rot--t27 { background: var(--azul-bg);    color: var(--azul); }
+.grupo__rot--t67 { background: var(--amarelo-bg); color: var(--amarelo); }
+.grupo__rot--t97 { background: var(--verde-bg);   color: var(--verde); }
+
+/* O número de colunas sai da largura disponível: três num monitor, duas
+   num tablet, uma no celular — sem breakpoint escrito à mão. */
+.grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: .8rem;
+}
+
+/* =========================================================================
+   Bloco de página
+   ========================================================================= */
+.bloco {
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column; gap: .55rem;
+  padding: 1rem 1.05rem 1.05rem;
+  border: 1px solid var(--line); border-radius: 12px;
+  background: var(--surface);
+  transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease;
+}
+.bloco:hover { border-color: #CFDAE7; box-shadow: 0 6px 20px rgba(16, 32, 56, .07); transform: translateY(-1px); }
+
+/* O fio do topo é o que diz a que funil o bloco pertence. */
+.bloco::before { content: ""; position: absolute; inset-inline: 0; top: 0; height: 3px; background: var(--neutro); }
+.bloco--azul::before { background: var(--azul); }
+.bloco--t27::before  { background: var(--azul); }
+.bloco--t67::before  { background: var(--amarelo-fio); }
+.bloco--t97::before  { background: var(--verde); }
+
+/* O bloco inteiro é da cor do ticket: fundo, borda e o fio do topo.
+
+   Com o fundo colorido, tudo que era uma pastilha clara dentro do bloco
+   passa a branco — o chip do preço, o slug, as etiquetas de pendência. Se
+   ficassem no tom claro original desapareceriam contra o fundo, que agora
+   é desse mesmo tom. A cor delas migra para o texto, que é onde ela ainda
+   é lida. */
+.bloco--t27 { background: var(--azul-bg);    border-color: var(--azul-linha); }
+.bloco--t67 { background: var(--amarelo-bg); border-color: var(--amarelo-linha); }
+.bloco--t97 { background: var(--verde-bg);   border-color: var(--verde-linha); }
+
+.bloco--t27 .bloco__preco,
+.bloco--t67 .bloco__preco,
+.bloco--t97 .bloco__preco,
+.bloco--t27 .bloco__slug,
+.bloco--t67 .bloco__slug,
+.bloco--t97 .bloco__slug,
+.bloco--t27 .falta span,
+.bloco--t67 .falta span,
+.bloco--t97 .falta span { background: var(--surface); }
+
+.bloco--t27 .bloco__preco--vazio,
+.bloco--t67 .bloco__preco--vazio,
+.bloco--t97 .bloco__preco--vazio { color: var(--muted); }
+
+.bloco__topo { display: flex; align-items: flex-start; gap: .6rem; }
+.bloco__nome { margin: 0; font-size: .97rem; font-weight: 800; line-height: 1.3; color: var(--ink); }
+.bloco__preco {
+  margin-left: auto; flex: 0 0 auto;
+  padding: .22em .6em; border-radius: 7px;
+  font-size: .78rem; font-weight: 800; white-space: nowrap;
+}
+.bloco--azul .bloco__preco { background: var(--azul-bg);    color: var(--azul); }
+.bloco--t27  .bloco__preco { background: var(--azul-bg);    color: var(--azul); }
+.bloco--t67  .bloco__preco { background: var(--amarelo-bg); color: var(--amarelo); }
+.bloco--t97  .bloco__preco { background: var(--verde-bg);   color: var(--verde); }
+.bloco__preco--vazio { background: var(--neutro-bg); color: var(--muted); font-weight: 600; }
+
+.bloco__papel { font-size: .8rem; color: var(--muted); }
+
+/* Slug e endereço. O <a> do endereço é o "link" propriamente dito; o
+   botão de baixo é o atalho grande. */
+.bloco__slug {
+  align-self: flex-start;
+  padding: .25em .55em; border-radius: 6px;
+  background: var(--neutro-bg);
+  font-family: var(--mono); font-size: .8rem; color: var(--ink-2);
+}
+.bloco__urls { display: flex; flex-direction: column; gap: .2rem; }
+.bloco__url {
+  display: inline-flex; align-items: baseline; gap: .4rem;
+  font-family: var(--mono); font-size: .72rem; color: var(--muted); text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.bloco__url:hover, .bloco__url:focus-visible { color: var(--ink-2); text-decoration: underline; }
+.bloco__url b { font-family: Manrope, sans-serif; font-size: .68rem; font-weight: 800;
+                letter-spacing: .07em; text-transform: uppercase; color: var(--faint); }
+
+/* Empurra o rodapé do bloco para a base, para os blocos da mesma linha
+   terminarem alinhados mesmo com textos de alturas diferentes. */
+.bloco__pe { margin-top: auto; padding-top: .35rem; display: grid; gap: .45rem; }
+
+.abrir {
+  display: flex; align-items: center; justify-content: space-between; gap: .5rem;
+  padding: .6em .95em;
+  border: 1px solid var(--ink); border-radius: 9px;
+  background: var(--ink); color: #fff;
+  font-size: .84rem; font-weight: 800; text-decoration: none;
+  transition: background .15s ease, border-color .15s ease;
+}
+.abrir:hover, .abrir:focus-visible { background: #1C2841; border-color: #1C2841; }
+.abrir span:last-child { font-weight: 600; }
+
+.copias { display: flex; gap: .35rem; }
+.cp {
+  flex: 1 1 0;
+  padding: .45em .5em;
+  border: 1px solid var(--line); border-radius: 8px;
+  background: var(--surface);
+  font: inherit; font-size: .74rem; font-weight: 700; color: var(--muted);
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
+}
+.cp:hover { background: var(--canvas); color: var(--ink-2); border-color: #CFDAE7; }
+.cp.ok { background: var(--verde-bg); border-color: #BFE3CD; color: var(--verde); }
+
+.falta { display: flex; flex-wrap: wrap; gap: .3rem; }
+.falta span {
+  padding: .2em .55em; border-radius: 6px;
+  background: var(--ambar-bg); color: var(--ambar);
+  font-size: .71rem; font-weight: 700;
+}
+.falta span.ok { background: var(--verde-bg); color: var(--verde); }
+
+/* =========================================================================
+   Nota de pé
+   ========================================================================= */
+.pe {
+  margin-top: clamp(1.75rem, 4vw, 2.5rem);
+  padding: clamp(.95rem, 2.4vw, 1.25rem);
+  border: 1px solid var(--line); border-radius: 12px;
+  background: var(--surface);
+}
+.pe h3 { margin: 0 0 .5rem; font-size: .85rem; font-weight: 800; color: var(--ink); }
+.pe ul { margin: 0; padding-left: 1.1rem; display: grid; gap: .35rem; }
+.pe li { font-size: .84rem; color: var(--muted); }
+.pe strong { color: var(--ink-2); }
+.pe code { padding: .1em .38em; border-radius: 5px; background: var(--neutro-bg);
+           font-family: var(--mono); font-size: .88em; color: var(--ink-2); }
+</style>
+</head>
+<body>
+
+<!-- Índice do fluxo em espanhol (/esp/). Em português, para o time: as
+     páginas que ele lista é que estão em espanhol (latino neutro). Gerado em
+     03/11/2026 junto com as cópias; o índice das páginas em português
+     continua em /indice/. -->
+<header class="head">
+  <div class="wrap">
+    <div class="head__row">
+      <h1>Índice do fluxo em espanhol</h1>
+      <p class="head__sub">28 páginas &middot; todas em /esp/ &middot; 2 subdomínios</p>
+      <a class="head__ir" href="/indice/">Ver o índice em português &rarr;</a>
+    </div>
+
+    <ul class="cores">
+      <li class="cores__rot">Cor do ticket</li>
+      <li><span class="cores__p cores__p--t27" aria-hidden="true"></span><b>27</b>&nbsp;azul</li>
+      <li><span class="cores__p cores__p--t67" aria-hidden="true"></span><b>67</b>&nbsp;amarelo</li>
+      <li><span class="cores__p cores__p--t97" aria-hidden="true"></span><b>97</b>&nbsp;verde</li>
+      <li><span class="cores__p cores__p--n" aria-hidden="true"></span>cinza&nbsp;&mdash;&nbsp;serve os três</li>
+    </ul>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="grupo">
+    <p class="pe">
+      <strong>Estado do fluxo em espanhol:</strong> o texto de todas as páginas está traduzido. A
+      compra está desligada em todas (botão de checkout inerte e widget de funil da Hotmart
+      retirado) até existirem as ofertas em espanhol. Imagens, vídeos, o PDF do Manual e a pesquisa
+      do Tally ainda são os da versão em português.
+    </p>
+  </section>
+
+  <section class="grupo">
+    <div class="grupo__cab">
+      <span class="grupo__rot grupo__rot--azul">Entrada</span>
+      <h2>Manual Ilustrado para el Alivio del Dolor &mdash; v1</h2>
+      <span class="grupo__n">3 páginas &middot; mesma copy, preços diferentes</span>
+    </div>
+
+    <div class="grade">
+
+      <article class="bloco bloco--t27">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Manual &mdash; ticket baixo</h3>
+          <span class="bloco__preco">R$ 27</span>
+        </div>
+        <p class="bloco__papel">9&times; de R$ 3,39</p>
+        <span class="bloco__slug">/esp/lt-v1-27/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/lt-v1-27/"><b>fb</b> exp-fb.topcorpus.com.br/esp/lt-v1-27/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/esp/lt-v1-27/"><b>gg</b> exp-gg.topcorpus.com.br/esp/lt-v1-27/</a>
+        </div>
+        <div class="bloco__pe">
+          <div class="falta"><span>compra desligada</span><span>imagens e vídeos em português</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/esp/lt-v1-27/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/esp/lt-v1-27/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/esp/lt-v1-27/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+      <article class="bloco bloco--t67">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Manual &mdash; ticket médio</h3>
+          <span class="bloco__preco">R$ 67</span>
+        </div>
+        <p class="bloco__papel">12&times; de R$ 6,53</p>
+        <span class="bloco__slug">/esp/lt-v1-67/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/lt-v1-67/"><b>fb</b> exp-fb.topcorpus.com.br/esp/lt-v1-67/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/esp/lt-v1-67/"><b>gg</b> exp-gg.topcorpus.com.br/esp/lt-v1-67/</a>
+        </div>
+        <div class="bloco__pe">
+          <div class="falta"><span>compra desligada</span><span>imagens e vídeos em português</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/esp/lt-v1-67/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/esp/lt-v1-67/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/esp/lt-v1-67/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+      <article class="bloco bloco--t97">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Manual &mdash; ticket alto</h3>
+          <span class="bloco__preco">R$ 97</span>
+        </div>
+        <p class="bloco__papel">12&times; de R$ 9,45</p>
+        <span class="bloco__slug">/esp/lt-v1-97/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/lt-v1-97/"><b>fb</b> exp-fb.topcorpus.com.br/esp/lt-v1-97/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/esp/lt-v1-97/"><b>gg</b> exp-gg.topcorpus.com.br/esp/lt-v1-97/</a>
+        </div>
+        <div class="bloco__pe">
+          <div class="falta"><span>compra desligada</span><span>imagens e vídeos em português</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/esp/lt-v1-97/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/esp/lt-v1-97/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/esp/lt-v1-97/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="grupo">
+    <div class="grupo__cab">
+      <span class="grupo__rot grupo__rot--azul">Entrada</span>
+      <h2>Manual Ilustrado para el Alivio del Dolor &mdash; v2</h2>
+      <span class="grupo__n">3 páginas &middot; copy da Página de Vendas #2</span>
+    </div>
+
+    <div class="grade">
+
+      <article class="bloco bloco--t27">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Manual &mdash; ticket baixo</h3>
+          <span class="bloco__preco">R$ 27</span>
+        </div>
+        <p class="bloco__papel">9&times; de R$ 3,39</p>
+        <span class="bloco__slug">/esp/lt-v2-27/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/lt-v2-27/"><b>fb</b> exp-fb.topcorpus.com.br/esp/lt-v2-27/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/esp/lt-v2-27/"><b>gg</b> exp-gg.topcorpus.com.br/esp/lt-v2-27/</a>
+        </div>
+        <div class="bloco__pe">
+          <div class="falta"><span>compra desligada</span><span>imagens e vídeos em português</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/esp/lt-v2-27/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/esp/lt-v2-27/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/esp/lt-v2-27/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+      <article class="bloco bloco--t67">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Manual &mdash; ticket médio</h3>
+          <span class="bloco__preco">R$ 67</span>
+        </div>
+        <p class="bloco__papel">12&times; de R$ 6,53</p>
+        <span class="bloco__slug">/esp/lt-v2-67/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/lt-v2-67/"><b>fb</b> exp-fb.topcorpus.com.br/esp/lt-v2-67/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/esp/lt-v2-67/"><b>gg</b> exp-gg.topcorpus.com.br/esp/lt-v2-67/</a>
+        </div>
+        <div class="bloco__pe">
+          <div class="falta"><span>compra desligada</span><span>imagens e vídeos em português</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/esp/lt-v2-67/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/esp/lt-v2-67/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/esp/lt-v2-67/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+      <article class="bloco bloco--t97">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Manual &mdash; ticket alto</h3>
+          <span class="bloco__preco">R$ 97</span>
+        </div>
+        <p class="bloco__papel">12&times; de R$ 9,45</p>
+        <span class="bloco__slug">/esp/lt-v2-97/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/lt-v2-97/"><b>fb</b> exp-fb.topcorpus.com.br/esp/lt-v2-97/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/esp/lt-v2-97/"><b>gg</b> exp-gg.topcorpus.com.br/esp/lt-v2-97/</a>
+        </div>
+        <div class="bloco__pe">
+          <div class="falta"><span>compra desligada</span><span>imagens e vídeos em português</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/esp/lt-v2-97/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/esp/lt-v2-97/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/esp/lt-v2-97/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="grupo">
+    <div class="grupo__cab">
+      <span class="grupo__rot grupo__rot--azul">Entrada</span>
+      <h2>Manual Ilustrado para el Alivio del Dolor &mdash; v3</h2>
+      <span class="grupo__n">3 páginas &middot; a v1 com hero nova e VSL</span>
+    </div>
+
+    <div class="grade">
+
+      <article class="bloco bloco--t27">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Manual &mdash; ticket baixo</h3>
+          <span class="bloco__preco">R$ 27</span>
+        </div>
+        <p class="bloco__papel">9&times; de R$ 3,39</p>
+        <span class="bloco__slug">/esp/lt-v3-27/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/lt-v3-27/"><b>fb</b> exp-fb.topcorpus.com.br/esp/lt-v3-27/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/esp/lt-v3-27/"><b>gg</b> exp-gg.topcorpus.com.br/esp/lt-v3-27/</a>
+        </div>
+        <div class="bloco__pe">
+          <div class="falta"><span>compra desligada</span><span>imagens e vídeos em português</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/esp/lt-v3-27/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/esp/lt-v3-27/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/esp/lt-v3-27/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+      <article class="bloco bloco--t67">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Manual &mdash; ticket médio</h3>
+          <span class="bloco__preco">R$ 67</span>
+        </div>
+        <p class="bloco__papel">12&times; de R$ 6,53</p>
+        <span class="bloco__slug">/esp/lt-v3-67/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/lt-v3-67/"><b>fb</b> exp-fb.topcorpus.com.br/esp/lt-v3-67/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/esp/lt-v3-67/"><b>gg</b> exp-gg.topcorpus.com.br/esp/lt-v3-67/</a>
+        </div>
+        <div class="bloco__pe">
+          <div class="falta"><span>compra desligada</span><span>imagens e vídeos em português</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/esp/lt-v3-67/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/esp/lt-v3-67/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/esp/lt-v3-67/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+      <article class="bloco bloco--t97">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Manual &mdash; ticket alto</h3>
+          <span class="bloco__preco">R$ 97</span>
+        </div>
+        <p class="bloco__papel">12&times; de R$ 9,45</p>
+        <span class="bloco__slug">/esp/lt-v3-97/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/lt-v3-97/"><b>fb</b> exp-fb.topcorpus.com.br/esp/lt-v3-97/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/esp/lt-v3-97/"><b>gg</b> exp-gg.topcorpus.com.br/esp/lt-v3-97/</a>
+        </div>
+        <div class="bloco__pe">
+          <div class="falta"><span>compra desligada</span><span>imagens e vídeos em português</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/esp/lt-v3-97/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/esp/lt-v3-97/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/esp/lt-v3-97/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="grupo">
+    <div class="grupo__cab">
+      <span class="grupo__rot grupo__rot--azul">Entrada</span>
+      <h2>Manual Ilustrado para el Alivio del Dolor &mdash; v4</h2>
+      <span class="grupo__n">2 páginas &middot; Página de Vendas #4: uma com a ID da v1, outra verde</span>
+    </div>
+
+    <div class="grade">
+
+      <article class="bloco bloco--t27">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Manual &mdash; ticket baixo</h3>
+          <span class="bloco__preco">R$ 27</span>
+        </div>
+        <p class="bloco__papel">R$ 27 à vista</p>
+        <span class="bloco__slug">/esp/lt-v4-27/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/lt-v4-27/"><b>fb</b> exp-fb.topcorpus.com.br/esp/lt-v4-27/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/esp/lt-v4-27/"><b>gg</b> exp-gg.topcorpus.com.br/esp/lt-v4-27/</a>
+        </div>
+        <div class="bloco__pe">
+          <div class="falta"><span>compra desligada</span><span>imagens e vídeos em português</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/esp/lt-v4-27/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/esp/lt-v4-27/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/esp/lt-v4-27/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+      <article class="bloco bloco--t27">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Manual &mdash; v4 verde</h3>
+          <span class="bloco__preco">R$ 27</span>
+        </div>
+        <p class="bloco__papel">a v4 com a identidade verde e a Fraunces</p>
+        <span class="bloco__slug">/esp/lt-v4-v2/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/lt-v4-v2/"><b>fb</b> exp-fb.topcorpus.com.br/esp/lt-v4-v2/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/esp/lt-v4-v2/"><b>gg</b> exp-gg.topcorpus.com.br/esp/lt-v4-v2/</a>
+        </div>
+        <div class="bloco__pe">
+          <div class="falta"><span>compra desligada</span><span>imagens e vídeos em português</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/esp/lt-v4-v2/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/esp/lt-v4-v2/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/esp/lt-v4-v2/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="grupo">
+    <div class="grupo__cab">
+      <span class="grupo__rot grupo__rot--azul">Entrada</span>
+      <h2>Manual Ilustrado para el Alivio del Dolor &mdash; v1 sf</h2>
+      <span class="grupo__n">1 página &middot; cópia da v1 de 27</span>
+    </div>
+
+    <div class="grade">
+
+      <article class="bloco bloco--t27">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Manual &mdash; ticket baixo</h3>
+          <span class="bloco__preco">R$ 27</span>
+        </div>
+        <p class="bloco__papel">9&times; de R$ 3,39</p>
+        <span class="bloco__slug">/esp/lt-v1-27-sf/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/lt-v1-27-sf/"><b>fb</b> exp-fb.topcorpus.com.br/esp/lt-v1-27-sf/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/esp/lt-v1-27-sf/"><b>gg</b> exp-gg.topcorpus.com.br/esp/lt-v1-27-sf/</a>
+        </div>
+        <div class="bloco__pe">
+          <div class="falta"><span>compra desligada</span><span>imagens e vídeos em português</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/esp/lt-v1-27-sf/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/esp/lt-v1-27-sf/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/esp/lt-v1-27-sf/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="grupo">
+    <div class="grupo__cab">
+      <span class="grupo__rot grupo__rot--neutro">Pós-compra</span>
+      <h2>Método Manos Lucrativas</h2>
+      <span class="grupo__n">4 páginas &middot; mesma copy, uma URL por ticket e uma sem ticket</span>
+    </div>
+
+    <div class="grade">
+
+      <article class="bloco bloco--t27">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Manos Lucrativas &mdash; ticket 27</h3>
+          <span class="bloco__preco">R$ 297</span>
+        </div>
+        <p class="bloco__papel">12&times; de R$ 28,94</p>
+        <span class="bloco__slug">/esp/upsell-api-27/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/upsell-api-27/"><b>fb</b> exp-fb.topcorpus.com.br/esp/upsell-api-27/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/esp/upsell-api-27/"><b>gg</b> exp-gg.topcorpus.com.br/esp/upsell-api-27/</a>
+        </div>
+        <div class="bloco__pe">
+          <div class="falta"><span>compra desligada</span><span>imagens e vídeos em português</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/esp/upsell-api-27/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/esp/upsell-api-27/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/esp/upsell-api-27/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+      <article class="bloco bloco--t67">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Manos Lucrativas &mdash; ticket 67</h3>
+          <span class="bloco__preco">R$ 297</span>
+        </div>
+        <p class="bloco__papel">12&times; de R$ 28,94</p>
+        <span class="bloco__slug">/esp/upsell-api-67/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/upsell-api-67/"><b>fb</b> exp-fb.topcorpus.com.br/esp/upsell-api-67/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/esp/upsell-api-67/"><b>gg</b> exp-gg.topcorpus.com.br/esp/upsell-api-67/</a>
+        </div>
+        <div class="bloco__pe">
+          <div class="falta"><span>compra desligada</span><span>imagens e vídeos em português</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/esp/upsell-api-67/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/esp/upsell-api-67/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/esp/upsell-api-67/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+      <article class="bloco bloco--t97">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Manos Lucrativas &mdash; ticket 97</h3>
+          <span class="bloco__preco">R$ 297</span>
+        </div>
+        <p class="bloco__papel">12&times; de R$ 28,94</p>
+        <span class="bloco__slug">/esp/upsell-api-97/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/upsell-api-97/"><b>fb</b> exp-fb.topcorpus.com.br/esp/upsell-api-97/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/esp/upsell-api-97/"><b>gg</b> exp-gg.topcorpus.com.br/esp/upsell-api-97/</a>
+        </div>
+        <div class="bloco__pe">
+          <div class="falta"><span>compra desligada</span><span>imagens e vídeos em português</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/esp/upsell-api-97/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/esp/upsell-api-97/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/esp/upsell-api-97/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+      <article class="bloco ">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Manos Lucrativas &mdash; sem ticket</h3>
+          <span class="bloco__preco">R$ 297</span>
+        </div>
+        <p class="bloco__papel">12&times; de R$ 28,94</p>
+        <span class="bloco__slug">/esp/upsell-api/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/upsell-api/"><b>fb</b> exp-fb.topcorpus.com.br/esp/upsell-api/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/esp/upsell-api/"><b>gg</b> exp-gg.topcorpus.com.br/esp/upsell-api/</a>
+        </div>
+        <div class="bloco__pe">
+          <div class="falta"><span>compra desligada</span><span>imagens e vídeos em português</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/esp/upsell-api/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/esp/upsell-api/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/esp/upsell-api/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="grupo">
+    <div class="grupo__cab">
+      <span class="grupo__rot grupo__rot--t27">Pós-compra</span>
+      <h2>Método Manos Lucrativas &middot; ticket 27</h2>
+      <span class="grupo__n">3 etapas &middot; na versão em português, os botões vêm do funil da Hotmart</span>
+    </div>
+
+    <div class="grade">
+
+      <article class="bloco bloco--t27">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Upsell</h3>
+          <span class="bloco__preco">R$ 297</span>
+        </div>
+        <p class="bloco__papel">12&times; de R$ 28,94</p>
+        <span class="bloco__slug">/esp/upsell1-mml-27/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/upsell1-mml-27/"><b>fb</b> exp-fb.topcorpus.com.br/esp/upsell1-mml-27/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/esp/upsell1-mml-27/"><b>gg</b> exp-gg.topcorpus.com.br/esp/upsell1-mml-27/</a>
+        </div>
+        <div class="bloco__pe">
+          <div class="falta"><span>compra desligada</span><span>imagens e vídeos em português</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/esp/upsell1-mml-27/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/esp/upsell1-mml-27/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/esp/upsell1-mml-27/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+      <article class="bloco bloco--t27">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Downsell do Upsell</h3>
+          <span class="bloco__preco">R$ 197</span>
+        </div>
+        <p class="bloco__papel">12&times; de R$ 19,19</p>
+        <span class="bloco__slug">/esp/up-down-mml-27/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/up-down-mml-27/"><b>fb</b> exp-fb.topcorpus.com.br/esp/up-down-mml-27/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/esp/up-down-mml-27/"><b>gg</b> exp-gg.topcorpus.com.br/esp/up-down-mml-27/</a>
+        </div>
+        <div class="bloco__pe">
+          <div class="falta"><span>compra desligada</span><span>imagens e vídeos em português</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/esp/up-down-mml-27/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/esp/up-down-mml-27/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/esp/up-down-mml-27/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+      <article class="bloco bloco--t27">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Pedido em processamento</h3>
+          <span class="bloco__preco bloco__preco--vazio">&mdash;</span>
+        </div>
+        <p class="bloco__papel">Vídeo para concluir o pedido</p>
+        <span class="bloco__slug">/esp/upsell2-mml-27/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/upsell2-mml-27/"><b>fb</b> exp-fb.topcorpus.com.br/esp/upsell2-mml-27/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/esp/upsell2-mml-27/"><b>gg</b> exp-gg.topcorpus.com.br/esp/upsell2-mml-27/</a>
+        </div>
+        <div class="bloco__pe">
+          <div class="falta"><span>compra desligada</span><span>imagens e vídeos em português</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/esp/upsell2-mml-27/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/esp/upsell2-mml-27/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/esp/upsell2-mml-27/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="grupo">
+    <div class="grupo__cab">
+      <span class="grupo__rot grupo__rot--t67">Pós-compra</span>
+      <h2>Método Manos Lucrativas &middot; ticket 67</h2>
+      <span class="grupo__n">3 etapas &middot; na versão em português, os botões vêm do funil da Hotmart</span>
+    </div>
+
+    <div class="grade">
+
+      <article class="bloco bloco--t67">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Upsell</h3>
+          <span class="bloco__preco">R$ 297</span>
+        </div>
+        <p class="bloco__papel">12&times; de R$ 28,94</p>
+        <span class="bloco__slug">/esp/upsell1-mml-67/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/upsell1-mml-67/"><b>fb</b> exp-fb.topcorpus.com.br/esp/upsell1-mml-67/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/esp/upsell1-mml-67/"><b>gg</b> exp-gg.topcorpus.com.br/esp/upsell1-mml-67/</a>
+        </div>
+        <div class="bloco__pe">
+          <div class="falta"><span>compra desligada</span><span>imagens e vídeos em português</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/esp/upsell1-mml-67/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/esp/upsell1-mml-67/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/esp/upsell1-mml-67/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+      <article class="bloco bloco--t67">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Downsell do Upsell</h3>
+          <span class="bloco__preco">R$ 197</span>
+        </div>
+        <p class="bloco__papel">12&times; de R$ 19,19</p>
+        <span class="bloco__slug">/esp/up-down-mml-67/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/up-down-mml-67/"><b>fb</b> exp-fb.topcorpus.com.br/esp/up-down-mml-67/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/esp/up-down-mml-67/"><b>gg</b> exp-gg.topcorpus.com.br/esp/up-down-mml-67/</a>
+        </div>
+        <div class="bloco__pe">
+          <div class="falta"><span>compra desligada</span><span>imagens e vídeos em português</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/esp/up-down-mml-67/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/esp/up-down-mml-67/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/esp/up-down-mml-67/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+      <article class="bloco bloco--t67">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Pedido em processamento</h3>
+          <span class="bloco__preco bloco__preco--vazio">&mdash;</span>
+        </div>
+        <p class="bloco__papel">Vídeo para concluir o pedido</p>
+        <span class="bloco__slug">/esp/upsell2-mml-67/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/upsell2-mml-67/"><b>fb</b> exp-fb.topcorpus.com.br/esp/upsell2-mml-67/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/esp/upsell2-mml-67/"><b>gg</b> exp-gg.topcorpus.com.br/esp/upsell2-mml-67/</a>
+        </div>
+        <div class="bloco__pe">
+          <div class="falta"><span>compra desligada</span><span>imagens e vídeos em português</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/esp/upsell2-mml-67/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/esp/upsell2-mml-67/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/esp/upsell2-mml-67/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="grupo">
+    <div class="grupo__cab">
+      <span class="grupo__rot grupo__rot--t97">Pós-compra</span>
+      <h2>Método Manos Lucrativas &middot; ticket 97</h2>
+      <span class="grupo__n">3 etapas &middot; na versão em português, os botões vêm do funil da Hotmart</span>
+    </div>
+
+    <div class="grade">
+
+      <article class="bloco bloco--t97">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Upsell</h3>
+          <span class="bloco__preco">R$ 297</span>
+        </div>
+        <p class="bloco__papel">12&times; de R$ 28,94</p>
+        <span class="bloco__slug">/esp/upsell1-mml-97/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/upsell1-mml-97/"><b>fb</b> exp-fb.topcorpus.com.br/esp/upsell1-mml-97/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/esp/upsell1-mml-97/"><b>gg</b> exp-gg.topcorpus.com.br/esp/upsell1-mml-97/</a>
+        </div>
+        <div class="bloco__pe">
+          <div class="falta"><span>compra desligada</span><span>imagens e vídeos em português</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/esp/upsell1-mml-97/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/esp/upsell1-mml-97/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/esp/upsell1-mml-97/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+      <article class="bloco bloco--t97">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Downsell do Upsell</h3>
+          <span class="bloco__preco">R$ 197</span>
+        </div>
+        <p class="bloco__papel">12&times; de R$ 19,19</p>
+        <span class="bloco__slug">/esp/up-down-mml-97/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/up-down-mml-97/"><b>fb</b> exp-fb.topcorpus.com.br/esp/up-down-mml-97/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/esp/up-down-mml-97/"><b>gg</b> exp-gg.topcorpus.com.br/esp/up-down-mml-97/</a>
+        </div>
+        <div class="bloco__pe">
+          <div class="falta"><span>compra desligada</span><span>imagens e vídeos em português</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/esp/up-down-mml-97/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/esp/up-down-mml-97/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/esp/up-down-mml-97/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+      <article class="bloco bloco--t97">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Pedido em processamento</h3>
+          <span class="bloco__preco bloco__preco--vazio">&mdash;</span>
+        </div>
+        <p class="bloco__papel">Vídeo para concluir o pedido</p>
+        <span class="bloco__slug">/esp/upsell2-mml-97/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/upsell2-mml-97/"><b>fb</b> exp-fb.topcorpus.com.br/esp/upsell2-mml-97/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/esp/upsell2-mml-97/"><b>gg</b> exp-gg.topcorpus.com.br/esp/upsell2-mml-97/</a>
+        </div>
+        <div class="bloco__pe">
+          <div class="falta"><span>compra desligada</span><span>imagens e vídeos em português</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/esp/upsell2-mml-97/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/esp/upsell2-mml-97/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/esp/upsell2-mml-97/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="grupo">
+    <div class="grupo__cab">
+      <span class="grupo__rot grupo__rot--neutro">Obrigado</span>
+      <h2>Confirmação de compra</h2>
+      <span class="grupo__n">3 páginas &middot; fecha o funil do Manual</span>
+    </div>
+
+    <div class="grade">
+
+      <article class="bloco bloco--azul">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Compra aprovada</h3>
+          <span class="bloco__preco bloco__preco--vazio">&mdash;</span>
+        </div>
+        <p class="bloco__papel">Download do e-book + suporte</p>
+        <span class="bloco__slug">/esp/confirmacao/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/confirmacao/"><b>fb</b> exp-fb.topcorpus.com.br/esp/confirmacao/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/esp/confirmacao/"><b>gg</b> exp-gg.topcorpus.com.br/esp/confirmacao/</a>
+        </div>
+        <div class="bloco__pe">
+          <div class="falta"><span>imagens, PDF e pesquisa em português</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/esp/confirmacao/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/esp/confirmacao/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/esp/confirmacao/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+      <article class="bloco bloco--azul">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Compra aprovada &mdash; v2</h3>
+          <span class="bloco__preco bloco__preco--vazio">&mdash;</span>
+        </div>
+        <p class="bloco__papel">Pesquisa embutida antes do download</p>
+        <span class="bloco__slug">/esp/confirmacao-v2/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/confirmacao-v2/"><b>fb</b> exp-fb.topcorpus.com.br/esp/confirmacao-v2/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/esp/confirmacao-v2/"><b>gg</b> exp-gg.topcorpus.com.br/esp/confirmacao-v2/</a>
+        </div>
+        <div class="bloco__pe">
+          <div class="falta"><span>imagens, PDF e pesquisa em português</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/esp/confirmacao-v2/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/esp/confirmacao-v2/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/esp/confirmacao-v2/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+      <article class="bloco bloco--azul">
+        <div class="bloco__topo">
+          <h3 class="bloco__nome">Compra aprovada &mdash; v3</h3>
+          <span class="bloco__preco bloco__preco--vazio">&mdash;</span>
+        </div>
+        <p class="bloco__papel">Pesquisa como ação principal</p>
+        <span class="bloco__slug">/esp/confirmacao-v3/</span>
+        <div class="bloco__urls">
+          <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/confirmacao-v3/"><b>fb</b> exp-fb.topcorpus.com.br/esp/confirmacao-v3/</a>
+          <a class="bloco__url" href="https://exp-gg.topcorpus.com.br/esp/confirmacao-v3/"><b>gg</b> exp-gg.topcorpus.com.br/esp/confirmacao-v3/</a>
+        </div>
+        <div class="bloco__pe">
+          <div class="falta"><span>imagens, PDF e pesquisa em português</span></div>
+          <div class="copias">
+            <button class="cp" type="button" data-copiar="https://exp-fb.topcorpus.com.br/esp/confirmacao-v3/">Copiar fb</button>
+            <button class="cp" type="button" data-copiar="https://exp-gg.topcorpus.com.br/esp/confirmacao-v3/">Copiar gg</button>
+          </div>
+          <a class="abrir" href="/esp/confirmacao-v3/"><span>Abrir página</span><span aria-hidden="true">&rarr;</span></a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+</div>
+
+<script>
+  // Copiar a URL é a ação mais repetida aqui — o destino delas é o
+  // gerenciador de anúncios. O clipboard do navegador só existe em HTTPS
+  // (ou localhost), então há um caminho alternativo para o resto.
+  document.addEventListener("click", function (ev) {
+    var b = ev.target.closest("[data-copiar]");
+    if (!b) return;
+
+    var url = b.getAttribute("data-copiar");
+    var rotulo = b.textContent;
+
+    function feito(ok) {
+      // Quando o navegador recusa a área de transferência, um aviso do tipo
+      // "selecione e copie" não ajudaria: não há nada visível para
+      // selecionar. O prompt entrega o endereço já pronto para copiar.
+      if (!ok) { window.prompt("Copie o endereço:", url); }
+      b.textContent = ok ? "Copiado" : rotulo;
+      b.classList.toggle("ok", ok);
+      if (ok) setTimeout(function () { b.textContent = rotulo; b.classList.remove("ok"); }, 1600);
+    }
+
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(url).then(function () { feito(true); }, function () { feito(false); });
+      return;
+    }
+
+    var t = document.createElement("textarea");
+    t.value = url;
+    t.setAttribute("readonly", "");
+    t.style.cssText = "position:fixed;top:-100px;opacity:0";
+    document.body.appendChild(t);
+    t.select();
+    var ok = false;
+    try { ok = document.execCommand("copy"); } catch (e) { ok = false; }
+    document.body.removeChild(t);
+    feito(ok);
+  });
+</script>
+
+</body>
+</html>

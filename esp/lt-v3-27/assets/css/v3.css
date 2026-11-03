@@ -1,0 +1,63 @@
+/* =========================================================================
+   Manual Ilustrado — v3.css
+
+   A lt-v3 nasceu em 09/10/2026 como cópia da lt-v1 (design-system + taping
+   + manual, que seguem sem alteração). Aqui ficam só as mudanças da v3,
+   escritas com os tokens que o manual.css já reatribuiu para o azul.
+
+   Carregar DEPOIS de manual.css.
+   ========================================================================= */
+
+/* =========================================================================
+   1. HERO — a manchete nova e o "assista ao vídeo"
+
+   A manchete da v3 é uma frase mais longa que a da v1, então ela desce um
+   pouco de tamanho para não virar um bloco alto demais. Logo abaixo, a
+   chamada para o vídeo, em caixa alta como no doc, no lugar do subtítulo
+   da v1.
+   ========================================================================= */
+.mn-hero__inner .tp-hero__headline {
+  max-width: 30ch;
+  font-size: clamp(1.5rem, 3.6vw, 2.4rem);
+}
+/* No celular a manchete ocupava cinco linhas e empurrava a VSL para baixo
+   da dobra. Ali ela encolhe e solta a largura, para caber em menos linhas,
+   e sobe: o respiro de cima do hero (o da seção e o da coluna, que somavam
+   uns 50px) cai para 1rem. Tudo para deixar mais do vídeo na primeira
+   tela. */
+@media (max-width: 767px) {
+  .tp-hero { padding-top: 0; }
+  .mn-hero__inner { padding-top: 1rem; }
+  .mn-hero__inner .tp-hero__headline {
+    max-width: none;
+    font-size: 1.25rem;
+  }
+}
+.v3-assista {
+  margin: clamp(.9rem, 2.2vw, 1.25rem) auto 0;
+  font-size: clamp(.95rem, 1.6vw, 1.1rem);
+  font-weight: var(--fw-extrabold);
+  letter-spacing: .04em;
+  color: var(--tp-ink);
+  text-align: center;
+}
+
+/* VSL, no lugar do mockup da v1.
+
+   O embed da VTurb já traz a largura máxima (400px) e a proporção vertical
+   no inline style; repetir essas medidas aqui faria as duas brigarem pela
+   mesma caixa. Aqui fica só a margem e o acabamento: canto arredondado e
+   sombra, como os cartões da página.
+
+   width:100% não é enfeite: o hero é um flex column centralizado, e um item
+   sem largura encolhe até o conteúdo. O conteúdo é um iframe absoluto, que
+   não mede nada, e a caixa ficaria com 0 de largura e 0 de altura. */
+.v3-vsl {
+  width: 100%;
+  margin: clamp(1.25rem, 3vw, 1.75rem) auto 0;
+}
+.v3-vsl__caixa {
+  border-radius: var(--tp-radius);
+  overflow: hidden;
+  box-shadow: var(--tp-shadow-md);
+}

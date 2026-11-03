@@ -1,0 +1,2259 @@
+/* ============================================================================
+   taping.css — página de vendas do curso TopTaping (/tap09/taping/)
+
+   Réplica clara e editorial da página original
+   www.topcorpus.com.br/toptaping/, mantendo 100% da copy e das seções.
+   A identidade original é escura/saturada; esta versão é o oposto proposital:
+   base creme, lavanda e blush, rosa da marca como único acento forte,
+   tipografia com muito ar e cartões de fio fino.
+
+   Carregue DEPOIS de design-system.css.
+
+   Atenção: os url() abaixo resolvem a partir DESTE arquivo
+   (/tap09/assets/css/), não a partir do HTML — por isso ../img/taping/.
+   ============================================================================ */
+
+:root {
+  /* ---- Base clara ---- */
+  --tp-cream:      #FFFCFB;   /* fundo da página                              */
+  --tp-ivory:      #FDF7F4;   /* faixa alternada quente                       */
+  --tp-blush:      #FCF1F2;   /* faixa alternada rosada                       */
+  --tp-lilac:      #F7F3FC;   /* faixa alternada lavanda                      */
+  --tp-mist:       #F4F7FA;   /* faixa alternada fria (médicos)               */
+  --tp-white:      #FFFFFF;
+
+  /* ---- Marca (extraída do logo TopTaping) ---- */
+  --tp-rose:       #E14B78;   /* rosa principal                               */
+  --tp-rose-deep:  #C6376A;   /* rosa de hover / texto sobre claro            */
+  --tp-rose-soft:  #F6A8BE;
+  --tp-rose-wash:  #FDEDF1;
+  --tp-violet:     #8B5BD6;   /* roxo do logo — cor dos botões                */
+  --tp-violet-lift:#A176E4;   /* topo do degradê do botão                     */
+  --tp-violet-deep:#6E3FB8;   /* base do degradê / hover                      */
+  --tp-violet-soft:#EFE6FA;
+  --tp-violet-wash:#F3ECFC;
+  --tp-gold:       #C9A24A;   /* dourado calmo (selo/moldura)                 */
+  --tp-gold-soft:  #F4E7C9;
+
+  /* ---- Texto ---- */
+  --tp-ink:        #34222F;   /* títulos — ameixa bem escura, não preto       */
+  --tp-body:       #5C4A57;   /* corpo                                        */
+  --tp-muted:      #8A7885;   /* apoio / legendas                             */
+
+  /* ---- Traços e sombras (tudo muito leve) ---- */
+  --tp-line:       rgba(52, 34, 47, .10);
+  --tp-line-soft:  rgba(52, 34, 47, .06);
+  --tp-shadow-xs:  0 1px 2px rgba(52,34,47,.04);
+  --tp-shadow-sm:  0 4px 16px rgba(122, 76, 100, .07);
+  --tp-shadow-md:  0 14px 40px rgba(122, 76, 100, .10);
+  --tp-shadow-lg:  0 26px 70px rgba(122, 76, 100, .13);
+
+  --tp-radius:     22px;
+  --tp-radius-sm:  14px;
+
+  /* CTA do design system repintado para o roxo da marca */
+  --color-cta:        var(--tp-violet);
+  --color-cta-hover:  var(--tp-violet-deep);
+  --color-cta-shadow: rgba(110, 63, 184, .30);
+
+  /* Rodapé claro nesta página */
+  --color-bg-footer:  #F6EFF1;
+
+  --tp-container: 1120px;
+}
+
+/* =========================================================================
+   BASE
+   ========================================================================= */
+
+body {
+  background-color: var(--tp-cream);
+  color: var(--tp-body);
+  font-weight: var(--fw-regular);
+  line-height: 1.72;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 { color: var(--tp-ink); }
+
+/* Barra de rolagem discreta, no tom da página */
+html {
+  scrollbar-color: var(--tp-rose-soft) var(--tp-ivory);
+  scroll-padding-top: 5.5rem;
+}
+::-webkit-scrollbar-track { background: var(--tp-ivory); }
+::-webkit-scrollbar-thumb {
+  background: var(--tp-rose-soft);
+  border-color: var(--tp-ivory);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--tp-rose); }
+
+::selection { background: var(--tp-rose-wash); color: var(--tp-rose-deep); }
+
+:focus-visible { outline-color: var(--tp-rose); }
+
+/* =========================================================================
+   UTILITÁRIOS DE LAYOUT
+   ========================================================================= */
+
+.tp-container {
+  width: 100%;
+  max-width: var(--tp-container);
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 5vw, 2.5rem);
+}
+.tp-container--narrow { max-width: 820px; }
+
+/* Quebra de linha só no desktop. O text-wrap: balance resolve bem a maioria
+   dos títulos, mas em alguns a divisão manual lê melhor; no mobile a quebra
+   some e o balanceamento volta a mandar. */
+.tp-br-desk { display: none; }
+@media (min-width: 900px) {
+  .tp-br-desk { display: inline; }
+}
+
+/* Trecho que não pode partir no mobile. Na largura de celular o balance
+   deixava "e te" pendurado no fim da linha, partindo o verbo da frase
+   seguinte; no desktop ele quebra bem sozinho e amarrar custaria uma linha
+   a mais, por isso a regra para no breakpoint. */
+@media (max-width: 899px) {
+  .tp-nb-mob { white-space: nowrap; }
+}
+
+.tp-section {
+  position: relative;
+  padding: clamp(3.5rem, 9vw, 7rem) 0;
+}
+.tp-section--ivory  { background: var(--tp-ivory); }
+/* Faixa de urgência — mesmo rosa do CTA. Usada no bloco do bônus para ele
+   destoar do resto da página, que é toda clara. */
+.tp-section--accent {
+  background: linear-gradient(135deg, #EC5C88 0%, var(--tp-rose) 48%, var(--tp-rose-deep) 100%);
+}
+.tp-section--accent::before { content: none; }
+.tp-section--blush  { background: var(--tp-blush); }
+.tp-section--lilac  { background: var(--tp-lilac); }
+.tp-section--mist   { background: var(--tp-mist); }
+.tp-section--tight  { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
+
+/* Transição suave entre faixas: um fio de luz no topo da seção */
+.tp-section--ivory::before,
+.tp-section--blush::before,
+.tp-section--lilac::before,
+.tp-section--mist::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--tp-line), transparent);
+}
+
+/* ---- Véu de linhas verticais ----------------------------------------------
+   Só nas faixas cor de creme (#FFFCFB), as quase brancas: as faixas tingidas
+   (ivory/blush/lilac/mist) e as rosas já têm cor própria e ficariam sujas.
+
+   São dois véus com exatamente o mesmo passo de 132px, então as linhas se
+   sobrepõem: o ::before fica sempre aceso num tom quase invisível e o ::after
+   é uma faixa que desce devagar acendendo as mesmas linhas. Como no fundo da
+   oferta, só o transform anima — a máscara é estática, então a GPU compõe o
+   quadro sem repintar nada. */
+.tp-section--veil { overflow: hidden; }
+.tp-section--veil > .tp-container { position: relative; z-index: 1; }
+
+.tp-section--veil::before,
+.tp-section--veil::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.tp-section--veil::before {
+  top: 0;
+  bottom: 0;
+  background-image: repeating-linear-gradient(90deg,
+    rgba(122, 76, 100, .028) 0 1px, transparent 1px 132px);
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 18%, #000 82%, transparent);
+          mask-image: linear-gradient(180deg, transparent, #000 18%, #000 82%, transparent);
+}
+.tp-section--veil::after {
+  top: 0;
+  height: 42%;
+  background-image: repeating-linear-gradient(90deg,
+    rgba(198, 55, 106, .07) 0 1px, transparent 1px 132px);
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 50%, transparent);
+          mask-image: linear-gradient(180deg, transparent, #000 50%, transparent);
+  will-change: transform;
+  animation: tpVeil 19s linear infinite;
+}
+@keyframes tpVeil {
+  from { transform: translate3d(0, -110%, 0); }
+  to   { transform: translate3d(0,  340%, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tp-section--veil::after { display: none; }
+}
+
+/* ---- Cabeçalho de seção ---- */
+.tp-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(.9rem, 2vw, 1.15rem);
+  text-align: center;
+  max-width: 780px;
+  margin-inline: auto;
+  margin-bottom: clamp(2.5rem, 5.5vw, 4rem);
+}
+.tp-head--left {
+  align-items: flex-start;
+  text-align: left;
+  margin-inline: 0;
+}
+
+.tp-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  font-size: .72rem;
+  font-weight: var(--fw-bold);
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--tp-rose-deep);
+  line-height: 1;
+}
+.tp-eyebrow::before,
+.tp-eyebrow::after {
+  content: "";
+  width: 1.6rem;
+  height: 1px;
+  background: currentColor;
+  opacity: .45;
+}
+.tp-head--left .tp-eyebrow::before { display: none; }
+
+.tp-title {
+  font-size: clamp(1.65rem, 4.1vw, 2.85rem);
+  font-weight: var(--fw-extrabold);
+  line-height: 1.16;
+  letter-spacing: -.025em;
+  color: var(--tp-ink);
+}
+.tp-title--sm { font-size: clamp(1.4rem, 3.2vw, 2.1rem); }
+
+.tp-lead {
+  font-size: clamp(1rem, 1.55vw, 1.14rem);
+  line-height: 1.72;
+  color: var(--tp-body);
+}
+.tp-lead strong { color: var(--tp-ink); font-weight: var(--fw-bold); }
+
+/* Destaque de termo: sublinhado suave em vez de marca-texto sólido */
+.tp-hl {
+  color: var(--tp-rose-deep);
+  background-image: linear-gradient(180deg, transparent 62%, var(--tp-rose-wash) 62%);
+  padding-inline: .06em;
+}
+.tp-hl--plain { color: var(--tp-rose-deep); background: none; }
+
+/* Ornamento divisor */
+.tp-ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
+  margin: clamp(1.75rem, 4vw, 2.75rem) auto 0;
+  color: var(--tp-rose-soft);
+}
+.tp-ornament::before,
+.tp-ornament::after {
+  content: "";
+  width: clamp(2.5rem, 8vw, 5rem);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, currentColor);
+}
+.tp-ornament::after { background: linear-gradient(90deg, currentColor, transparent); }
+.tp-ornament span {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* =========================================================================
+   BOTÕES
+   ========================================================================= */
+
+/* CTA principal — rosa da marca, sem pulso: o peso vem do contraste */
+.btn--tp {
+  width: auto;
+  max-width: 100%;
+  padding: 1.15rem 2.4rem;
+  font-size: clamp(.9rem, 1.15vw, 1rem);
+  font-weight: var(--fw-extrabold);
+  letter-spacing: .045em;
+  line-height: 1.25;
+  text-align: center;
+  color: #fff;
+  background: linear-gradient(135deg, var(--tp-violet-lift) 0%, var(--tp-violet) 45%, var(--tp-violet-deep) 100%);
+  box-shadow: 0 12px 30px rgba(110, 63, 184, .26), inset 0 1px 0 rgba(255,255,255,.22);
+  animation: none;
+}
+.btn--tp:hover,
+.btn--tp:focus-visible {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, var(--tp-violet) 0%, var(--tp-violet-deep) 100%);
+  box-shadow: 0 18px 42px rgba(110, 63, 184, .34), inset 0 1px 0 rgba(255,255,255,.22);
+}
+.btn--tp:active { transform: translateY(0) scale(.99); }
+
+/* CTA secundário — contorno leve (boleto parcelado) */
+.btn--tp-ghost {
+  width: auto;
+  max-width: 100%;
+  padding: 1.05rem 2rem;
+  font-size: clamp(.78rem, 1vw, .86rem);
+  font-weight: var(--fw-bold);
+  letter-spacing: .07em;
+  color: var(--tp-body);
+  background: transparent;
+  border: 1px solid var(--tp-line);
+  box-shadow: none;
+  animation: none;
+}
+.btn--tp-ghost:hover,
+.btn--tp-ghost:focus-visible {
+  color: var(--tp-violet-deep);
+  border-color: var(--tp-violet-soft);
+  background: var(--tp-violet-wash);
+  box-shadow: none;
+  transform: none;
+}
+
+/* CTA de boleto parcelado — quase branco com contorno roxo.
+
+   Nasce com o atributo [hidden] no HTML e só é revelado pelo taping.js a
+   partir de 02/09 00h00 (Brasília). O [hidden] precisa ser reforçado aqui:
+   o .btn do design-system declara display:inline-flex, que ganha da regra
+   display:none que o navegador aplica ao atributo. Sem esta linha o botão
+   apareceria desde já.
+
+   Para conferir o desenho antes da data, abra a página com ?boleto=1. */
+.btn--tp-boleto {
+  width: auto;
+  max-width: 100%;
+  padding: 1rem 2.2rem;
+  font-size: clamp(.8rem, 1.05vw, .9rem);
+  font-weight: var(--fw-bold);
+  letter-spacing: .05em;
+  line-height: 1.25;
+  text-align: center;
+  color: var(--tp-violet-deep);
+  background: #FDFBFF;
+  border: 2px solid var(--tp-violet);
+  box-shadow: 0 6px 18px rgba(110, 63, 184, .12);
+  transition: transform var(--dur-base) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out),
+              background var(--dur-base) var(--ease-out),
+              border-color var(--dur-base) var(--ease-out),
+              color var(--dur-base) var(--ease-out);
+  animation: none;
+}
+.btn--tp-boleto[hidden] { display: none; }
+
+/* Trava do agendamento: o atributo hidden tem de ganhar de qualquer display
+   declarado nas classes — o .btn e inline-flex e passaria por cima do
+   display:none do navegador. Vale para todo elemento datado, botao ou
+   secao. */
+[data-boleto][hidden],
+[data-bonus2][hidden] { display: none !important; }
+.btn--tp-boleto:hover,
+.btn--tp-boleto:focus-visible {
+  transform: translateY(-2px);
+  color: var(--tp-violet-deep);
+  background: var(--tp-violet-wash);
+  border-color: var(--tp-violet-deep);
+  box-shadow: 0 12px 28px rgba(110, 63, 184, .22);
+}
+.btn--tp-boleto:active { transform: translateY(0) scale(.99); }
+
+/* Bloco de CTAs (principal + boleto), repetido ao longo da página */
+.tp-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .85rem;
+  margin-top: clamp(2rem, 4.5vw, 3rem);
+}
+.tp-cta--left { align-items: flex-start; }
+
+@media (max-width: 640px) {
+  .btn--tp, .btn--tp-ghost, .btn--tp-boleto { width: 100%; }
+  .tp-cta { align-items: stretch; }
+}
+
+/* Seta do CTA do hero — acompanha o botão no hover */
+.tp-arrow {
+  display: inline-block;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.btn--tp:hover .tp-arrow,
+.btn--tp-boleto:hover .tp-arrow { transform: translateX(4px); }
+
+/* Selos de confiança sob o CTA */
+.tp-trust {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem 1.35rem;
+  /* <ul> nasce com padding-inline-start de 40px no navegador; sem zerar, o
+     justify-content centraliza dentro de uma caixa já deslocada 40px. */
+  margin: 1.35rem 0 0;
+  padding: 0;
+  font-size: .74rem;
+  font-weight: var(--fw-semibold);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--tp-muted);
+}
+.tp-trust li {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  list-style: none;
+}
+.tp-trust svg { color: var(--tp-rose); flex: 0 0 auto; }
+
+/* =========================================================================
+   TOPBAR — desconto + contagem regressiva
+   ========================================================================= */
+
+.tp-topbar {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  /* O rosa profundo que fechava o degradê dos botões antigos. */
+  background: var(--tp-rose-deep);
+  border-bottom: 1px solid rgba(0, 0, 0, .10);
+}
+.tp-topbar__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: .55rem clamp(.9rem, 3vw, 1.75rem);
+  padding-block: .7rem;
+}
+.tp-topbar__text {
+  font-size: clamp(.76rem, 1.5vw, .92rem);
+  font-weight: var(--fw-bold);
+  letter-spacing: .01em;
+  color: #fff;
+}
+/* Sobre o rosa não dá para separar por cor sem perder contraste, então o
+   destaque do valor fica só no peso da fonte. */
+.tp-topbar__text strong { color: #fff; font-weight: var(--fw-extrabold); }
+
+/* ---- Contagem regressiva ---- */
+.tp-count {
+  display: grid;
+  grid-auto-flow: column;
+  /* Todas as caixas com a mesma largura. Num container de largura automática,
+     trilhas 1fr assumem a MAIOR contribuição de max-content — a de SEGUNDOS —
+     e as quatro saem iguais. Sem número mágico e sem quebrar se o rótulo
+     mudar de tamanho. */
+  grid-auto-columns: 1fr;
+  align-items: start;
+  gap: .3rem;
+}
+.tp-count__unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .15rem;
+  padding: .3rem .35rem .28rem;
+  border-radius: 10px;
+  background: #fff;
+  border: 1px solid rgba(255, 255, 255, .55);
+  box-shadow: 0 1px 3px rgba(120, 20, 55, .18);
+}
+.tp-count__num {
+  font-size: clamp(.95rem, 1.9vw, 1.15rem);
+  font-weight: var(--fw-extrabold);
+  line-height: 1;
+  letter-spacing: -.02em;
+  color: var(--tp-rose-deep);
+  font-variant-numeric: tabular-nums;
+}
+.tp-count__label {
+  font-size: .54rem;
+  font-weight: var(--fw-bold);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--tp-muted);
+  line-height: 1;
+}
+
+@media (max-width: 420px) {
+  .tp-topbar__inner { gap: .45rem .6rem; padding-block: .55rem; }
+  /* Com as caixas padronizadas, o relógio fica mais largo; aqui ele encolhe
+     pelo conteúdo em vez de pela largura mínima de cada caixa. */
+  .tp-count { gap: .22rem; }
+  .tp-count__unit { padding-inline: .2rem; }
+  .tp-count__label { font-size: .5rem; letter-spacing: .08em; }
+}
+
+/* =========================================================================
+   HERO
+   ========================================================================= */
+
+.tp-hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1.5rem, 3.4vw, 2.5rem) 0 0;
+  background:
+    radial-gradient(58% 44% at 50% -6%,  rgba(225, 75, 120, .13) 0%, transparent 68%),
+    radial-gradient(46% 38% at 88% 22%,  rgba(139, 91, 214, .11) 0%, transparent 70%),
+    radial-gradient(52% 40% at 8%  72%,  rgba(201, 162,  74, .10) 0%, transparent 72%),
+    linear-gradient(180deg, #FFF9F8 0%, var(--tp-cream) 55%, var(--tp-ivory) 100%);
+}
+
+/* Fita decorativa que atravessa o topo, bem sutil */
+.tp-hero__ribbon {
+  position: absolute;
+  inset-inline: -10%;
+  top: -8%;
+  width: 120%;
+  height: auto;
+  opacity: .5;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.tp-hero__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  /* Mobile: linha 1 leva o logo à esquerda e a foto à direita; linha 2 leva o
+     texto, atravessando as duas colunas. O desktop redefine tudo lá embaixo.
+     A coluna da foto tem largura fixa e a do logo é minmax(0,1fr): as duas
+     ignoram o conteúdo, senão o texto da linha 2 — que atravessa as colunas —
+     inflaria a coluna do logo e espremeria a foto pra fora do container. */
+  grid-template-columns: minmax(0, 1fr) clamp(170px, 48vw, 240px);
+  align-items: start;
+  text-align: left;
+}
+/* No mobile o logo fica centrado no vão à esquerda da foto — nos dois eixos. */
+.tp-hero__logo   { grid-area: 1 / 1; align-self: center; justify-self: center; }
+.tp-hero__figure { grid-area: 1 / 2; }
+.tp-hero__copy   { grid-area: 2 / 1 / 3 / 3; }
+
+/* O respiro de baixo do hero mora aqui, não na seção: assim a foto da Ana
+   encosta na base e a faixa corrida corta ela, como no layout. */
+.tp-hero__copy {
+  padding-bottom: clamp(2.5rem, 6vw, 4.25rem);
+  /* Sobe pra dentro do trecho da foto que o degradê já apagou, em vez de
+     esperar a caixa dela terminar. */
+  margin-top: -2rem;
+  text-align: center;
+}
+/* Os max-width da headline e do subtítulo precisam de margem automática
+   para centralizar de fato. */
+.tp-hero__copy .tp-hero__headline,
+.tp-hero__copy .tp-hero__sub { margin-inline: auto; }
+
+/* Foto da Ana. No mobile ela abre o hero e a base dissolve no fundo;
+   no desktop vai para a coluna da direita (ver media query abaixo). */
+.tp-hero__figure {
+  display: block;
+  width: 100%;               /* a coluna já define a largura */
+  /* A caixa é mais baixa que a foto (78% dela), então a base fica de fora e
+     ela não empurra o texto pra longe. O aspect-ratio acompanha a largura
+     sozinho — sem um segundo clamp pra manter em sincronia. */
+  aspect-ratio: 654 / 740;
+  height: auto;
+  object-fit: cover;
+  object-position: 50% 0;    /* o corte tira de baixo, o rosto fica */
+  /* O degradê apaga a foto antes da linha do corte, então o corte não
+     aparece. Usar mask (e não uma tarja por cima) faz o próprio fundo do
+     hero aparecer por baixo — ele é um gradiente de várias camadas, que
+     nenhuma cor sólida reproduziria. */
+  -webkit-mask-image: linear-gradient(180deg, #000 66%, transparent 100%);
+          mask-image: linear-gradient(180deg, #000 66%, transparent 100%);
+}
+
+.tp-hero__logo {
+  width: clamp(84px, 10vw, 118px);
+  height: auto;
+  /* Sem margem no mobile: ela puxaria o logo pra cima do centro da linha.
+     No desktop ela volta, para abrir espaço entre o logo e a headline. */
+  margin-bottom: 0;
+}
+
+.tp-hero__headline {
+  max-width: 21ch;
+  font-size: clamp(1.65rem, 4.1vw, 2.7rem);
+  font-weight: var(--fw-extrabold);
+  line-height: 1.14;
+  letter-spacing: -.028em;
+  color: var(--tp-ink);
+  text-wrap: balance;
+}
+
+.tp-hero__sub {
+  max-width: 54ch;
+  margin-top: clamp(1rem, 2.4vw, 1.45rem);
+  font-size: clamp(.98rem, 1.6vw, 1.12rem);
+  line-height: 1.68;
+  color: var(--tp-body);
+}
+.tp-hero__sub strong { color: var(--tp-ink); font-weight: var(--fw-bold); }
+
+.tp-hero .tp-cta {
+  margin-top: clamp(1.75rem, 3.6vw, 2.4rem);
+  align-items: center;
+}
+.tp-hero .tp-trust { justify-content: center; }
+
+/* No mobile os botões continuam ocupando a largura toda */
+@media (max-width: 640px) {
+  .tp-hero .tp-cta { align-items: stretch; }
+}
+
+/* Os três selos do hero cabem numa linha só: o corpo encolhe junto com a tela
+   e os ícones passam a ser medidos em em, para acompanharem a fonte. Escopo
+   só no hero e só no mobile — os selos do card de oferta são outros dois. */
+@media (max-width: 899px) {
+  .tp-hero .tp-trust {
+    flex-wrap: nowrap;
+    gap: 0 clamp(.4rem, 2.4vw, 1.35rem);
+    font-size: clamp(.5rem, 2.4vw, .74rem);
+    letter-spacing: .06em;
+    white-space: nowrap;
+  }
+  .tp-hero .tp-trust li  { gap: .38em; }
+  .tp-hero .tp-trust svg { width: 1.05em; height: 1.05em; }
+}
+
+/* Desktop: texto à esquerda, Ana à direita apoiada na base do hero.
+   A coluna da foto é menor que a do texto para a headline não estreitar. */
+@media (min-width: 900px) {
+  .tp-hero__inner {
+    display: grid;
+    /* A coluna da foto é do tamanho da foto: quem manda na largura é o clamp
+       abaixo, e o texto fica com todo o resto. */
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto auto;
+    align-items: end;
+    column-gap: clamp(1.5rem, 4vw, 3rem);
+  }
+  /* O logo é irmão do texto (para no mobile ficar acima da foto), então aqui
+     ele volta para o topo da coluna esquerda e a foto atravessa as 2 linhas. */
+  .tp-hero__logo   {
+    grid-area: 1 / 1;
+    align-self: end;
+    justify-self: start;
+    margin-bottom: clamp(1rem, 2.4vw, 1.5rem);
+  }
+  .tp-hero__copy   {
+    grid-area: 2 / 1;
+    margin-top: 0;
+    text-align: left;
+  }
+  .tp-hero__copy .tp-hero__headline,
+  .tp-hero__copy .tp-hero__sub { margin-inline: 0; }
+  .tp-hero .tp-cta   { align-items: flex-start; }
+  .tp-hero .tp-trust { justify-content: flex-start; }
+  .tp-hero__figure {
+    grid-area: 1 / 2 / 3 / 3;
+    align-self: end;      /* encosta na base da seção */
+    justify-self: end;    /* alinhada à direita do container */
+    width: clamp(300px, 34vw, 460px);
+    aspect-ratio: auto;      /* volta a foto inteira */
+    object-fit: fill;
+    -webkit-mask-image: none;
+            mask-image: none;
+  }
+}
+
+/* =========================================================================
+   FAIXA CORRIDA — texto em loop infinito entre o hero e os bônus
+   ========================================================================= */
+
+.tp-marquee {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(.8rem, 1.8vw, 1.05rem);
+  background: linear-gradient(90deg, var(--tp-blush) 0%, var(--tp-lilac) 50%, var(--tp-blush) 100%);
+  border-block: 1px solid var(--tp-line-soft);
+  /* As pontas desvanecem para o texto não aparecer/sumir “cortado” na borda */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+}
+
+.tp-marquee__track {
+  display: flex;
+  width: max-content;
+  animation: tpMarquee 42s linear infinite;
+}
+.tp-marquee:hover .tp-marquee__track { animation-play-state: paused; }
+
+.tp-marquee__group {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tp-marquee__item {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  padding-inline: clamp(1rem, 2.4vw, 1.75rem);
+  font-size: clamp(.7rem, 1.15vw, .8rem);
+  font-weight: var(--fw-bold);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--tp-rose-deep);
+}
+/* Separador losango entre os itens */
+.tp-marquee__item::after {
+  content: "";
+  width: 5px;
+  height: 5px;
+  margin-left: clamp(1rem, 2.4vw, 1.75rem);
+  background: var(--tp-gold);
+  transform: rotate(45deg);
+  opacity: .7;
+}
+
+/* Dois grupos idênticos: deslocar metade do trilho reinicia no mesmo ponto. */
+@keyframes tpMarquee {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+/* Sem movimento: vira uma faixa estática que o usuário rola se quiser. */
+@media (prefers-reduced-motion: reduce) {
+  .tp-marquee { overflow-x: auto; }
+  .tp-marquee__track { animation: none; }
+  .tp-marquee__group:last-child { display: none; }
+}
+
+/* =========================================================================
+   BÔNUS EM DESTAQUE (2 cards logo abaixo do hero)
+   ========================================================================= */
+
+.tp-flash__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  gap: clamp(1.25rem, 3vw, 2rem);
+  align-items: stretch;
+}
+/* Card único: não deixa esticar na largura toda da página */
+.tp-flash__grid--single {
+  grid-template-columns: 1fr;
+  max-width: 820px;
+  margin-inline: auto;
+}
+.tp-flash__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(.9rem, 2vw, 1.25rem);
+  padding: clamp(1.6rem, 3.5vw, 2.5rem);
+  text-align: center;
+  background: var(--tp-white);
+  border: 1px solid var(--tp-line-soft);
+  border-radius: var(--tp-radius);
+  box-shadow: var(--tp-shadow-sm);
+  transition: transform var(--dur-base) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out);
+}
+.tp-flash__card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--tp-shadow-md);
+}
+
+/* Sobre a faixa rosa o cartão branco precisa de sombra mais funda para
+   descolar do fundo — a sombra clara padrão sumiria. */
+.tp-section--accent .tp-flash__card {
+  border-color: transparent;
+  box-shadow: 0 24px 60px rgba(120, 20, 55, .28);
+}
+.tp-section--accent .tp-flash__card:hover {
+  box-shadow: 0 32px 76px rgba(120, 20, 55, .34);
+}
+
+.tp-flash__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .42rem 1rem;
+  border-radius: var(--radius-pill);
+  background: var(--tp-gold-soft);
+  color: #8A6D22;
+  font-size: .67rem;
+  font-weight: var(--fw-extrabold);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.tp-flash__tag--rose { background: var(--tp-rose-wash); color: var(--tp-rose-deep); }
+
+.tp-flash__img {
+  width: clamp(280px, 68vw, 660px);
+  max-width: 100%;
+  height: auto;
+  margin-block: clamp(.25rem, 1vw, .75rem);
+}
+
+/* CTA dentro do card do bônus */
+.tp-cta--card {
+  width: 100%;
+  max-width: 460px;
+  margin-top: clamp(.4rem, 1.5vw, .9rem);
+}
+.tp-cta--card .btn--tp,
+.tp-cta--card .btn--tp-boleto { width: 100%; }
+
+.tp-flash__title {
+  font-size: clamp(1.4rem, 3.4vw, 2.15rem);
+  font-weight: var(--fw-extrabold);
+  line-height: 1.2;
+  letter-spacing: -.025em;
+  color: var(--tp-ink);
+  text-wrap: balance;
+}
+
+.tp-flash__text {
+  font-size: .95rem;
+  line-height: 1.7;
+  color: var(--tp-body);
+}
+
+.tp-flash__card .tp-count { margin-top: .25rem; }
+
+/* Com os dois cards lado a lado eles ficam da mesma altura, e o segundo, que
+   nao tem contagem, sobrava espaco em baixo. Empurrar o bloco de CTAs para o
+   fim alinha os botoes dos dois. Com um card so nao ha folga e nada muda. */
+.tp-flash__card .tp-cta--card { margin-top: auto; }
+
+/* =========================================================================
+   MANIFESTO — "Uma fita baratinha é um diferencial que vale ouro!"
+   ========================================================================= */
+
+.tp-manifest {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1rem, 2.4vw, 1.4rem);
+  text-align: center;
+  max-width: 1040px;
+  margin-inline: auto;
+}
+/* O bloco abre ate a largura do container para as tres caixas respirarem, mas
+   os paragrafos seguem presos aos 760px — linha longa demais cansa a leitura. */
+.tp-manifest > p {
+  max-width: 760px;
+  font-size: clamp(1.02rem, 1.85vw, 1.22rem);
+  line-height: 1.75;
+  color: var(--tp-body);
+}
+/* As três perguntas encadeadas, cada uma em sua caixa */
+.tp-asks {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+  gap: clamp(.85rem, 2vw, 1.25rem);
+  margin: clamp(.5rem, 1.5vw, 1rem) 0;
+  padding: 0;
+  list-style: none;
+}
+/* Sem display:flex aqui — os <strong> do texto virariam itens flex e a frase
+   se quebraria em blocos soltos. Fluxo normal de texto. */
+.tp-asks__box {
+  padding: clamp(1.15rem, 2.4vw, 1.6rem);
+  background: var(--tp-white);
+  border: 1px solid var(--tp-line-soft);
+  border-top: 3px solid var(--tp-rose-soft);
+  border-radius: var(--tp-radius-sm);
+  box-shadow: var(--tp-shadow-sm);
+  font-size: clamp(.94rem, 1.5vw, 1.02rem);
+  line-height: 1.6;
+  color: var(--tp-body);
+  text-align: left;
+  transition: transform var(--dur-base) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out);
+}
+.tp-asks__box:hover { transform: translateY(-3px); box-shadow: var(--tp-shadow-md); }
+.tp-asks__box strong { color: var(--tp-rose-deep); font-weight: var(--fw-extrabold); }
+
+/* Ícone da caixa. display:flex (e não inline-flex) de propósito: como caixa de
+   bloco ele ocupa a própria linha e o texto continua logo abaixo, em fluxo
+   normal — sem precisar transformar a .tp-asks__box em flex, o que quebraria
+   a frase nos <strong> (ver comentário acima). */
+.tp-asks__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-bottom: .9rem;
+  border-radius: 13px;
+  border: 1px solid rgba(246, 168, 190, .55);
+  background: linear-gradient(150deg, var(--tp-rose-wash), var(--tp-white));
+  color: var(--tp-rose);
+  transition: background var(--dur-base) var(--ease-out),
+              border-color var(--dur-base) var(--ease-out),
+              color var(--dur-base) var(--ease-out),
+              transform var(--dur-base) var(--ease-out);
+}
+.tp-asks__box:hover .tp-asks__icon {
+  border-color: transparent;
+  background: linear-gradient(135deg, #EC5C88, var(--tp-rose));
+  color: #fff;
+  transform: scale(1.06);
+}
+@media (prefers-reduced-motion: reduce) {
+  .tp-asks__box:hover .tp-asks__icon { transform: none; }
+}
+.tp-manifest__close {
+  font-size: clamp(1.1rem, 2.3vw, 1.4rem) !important;
+  font-weight: var(--fw-bold);
+  line-height: 1.45 !important;
+  color: var(--tp-ink) !important;
+}
+.tp-manifest__close .tp-hl { font-weight: var(--fw-extrabold); }
+
+/* =========================================================================
+   COMO FUNCIONA — 3 passos
+   ========================================================================= */
+
+.tp-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: clamp(1.25rem, 3vw, 2rem);
+  counter-reset: step;
+}
+
+.tp-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--tp-white);
+  border: 1px solid var(--tp-line-soft);
+  border-radius: var(--tp-radius);
+  overflow: hidden;
+  box-shadow: var(--tp-shadow-sm);
+  transition: transform var(--dur-base) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out);
+}
+.tp-step:hover { transform: translateY(-4px); box-shadow: var(--tp-shadow-md); }
+
+.tp-step__media {
+  position: relative;
+  aspect-ratio: 677 / 463;
+  overflow: hidden;
+  background: var(--tp-blush);
+}
+.tp-step__media img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+.tp-step:hover .tp-step__media img { transform: scale(1.04); }
+
+.tp-step__num {
+  position: absolute;
+  left: 1rem; bottom: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem; height: 2.4rem;
+  border-radius: 50%;
+  background: rgba(255,255,255,.94);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: var(--tp-rose-deep);
+  font-size: .95rem;
+  font-weight: var(--fw-extrabold);
+  font-variant-numeric: tabular-nums;
+  box-shadow: var(--tp-shadow-sm);
+}
+
+.tp-step__text {
+  padding: clamp(1.15rem, 2.5vw, 1.6rem);
+  font-size: clamp(.95rem, 1.4vw, 1.03rem);
+  line-height: 1.62;
+  font-weight: var(--fw-medium);
+  color: var(--tp-ink);
+}
+
+/* =========================================================================
+   MÉDICOS
+   ========================================================================= */
+
+.tp-doctors {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  align-items: center;
+}
+@media (min-width: 900px) {
+  /* A coluna da manchete leva a fatia maior: o recorte da CNN e o que prova
+     o argumento, e vinha menor que o texto ao lado. O arquivo tem 406px de
+     largura, entao esta e a ampliacao maxima antes de a manchete perder o
+     traco — trocar por um recorte maior permite crescer mais. */
+  .tp-doctors { grid-template-columns: .88fr 1.12fr; }
+}
+
+.tp-doctors__copy { display: flex; flex-direction: column; gap: 1.1rem; }
+.tp-doctors__copy p {
+  font-size: clamp(1rem, 1.6vw, 1.12rem);
+  line-height: 1.72;
+  color: var(--tp-body);
+}
+
+/* Citação sem caixa: fica na mesma coluna do texto ao redor, só com um fio
+   fino à esquerda. Antes era um cartão com recuo, e o texto começava uns 33px
+   à direita dos parágrafos vizinhos. */
+.tp-quote {
+  position: relative;
+  margin: .35rem 0;
+  padding: .15rem 0 .15rem clamp(.85rem, 1.8vw, 1.1rem);
+  background: none;
+  border: 0;
+  border-left: 2px solid var(--tp-rose);
+  border-radius: 0;
+  box-shadow: none;
+  font-size: clamp(.94rem, 1.45vw, 1.02rem);
+  font-weight: var(--fw-semibold);
+  font-style: italic;
+  line-height: 1.62;
+  color: var(--tp-ink);
+}
+
+.tp-doctors__figure {
+  margin: 0;
+  padding: clamp(.75rem, 1.6vw, 1rem);
+  background: var(--tp-white);
+  border: 1px solid var(--tp-line-soft);
+  border-radius: var(--tp-radius);
+  box-shadow: var(--tp-shadow-md);
+  transform: rotate(-1.1deg);
+}
+.tp-doctors__figure img { border-radius: 10px; width: 100%; }
+.tp-doctors__figure figcaption {
+  margin-top: .7rem;
+  font-size: .72rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--tp-muted);
+  text-align: center;
+}
+
+/* =========================================================================
+   DEPOIMENTOS — trilho horizontal com rolagem
+   ========================================================================= */
+
+/* ---- Desktop: trilho em loop infinito, sem interação ---- */
+.tp-testi {
+  overflow: hidden;
+  padding-block: .5rem 1.5rem;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
+}
+.tp-testi__track {
+  display: flex;
+  width: max-content;
+  animation: tpTesti 64s linear infinite;
+}
+.tp-testi:hover .tp-testi__track { animation-play-state: paused; }
+
+.tp-testi__group {
+  display: flex;
+  flex: 0 0 auto;
+  gap: clamp(1rem, 2.2vw, 1.5rem);
+  padding-right: clamp(1rem, 2.2vw, 1.5rem);   /* mantém o vão na emenda */
+}
+
+.tp-testi__item {
+  flex: 0 0 min(70vw, 440px);
+  border-radius: var(--tp-radius-sm);
+  overflow: hidden;
+  background: var(--tp-white);
+  border: 1px solid var(--tp-line-soft);
+  box-shadow: var(--tp-shadow-sm);
+}
+.tp-testi__item img { width: 100%; height: auto; }
+
+/* Dois grupos idênticos: -50% recomeça exatamente no mesmo ponto. */
+@keyframes tpTesti {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+/* ---- Mobile: empilhado, sem carrossel ---- */
+@media (max-width: 899px) {
+  .tp-testi {
+    overflow: visible;
+    -webkit-mask-image: none;
+            mask-image: none;
+    padding-inline: clamp(1.25rem, 5vw, 2.5rem);
+  }
+  .tp-testi__track {
+    display: block;
+    width: auto;
+    animation: none;
+  }
+  .tp-testi__group {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(.85rem, 3vw, 1.15rem);
+    padding-right: 0;
+  }
+  .tp-testi__group[aria-hidden="true"] { display: none; }   /* duplicata só serve ao loop */
+  .tp-testi__item { flex: 0 0 auto; width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tp-testi__track { animation: none; }
+}
+
+/* =========================================================================
+   AS 3 ÁREAS — pilares
+   ========================================================================= */
+
+.tp-pillars {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr));
+  gap: clamp(1.25rem, 3vw, 2rem);
+}
+
+.tp-pillar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: .85rem;
+  padding: clamp(1.6rem, 3.4vw, 2.25rem);
+  background: var(--tp-white);
+  border: 1px solid var(--tp-line-soft);
+  border-radius: var(--tp-radius);
+  box-shadow: var(--tp-shadow-sm);
+  overflow: hidden;
+  transition: transform var(--dur-base) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out);
+}
+.tp-pillar::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0; top: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--tp-rose-soft), var(--tp-rose));
+}
+.tp-pillar:nth-child(2)::before { background: linear-gradient(90deg, #DDBDF3, var(--tp-violet)); }
+.tp-pillar:nth-child(3)::before { background: linear-gradient(90deg, var(--tp-gold-soft), var(--tp-gold)); }
+.tp-pillar:hover { transform: translateY(-5px); box-shadow: var(--tp-shadow-md); }
+
+.tp-pillar__num {
+  font-size: .72rem;
+  font-weight: var(--fw-extrabold);
+  letter-spacing: .16em;
+  color: var(--tp-muted);
+}
+.tp-pillar__title {
+  font-size: clamp(1.05rem, 2vw, 1.22rem);
+  font-weight: var(--fw-extrabold);
+  letter-spacing: -.01em;
+  line-height: 1.28;
+  color: var(--tp-ink);
+  text-transform: uppercase;
+}
+.tp-pillar__text {
+  font-size: .96rem;
+  line-height: 1.68;
+  color: var(--tp-body);
+}
+
+/* Selo triangular do TopTaping, centralizado acima dos pilares */
+.tp-pillars__mark {
+  display: block;
+  width: clamp(120px, 16vw, 168px);
+  height: auto;
+  margin: 0 auto clamp(1.75rem, 4vw, 2.5rem);
+}
+
+/* =========================================================================
+   DENTRO DO CURSO — 6 cartões com imagem
+   ========================================================================= */
+
+.tp-inside {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: clamp(1.25rem, 3vw, 1.9rem);
+}
+
+.tp-inside__card {
+  display: flex;
+  flex-direction: column;
+  background: var(--tp-white);
+  border: 1px solid var(--tp-line-soft);
+  border-radius: var(--tp-radius);
+  overflow: hidden;
+  box-shadow: var(--tp-shadow-sm);
+  transition: transform var(--dur-base) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out);
+}
+.tp-inside__card:hover { transform: translateY(-4px); box-shadow: var(--tp-shadow-md); }
+
+/* As artes deste bloco já vêm com moldura e margem transparente no arquivo —
+   fundo branco para a transparência não pegar cor da faixa. */
+.tp-inside__media {
+  aspect-ratio: 672 / 566;
+  overflow: hidden;
+  background: var(--tp-white);
+}
+.tp-inside__media img { width: 100%; height: 100%; object-fit: contain; }
+
+.tp-inside__text {
+  padding: clamp(1.15rem, 2.4vw, 1.5rem);
+  font-size: .96rem;
+  line-height: 1.68;
+  color: var(--tp-body);
+}
+.tp-inside__text strong { color: var(--tp-ink); font-weight: var(--fw-bold); }
+
+/* =========================================================================
+   BÔNUS — 6 cartões
+   ========================================================================= */
+
+.tp-bonus {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: clamp(1.25rem, 3vw, 1.9rem);
+}
+
+.tp-bonus__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--tp-white);
+  border: 1px solid var(--tp-line-soft);
+  border-radius: var(--tp-radius);
+  overflow: hidden;
+  box-shadow: var(--tp-shadow-sm);
+  transition: transform var(--dur-base) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out);
+}
+.tp-bonus__card:hover { transform: translateY(-4px); box-shadow: var(--tp-shadow-md); }
+
+.tp-bonus__media {
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: var(--tp-white);
+}
+.tp-bonus__media img { width: 100%; height: 100%; object-fit: cover; }
+
+.tp-bonus__free {
+  position: absolute;
+  top: .9rem; right: .9rem;
+  padding: .34rem .78rem;
+  border-radius: var(--radius-pill);
+  background: rgba(255,255,255,.95);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: var(--tp-rose-deep);
+  font-size: .64rem;
+  font-weight: var(--fw-extrabold);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  line-height: 1;
+  box-shadow: var(--tp-shadow-xs);
+}
+
+.tp-bonus__body {
+  display: flex;
+  flex-direction: column;
+  gap: .55rem;
+  padding: clamp(1.2rem, 2.5vw, 1.6rem);
+}
+.tp-bonus__label {
+  font-size: .68rem;
+  font-weight: var(--fw-extrabold);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--tp-rose-deep);
+}
+.tp-bonus__text {
+  font-size: .95rem;
+  line-height: 1.68;
+  color: var(--tp-body);
+}
+.tp-bonus__text strong { color: var(--tp-ink); font-weight: var(--fw-bold); }
+
+/* =========================================================================
+   CERTIFICADO
+   ========================================================================= */
+
+.tp-cert {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  align-items: center;
+}
+@media (min-width: 900px) {
+  /* A arte do certificado tem margem transparente no próprio arquivo, então a
+     coluna precisa ser mais larga que a do texto. O sangramento à direita usa
+     exatamente o padding do container — cresce a imagem sem estreitar o texto
+     e sem estourar a viewport. */
+  .tp-cert { grid-template-columns: .92fr 1.08fr; }
+  .tp-cert__media {
+    order: 2;
+    margin-right: calc(-1 * clamp(1.25rem, 5vw, 2.5rem));
+  }
+}
+.tp-cert__media img {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 24px 50px rgba(122, 76, 100, .18));
+}
+.tp-cert__copy { display: flex; flex-direction: column; gap: 1.1rem; align-items: flex-start; }
+
+/* =========================================================================
+   OFERTA — caixa de investimento
+   ========================================================================= */
+
+/* Faixa da oferta: mesmo rosa do CTA, com brilhos e um risqueado bem fino.
+
+   O gradiente do botão (#EC5C88 → #C6376A) não serve aqui: nesta seção há
+   texto corrido sobre o fundo, e branco sobre a ponta clara dá só 3,25:1 —
+   abaixo dos 4,5:1 exigidos para corpo de texto. Aprofundei as paradas
+   mantendo o mesmo matiz. A parada mais clara (#B83163) foi escolhida por ser
+   a última que, já com o brilho de 12% por cima, ainda entrega 4,66:1. */
+.tp-section--offer {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(135deg, #A82C59 0%, #9C2853 52%, #8E244C 100%);
+}
+
+/* Duas manchas de luz que derivam devagar, em ritmos e sentidos diferentes —
+   os ciclos (23s e 31s) não são múltiplos, então a composição demora a se
+   repetir e o movimento não fica cadenciado.
+
+   São radial-gradient com borda transparente, não filter: blur(). O desfoque
+   por filtro obrigaria o navegador a rasterizar de novo a cada quadro; aqui só
+   o transform anima, que a GPU compõe sozinha. */
+.tp-section--offer::before,
+.tp-section--offer::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform;
+}
+.tp-section--offer::before {
+  width: 92vw; height: 92vw;
+  max-width: 1000px; max-height: 1000px;
+  top: -34%; left: -22%;
+  background: radial-gradient(closest-side, rgba(214, 58, 112, .85) 0%, rgba(214, 58, 112, 0) 100%);
+  animation: tpBlobA 23s ease-in-out infinite alternate;
+}
+.tp-section--offer::after {
+  width: 86vw; height: 86vw;
+  max-width: 940px; max-height: 940px;
+  right: -24%; bottom: -32%;
+  background: radial-gradient(closest-side, rgba(108, 36, 118, .80) 0%, rgba(108, 36, 118, 0) 100%);
+  animation: tpBlobB 31s ease-in-out infinite alternate;
+}
+@keyframes tpBlobA {
+  from { transform: translate3d(-4%, -3%, 0) scale(1);    }
+  to   { transform: translate3d(13%,  9%, 0) scale(1.18); }
+}
+@keyframes tpBlobB {
+  from { transform: translate3d(5%,  4%, 0) scale(1.14); }
+  to   { transform: translate3d(-11%, -7%, 0) scale(.94); }
+}
+/* O conteúdo fica acima das manchas */
+.tp-section--offer > .tp-container { position: relative; z-index: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tp-section--offer::before,
+  .tp-section--offer::after { animation: none; }
+}
+
+/* Texto sobre a faixa */
+.tp-section--offer .tp-eyebrow,
+.tp-section--offer .tp-title,
+.tp-section--offer .tp-offer__intro p,
+.tp-section--offer .tp-offer__intro strong { color: #fff; }
+
+/* O cartão branco precisa de sombra funda para descolar do rosa */
+.tp-section--offer .tp-offer__box {
+  border-color: transparent;
+  box-shadow: 0 30px 80px rgba(80, 12, 40, .38);
+}
+
+.tp-offer__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 720px;
+  margin: 0 auto clamp(2.5rem, 5vw, 3.5rem);
+  text-align: center;
+}
+.tp-offer__intro p {
+  font-size: clamp(1rem, 1.6vw, 1.12rem);
+  line-height: 1.72;
+  color: var(--tp-body);
+}
+.tp-offer__intro strong { color: var(--tp-ink); font-weight: var(--fw-bold); }
+
+.tp-offer__box {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  max-width: 980px;
+  margin-inline: auto;
+  background: var(--tp-white);
+  border: 1px solid var(--tp-line);
+  border-radius: clamp(20px, 3vw, 28px);
+  box-shadow: var(--tp-shadow-lg);
+  overflow: hidden;
+}
+@media (min-width: 900px) {
+  .tp-offer__box { grid-template-columns: 1fr 1fr; }
+}
+
+/* Coluna esquerda — o que está incluso */
+.tp-offer__list {
+  padding: clamp(1.75rem, 3.6vw, 2.75rem);
+}
+.tp-offer__list-title {
+  font-size: clamp(1rem, 1.7vw, 1.13rem);
+  font-weight: var(--fw-extrabold);
+  letter-spacing: -.01em;
+  color: var(--tp-ink);
+  margin-bottom: 1.25rem;
+}
+.tp-offer__items { list-style: none; margin: 0; padding: 0; }
+.tp-offer__items li {
+  display: flex;
+  align-items: flex-start;
+  gap: .7rem;
+  padding: .62rem 0;
+  border-bottom: 1px dashed var(--tp-line-soft);
+  font-size: .93rem;
+  line-height: 1.55;
+  color: var(--tp-body);
+}
+.tp-offer__items li:last-child { border-bottom: 0; }
+.tp-offer__items li strong { color: var(--tp-ink); font-weight: var(--fw-bold); }
+.tp-offer__items svg { flex: 0 0 auto; margin-top: .18rem; color: var(--tp-rose); }
+.tp-offer__items li.is-bonus svg { color: var(--tp-gold); }
+
+/* Coluna direita — preço */
+.tp-offer__price {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .55rem;
+  padding: clamp(1.75rem, 3.6vw, 2.75rem);
+  text-align: center;
+  background:
+    radial-gradient(70% 50% at 50% 0%, rgba(225,75,120,.09) 0%, transparent 70%),
+    linear-gradient(180deg, var(--tp-ivory) 0%, var(--tp-blush) 100%);
+  border-top: 1px solid var(--tp-line-soft);
+}
+@media (min-width: 900px) {
+  .tp-offer__price { border-top: 0; border-left: 1px solid var(--tp-line-soft); }
+}
+
+/* Mockup do setup, acima do logo — é o produto, então domina o bloco */
+.tp-offer__setup {
+  width: clamp(260px, 44vw, 500px);
+  /* O negativo nas laterais deixa a imagem passar do padding da coluna —
+     é ela que vende o produto, então usa quase toda a largura do card. */
+  max-width: calc(100% + 3.5rem);
+  margin-inline: -1.75rem;
+  height: auto;
+  margin-bottom: .35rem;
+}
+.tp-offer__mock {
+  width: clamp(78px, 10vw, 105px);
+  height: auto;
+  margin-bottom: .3rem;
+}
+.tp-offer__from {
+  font-size: .88rem;
+  font-weight: var(--fw-semibold);
+  color: var(--tp-muted);
+}
+.tp-offer__from s { text-decoration-thickness: 1.5px; }
+.tp-offer__installment {
+  font-size: clamp(2.3rem, 6vw, 3.35rem);
+  font-weight: var(--fw-extrabold);
+  line-height: 1;
+  letter-spacing: -.035em;
+  color: var(--tp-rose-deep);
+}
+.tp-offer__installment small {
+  font-size: .42em;
+  font-weight: var(--fw-bold);
+  letter-spacing: -.01em;
+}
+.tp-offer__cash {
+  font-size: 1rem;
+  font-weight: var(--fw-semibold);
+  color: var(--tp-ink);
+}
+.tp-offer__note {
+  margin-top: .35rem;
+  font-size: .9rem;
+  line-height: 1.6;
+  color: var(--tp-body);
+  font-style: italic;
+}
+.tp-offer__price .tp-cta { margin-top: 1.35rem; width: 100%; align-items: stretch; }
+.tp-offer__price .btn--tp,
+.tp-offer__price .btn--tp-ghost,
+.tp-offer__price .btn--tp-boleto { width: 100%; }
+
+/* =========================================================================
+   GARANTIA
+   ========================================================================= */
+
+.tp-guarantee {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1.75rem, 4.5vw, 3rem);
+  align-items: center;
+  max-width: 1080px;
+  margin-inline: auto;
+}
+@media (min-width: 820px) {
+  .tp-guarantee { grid-template-columns: auto minmax(0, 1fr); }
+  /* Texto encostado na direita: sobra respiro entre ele e o selo. */
+  .tp-guarantee__copy { max-width: 620px; margin-left: auto; }
+}
+.tp-guarantee__copy { display: flex; flex-direction: column; gap: 1rem; align-items: flex-start; }
+.tp-guarantee__copy p {
+  font-size: clamp(.98rem, 1.55vw, 1.08rem);
+  line-height: 1.72;
+  color: var(--tp-body);
+}
+.tp-guarantee__copy p strong { color: var(--tp-ink); font-weight: var(--fw-bold); }
+
+/* Selo de garantia — imagem enviada pela cliente */
+.tp-seal {
+  display: block;
+  width: clamp(220px, 34vw, 380px);
+  height: auto;
+  margin-inline: auto;
+  filter: drop-shadow(0 14px 32px rgba(198, 55, 106, .20));
+}
+
+/* =========================================================================
+   BIO
+   ========================================================================= */
+
+.tp-bio {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .tp-bio { grid-template-columns: 1fr 1.05fr; }
+}
+/* A foto já traz a moldura dourada no próprio arquivo — sem raio aqui,
+   senão o canto do retângulo dourado é cortado. */
+.tp-bio__media img {
+  width: 100%;
+  height: auto;
+}
+.tp-bio__copy { display: flex; flex-direction: column; gap: 1.05rem; align-items: flex-start; }
+.tp-bio__copy p {
+  font-size: clamp(.98rem, 1.6vw, 1.1rem);
+  line-height: 1.74;
+  color: var(--tp-body);
+}
+.tp-bio__copy p strong { color: var(--tp-ink); font-weight: var(--fw-bold); }
+.tp-bio__sign {
+  font-size: clamp(1.15rem, 2.4vw, 1.5rem) !important;
+  font-weight: var(--fw-extrabold);
+  color: var(--tp-rose-deep) !important;
+  letter-spacing: -.02em;
+}
+
+/* =========================================================================
+   FAQ
+   ========================================================================= */
+
+.tp-faq {
+  max-width: 800px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+}
+.tp-faq__item {
+  background: var(--tp-white);
+  border: 1px solid var(--tp-line-soft);
+  border-radius: var(--tp-radius-sm);
+  box-shadow: var(--tp-shadow-xs);
+  overflow: hidden;
+  transition: box-shadow var(--dur-base) var(--ease-out),
+              border-color var(--dur-base) var(--ease-out);
+}
+.tp-faq__item[open] {
+  border-color: var(--tp-rose-soft);
+  box-shadow: var(--tp-shadow-sm);
+}
+.tp-faq__q {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: clamp(1rem, 2.2vw, 1.35rem) clamp(1.15rem, 2.5vw, 1.6rem);
+  cursor: pointer;
+  list-style: none;
+  font-size: clamp(.97rem, 1.5vw, 1.06rem);
+  font-weight: var(--fw-bold);
+  line-height: 1.45;
+  color: var(--tp-ink);
+}
+.tp-faq__q::-webkit-details-marker { display: none; }
+.tp-faq__q:hover { color: var(--tp-rose-deep); }
+.tp-faq__icon {
+  flex: 0 0 auto;
+  margin-left: auto;
+  width: 1.6rem; height: 1.6rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--tp-rose-wash);
+  color: var(--tp-rose-deep);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.tp-faq__item[open] .tp-faq__icon { transform: rotate(45deg); }
+.tp-faq__a {
+  padding: 0 clamp(1.15rem, 2.5vw, 1.6rem) clamp(1.15rem, 2.4vw, 1.5rem);
+  font-size: .96rem;
+  line-height: 1.72;
+  color: var(--tp-body);
+}
+.tp-faq__a p + p { margin-top: .7rem; }
+
+/* =========================================================================
+   SUPORTE
+   ========================================================================= */
+
+.tp-support {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.15rem;
+  text-align: center;
+  padding: clamp(2rem, 4.5vw, 3rem) clamp(1.5rem, 4vw, 3rem);
+  max-width: 720px;
+  margin-inline: auto;
+  background: var(--tp-white);
+  border: 1px solid var(--tp-line-soft);
+  border-radius: var(--tp-radius);
+  box-shadow: var(--tp-shadow-sm);
+}
+.tp-support__title {
+  font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+  font-weight: var(--fw-extrabold);
+  letter-spacing: -.02em;
+  color: var(--tp-ink);
+}
+/* Botão de verdade, igual aos demais CTAs (antes era um link sublinhado) */
+.tp-support__btn { margin-top: .25rem; }
+.tp-support__btn svg { flex: 0 0 auto; }
+
+/* Cartão branco sobre a faixa rosa */
+.tp-section--accent .tp-support {
+  border-color: transparent;
+  box-shadow: 0 24px 60px rgba(120, 20, 55, .28);
+}
+
+/* =========================================================================
+   RODAPÉ CLARO (sobrescreve o rodapé escuro do design system)
+   ========================================================================= */
+
+.footer {
+  background: var(--color-bg-footer);
+  color: var(--tp-muted);
+  border-top: 1px solid var(--tp-line-soft);
+}
+.footer__top { border-bottom-color: var(--tp-line-soft); }
+.footer__copy { color: var(--tp-body); }
+.footer__copy strong { color: var(--tp-ink); }
+.footer__links a { color: var(--tp-ink); }
+.footer__links a:hover, .footer__links a:focus-visible { color: var(--tp-rose-deep); }
+.footer__company { color: var(--tp-muted); }
+.footer__legal { color: var(--tp-muted); }
+.footer__legal-label { color: var(--tp-body); }
+
+/* =========================================================================
+   MODAL DE CAPTURA
+
+   Duas etapas dentro do mesmo painel — qualificação (SIM/NÃO) e dados —
+   como no popup da página original, só que sem trocar de popup no meio.
+
+   O painel é claro como o resto da página; o contraste vem de três coisas
+   discretas: o véu escuro atrás, o fio em degradê na borda (máscara xor, sem
+   pseudo-elemento extra no fundo) e o halo rosado que nasce atrás do logo.
+   ========================================================================= */
+
+.tp-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 2rem);
+  background:
+    radial-gradient(60% 45% at 50% 12%, rgba(225, 75, 120, .22), transparent 70%),
+    rgba(40, 24, 36, .55);
+  backdrop-filter: blur(10px) saturate(120%);
+  -webkit-backdrop-filter: blur(10px) saturate(120%);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.tp-modal.is-open { display: flex; animation: tpFade var(--dur-base) var(--ease-out); }
+@keyframes tpFade { from { opacity: 0; } to { opacity: 1; } }
+
+.tp-modal__panel {
+  position: relative;
+  width: 100%;
+  max-width: 452px;
+  margin: auto;
+  padding: clamp(1.6rem, 4vw, 2.15rem) clamp(1.35rem, 4vw, 2.15rem) clamp(1.5rem, 3.5vw, 1.9rem);
+  background: linear-gradient(180deg, #FFFFFF 0%, var(--tp-cream) 100%);
+  border-radius: clamp(20px, 3.4vw, 28px);
+  box-shadow:
+    0 40px 100px rgba(40, 24, 36, .34),
+    0 4px 14px rgba(40, 24, 36, .12);
+  overflow: hidden;
+  animation: tpRise 420ms var(--ease-out) both;
+}
+@keyframes tpRise {
+  from { opacity: 0; transform: translateY(22px) scale(.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Fio em degradê na borda: um retângulo de 1px recortado pelo próprio miolo. */
+.tp-modal__panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(150deg,
+    rgba(225, 75, 120, .55) 0%,
+    rgba(139, 91, 214, .30) 45%,
+    rgba(201, 162, 74, .38) 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Halo atrás do logo — dá profundidade sem escurecer nada. */
+.tp-modal__aura {
+  position: absolute;
+  top: -42%;
+  left: 50%;
+  width: 132%;
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  background:
+    radial-gradient(closest-side, rgba(225, 75, 120, .14), transparent 72%),
+    radial-gradient(closest-side at 62% 58%, rgba(139, 91, 214, .10), transparent 70%);
+  pointer-events: none;
+}
+
+.tp-modal__close {
+  position: absolute;
+  top: .8rem; right: .8rem;
+  z-index: 2;
+  width: 2.2rem; height: 2.2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid var(--tp-line-soft);
+  background: rgba(255, 255, 255, .7);
+  color: var(--tp-muted);
+  transition: background var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
+}
+.tp-modal__close:hover,
+.tp-modal__close:focus-visible {
+  background: var(--tp-rose-wash);
+  border-color: var(--tp-rose-soft);
+  color: var(--tp-rose-deep);
+  transform: rotate(90deg);
+}
+
+/* ---- Cabeçalho: logo, selo do desconto e trilha das etapas ---- */
+
+.tp-modal__head {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .75rem;
+  margin-bottom: 1.35rem;
+}
+.tp-modal__logo {
+  width: 88px;
+  height: auto;
+}
+.tp-modal__ribbon {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .34rem .8rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(201, 162, 74, .34);
+  background: linear-gradient(120deg, var(--tp-gold-soft), #FFF8E8);
+  color: #8A6B22;
+  font-size: .66rem;
+  font-weight: var(--fw-extrabold);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.tp-modal__ribbon svg { color: var(--tp-gold); flex: 0 0 auto; }
+
+/* O display:flex abaixo anula o [hidden] do navegador, então a trilha
+   precisa da própria regra — é assim que .tp-modal__step já faz. */
+.tp-modal__progress[hidden] { display: none; }
+.tp-modal__progress {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin: .1rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: .64rem;
+  font-weight: var(--fw-bold);
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  color: var(--tp-muted);
+}
+.tp-modal__progress li {
+  display: inline-flex;
+  align-items: center;
+  gap: .38rem;
+  transition: color var(--dur-base) var(--ease-out);
+}
+/* Fio entre as duas etapas */
+.tp-modal__progress li + li::before {
+  content: "";
+  width: 26px;
+  height: 1px;
+  margin-right: .15rem;
+  background: var(--tp-line);
+}
+.tp-modal__progress-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.35rem; height: 1.35rem;
+  border-radius: 50%;
+  border: 1px solid var(--tp-line);
+  background: var(--tp-white);
+  font-size: .66rem;
+  color: var(--tp-muted);
+  transition: all var(--dur-base) var(--ease-out);
+}
+.tp-modal__progress li.is-active { color: var(--tp-rose-deep); }
+.tp-modal__progress li.is-active .tp-modal__progress-num {
+  border-color: transparent;
+  background: linear-gradient(135deg, #EC5C88, var(--tp-rose));
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(198, 55, 106, .30);
+}
+.tp-modal__progress li.is-done .tp-modal__progress-num {
+  border-color: var(--tp-rose-soft);
+  background: var(--tp-rose-wash);
+  color: var(--tp-rose-deep);
+}
+
+/* ---- Etapas ---- */
+
+.tp-modal__step { position: relative; }
+.tp-modal__step[hidden] { display: none; }
+.tp-modal__step { animation: tpStepIn 380ms var(--ease-out) both; }
+@keyframes tpStepIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.tp-modal__title {
+  font-size: clamp(1.08rem, 2.3vw, 1.26rem);
+  font-weight: var(--fw-extrabold);
+  line-height: 1.32;
+  letter-spacing: -.02em;
+  text-align: center;
+  text-wrap: balance;
+  color: var(--tp-ink);
+  margin-bottom: .45rem;
+}
+/* Destaque de "Ótimo, mulher!" — no original é um amarelo sobre fundo escuro;
+   aqui, o rosa da marca com um traço de luz por baixo. */
+.tp-modal__hl {
+  position: relative;
+  color: var(--tp-rose-deep);
+  white-space: nowrap;
+}
+.tp-modal__hl::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: .05em;
+  height: .34em;
+  background: linear-gradient(90deg, rgba(246, 168, 190, .45), rgba(246, 168, 190, .1));
+  border-radius: 4px;
+  z-index: -1;
+}
+.tp-modal__sub {
+  font-size: .82rem;
+  line-height: 1.5;
+  text-align: center;
+  text-wrap: balance;
+  color: var(--tp-muted);
+  margin-bottom: 1.25rem;
+}
+
+/* ---- Etapa 1: qualificação ---- */
+
+.tp-quiz {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .7rem;
+}
+.tp-quiz__btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .35rem;
+  padding: 1.15rem .85rem 1rem;
+  border-radius: 18px;
+  border: 1px solid var(--tp-line);
+  background: var(--tp-white);
+  box-shadow: var(--tp-shadow-xs);
+  text-align: center;
+  transition: border-color var(--dur-fast) var(--ease-out),
+              background var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
+}
+.tp-quiz__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem; height: 2.4rem;
+  margin-bottom: .1rem;
+  border-radius: 50%;
+  background: var(--tp-rose-wash);
+  color: var(--tp-rose);
+  transition: background var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
+}
+.tp-quiz__label {
+  font-size: .95rem;
+  font-weight: var(--fw-extrabold);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--tp-ink);
+}
+.tp-quiz__hint {
+  font-size: .7rem;
+  line-height: 1.35;
+  color: var(--tp-muted);
+}
+.tp-quiz__btn:hover,
+.tp-quiz__btn:focus-visible {
+  border-color: var(--tp-rose-soft);
+  background: linear-gradient(180deg, #fff, var(--tp-rose-wash));
+  box-shadow: 0 12px 28px rgba(198, 55, 106, .14);
+  transform: translateY(-3px);
+}
+.tp-quiz__btn:hover .tp-quiz__icon,
+.tp-quiz__btn:focus-visible .tp-quiz__icon {
+  background: linear-gradient(135deg, #EC5C88, var(--tp-rose));
+  color: #fff;
+  transform: scale(1.06);
+}
+.tp-quiz__btn:active { transform: translateY(-1px) scale(.99); }
+
+.tp-modal__note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .35rem;
+  margin-top: 1.1rem;
+  font-size: .7rem;
+  letter-spacing: .02em;
+  color: var(--tp-muted);
+}
+.tp-modal__note svg { color: var(--tp-rose-soft); }
+
+/* ---- Etapa 2: dados ---- */
+
+.tp-modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: .85rem;
+}
+/* O titulo so tem .45rem embaixo, contando com a linha de apoio que vinha
+   depois. Onde o formulario vem direto do titulo, ele repoe o respiro que
+   aquele paragrafo dava. */
+.tp-modal__title + .tp-modal__form { margin-top: 1.25rem; }
+
+/* Campos: só placeholder e ícone dentro do campo, sem rótulo visível acima —
+   o <label> continua no HTML, escondido em .sr-only para o leitor de tela.
+   O erro é escrito no próprio placeholder pelo form-handler. */
+.tp-modal__form .field__input {
+  padding: .92rem 1.1rem;
+  border: 1px solid var(--tp-line);
+  border-radius: 14px;
+  background: var(--tp-white);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  color: var(--tp-ink);
+  font-family: var(--font-body);
+  font-size: .95rem;
+  box-shadow: inset 0 1px 2px rgba(52, 34, 47, .04);
+  transition: border-color var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out),
+              background var(--dur-fast) var(--ease-out);
+}
+.tp-modal__form .field__input::placeholder { color: var(--tp-muted); opacity: .75; }
+/* O form-handler escreve a mensagem de erro no próprio placeholder; sem esta
+   regra ela herdaria o cinza do placeholder normal (o design-system tem a
+   versão vermelha, mas com a mesma especificidade e antes na cascata). */
+.tp-modal__form .field__input[aria-invalid="true"]::placeholder {
+  color: var(--color-error-strong);
+  font-weight: var(--fw-semibold);
+  opacity: 1;
+}
+.tp-modal__form .field__input:focus-visible,
+.tp-modal__form .field__input:focus {
+  outline: none;
+  border-color: var(--tp-rose-soft);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(225, 75, 120, .13), inset 0 1px 2px rgba(52, 34, 47, .04);
+}
+/* Ícone à esquerda — só nos campos sem o seletor de país. */
+.tp-modal__form .field--icon { position: relative; }
+.tp-modal__form .field--icon .field__icon {
+  position: absolute;
+  left: .95rem;
+  top: 0;
+  bottom: 0;
+  /* O input é o único elemento em fluxo do .field — o <label> é .sr-only e o
+     .field__error é absoluto —, então o .field tem exatamente a altura dele.
+     Esticar o ícone de topo a base e centralizar dispensa número mágico. */
+  display: inline-flex;
+  align-items: center;
+  color: var(--tp-muted);
+  pointer-events: none;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.tp-modal__form .field--icon .field__input { padding-left: 2.75rem; }
+.tp-modal__form .field--icon:focus-within .field__icon { color: var(--tp-rose); }
+
+/* Campo inválido: o form-handler troca o placeholder pela mensagem e marca
+   aria-invalid. O anel vermelho e um tremor curto tornam a troca perceptível. */
+.tp-modal__form .field__input[aria-invalid="true"] {
+  border-color: rgba(220, 38, 38, .5);
+  box-shadow: 0 0 0 4px rgba(239, 68, 68, .12);
+  animation: tpShake 340ms var(--ease-out);
+}
+.tp-modal__form .field--icon:has(.field__input[aria-invalid="true"]) .field__icon { color: var(--color-error-strong); }
+@keyframes tpShake {
+  0%, 100% { transform: translateX(0); }
+  22% { transform: translateX(-5px); }
+  46% { transform: translateX(4px); }
+  70% { transform: translateX(-2px); }
+}
+
+/* Seletor de país: mesma borda e mesmo raio dos demais campos. */
+.tp-modal__form .field--phone .iti { width: 100%; }
+.tp-modal__form .field--phone .iti__selected-country { border-radius: 14px 0 0 14px; }
+.tp-modal__form .field--phone .iti__selected-dial-code { color: var(--tp-body); font-size: .95rem; }
+
+.tp-modal__form .consent { margin: .1rem 0 .15rem; }
+.tp-modal__form .consent__box { accent-color: var(--tp-rose); }
+.tp-modal__form .consent__text { color: var(--tp-muted); }
+.tp-modal__form .consent__text a { color: var(--tp-rose-deep); }
+
+.tp-modal__submit {
+  width: 100%;
+  margin-top: .15rem;
+  padding-block: 1.05rem;
+}
+.tp-modal__submit[disabled] { opacity: .72; cursor: progress; transform: none; }
+
+.tp-modal__form .form-status { margin-top: -.15rem; }
+
+/* Selos abaixo do botão — fecham o formulário com o mesmo repertório dos
+   selos do hero. */
+.tp-modal__trust {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: .35rem .95rem;
+  margin: .35rem 0 0;
+  padding: .75rem 0 0;
+  border-top: 1px solid var(--tp-line-soft);
+  list-style: none;
+  font-size: .66rem;
+  letter-spacing: .02em;
+  color: var(--tp-muted);
+}
+.tp-modal__trust li { display: inline-flex; align-items: center; gap: .3rem; }
+.tp-modal__trust svg { color: var(--tp-rose-soft); flex: 0 0 auto; }
+
+@media (max-width: 420px) {
+  .tp-quiz { grid-template-columns: 1fr; }
+  .tp-quiz__btn { flex-direction: row; justify-content: flex-start; gap: .7rem; padding: .85rem 1rem; text-align: left; }
+  .tp-quiz__btn .tp-quiz__icon { margin-bottom: 0; }
+  .tp-quiz__label { flex: 0 0 auto; }
+  .tp-quiz__hint { margin-left: auto; }
+  .tp-modal__progress { font-size: .6rem; }
+  .tp-modal__progress li + li::before { width: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tp-modal__panel,
+  .tp-modal__step { animation: none; }
+  .tp-modal__form .field__input[aria-invalid="true"] { animation: none; }
+  .tp-modal__close:hover { transform: none; }
+  .tp-quiz__btn:hover, .tp-quiz__btn:focus-visible { transform: none; }
+}
+/* =========================================================================
+   CTA FIXO NO MOBILE
+   ========================================================================= */
+
+.tp-sticky {
+  position: fixed;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 900;
+  display: none;
+  padding: .7rem clamp(1rem, 4vw, 1.5rem)
+           calc(.7rem + env(safe-area-inset-bottom, 0px));
+  background: rgba(255, 252, 251, .93);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid var(--tp-line-soft);
+  transform: translateY(110%);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.tp-sticky.is-visible { transform: translateY(0); }
+.tp-sticky .btn--tp { width: 100%; padding-block: 1rem; }
+
+/* Na barra fixa o boleto entra mais baixo e com fonte menor: sao dois botoes
+   sobre um espaco que ja e emprestado da tela, e a hierarquia precisa
+   continuar clara. */
+.tp-sticky .btn--tp-boleto {
+  width: 100%;
+  padding-block: .72rem;
+  font-size: clamp(.72rem, 3vw, .8rem);
+}
+
+@media (max-width: 860px) {
+  /* Coluna em vez de bloco para separar os dois botoes. Antes de 02/09, com
+     o boleto ainda hidden, sobra um filho so e o resultado e identico ao
+     display:block de antes — o gap nao tem entre o que se aplicar. */
+  .tp-sticky {
+    display: flex;
+    flex-direction: column;
+    gap: .45rem;
+  }
+  body { padding-bottom: 0; }
+}
+
+/* =========================================================================
+   ENTRADA COM DESFOQUE
+
+   Sobrescreve o [data-reveal] do design system SÓ nesta página: além de subir
+   e aparecer, o elemento entra levemente desfocado e ganha nitidez. O hero não
+   tem data-reveal, então a primeira dobra continua instantânea.
+   ========================================================================= */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(20px);
+  filter: blur(6px);
+  transition:
+    opacity   760ms var(--ease-out),
+    transform 760ms var(--ease-out),
+    filter    760ms var(--ease-out);
+}
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Depois que assenta, o filtro sai de cena: blur(0) ainda mantém uma camada de
+   composição viva em cada um dos 46 elementos revelados. A classe é aplicada
+   por taping.js no transitionend. */
+[data-reveal].is-settled {
+  filter: none;
+  transition: none;
+  will-change: auto;
+}
+
+/* Escalonamento por coluna — só onde a grade é realmente multicoluna, para o
+   card sozinho no mobile não entrar com atraso perceptível. */
+@media (min-width: 900px) {
+  .tp-flash__grid > [data-reveal]:nth-child(2n),
+  .tp-steps       > [data-reveal]:nth-child(3n + 2),
+  .tp-pillars     > [data-reveal]:nth-child(3n + 2),
+  .tp-inside      > [data-reveal]:nth-child(3n + 2),
+  .tp-bonus       > [data-reveal]:nth-child(3n + 2) { transition-delay: 90ms; }
+
+  .tp-steps   > [data-reveal]:nth-child(3n + 3),
+  .tp-pillars > [data-reveal]:nth-child(3n + 3),
+  .tp-inside  > [data-reveal]:nth-child(3n + 3),
+  .tp-bonus   > [data-reveal]:nth-child(3n + 3) { transition-delay: 180ms; }
+}
+
+/* Sem animação por preferência do sistema: aparece direto, sem desfoque.
+   (O bloco do design system já zera as durações; aqui zeramos o estado inicial
+   para nada nascer borrado caso a transição não chegue a rodar.) */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition-delay: 0ms !important;
+  }
+}
+
+/* =========================================================================
+   IMPRESSÃO — não é o caso de uso, mas evita gasto de tinta
+   ========================================================================= */
+@media print {
+  [data-reveal] { opacity: 1 !important; transform: none !important; filter: none !important; }
+  .tp-topbar, .tp-sticky, .tp-modal, .tp-cta { display: none !important; }
+}

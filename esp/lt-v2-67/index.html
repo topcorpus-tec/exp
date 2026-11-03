@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<!-- Versão em espanhol (latino neutro) da /lt-v2-67/, gerada em 03/11/2026.
+     As imagens e os vídeos ainda são os da versão em português. -->
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#FBFDFF" />
+  <meta name="description" content="Alivia el dolor que nadie logró aliviar: más de 70 maniobras ilustradas que muestran dónde tocar, cómo tocar y cuánto presionar, aunque no tengas experiencia. Por Ana Martha, fisioterapeuta y fundadora de TopCorpus." />
+
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=()" />
+
+  <meta property="og:title"       content="Alivia el dolor que nadie logró aliviar" />
+  <meta property="og:description" content="Más de 70 maniobras ilustradas, alertas de seguridad y 5 bonos. Manual Ilustrado para el Alivio del Dolor con Masaje por R$67." />
+  <meta property="og:type"        content="website" />
+  <meta property="og:locale"      content="es_LA" />
+
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <title>Manual Ilustrado para el Alivio del Dolor con Masaje</title>
+
+  <!-- ==================== Fontes compartilhadas (CDN topcorpus) ==================== -->
+  <link rel="preconnect" href="https://pcm.topcorpus.com.br" crossorigin />
+  <link rel="dns-prefetch" href="https://pcm.topcorpus.com.br" />
+  <link rel="preload" as="font" type="font/woff2" href="https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-400.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-600.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-800.woff2" crossorigin />
+
+  <!-- ==================== dataLayer init ANTES do env-config ==================== -->
+  <script>window.dataLayer = window.dataLayer || [];</script>
+
+  <!-- ==================== Site config + GTM ==================== -->
+  <script src="assets/js/env-config.js"></script>
+  <script src="assets/js/gtm-loader.js"></script>
+
+  <!-- ==================== CSS ====================
+       Os três primeiros são os mesmos da lt-v1, sem nenhuma alteração: a v2
+       usa a mesma identidade (Manrope, azul da capa, CTA verde). v2.css é a
+       camada de cima, com os blocos que a copy nova pede e a v1 não tinha —
+       a caixa de chamada do hero, a lista do que se aprende, os entregáveis
+       em zigue-zague, a pilha de valor da oferta e a escolha final. -->
+  <link rel="stylesheet" href="assets/css/design-system.css" />
+  <link rel="stylesheet" href="assets/css/taping.css" />
+  <link rel="stylesheet" href="assets/css/manual.css" />
+  <link rel="stylesheet" href="assets/css/v2.css" />
+
+  <script src="assets/js/manual.js" defer></script>
+</head>
+<body>
+
+  <!-- ==================== Sprite de ícones (usado via <use>) ==================== -->
+  <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="20 6 9 17 4 12" />
+    </symbol>
+    <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+      <line x1="6" y1="6" x2="18" y2="18" /><line x1="18" y1="6" x2="6" y2="18" />
+    </symbol>
+    <symbol id="i-star" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12 2.6l2.6 5.9 6.4.6-4.8 4.3 1.4 6.3-5.6-3.3-5.6 3.3 1.4-6.3L3 9.1l6.4-.6z" />
+    </symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+      <line x1="12" y1="6" x2="12" y2="18" /><line x1="6" y1="12" x2="18" y2="12" />
+    </symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" /><line x1="12" y1="9.5" x2="12" y2="13.5" /><line x1="12" y1="17" x2="12" y2="17.1" />
+    </symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="5" width="18" height="14" rx="2.5" /><polyline points="3.5 6.5 12 13 20.5 6.5" />
+    </symbol>
+  </svg>
+
+  <main>
+
+    <!-- ==================== DOBRA 1 — HERO ==================== -->
+    <section class="tp-hero" aria-labelledby="hero-title">
+      <svg class="tp-hero__ribbon" viewBox="0 0 1440 320" fill="none" aria-hidden="true" focusable="false" preserveAspectRatio="none">
+        <path d="M0 190c180-90 320 40 500-10S840 40 1010 78s290 130 430 92" stroke="url(#tp-g1)" stroke-width="34" stroke-linecap="round" opacity=".30" />
+        <path d="M0 240c200-70 330 60 520 6S850 96 1030 132s280 120 410 84" stroke="url(#tp-g2)" stroke-width="18" stroke-linecap="round" opacity=".26" />
+        <defs>
+          <linearGradient id="tp-g1" x1="0" y1="0" x2="1440" y2="0" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#7FC4EC" stop-opacity="0" /><stop offset=".4" stop-color="#7FC4EC" /><stop offset="1" stop-color="#01337C" stop-opacity=".2" />
+          </linearGradient>
+          <linearGradient id="tp-g2" x1="0" y1="0" x2="1440" y2="0" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#0285D3" stop-opacity="0" /><stop offset=".55" stop-color="#0285D3" /><stop offset="1" stop-color="#0285D3" stop-opacity="0" />
+          </linearGradient>
+        </defs>
+      </svg>
+
+      <!-- O logo abre a página e a faixa vem logo abaixo dele. A faixa é
+           filha direta da seção, e não do container, para ir de ponta a
+           ponta da tela. -->
+      <div class="tp-container v2-hero__marca">
+        <img class="v2-hero__logo" src="assets/img/logo-manual.webp"
+             alt="Manual Ilustrado para el Alivio del Dolor"
+             width="600" height="391" decoding="async" />
+      </div>
+
+      <p class="v2-topo">¡Creado para ti, que sueñas con aliviar el dolor de las personas con tus manos y no quieres equivocarte!</p>
+
+      <div class="tp-container mn-hero__inner">
+
+        <div class="tp-hero__copy">
+          <h1 class="tp-hero__headline" id="hero-title">¡Alivia el dolor que <span class="tp-hl">nadie logró aliviar</span>!</h1>
+          <p class="tp-hero__sub">Accede a <strong>más de 70 maniobras ilustradas</strong> que muestran dónde tocar, cómo tocar y cuánto presionar, para que llegues con tu próxima clienta sabiendo exactamente qué hacer.</p>
+        </div>
+
+        <p class="v2-hero__badge"><svg width="16" height="16" aria-hidden="true"><use href="#i-check" /></svg> <span>Aunque no tengas experiencia</span></p>
+
+        <!-- Antes e depois: a mesma sala, a mesma massoterapeuta e a mesma
+             cliente, sem o manual e com ele, cada lado com as suas falas. -->
+        <figure class="v2-antes-depois">
+          <img src="assets/img/hero-antes-depois.webp"
+               alt="Antes y después de la misma escena. Sin el manual: la masoterapeuta, con bata oscura, con una mano en la barbilla y la otra quieta sobre la espalda de la clienta, marcada con puntos rojos, y un video en pausa al lado; piensa &ldquo;¿Será que es aquí?&rdquo;, &ldquo;¿Y si le empeoro el dolor?&rdquo; y &ldquo;Ya vi este video varias veces y todavía no sé&rdquo;. Con el manual: con bata blanca, da el masaje tranquila, con los puntos ahora verdes y el manual abierto en la página de la espalda baja; piensa &ldquo;Es aquí, el dibujo lo muestra&rdquo;, &ldquo;Ya sé la presión correcta. Ahora lo hago tranquila&rdquo; y &ldquo;Ahora entendí, solo hay que seguir el dibujo&rdquo;."
+               width="1349" height="951" fetchpriority="high" decoding="async" />
+        </figure>
+
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 1 ==================== -->
+
+    <!-- ==================== FAIXA CORRIDA ====================
+         Ornamento, como na v1: o nome do produto já está no <title> e no H1,
+         então para leitor de tela seria só repetição. -->
+    <div class="mn-marquee" aria-hidden="true">
+      <div class="mn-marquee__track"><span class="mn-marquee__item">Manual Ilustrado para el Alivio del Dolor<span class="mn-marquee__sep"></span></span> <span class="mn-marquee__item">Manual Ilustrado para el Alivio del Dolor<span class="mn-marquee__sep"></span></span> <span class="mn-marquee__item">Manual Ilustrado para el Alivio del Dolor<span class="mn-marquee__sep"></span></span> <span class="mn-marquee__item">Manual Ilustrado para el Alivio del Dolor<span class="mn-marquee__sep"></span></span> <span class="mn-marquee__item">Manual Ilustrado para el Alivio del Dolor<span class="mn-marquee__sep"></span></span> <span class="mn-marquee__item">Manual Ilustrado para el Alivio del Dolor<span class="mn-marquee__sep"></span></span> <span class="mn-marquee__item">Manual Ilustrado para el Alivio del Dolor<span class="mn-marquee__sep"></span></span> <span class="mn-marquee__item">Manual Ilustrado para el Alivio del Dolor<span class="mn-marquee__sep"></span></span> <span class="mn-marquee__item">Manual Ilustrado para el Alivio del Dolor<span class="mn-marquee__sep"></span></span> <span class="mn-marquee__item">Manual Ilustrado para el Alivio del Dolor<span class="mn-marquee__sep"></span></span> <span class="mn-marquee__item">Manual Ilustrado para el Alivio del Dolor<span class="mn-marquee__sep"></span></span> <span class="mn-marquee__item">Manual Ilustrado para el Alivio del Dolor<span class="mn-marquee__sep"></span></span> <span class="mn-marquee__item">Manual Ilustrado para el Alivio del Dolor<span class="mn-marquee__sep"></span></span> <span class="mn-marquee__item">Manual Ilustrado para el Alivio del Dolor<span class="mn-marquee__sep"></span></span></div>
+    </div>
+
+    <!-- ==================== DOBRA 2 — DEPOIMENTOS ====================
+         Os quatro depoimentos do doc, cada um redesenhado em HTML com a cara
+         do lugar de onde veio o print — conversa da caixa de mensagens do
+         Facebook e comentários do YouTube, o da Lenek3 no layout novo, com
+         @ e hora em cima —, com a frase que o resume em cima. O texto é o
+         que a aluna escreveu, sem correção. Foto e nome são os do perfil de
+         cada uma; a Kely não tinha foto, só a inicial.
+
+         Carrossel no desktop, dois por vez, com as setas embaixo; empilhados
+         no celular, onde as setas somem. No desktop o carrossel abre com a
+         Jessica, por isso ela vem primeiro aqui; no celular o CSS devolve a
+         ordem do doc (Kely, Jessica, Lenek3, Dilce).
+
+         A conversa da Jessica vai sem o cabeçalho da caixa de mensagens
+         (nome, "Atribuir esta conversa" e o botão ···), que saiu em 09/10:
+         ficam só as bolhas, com a foto dela ao lado da primeira. -->
+    <section class="tp-section tp-section--ivory" aria-labelledby="depo-title">
+      <div class="tp-container">
+        <div class="tp-head">
+          <span class="tp-eyebrow">Testimonios</span>
+          <h2 class="tp-title" id="depo-title">Mira lo que dicen las personas que ya aplican mi método:</h2>
+        </div>
+
+        <div class="v2-deps" id="depoimentos" role="region" aria-label="Testimonios" tabindex="0" data-carrossel>
+
+          <figure class="v2-dep v2-dep--jessica">
+            <figcaption class="v2-dep__titulo">Atendió a una clienta con fibromialgia y a una recién parida, y las dos se durmieron en la sesión</figcaption>
+            <div class="v2-msg">
+              <div class="v2-msg__conversa">
+                <img class="v2-msg__av-mini" src="assets/img/avatar-jessica.webp" alt=""
+                     width="44" height="44" loading="lazy" decoding="async" />
+                <p class="v2-msg__balao v2-msg__balao--primeiro">Ana.<br /> Necesito contarte lo que me pasó.<br /> Atendí a dos clientas. Una recién parida y la otra con artrosis y fibromialgia.<br /> Hice la anamnesis antes. No le hice masaje en los pies a la clienta con fibromialgia (porque no le gusta, siente cosquillas) y no le hice masaje en la barriga a la recién parida (2 meses de parto).<br /> Le hice TopCorpus a la recién parida y TopRelax a la de fibromialgia. Les encantó y se durmieron durante la sesión. Durmieron tanto que no vieron pasar el tiempo. ¡Increíble!<br /> Además, la que tenía fibromialgia me contó que ni necesitó tomar medicamento para dormir, que estaba sin dolores y durmió tranquila.<br /> La recién parida, que tenía unos dolores localizados, me dijo que despertó sin dolor.</p>
+                <p class="v2-msg__balao">Esto demuestra, Ana, lo valioso que es tu curso. Lo mucho que enseñas y los resultados que trae si se aplica como tú enseñas.</p>
+                <p class="v2-msg__balao">Estoy tan feliz y realizada.</p>
+              </div>
+            </div>
+          </figure>
+
+          <figure class="v2-dep v2-dep--kely">
+            <figcaption class="v2-dep__titulo">La clienta salió de la sala sin dolor y, al día siguiente, estaba renovada</figcaption>
+            <div class="v2-yt">
+              <span class="v2-yt__av" aria-hidden="true">K</span>
+              <p class="v2-yt__texto"><span class="v2-yt__nome">Kely Fabiana Bufalo</span> Otra clienta con dolores en el cuerpo calificó el masaje que le hice como SURREAL....dijo que salió de la sala sin dolor y al día siguiente estaba NUEVA 😍💜 Esto es el masaje humanizado Top Corpus</p>
+            </div>
+          </figure>
+
+          <figure class="v2-dep v2-dep--lenek">
+            <figcaption class="v2-dep__titulo">Hoy vive del masaje y ya la llaman doctora</figcaption>
+            <div class="v2-yt v2-yt--novo">
+              <img class="v2-yt__av" src="assets/img/avatar-lenek.webp" alt=""
+                   width="45" height="45" loading="lazy" decoding="async" />
+              <div class="v2-yt__corpo">
+                <p class="v2-yt__cab"><span class="v2-yt__nome">@Lenek3</span> <svg class="v2-yt__selo" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="#FF0000" /><path d="M5.8 6.2V5.4a2.2 2.2 0 0 1 4.4 0v.8" fill="none" stroke="#FFFFFF" stroke-width="1.2" /><rect x="3.8" y="6.2" width="8.4" height="5.6" rx="1" fill="#FFFFFF" /><path d="M7.2 7.6v2.8L9.4 9z" fill="#FF0000" /></svg> <span class="v2-yt__hora">&bull; hace 1 hora</span></p>
+                <p class="v2-yt__texto">Ese es mi objetivo ayudar a las personas con masaje, hoy vivo del masaje , mi esposo desempleado, ayer recibí mi certificado, estoy muy feliz, ya estoy atendiendo posoperatorios , ya me están llamando doctora, muchas gracias maestra y familia TopCorpus gratitud ❤️ 😂 😇 🙏🏽</p>
+              </div>
+            </div>
+          </figure>
+
+          <figure class="v2-dep v2-dep--dilce">
+            <figcaption class="v2-dep__titulo">Empezó de cero y hoy atiende en su propio espacio</figcaption>
+            <div class="v2-yt">
+              <img class="v2-yt__av v2-yt__av--pequeno" src="assets/img/avatar-dilce.webp" alt=""
+                   width="25" height="25" loading="lazy" decoding="async" />
+              <p class="v2-yt__texto"><span class="v2-yt__nome">Dilce De Jesus Melo Gaspar</span> Yo tampoco sabía nada hoy tengo un espacio con camilla mi esposo no creía en el masaje .Hoy me llama Doctora. Me ayudó mucho después de que empezó a creer. Y quedar sin dolor con dos sesione</p>
+            </div>
+          </figure>
+
+        </div>
+
+        <div class="v2-deps__nav">
+          <button class="v2-deps__seta" type="button" aria-controls="depoimentos" aria-label="Testimonios anteriores" data-carrossel-ant>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 5 8 12 15 19" /></svg>
+          </button>
+          <button class="v2-deps__seta" type="button" aria-controls="depoimentos" aria-label="Siguientes testimonios" data-carrossel-prox>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 5 16 12 9 19" /></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 2 ==================== -->
+
+    <!-- ==================== DOBRA 3 — A DÚVIDA ==================== -->
+    <section class="tp-section tp-section--veil" aria-labelledby="duvida-title">
+      <div class="tp-container">
+        <div class="tp-manifest">
+
+          <h2 class="tp-title tp-title--sm" id="duvida-title">Aunque ya des masajes, puede aparecer esa duda a la hora de aplicarlo: <span class="tp-hl">¿y si lastimo en lugar de aliviar?</span></h2>
+
+          <p><strong>Entonces agarras el celular y escribes:</strong></p>
+
+          <!-- O celular com as pesquisas recentes dela no Google. As quatro
+               pesquisas estão na imagem, então o alt as repete. -->
+          <figure class="v2-busca">
+            <img src="assets/img/celular-pesquisas.webp"
+                 alt="Un celular abierto en Google, con las búsquedas recientes: &ldquo;¿cómo saber si es nervio o músculo en la espalda baja?&rdquo;, &ldquo;¿presión correcta para un masaje en la espalda?&rdquo;, &ldquo;¿puedo lastimar si doy mal un masaje?&rdquo; y &ldquo;¿cómo dar un masaje para el dolor de cadera?&rdquo;"
+                 width="469" height="886" loading="lazy" decoding="async" />
+          </figure>
+
+          <!-- O box começa na metade do celular, por trás dele, e segue até o
+               fecho da dobra: a metade de cima do aparelho fica para fora. -->
+          <div class="v2-duvida__box">
+
+            <p>El problema es que, en plena sesión, no puedes parar todo para buscar en el celular. La clienta señala el dolor y la mente se bloquea&hellip;</p>
+
+            <p><strong>Y terminas haciéndolo al azar, sin saber si ese es el movimiento correcto&hellip;</strong></p>
+
+            <p class="tp-manifest__close">Si ya te pasó, el <span class="tp-hl">Manual Ilustrado para el Alivio del Dolor con Masaje</span> es lo que necesitas.</p>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 3 ==================== -->
+
+    <!-- ==================== DOBRA 4 — O QUE VOCÊ VAI APRENDER ==================== -->
+    <section class="tp-section tp-section--lilac" aria-labelledby="aprender-title">
+      <div class="tp-container">
+        <div class="tp-head">
+          <span class="tp-eyebrow">El contenido</span>
+          <h2 class="tp-title" id="aprender-title">Con él vas a aprender:</h2>
+        </div>
+
+        <ul class="v2-checks">
+          <li>
+            <div class="v2-checks__media">
+              <img src="assets/img/aprender-onde-tocar.webp"
+                   alt="La masajista señala el punto exacto en la espalda de la clienta, marcado con una diana."
+                   width="900" height="900" loading="lazy" decoding="async" />
+            </div>
+            <div class="v2-checks__body"><span class="v2-checks__icon"><svg width="16" height="16" aria-hidden="true"><use href="#i-check" /></svg></span> <span><strong>Dónde tocar en cada región</strong> (espalda baja, cervical, hombro y más), sin hacerlo al azar esperando que salga bien</span></div>
+          </li>
+          <li>
+            <div class="v2-checks__media">
+              <img src="assets/img/aprender-qual-pressao.webp"
+                   alt="Las dos manos de la masajista apoyadas en la espalda de la clienta, con círculos que indican la presión."
+                   width="900" height="900" loading="lazy" decoding="async" />
+            </div>
+            <div class="v2-checks__body"><span class="v2-checks__icon"><svg width="16" height="16" aria-hidden="true"><use href="#i-check" /></svg></span> <span><strong>Qué presión usar en cada caso</strong>, con la seguridad de saber que no vas a lastimar a quien confía en ti</span></div>
+          </li>
+          <li>
+            <div class="v2-checks__media">
+              <img src="assets/img/aprender-quando-nao-massagear.webp"
+                   alt="La masajista hace la señal de alto frente a una zona enrojecida en el muslo de la clienta, marcada con una alerta."
+                   width="900" height="900" loading="lazy" decoding="async" />
+            </div>
+            <div class="v2-checks__body"><span class="v2-checks__icon"><svg width="16" height="16" aria-hidden="true"><use href="#i-check" /></svg></span> <span><strong>A reconocer en el momento cuándo NO debes dar masaje</strong>, en lugar de descubrirlo demasiado tarde</span></div>
+          </li>
+          <li>
+            <div class="v2-checks__media">
+              <img src="assets/img/aprender-sequencia-certa.webp"
+                   alt="Puntos unidos por flechas a lo largo de la columna de la clienta, que muestran el orden de las maniobras."
+                   width="900" height="900" loading="lazy" decoding="async" />
+            </div>
+            <div class="v2-checks__body"><span class="v2-checks__icon"><svg width="16" height="16" aria-hidden="true"><use href="#i-check" /></svg></span> <span><strong>A seguir la secuencia correcta para cada dolor</strong>, sin tener que memorizar nada ni detener la sesión para buscar</span></div>
+          </li>
+          <li>
+            <div class="v2-checks__media">
+              <img src="assets/img/aprender-tensao-ou-outra-causa.webp"
+                   alt="Dos detalles ampliados de la espalda de la clienta: un nudo en el músculo de un lado y un dolor que corre por el nervio del otro."
+                   width="900" height="900" loading="lazy" decoding="async" />
+            </div>
+            <div class="v2-checks__body"><span class="v2-checks__icon"><svg width="16" height="16" aria-hidden="true"><use href="#i-check" /></svg></span> <span><strong>A distinguir si es nervio o músculo, tensión u otra cosa</strong>, sin quedarte en suposiciones</span></div>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 4 ==================== -->
+
+    <!-- ==================== DOBRA 5 — POR DENTRO DO MANUAL ====================
+         Imagem e texto em linha, alternando de lado, como nas referências.
+         Cada item mostra as páginas do próprio manual: a 90 e a 91 no 01, o
+         mapa rápido do corpo no 02, a 22 no 03 e a 7 no 04. -->
+    <section class="tp-section" aria-labelledby="recebe-title">
+      <div class="tp-container">
+        <div class="tp-head">
+          <span class="tp-eyebrow">Pero todavía no termina</span>
+          <h2 class="tp-title" id="recebe-title">Echa un vistazo a cómo es por dentro el <span class="tp-hl">Manual Ilustrado</span>:</h2>
+        </div>
+
+        <div class="v2-feats">
+
+          <article class="v2-feat">
+            <div class="v2-feat__media">
+              <img src="assets/img/por-dentro-1-lombar.webp"
+                   alt="Las páginas 90 y 91 del manual abiertas una al lado de la otra: &ldquo;Aplicación para la espalda baja&rdquo;, con dónde tocar, dónde evitar presionar y las etapas, y &ldquo;Anestesiar y drenar&rdquo;, con las fotos numeradas de la maniobra aplicada en la espalda."
+                   width="888" height="1027" loading="lazy" decoding="async" />
+            </div>
+            <div class="v2-feat__body">
+              <span class="v2-feat__num">01</span>
+              <h3 class="v2-feat__title">Más de 70 maniobras para tratar distintas regiones del cuerpo</h3>
+              <p>Cada página muestra la maniobra aplicada, igual que en la foto de al lado: la región correcta y la mano en el lugar correcto, lista para que la reproduzcas con tu clienta.</p>
+            </div>
+          </article>
+
+          <article class="v2-feat">
+            <div class="v2-feat__media">
+              <img src="assets/img/por-dentro-2-mapa-corpo.webp"
+                   alt="Las páginas &ldquo;Tu mapa rápido del cuerpo&rdquo; del manual: la musculatura humana en vista de frente y de espaldas y la lista de las áreas para consultar, de la cabeza a los pies."
+                   width="888" height="1027" loading="lazy" decoding="async" />
+            </div>
+            <div class="v2-feat__body">
+              <span class="v2-feat__num">02</span>
+              <h3 class="v2-feat__title">No importa dónde esté el dolor, vas a saber resolverlo</h3>
+              <p>Vas directo a la región que necesitas, de la cabeza a los pies. Nada de buscar videos guardados, capturas de pantalla o notas sueltas.</p>
+            </div>
+          </article>
+
+          <article class="v2-feat">
+            <div class="v2-feat__media">
+              <img src="assets/img/por-dentro-3-adeir.webp"
+                   alt="La página 22 del manual, &ldquo;Las cinco etapas&rdquo; del método TopTerapéutico: Anestesiar, Drenar, Entibiar, Investigar y Relajar, las letras de ADEIR."
+                   width="888" height="1027" loading="lazy" decoding="async" />
+            </div>
+            <div class="v2-feat__body">
+              <span class="v2-feat__num">03</span>
+              <h3 class="v2-feat__title">Método validado, que uso desde hace años para enseñar a mis alumnas</h3>
+              <p>Solo tienes que seguir el orden, sin detenerte en medio de la sesión preguntándote qué hacer.</p>
+            </div>
+          </article>
+
+          <article class="v2-feat">
+            <div class="v2-feat__media">
+              <img src="assets/img/por-dentro-4-antes-de-comecar.webp"
+                   alt="La página 7 del manual, &ldquo;Antes de empezar&rdquo;: la lista de las regiones donde no se debe dar masaje directamente, como heridas abiertas, sospecha de fractura y sospecha de trombosis, y la lista de las señales que piden una evaluación profesional, como dolor muy fuerte y repentino, falta de aire y pérdida de fuerza."
+                   width="888" height="1026" loading="lazy" decoding="async" />
+            </div>
+            <div class="v2-feat__body">
+              <span class="v2-feat__num">04</span>
+              <h3 class="v2-feat__title">Alertas de seguridad</h3>
+              <p>El manual muestra cuándo <strong>NO</strong> dar masaje: inflamación, sospecha de fractura, señales de trombosis y otras situaciones que piden más cuidado, para que no te quedes con la duda de si puedes tocar ahí.</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 5 ==================== -->
+
+    <!-- ==================== DOBRA 6 — BÔNUS ==================== -->
+    <section class="tp-section tp-section--ivory" aria-labelledby="bonus-title">
+      <div class="tp-container">
+        <div class="tp-head">
+          <span class="tp-eyebrow">Todo incluido</span>
+          <h2 class="tp-title" id="bonus-title">Y además recibes <span class="tp-hl">5 Bonos Increíbles</span>:</h2>
+        </div>
+
+        <div class="tp-bonus">
+
+          <article class="tp-bonus__card">
+            <img class="mn-bonus__selo" src="assets/img/selo-bonus.webp"
+                 alt="" aria-hidden="true"
+                 width="240" height="240" loading="lazy" decoding="async" />
+            <div class="tp-bonus__media">
+              <img src="assets/img/bonus-1-videoaulas.webp"
+                   alt="Ana Martha aplicando las maniobras en video, en la pantalla de la laptop, la tablet y el celular al mismo tiempo — masaje en la espalda, el abdomen y el rostro."
+                   width="720" height="480" loading="lazy" decoding="async" />
+            </div>
+            <span class="tp-bonus__free">Gratis</span>
+            <div class="tp-bonus__body">
+              <span class="tp-bonus__label">Bono 1</span>
+              <h3 class="mn-bonus__title">Videoclase de las maniobras</h3>
+              <p class="tp-bonus__text">Una sesión de masaje en la espalda, con el paso a paso completo de dónde poner las manos, cuánta presión usar en cada movimiento y dónde no tocar.</p>
+            </div>
+          </article>
+
+          <article class="tp-bonus__card">
+            <img class="mn-bonus__selo" src="assets/img/selo-bonus.webp"
+                 alt="" aria-hidden="true"
+                 width="240" height="240" loading="lazy" decoding="async" />
+            <div class="tp-bonus__media">
+              <img src="assets/img/bonus-2-whatsapp.webp"
+                   alt="Ana Martha con el celular en la mano frente al ícono de WhatsApp, junto a un globo de mensaje enviado: &ldquo;¡Mujer, ten mi WhatsApp!&rdquo;"
+                   width="720" height="480" loading="lazy" decoding="async" />
+            </div>
+            <span class="tp-bonus__free">Gratis</span>
+            <div class="tp-bonus__body">
+              <span class="tp-bonus__label">Bono 2</span>
+              <h3 class="mn-bonus__title">Mi contacto directo por WhatsApp</h3>
+              <p class="tp-bonus__text">Me mandas tu duda directo por WhatsApp y recibes respuesta en el momento. Sea sábado, domingo, feriado o de madrugada.</p>
+            </div>
+          </article>
+
+          <article class="tp-bonus__card">
+            <img class="mn-bonus__selo" src="assets/img/selo-bonus.webp"
+                 alt="" aria-hidden="true"
+                 width="240" height="240" loading="lazy" decoding="async" />
+            <div class="tp-bonus__media">
+              <img src="assets/img/bonus-3-reflexologia.webp"
+                   alt="El Mapa de Reflexología de los Pies en tapa dura al centro, rodeado por las páginas internas: el mapa a color de las zonas reflejas de los pies, la presentación de Ana Martha y el certificado de extensión."
+                   width="720" height="480" loading="lazy" decoding="async" />
+            </div>
+            <span class="tp-bonus__free">Gratis</span>
+            <div class="tp-bonus__body">
+              <span class="tp-bonus__label">Bono 3</span>
+              <h3 class="mn-bonus__title">Mapa ilustrado de reflexología</h3>
+              <p class="tp-bonus__text">La reflexología es una técnica milenaria que trabaja puntos específicos de los pies para aliviar dolores en otras partes del cuerpo. Aquí recibes un mapa ilustrado de esos puntos, para ampliar tu repertorio.</p>
+            </div>
+          </article>
+
+          <article class="tp-bonus__card">
+            <img class="mn-bonus__selo" src="assets/img/selo-bonus.webp"
+                 alt="" aria-hidden="true"
+                 width="240" height="240" loading="lazy" decoding="async" />
+            <div class="tp-bonus__media">
+              <img src="assets/img/bonus-4-drenagem.webp"
+                   alt="La Guía Ilustrada de Drenaje Linfático en tapa dura al centro, rodeada por las páginas internas: el mapa de las estaciones linfáticas, las maniobras con la dirección de cada movimiento en flechas y los cuidados de la terapeuta."
+                   width="720" height="480" loading="lazy" decoding="async" />
+            </div>
+            <span class="tp-bonus__free">Gratis</span>
+            <div class="tp-bonus__body">
+              <span class="tp-bonus__label">Bono 4</span>
+              <h3 class="mn-bonus__title">Guía ilustrada de drenaje linfático</h3>
+              <p class="tp-bonus__text">Una guía visual con las principales regiones linfáticas, los caminos y la dirección de cada movimiento, para que apliques el drenaje sin tener que adivinar hacia qué lado debe ir.</p>
+            </div>
+          </article>
+
+          <article class="tp-bonus__card">
+            <img class="mn-bonus__selo" src="assets/img/selo-bonus.webp"
+                 alt="" aria-hidden="true"
+                 width="240" height="240" loading="lazy" decoding="async" />
+            <div class="tp-bonus__media">
+              <img src="assets/img/bonus-5-fibromialgia.webp"
+                   alt="El Mapa de los Puntos de Dolor en la Fibromialgia en tapa dura al centro, rodeado por las páginas internas: la presentación de Ana Martha, el papel de la masoterapeuta, el mapa de los 18 puntos en vista frontal y posterior y las indicaciones de cómo usar el mapa."
+                   width="720" height="480" loading="lazy" decoding="async" />
+            </div>
+            <span class="tp-bonus__free">Gratis</span>
+            <div class="tp-bonus__body">
+              <span class="tp-bonus__label">Bono 5</span>
+              <h3 class="mn-bonus__title">Mapa de los Puntos de Dolor en la Fibromialgia</h3>
+              <p class="tp-bonus__text">Conoce los 18 puntos sensibles y ten una guía visual para una atención más segura y humanizada.</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 6 ==================== -->
+
+    <!-- ==================== DOBRA 7 — PARA QUEM É ==================== -->
+    <section class="tp-section tp-section--blush" aria-labelledby="para-quem-title">
+      <div class="tp-container">
+        <div class="tp-head">
+          <span class="tp-eyebrow">Para quién es</span>
+          <h2 class="tp-title" id="para-quem-title">Creé el Manual Ilustrado para el Alivio del Dolor con Masaje pensando en ti, que:</h2>
+        </div>
+
+        <div class="tp-pillars">
+          <article class="tp-pillar">
+            <img class="mn-pillar__img" src="assets/img/pilar-1-profissional.webp"
+                 alt="Ana Martha con bata blanca, arrodillada junto a la camilla, mirando a la cámara mientras atiende a una clienta."
+                 width="720" height="720" loading="lazy" decoding="async" />
+            <h3 class="tp-pillar__title">Ya atiendes de forma profesional</h3>
+            <p class="tp-pillar__text">Pero todavía buscas a escondidas antes de un caso diferente, como ese dolor de espalda baja que nunca habías atendido.</p>
+          </article>
+
+          <article class="tp-pillar">
+            <img class="mn-pillar__img" src="assets/img/pilar-2-comecando.webp"
+                 alt="Ana Martha sonriendo a la cámara, con ropa blanca, con las dos manos abiertas frente al cuerpo."
+                 width="720" height="720" loading="lazy" decoding="async" />
+            <h3 class="tp-pillar__title">Estás empezando en el área</h3>
+            <p class="tp-pillar__text">Y sientes mariposas en el estómago cuando la clienta te señala un dolor que nunca atendiste, aunque hayas visto varias clases intentando sentirte segura.</p>
+          </article>
+
+          <article class="tp-pillar">
+            <img class="mn-pillar__img" src="assets/img/pilar-3-familia.webp"
+                 alt="Una hija abrazando a su mamá por detrás, las dos de blanco, con los ojos cerrados y sonriendo, con corazoncitos flotando alrededor."
+                 width="720" height="720" loading="lazy" decoding="async" />
+            <h3 class="tp-pillar__title">Quieres aliviar los dolores de quienes más amas</h3>
+            <p class="tp-pillar__text">Tu esposo que llega con dolor de espalda, tu mamá con las piernas adoloridas, y tú sin saber si es mejor intentar aliviarlo con las manos o solo darle otro medicamento.</p>
+          </article>
+        </div>
+
+        <div class="v2-callout">
+          <p class="v2-callout__kicker"><svg width="22" height="22" aria-hidden="true"><use href="#i-alert" /></svg>Entonces, ¡presta mucha atención!</p>
+          <p>Si quieres dejar de atender con miedo y tener más seguridad en cada sesión, sin depender de la suerte: el <strong>Manual Ilustrado para el Alivio del Dolor con Masaje es lo que necesitas</strong>.</p>
+        </div>
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 7 ==================== -->
+
+    <!-- ==================== DOBRA 8 — OFERTA ====================
+         A pilha de valor das referências: o que vem, quanto valeria cada
+         coisa e tudo junto e, só depois, o preço de hoje. Se algum botão
+         voltar a apontar para #oferta, o manual.js para a rolagem com o fim
+         desta caixa no pé da tela, para o preço e o botão aparecerem
+         juntos. -->
+    <section class="tp-section tp-section--offer" id="oferta" aria-labelledby="offer-title">
+      <div class="tp-container">
+        <div class="tp-head">
+          <span class="tp-eyebrow">La condición de hoy</span>
+          <h2 class="tp-title" id="offer-title">Mira todo lo que vas a recibir:</h2>
+        </div>
+
+        <div class="tp-offer__box">
+
+          <div class="tp-offer__list">
+            <ul class="tp-offer__items">
+              <li><svg width="16" height="16" aria-hidden="true"><use href="#i-check" /></svg><span><strong>Manual completo</strong>, con más de 70 maniobras ilustradas</span><s class="v2-item__de">R$107,00</s></li>
+              <li class="is-bonus"><svg width="16" height="16" aria-hidden="true"><use href="#i-star" /></svg><span><strong>Bono 1</strong> &mdash; Videoclase de las maniobras</span><s class="v2-item__de">R$57,00</s></li>
+              <li class="is-bonus"><svg width="16" height="16" aria-hidden="true"><use href="#i-star" /></svg><span><strong>Bono 2</strong> &mdash; Mi contacto por WhatsApp para resolver dudas</span><s class="v2-item__de">R$29,00</s></li>
+              <li class="is-bonus"><svg width="16" height="16" aria-hidden="true"><use href="#i-star" /></svg><span><strong>Bono 3</strong> &mdash; Mapa ilustrado de reflexología</span><s class="v2-item__de">R$20,00</s></li>
+              <li class="is-bonus"><svg width="16" height="16" aria-hidden="true"><use href="#i-star" /></svg><span><strong>Bono 4</strong> &mdash; Guía ilustrada de drenaje linfático</span><s class="v2-item__de">R$37,00</s></li>
+              <li class="is-bonus"><svg width="16" height="16" aria-hidden="true"><use href="#i-star" /></svg><span><strong>Bono 5</strong> &mdash; Mapa de los Puntos de Dolor en la Fibromialgia</span><s class="v2-item__de">R$47,00</s></li>
+            </ul>
+
+            <p class="v2-total">Sumando todo, el valor total sería: <s>R$297,00</s></p>
+          </div>
+
+          <div class="tp-offer__price">
+            <!-- O mockup abre a área do preço, logo acima da frase que leva a
+                 ele: depois da lista, ele mostra junto tudo o que ela somou. -->
+            <div class="v2-oferta__mock">
+              <img src="assets/img/mockup-oferta.webp"
+                   alt="El Manual Ilustrado para el Alivio del Dolor al centro, rodeado por los cinco bonos: el Mapa de Reflexología de los Pies, el Mapa de los Puntos de Dolor en la Fibromialgia, la Guía Ilustrada de Drenaje Linfático, las videoclases en la laptop, la tablet y el celular, y el ícono de WhatsApp — con las páginas internas de anatomía abiertas alrededor."
+                   width="1100" height="661" loading="lazy" decoding="async" />
+            </div>
+
+            <p class="v2-price__lead">Pero hoy vas a tener acceso al Manual y a todos los bonos por solo:</p>
+
+            <!-- O preço no formato das referências: o parcelado é o número
+                 grande e o à vista vem embaixo, menor. -->
+            <p class="tp-offer__from v2-preco__de">De <s>R$ 297,00</s> por:</p>
+            <p class="v2-preco__parcela">12 cuotas de 6,53<span class="v2-preco__ast">*</span></p>
+            <p class="v2-preco__vista">o 67,00 de contado</p>
+
+            <p class="tp-offer__note">¡Asegúralo ahora mismo y recíbelo al instante en tu correo electrónico!</p>
+
+            <div class="tp-cta"><a class="btn btn--tp" href="#" data-checkout> <span><svg class="v2-btn__ico" width="18" height="18" aria-hidden="true"><use href="#i-mail" /></svg>Quiero el manual y todos los bonos</span> </a></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 8 ==================== -->
+
+    <!-- ==================== DOBRA 9 — A ESCOLHA ==================== -->
+    <section class="tp-section tp-section--lilac" aria-labelledby="escolha-title">
+      <div class="tp-container">
+        <div class="tp-head">
+          <span class="tp-eyebrow">Tu decisión</span>
+          <h2 class="tp-title" id="escolha-title">Ahora la decisión está en <span class="tp-hl">tus manos</span></h2>
+        </div>
+
+        <div class="v2-choice">
+          <article class="v2-choice__card v2-choice__card--nao">
+            <span class="v2-choice__icon"><svg width="20" height="20" aria-hidden="true"><use href="#i-x" /></svg></span>
+            <h3 class="v2-choice__title">Puedes seguir sin el Manual</h3>
+            <p>Buscando a escondidas antes de cada sesión, esperando no equivocarte de región o de presión y empeorar el dolor de la clienta.</p>
+          </article>
+
+          <article class="v2-choice__card v2-choice__card--sim">
+            <span class="v2-choice__icon"><svg width="20" height="20" aria-hidden="true"><use href="#i-check" /></svg></span>
+            <h3 class="v2-choice__title">O puedes atender con tu Manual al lado</h3>
+            <p>Para consultarlo cada vez que lo necesites e ir directo a la región correcta, y atender con la certeza de que lo estás haciendo bien.</p>
+          </article>
+        </div>
+
+        <div class="v2-choice__close">
+          <p class="v2-choice__ask">Las dos sabemos cuál es la mejor opción, ¿verdad?</p>
+          <p>Entonces toca el botón de abajo y asegura el <strong>Manual Ilustrado</strong>, para usarlo ya en tu próxima sesión.</p>
+        </div>
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 9 ==================== -->
+
+    <!-- ==================== DOBRA 10 — QUEM É A ANA ==================== -->
+    <section class="tp-section tp-section--veil" aria-labelledby="bio-title">
+      <div class="tp-container">
+        <div class="mn-bio">
+
+          <div class="mn-bio__media">
+            <img src="assets/img/bio-ana.webp"
+                 alt="Ana Martha con bata blanca, con las manos abiertas, frente a un collage de sus apariciones en televisión, de un grupo de alumnas y de un premio que recibió."
+                 width="700" height="869" loading="lazy" decoding="async" />
+          </div>
+
+          <div class="mn-bio__copy">
+            <span class="tp-eyebrow">Quién lo firma</span>
+            <h2 class="tp-title tp-title--sm" id="bio-title">¡Mucho gusto! Soy Ana Martha</h2>
+            <p class="mn-bio__role">Fisioterapeuta y fundadora de TopCorpus</p>
+
+            <p>Estoy casada, soy mamá de dos niñas, trabajo desde hace 20 años en la terapia del toque y me convertí en una de las mayores referentes de Brasil en esta especialidad.</p>
+            <p>Fundé la Escuela TopCorpus, donde ya ayudé a más de 60.000 alumnas en 60 países a pasar de cero a la profesionalización en el toque terapéutico.</p>
+            <p>Este manual reúne <strong>20 años de mi práctica</strong>, listos para que los apliques con seguridad desde la primera técnica.</p>
+
+            <p class="mn-bio__kicker">Aprende de quien vive esta profesión desde hace 20 años</p>
+            <ul class="mn-bio__facts">
+              <li><svg width="16" height="16" aria-hidden="true"><use href="#i-check" /></svg><span>+60.000 mujeres son mis alumnas</span></li>
+              <li><svg width="16" height="16" aria-hidden="true"><use href="#i-check" /></svg><span>Mis cursos están entre los más recomendados de Hotmart</span></li>
+              <li><svg width="16" height="16" aria-hidden="true"><use href="#i-check" /></svg><span>Y tienen los mayores índices de satisfacción de Brasil</span></li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- A segunda caixa de preço: curta, só o fecho, depois da bio, como
+             no doc — é para ela que aponta o "toque no botão abaixo" da
+             escolha. A lista do que vem já ficou na dobra da oferta. -->
+        <div class="tp-offer__box v2-final">
+          <div class="tp-offer__price">
+            <!-- O mesmo mockup da oferta, para o fecho mostrar de novo tudo o
+                 que vem antes do preço. O alt é curto: a descrição longa já
+                 está na primeira caixa. -->
+            <div class="v2-oferta__mock">
+              <img src="assets/img/mockup-oferta.webp"
+                   alt="El Manual Ilustrado para el Alivio del Dolor rodeado por los cinco bonos."
+                   width="1100" height="661" loading="lazy" decoding="async" />
+            </div>
+
+            <p class="tp-offer__from v2-preco__de">De <s>R$ 297,00</s> por:</p>
+            <p class="v2-preco__parcela">12 cuotas de 6,53<span class="v2-preco__ast">*</span></p>
+            <p class="v2-preco__vista">o 67,00 de contado</p>
+
+            <div class="tp-cta"><a class="btn btn--tp" href="#" data-checkout> <span>Quiero el manual ahora <span class="tp-arrow" aria-hidden="true">&rarr;</span></span> </a></div>
+
+            <p class="tp-offer__note">¡Asegúralo ahora mismo y recíbelo al instante en tu correo electrónico!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 10 ==================== -->
+
+    <!-- ==================== DOBRA 11 — FAQ ==================== -->
+    <section class="tp-section tp-section--ivory" aria-labelledby="faq-title">
+      <div class="tp-container">
+        <div class="tp-head">
+          <span class="tp-eyebrow">Resuelve tus dudas</span>
+          <h2 class="tp-title" id="faq-title">Preguntas frecuentes</h2>
+        </div>
+
+        <div class="tp-faq">
+
+          <details class="tp-faq__item">
+            <summary class="tp-faq__q">¿Necesito experiencia para usar el manual? <span class="tp-faq__icon"><svg width="14" height="14" aria-hidden="true"><use href="#i-plus" /></svg></span></summary>
+            <div class="tp-faq__a">
+              <p>No. Se hizo tanto para quien ya atiende como para quien está empezando ahora, con lenguaje directo y sin términos técnicos complicados.</p>
+            </div>
+          </details>
+
+          <details class="tp-faq__item">
+            <summary class="tp-faq__q">¿Funciona en el celular? <span class="tp-faq__icon"><svg width="14" height="14" aria-hidden="true"><use href="#i-plus" /></svg></span></summary>
+            <div class="tp-faq__a">
+              <p>Sí. Puedes acceder directo desde el celular, sin instalar nada.</p>
+            </div>
+          </details>
+
+          <details class="tp-faq__item">
+            <summary class="tp-faq__q">¿Necesito algún equipo? <span class="tp-faq__icon"><svg width="14" height="14" aria-hidden="true"><use href="#i-plus" /></svg></span></summary>
+            <div class="tp-faq__a">
+              <p>No. Todas las maniobras usan solo tus manos.</p>
+            </div>
+          </details>
+
+          <details class="tp-faq__item">
+            <summary class="tp-faq__q">¿Puedo usarlo en mi trabajo profesional, con clientas? <span class="tp-faq__icon"><svg width="14" height="14" aria-hidden="true"><use href="#i-plus" /></svg></span></summary>
+            <div class="tp-faq__a">
+              <p>Claro que sí. El manual se hizo principalmente para eso.</p>
+            </div>
+          </details>
+
+          <details class="tp-faq__item">
+            <summary class="tp-faq__q">¿Sirve para casos como hernia, embarazo o escoliosis? <span class="tp-faq__icon"><svg width="14" height="14" aria-hidden="true"><use href="#i-plus" /></svg></span></summary>
+            <div class="tp-faq__a">
+              <p>Son situaciones que piden más cuidado, y el Manual muestra justamente eso: las alertas y los cuidados específicos de cada región, incluido cuándo conviene tener más atención. Te da más claridad en esos casos, pero no reemplaza una evaluación médica o fisioterapéutica cuando sea necesaria.</p>
+            </div>
+          </details>
+
+          <details class="tp-faq__item">
+            <summary class="tp-faq__q">¿Y si no estoy segura de si ese dolor es solo tensión o algo que necesita una evaluación profesional? <span class="tp-faq__icon"><svg width="14" height="14" aria-hidden="true"><use href="#i-plus" /></svg></span></summary>
+            <div class="tp-faq__a">
+              <p>Es una de las dudas que el manual resuelve de forma directa. Cada región tiene una sección de alertas con las señales que indican que ese dolor puede no ser solo tensión muscular, para que sepas cuándo seguir con el masaje y cuándo es mejor derivar a un profesional de la salud.</p>
+            </div>
+          </details>
+
+          <details class="tp-faq__item">
+            <summary class="tp-faq__q">¿El manual me ayuda a saber cuándo NO debo dar masaje? <span class="tp-faq__icon"><svg width="14" height="14" aria-hidden="true"><use href="#i-plus" /></svg></span></summary>
+            <div class="tp-faq__a">
+              <p>Sí. En cada región del cuerpo, además de mostrar dónde y cómo tocar, el Manual trae las señales de atención: inflamación, sospecha de fractura, señales de trombosis y otras situaciones en las que no se debe dar masaje directamente ahí.</p>
+            </div>
+          </details>
+
+        </div>
+      </div>
+    </section>
+    <!-- ==================== /DOBRA 11 ==================== -->
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__top">
+        <p class="footer__copy">Copyright &copy; ANA MARTHA CURSOS ONLINE LTDA.<br /> Todos los derechos reservados.</p>
+        <div class="footer__links"><span class="footer__links-row"> <!-- ATENÇÃO: os mesmos dois caminhos da lt-v1, que respondem 404
+                 lá e aqui. Falta publicar as páginas legais. --> <a href="/tap09/legal/politica-de-privacidade.html" target="_blank" rel="noopener noreferrer">Política de privacidad</a> <span aria-hidden="true">|</span> <a href="/tap09/legal/termos-de-uso.html" target="_blank" rel="noopener noreferrer">Términos de uso</a> </span> <span class="footer__company">ANA MARTHA CURSOS ONLINE LTDA &middot; CNPJ 41.219.310/0001-89</span></div>
+      </div>
+
+      <div class="footer__legal"><span class="footer__legal-label">Aviso legal:</span> Los resultados pueden variar de una persona a otra. Este método tiene carácter educativo y de desarrollo personal, y no garantiza ganancias económicas inmediatas ni específicas. El éxito depende de la aplicación práctica de cada participante. Este sitio no está afiliado, respaldado ni patrocinado por Google ni por Meta.</div>
+    </div>
+  </footer>
+  <!-- ==================== /FOOTER ==================== -->
+
+</body>
+</html>
