@@ -40,7 +40,8 @@
      É o único lugar da página que precisa ser editado: todos os botões de
      download apontam para cá através do [data-ebook].
      ======================================================================= */
-  var EBOOK_URL = "https://drive.google.com/uc?export=download&id=1tvyXfg8eI1SjpV44UrTxwqhfmevqdgGu";
+  /* ESPAÑOL (/esp/): o PDF é o Manual em espanhol (9,7 MB, desde 04/11/2026). */
+  var EBOOK_URL = "https://drive.google.com/uc?export=download&id=1Bni9m9hAllR--bI1xXODwvFRMKzlwePo";
 
   function initDownload() {
     var botoes = [].slice.call(document.querySelectorAll("[data-ebook]"));
