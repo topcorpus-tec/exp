@@ -1070,3 +1070,8 @@ strong { font-weight: 800; }
   opacity: .85;
 }
 .v4-rodape__aviso strong { color: var(--creme); }
+
+/* Ana Maria e Ruthlea, refeitas em HTML na versão em espanhol (07/11/2026):
+   a inicial no círculo verde-azulado do print e a foto do perfil. */
+.v4-coment__av--teal { background: #0397A5; font-size: 1rem; }
+.v4-coment__av--foto { padding: 0; object-fit: cover; background: none; }
