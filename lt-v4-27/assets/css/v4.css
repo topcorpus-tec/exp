@@ -738,6 +738,9 @@ strong { font-weight: 800; }
   .v4-bonus__card:nth-child(4) { grid-column: 2 / span 2; }
 }
 
+/* Botão logo abaixo dos cards de bônus (desde 07/11/2026). */
+.v4-bonus__cta { margin-top: 36px; }
+
 /* ==================== DOBRAS 7 E 8 — A HISTÓRIA ==================== */
 
 .v4-historia .v4-titulo { text-align: left; }
