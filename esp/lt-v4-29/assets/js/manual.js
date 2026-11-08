@@ -32,9 +32,15 @@
      &checkoutMode=10: pay.hotmart.com/W95360090D?off=9z1ywsjs
      &checkoutMode=10&xcod=0&external_code=0 (conferido em 29/10/2026).
      ======================================================================= */
-  /* ESPAÑOL (/esp/): a compra está desligada nesta cópia até existirem
-     as ofertas em espanhol. Vazio deixa os botões de compra inertes. */
-  var CHECKOUT_URL = "";
+  /* ESPAÑOL (/esp/): desde 07/11/2026 o botão da oferta passa pelo
+     funil do SF em dólar de cada ticket — 9,90 no sfunnel 198, 19,90 no
+     197 e 29,90 no 199. A V4v1 e a V4v2 do mesmo preço usam o mesmo.
+     Este é o de US$29,90: redireciona para pay.hotmart.com/K108329146K
+     ?off=aioiiv24&checkoutMode=10 (conferido em 07/11/2026).
+
+     O sfunnel 193 é o link da campanha da Meta e leva a esta página na
+     versão de 9,90 (exp-fb/esp/lt-v4-9/); não é destino de botão. */
+  var CHECKOUT_URL = "https://sf.topcorpus.com.br/sf/?sfunnel=199";
 
   /* =======================================================================
      DESTINO DO CTA DA OFERTA
