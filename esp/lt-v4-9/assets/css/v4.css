@@ -909,6 +909,30 @@ strong { font-weight: 800; }
 }
 .v4-oferta__entrega svg { flex: none; color: var(--azul); }
 
+/* Pagamento em moeda local, com as bandeiras dos países anunciados
+   (desde 10/11/2026, no lugar do aviso de entrega por e-mail). */
+.v4-oferta__moeda { margin: 20px 0 18px; text-align: center; }
+.v4-oferta__moeda-txt {
+  margin: 0 0 10px;
+  font-size: .9375rem;
+  font-weight: 700;
+  color: var(--tinta-suave);
+}
+.v4-oferta__bandeiras {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 0;
+}
+.v4-oferta__bandeiras img {
+  display: block;
+  width: 28px;
+  height: 21px;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(16, 32, 56, .12), 0 2px 6px rgba(16, 32, 56, .12);
+}
+
 .v4-btn--compra { width: 100%; display: flex; min-height: 64px; font-size: 1.0625rem; }
 
 @media (min-width: 600px) {
