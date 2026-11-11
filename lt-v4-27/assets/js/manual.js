@@ -32,7 +32,12 @@
      &checkoutMode=10: pay.hotmart.com/W95360090D?off=9z1ywsjs
      &checkoutMode=10&xcod=0&external_code=0 (conferido em 29/10/2026).
      ======================================================================= */
-  var CHECKOUT_URL = "https://sf.topcorpus.com.br/sf/?sfunnel=119";
+  /* Desde 11/11/2026 a lt-v4-27 tem funil próprio, o sfunnel 207, e as
+     vendas dela deixam de cair junto com as da lt-v4-v2 (que segue no
+     119); a lt-v4-verde-vsl está no 205. O 207 redireciona para a mesma
+     oferta de R$27: pay.hotmart.com/W95360090D?off=9z1ywsjs
+     &checkoutMode=10&xcod=0&external_code=0 (conferido em 11/11/2026). */
+  var CHECKOUT_URL = "https://sf.topcorpus.com.br/sf/?sfunnel=207";
 
   /* =======================================================================
      DESTINO DO CTA DA OFERTA
