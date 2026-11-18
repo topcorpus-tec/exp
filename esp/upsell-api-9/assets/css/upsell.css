@@ -1209,3 +1209,30 @@ h1, h2, h3, h4, h5, h6,
   font-size: .85rem;
   color: #FFFFFF;
 }
+
+/* ESPAÑOL — pago en moneda local (18/11/2026): o texto e as bandeiras
+   dos países anunciados, no lugar do "o el equivalente en tu moneda
+   local" que ficava embaixo do preço. */
+.dw-moeda { margin: 14px 0 6px; text-align: center; }
+.dw-moeda__txt {
+  margin: 0 0 10px;
+  font-size: .9375rem;
+  font-weight: 700;
+  color: var(--dw-verde-600);
+}
+.dw-moeda__bandeiras {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.dw-moeda__bandeiras img {
+  display: block;
+  width: 28px;
+  height: 21px;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(16, 32, 56, .12), 0 2px 6px rgba(16, 32, 56, .12);
+}
