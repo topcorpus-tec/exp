@@ -678,7 +678,10 @@ img.v2-yt__av { object-fit: cover; background: none; }
 }
 .v2-preco__parcela {
   margin: 0;
-  font-size: clamp(2.4rem, 6vw, 3.3rem);
+  /* Espanhol em dólar: "2 cuotas de US$ 10.45" é bem mais longo que o
+     "9 cuotas de 3,39" do original e não quebra linha, então o tamanho
+     acompanha a largura da tela para caber em 360px. */
+  font-size: clamp(1.4rem, 6.6vw, 3.3rem);
   font-weight: var(--fw-extrabold);
   line-height: 1.05;
   letter-spacing: -.03em;
