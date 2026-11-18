@@ -56,9 +56,11 @@
      destino da compra: a identidade do deploy (key e GTM) segue vindo do
      env-config.js, sem olhar o endereço.
      ======================================================================= */
-  /* ESPAÑOL (/esp/): a compra está desligada nesta cópia até existirem
-     as ofertas em espanhol. Vazio deixa os botões de compra inertes. */
-  var CHECKOUT_URL = "";
+  /* ESPAÑOL (/esp/lt-v1-19/), US$19.90: o botão vai para o sfunnel 209, só
+     desta página, para separar as vendas dela. Redireciona para
+     pay.hotmart.com/K108329146K?off=jy8ogydh&checkoutMode=10, a mesma
+     oferta de US$19,90 da v4 (conferido em 18/11/2026). */
+  var CHECKOUT_URL = "https://sf.topcorpus.com.br/sf/?sfunnel=209";
 
   /* =======================================================================
      DESTINO DO CTA DA OFERTA
