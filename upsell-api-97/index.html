@@ -52,7 +52,15 @@
   <link rel="preload" as="font" type="font/woff2" href="https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-700.woff2" crossorigin />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&amp;display=swap" />
+  <!-- Poppins só em detalhes pequenos: carrega sem travar a renderização
+       (vira stylesheet quando chega; até lá o texto usa a fonte de apoio). -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400&amp;display=swap" /></noscript>
+  <!-- O fundo do topo vem do CSS (background-image), que o navegador só
+       descobre depois de ler a folha. O preload pede a imagem certa de cada
+       tela já no começo do HTML. -->
+  <link rel="preload" as="image" href="assets/img/hero-fundo-movel.webp" media="(max-width: 767px)" fetchpriority="high" />
+  <link rel="preload" as="image" href="assets/img/hero-fundo.webp" media="(min-width: 768px)" fetchpriority="high" />
 
   <!-- ==================== dataLayer init ANTES do env-config ==================== -->
   <script>window.dataLayer = window.dataLayer || [];</script>

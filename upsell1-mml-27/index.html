@@ -44,6 +44,10 @@
 
   <!-- ==================== Fontes compartilhadas (CDN topcorpus) ==================== -->
   <link rel="preconnect" href="https://pcm.topcorpus.com.br" crossorigin />
+  <!-- VSL do VTurb: script e player (scripts), vídeo (cdn) e capa (images). -->
+  <link rel="preconnect" href="https://scripts.converteai.net" />
+  <link rel="preconnect" href="https://cdn.converteai.net" crossorigin />
+  <link rel="preconnect" href="https://images.converteai.net" />
   <link rel="dns-prefetch" href="https://pcm.topcorpus.com.br" />
   <link rel="preload" as="font" type="font/woff2" href="https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-400.woff2" crossorigin />
   <link rel="preload" as="font" type="font/woff2" href="https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-600.woff2" crossorigin />
@@ -108,7 +112,7 @@
              entrega: o script do teste sorteia a variante e monta o player
              dentro do <vturb-smartplayer>, que ele mesmo limita a 400px no
              vídeo vertical. A nossa folha só centraliza e arredonda. -->
-        <div class="mml-vsl" data-reveal>
+        <div class="mml-vsl">
           <vturb-smartplayer class="mml-vsl__caixa" id="ab-6abfd0a22500a7595842a562" style="display: block; margin: 0 auto; width: 100%; "></vturb-smartplayer>
           <script type="text/javascript">
             var s = document.createElement("script");

@@ -44,6 +44,10 @@
 
   <!-- ==================== Fontes compartilhadas (CDN topcorpus) ==================== -->
   <link rel="preconnect" href="https://pcm.topcorpus.com.br" crossorigin />
+  <!-- VSL do VTurb: script e player (scripts), vídeo (cdn) e capa (images). -->
+  <link rel="preconnect" href="https://scripts.converteai.net" />
+  <link rel="preconnect" href="https://cdn.converteai.net" crossorigin />
+  <link rel="preconnect" href="https://images.converteai.net" />
   <link rel="dns-prefetch" href="https://pcm.topcorpus.com.br" />
   <link rel="preload" as="font" type="font/woff2" href="https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-400.woff2" crossorigin />
   <link rel="preload" as="font" type="font/woff2" href="https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-600.woff2" crossorigin />
@@ -107,7 +111,7 @@
              atual para o player. A caixa e a proporção 9/16 são do inline
              style deles — a nossa folha não mexe nisso, só centraliza e
              arredonda, senão as duas brigariam pela mesma medida. -->
-        <div class="mml-vsl" data-reveal>
+        <div class="mml-vsl">
           <script type="text/javascript">
             var s = document.createElement("script");
             s.src = "https://scripts.converteai.net/lib/js/smartplayer-wc/v4/sdk.js", s.async = !0, document.head.appendChild(s);
