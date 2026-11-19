@@ -30,6 +30,13 @@
 /lt-v4-*
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
 
+# A v5 (lt-v5) nasceu em 18/11/2026 da Página de Vendas #5, a partir da
+# v4 verde. Fora dos buscadores pelo mesmo motivo.
+/lt-v5
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+/lt-v5/*
+  X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
+
 # As cópias em espanhol de todo o funil (e o índice delas, em português)
 # moram em /esp/ desde 03/11/2026. Fora dos buscadores enquanto a compra
 # estiver desligada e as imagens forem as da versão em português.
