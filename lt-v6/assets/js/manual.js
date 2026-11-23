@@ -161,21 +161,29 @@
     return y;
   }
 
-  /* lt-v6: a caixa agora são os dois pacotes. Se cabem inteiros na tela
-     (desktop), a rolagem para com o pé deles no pé da tela, como na v5. Se
-     não cabem (no celular, empilhados, nunca cabem), para no topo da dobra:
-     alinhar pelo pé pularia o Básico e o título. */
+  /* Os botões que trazem para a oferta levam ao Premium, o melhor pacote
+     (pedido da Fran e do Emilio, 23/11/2026):
+
+       - celular (cards um embaixo do outro): a rolagem para no começo do
+         card do Premium, com o selo "Recomendado" no alto da tela;
+       - desktop (cards lado a lado): para com o pé do card do Premium no
+         pé da tela, para o preço e o botão dele aparecerem, com o Básico
+         ao lado. Se a dobra inteira couber, para no topo dela. */
   function alvoDaOferta() {
     var dobra = document.getElementById("oferta");
-    var caixa = document.querySelector("#oferta .v5p-pacotes");
-    if (!dobra || !caixa) return null;
+    var premium = document.querySelector("#oferta .v5p-card--premium");
+    if (!dobra || !premium) return null;
 
-    var folga = 24;
+    var topoPremium = topoNaPagina(premium);
+    var empilhado = window.matchMedia && matchMedia("(max-width: 899px)").matches;
+    if (empilhado) return Math.max(0, topoPremium - 32);
+
+    var folga = 32;
     var topoDobra = topoNaPagina(dobra);
-    var peCaixa = topoNaPagina(caixa) + caixa.offsetHeight;
-    if (peCaixa + folga - topoDobra > window.innerHeight) return topoDobra;
-    return Math.max(topoDobra, peCaixa + folga - window.innerHeight);
+    var pePremium = topoPremium + premium.offsetHeight;
+    return Math.max(topoDobra, pePremium + folga - window.innerHeight);
   }
+
 
   function initAncoras() {
     [].slice.call(document.querySelectorAll('a[href="#oferta"]')).forEach(function (a) {
