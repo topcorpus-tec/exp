@@ -50,6 +50,10 @@
   --salvia:       #13874A;   /* verde do "ok": 4,8:1 no branco   */
   --salvia-clara: #E1F4E9;
 
+  /* O azul das dobras de destaque (hero, história e depoimentos). */
+  --azul-fundo: linear-gradient(180deg, #1D52BD 0%, #143A8C 100%);
+  --azul-texto: #DCE6F8;     /* texto corrido no azul: 5:1      */
+
   --serifa: var(--sans);
   --raio:    20px;
   --raio-sm: 14px;
@@ -178,14 +182,55 @@ body { line-height: 1.65; }
 
 
 /* =========================================================================
-   DOBRA 1 — fundo limpo, com uma luz azul bem leve atrás do mockup
+   DOBRA 1 — FUNDO AZUL (pedido de 23/11/2026)
+
+   Degradê do azul da capa para um azul mais fundo, com uma luz clara
+   atrás do mockup. Sobre ele: título branco, destaque e promessa em
+   amarelo (texto grande: 3,9:1 no azul do topo, acima dos 3:1 que o
+   WCAG pede para texto grande), o resto em azul bem claro (5:1) e os ✓
+   em branco.
    ========================================================================= */
 .v4-hero {
   padding-top: clamp(32px, 5vw, 56px);
   background:
-    radial-gradient(55% 40% at 50% 58%, rgba(30, 91, 204, .09) 0%, rgba(30, 91, 204, 0) 70%),
-    var(--creme);
+    radial-gradient(55% 42% at 50% 60%, rgba(120, 170, 255, .35) 0%, rgba(120, 170, 255, 0) 70%),
+    var(--azul-fundo);
+  color: var(--branco);
 }
+.v4-hero .v4-hero__titulo { color: var(--branco); }
+.v4-hero .v4-hero__titulo em { color: var(--mata-realce); }
+.v4-hero .v4-hero__promessa { color: var(--mata-realce); }
+.v4-hero .v4-hero__promessa span { background: none; padding: 0; }
+.v4-hero .v4-hero__sub,
+.v4-hero .v4-hero__resto { color: #DCE6F8; }
+.v4-hero .v4-oks li { color: var(--branco); }
+.v5-hero__mock img { filter: drop-shadow(0 22px 34px rgba(5, 18, 48, .35)); }
+
+
+/* =========================================================================
+   SEÇÕES AZUIS — dobras 7 e 8 (a história) e 10 (depoimentos)
+
+   O mesmo azul da hero (pedido de 23/11/2026). Títulos em branco, com o
+   destaque em amarelo; texto corrido em azul bem claro, negrito em
+   branco. O que mora em cartão branco (a fala do pai, a assinatura da
+   Ana, os prints dos depoimentos) volta para o azul-marinho, para não
+   herdar o texto claro da seção.
+   ========================================================================= */
+.v6-sec--azul { background: var(--azul-fundo); color: var(--azul-texto); }
+.v6-sec--azul .v4-titulo { color: var(--branco); }
+.v6-sec--azul .v4-titulo em,
+.v6-sec--azul .v4-poder { color: var(--mata-realce); }
+.v6-sec--azul strong { color: var(--branco); }
+
+.v6-sec--azul .v4-depo__titulo { color: var(--branco); }
+.v6-sec--azul .v4-depo__titulo::before { background: var(--mata-realce); }
+
+.v6-sec--azul .v4-citacao,
+.v6-sec--azul .v4-assina,
+.v6-sec--azul .v4-depo__print { color: var(--tinta); border-color: transparent; box-shadow: 0 14px 34px rgba(5, 18, 48, .28); }
+.v6-sec--azul .v4-citacao strong,
+.v6-sec--azul .v4-assina strong,
+.v6-sec--azul .v4-depo__print strong { color: var(--tinta); }
 
 
 /* =========================================================================
