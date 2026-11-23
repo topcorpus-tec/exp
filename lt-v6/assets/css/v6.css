@@ -43,17 +43,18 @@
   --cta-escuro:   #0B6A39;
   --cta-texto:    #FFFFFF;
 
-  --mata:         #1D315B;   /* dobras escuras: o mesmo azul     */
-  --mata-texto:   #C9D5EC;
-  --mata-realce:  #FFC93C;
+  --mata:         #0F7F45;   /* dobras escuras: o mesmo verde    */
+  --mata-texto:   #FFFFFF;   /* 5:1 no verde                     */
+  --mata-realce:  #FFD666;   /* 3,6:1: só em texto grande        */
 
   --salvia:       #13874A;   /* verde do "ok": 4,8:1 no branco   */
   --salvia-clara: #E1F4E9;
 
-  /* O azul de todos os fundos azuis (hero, história, depoimentos, a
-     dobra 5 e o rodapé): #1D315B, liso, escolhido em 23/11/2026. */
-  --azul-fundo: #1D315B;
-  --azul-texto: #DCE6F8;     /* texto corrido no azul: 10:1     */
+  /* O fundo das dobras de cor (hero, história, depoimentos, a dobra 5 e
+     o rodapé). Foi azul (#1D315B) e virou o verde dos botões, liso
+     (23/11/2026). Os nomes "azul" ficaram dessa época. */
+  --azul-fundo: #0F7F45;
+  --azul-texto: #FFFFFF;     /* texto corrido no verde: 5:1     */
 
   --serifa: var(--sans);
   --raio:    20px;
@@ -185,9 +186,10 @@ body { line-height: 1.65; }
 /* =========================================================================
    DOBRA 1 — FUNDO AZUL (pedido de 23/11/2026)
 
-   O azul liso (--azul-fundo). Sobre ele: título branco (12,8:1),
-   destaque e promessa em amarelo (8,3:1), o resto em azul bem claro
-   (10:1) e os ✓ com texto branco.
+   O fundo liso (--azul-fundo, hoje o verde dos botões). Sobre ele:
+   título e texto brancos (5:1), destaque e promessa em amarelo-claro
+   (3,6:1, só em texto grande, onde o WCAG pede 3:1) e os ✓ brancos com
+   o visto verde, porque o círculo verde sumiria no fundo.
    ========================================================================= */
 .v4-hero {
   padding-top: clamp(32px, 5vw, 56px);
@@ -201,6 +203,11 @@ body { line-height: 1.65; }
 .v4-hero .v4-hero__sub,
 .v4-hero .v4-hero__resto { color: #DCE6F8; }
 .v4-hero .v4-oks li { color: var(--branco); }
+.v4-hero .v4-ok { background: var(--branco); color: var(--cta); }
+
+/* O aviso do rodapé tinha opacidade .85; no verde isso baixa o contraste
+   de 5:1 para menos de 4,5:1. */
+.v4-rodape__aviso { opacity: 1; }
 .v5-hero__mock img { filter: drop-shadow(0 22px 34px rgba(5, 18, 48, .35)); }
 
 
