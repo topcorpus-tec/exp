@@ -786,3 +786,59 @@ body { line-height: 1.65; }
 .v6-sec--escura .v4-ana-maos img {
   filter: drop-shadow(0 18px 30px rgba(8, 22, 16, .35));
 }
+
+
+/* =========================================================================
+   DOBRA 1 — brilho animado atrás do mockup (pedido de 23/11/2026)
+
+   Duas camadas atrás da imagem (o isolation as mantém atrás dela e na
+   frente do fundo verde):
+     ::before  uma luz dourado-clara, redonda, que respira devagar (7 s);
+     ::after   raios de luz muito sutis (gradiente cônico) girando bem
+               devagar (60 s), apagados nas bordas por uma máscara
+               redonda.
+   A hero já tem overflow: hidden, então nada vaza. Parado para quem pede
+   menos movimento.
+   ========================================================================= */
+.v4-hero__mock { position: relative; isolation: isolate; }
+.v4-hero__mock::before,
+.v4-hero__mock::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 50%;
+  pointer-events: none;
+}
+.v4-hero__mock::before {
+  width: 128%;
+  aspect-ratio: 1;
+  translate: -50% -52%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side,
+    rgba(255, 236, 180, .42) 0%,
+    rgba(255, 236, 180, .22) 40%,
+    rgba(255, 236, 180, .07) 65%,
+    rgba(255, 236, 180, 0) 100%);
+  animation: v6-luz 7s ease-in-out infinite;
+}
+.v4-hero__mock::after {
+  width: 165%;
+  aspect-ratio: 1;
+  translate: -50% -52%;
+  background: repeating-conic-gradient(from 0deg,
+    rgba(255, 240, 200, .15) 0deg 5deg,
+    rgba(255, 240, 200, 0) 5deg 20deg);
+  -webkit-mask-image: radial-gradient(closest-side, #000 20%, rgba(0, 0, 0, .6) 48%, transparent 78%);
+          mask-image: radial-gradient(closest-side, #000 20%, rgba(0, 0, 0, .6) 48%, transparent 78%);
+  animation: v6-raios 60s linear infinite;
+}
+@keyframes v6-luz {
+  0%, 100% { opacity: .75; scale: .94; }
+  50%      { opacity: 1;   scale: 1.04; }
+}
+@keyframes v6-raios { to { rotate: 360deg; } }
+@media (prefers-reduced-motion: reduce) {
+  .v4-hero__mock::before,
+  .v4-hero__mock::after { animation: none; }
+}
