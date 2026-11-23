@@ -37,12 +37,12 @@
 /lt-v5/*
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
 
-# A lt-v5-v2 nasceu em 23/11/2026 como cópia da lt-v5, com a oferta em
-# pacotes (Básico, Premium e o popup do Premium). Fora dos buscadores pelo
-# mesmo motivo. A regra da /lt-v5 acima não a cobre: /lt-v5/* exige a barra.
-/lt-v5-v2
+# A v6 (lt-v6) nasceu em 23/11/2026 como cópia da lt-v5, com a oferta em
+# pacotes (Básico, Premium e o popup do Premium). Nasceu como lt-v5-v2 e
+# foi renomeada no mesmo dia. Fora dos buscadores pelo mesmo motivo.
+/lt-v6
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
-/lt-v5-v2/*
+/lt-v6/*
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
 
 # As cópias em espanhol de todo o funil (e o índice delas, em português)

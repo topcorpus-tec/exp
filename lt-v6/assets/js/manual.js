@@ -1,7 +1,7 @@
 /* =========================================================================
-   Manual Ilustrado — manual.js (lt-v5-v2)
+   Manual Ilustrado — manual.js (lt-v6)
 
-   Veio da lt-v4-v2 (a mesma da lt-v4-27) pela lt-v5. O que a v5-v2 mudou:
+   Veio da lt-v4-v2 (a mesma da lt-v4-27) pela lt-v5. O que a v6 mudou:
    um destino de compra por pacote (CHECKOUTS), o popup do Premium por
    R$ 37 (initPopup) e a parada das âncoras nos pacotes.
 
@@ -36,7 +36,7 @@
      &checkoutMode=10: pay.hotmart.com/W95360090D?off=9z1ywsjs
      &checkoutMode=10&xcod=0&external_code=0 (conferido em 29/10/2026).
      ======================================================================= */
-  /* lt-v5-v2 (23/11/2026): a oferta virou pacotes, e cada botão de compra
+  /* lt-v6 (23/11/2026): a oferta virou pacotes, e cada botão de compra
      diz o seu pacote em data-checkout="<chave>". As três chaves:
 
        basico         Pacote Básico, R$ 27 (botão do Básico e o "Não" do popup)
@@ -161,7 +161,7 @@
     return y;
   }
 
-  /* lt-v5-v2: a caixa agora são os dois pacotes. Se cabem inteiros na tela
+  /* lt-v6: a caixa agora são os dois pacotes. Se cabem inteiros na tela
      (desktop), a rolagem para com o pé deles no pé da tela, como na v5. Se
      não cabem (no celular, empilhados, nunca cabem), para no topo da dobra:
      alinhar pelo pé pularia o Básico e o título. */
