@@ -7,19 +7,20 @@
    nova, só Manrope, e depois "tudo mais profissional".
 
      - letra: Manrope em tudo, títulos em 800 com o espaço entre letras
-       apertado. O destaque dos títulos é só a cor (azul), sem itálico e
+       apertado. O destaque dos títulos é só a cor (verde), sem itálico e
        sem enfeite;
-     - cor: as da capa do Manual. Azul-marinho no texto e nas dobras
-       escuras, azul nos destaques e nos preços, amarelo nos acentos. O
-       verde é a cor de agir e de "ok": os botões (pedido de 23/11/2026),
-       os ✓, o Premium e a economia. Nada de vermelho (regra que vem da v4: numa página sobre
-       dor, o vermelho lembra a própria dor);
+     - cor: tudo na família verde da v4/v5. Verde quase preto no texto,
+       verde-mata liso nas dobras escuras, verde nos destaques e nos
+       preços, verde vivo nos botões, mel nos acentos. Nenhum azul (a v6
+       passou por azul e voltou ao verde em 23/11/2026); o único azul que
+       sobra é o das imagens do produto (logo e capa do Manual). Nada de
+       vermelho (regra que vem da v4: numa página sobre dor, o vermelho
+       lembra a própria dor);
      - forma: botões em pílula, firmes, sem pulsar; cartões brancos com
        borda fina e sombra baixa; uma faixa com o logo do Manual no topo.
 
    Quase tudo no v4.css lê as variáveis do :root, então a troca de cor é
-   feita aqui, pelos mesmos nomes. Os nomes ficaram da v4: --verde agora é
-   azul e --mata é o azul-marinho. Contraste: todo texto sobre o seu fundo
+   feita aqui, pelos mesmos nomes da v4. Contraste: todo texto sobre o seu fundo
    passa de 4,5:1 (WCAG AA).
 
    Partes: tokens · topo · títulos · botões · blocos · dobra 1 · dobra 2 ·
@@ -27,17 +28,20 @@
    ========================================================================= */
 
 :root {
-  --creme:        #F7F9FC;   /* fundo da página                  */
-  --areia:        #EEF2F8;   /* fundo das dobras alternadas      */
-  --areia-forte:  #DCE4F0;
+  /* Paleta toda na família verde da v4/v5 (23/11/2026: "precisa ser
+     verde"; até então o texto, os destaques e os fundos claros eram
+     azulados). */
+  --creme:        #FAF8F2;   /* fundo da página                  */
+  --areia:        #EFEEE4;   /* fundo das dobras alternadas      */
+  --areia-forte:  #DEDDCF;
   --branco:       #FFFFFF;
-  --linha:        #E3E9F2;   /* bordas finas dos cartões         */
+  --linha:        #E4E2D6;   /* bordas finas dos cartões         */
 
-  --tinta:        #0F1F40;   /* azul-marinho: 16:1 no fundo      */
-  --tinta-suave:  #4B5873;   /* 7:1 no fundo                     */
+  --tinta:        #1F2A24;   /* verde quase preto: 14:1 no fundo */
+  --tinta-suave:  #4F5C54;   /* 6,6:1 no fundo                   */
 
-  --verde:        #1E5BCC;   /* o azul dos destaques: 6:1 no branco */
-  --verde-claro:  #E4ECFA;
+  --verde:        #2C6A52;   /* verde dos destaques: 6:1 no creme */
+  --verde-claro:  #DDEBE2;
   --mel:          #FFC23A;
   --cta:          #0F7F45;   /* botões verdes, texto branco: 5:1 */
   --cta-escuro:   #0B6A39;
@@ -50,17 +54,15 @@
   --salvia:       #13874A;   /* verde do "ok": 4,8:1 no branco   */
   --salvia-clara: #E1F4E9;
 
-  /* O fundo das dobras de cor (hero, história, depoimentos, a dobra 5 e
-     o rodapé): o verde-mata da v4 verde e da v5 (#1E3B32), liso. Em
-     23/11/2026 foi azul (#1D315B) e depois o verde dos botões, e voltou
-     para este. Os nomes "azul" ficaram dessa época. */
-  --azul-fundo: #1E3B32;
-  --azul-texto: #D3E0D8;     /* texto corrido no verde-mata: 8,9:1 */
+  /* O fundo das dobras escuras (hero, história, depoimentos, a dobra 5
+     e o rodapé): o verde-mata da v4 verde e da v5 (#1E3B32), liso. */
+  --fundo-escuro:       #1E3B32;
+  --fundo-escuro-texto: #D3E0D8;   /* texto corrido nele: 8,9:1 */
 
   --serifa: var(--sans);
   --raio:    20px;
   --raio-sm: 14px;
-  --sombra:  0 1px 2px rgba(15, 31, 64, .05), 0 10px 28px rgba(15, 31, 64, .08);
+  --sombra:  0 1px 2px rgba(31, 42, 36, .05), 0 10px 28px rgba(31, 42, 36, .08);
 }
 
 body { line-height: 1.65; }
@@ -180,21 +182,22 @@ body { line-height: 1.65; }
 .v4-faq__item { box-shadow: none; }
 .v4-faq__item[open] { box-shadow: var(--sombra); }
 
-/* Os títulos dos depoimentos: o fio amarelo vira azul, mais sóbrio. */
+/* Os títulos dos depoimentos: o fio amarelo vira verde, mais sóbrio
+   (nas dobras escuras ele volta ao mel, mais abaixo). */
 .v4-depo__titulo::before { background: var(--verde); }
 
 
 /* =========================================================================
-   DOBRA 1 — FUNDO AZUL (pedido de 23/11/2026)
+   DOBRA 1 — FUNDO ESCURO (pedido de 23/11/2026)
 
-   O fundo liso (--azul-fundo, o verde-mata). Sobre ele: título branco
+   O fundo liso (--fundo-escuro, o verde-mata). Sobre ele: título branco
    (12:1), destaque e promessa em mel (7,6:1), o resto em verde bem
    claro (8,9:1) e os ✓ brancos com o visto verde, que se destacam mais
    no escuro que o círculo verde.
    ========================================================================= */
 .v4-hero {
   padding-top: clamp(32px, 5vw, 56px);
-  background: var(--azul-fundo);
+  background: var(--fundo-escuro);
   color: var(--branco);
 }
 .v4-hero .v4-hero__titulo { color: var(--branco); }
@@ -202,38 +205,38 @@ body { line-height: 1.65; }
 .v4-hero .v4-hero__promessa { color: var(--mata-realce); }
 .v4-hero .v4-hero__promessa span { background: none; padding: 0; }
 .v4-hero .v4-hero__sub,
-.v4-hero .v4-hero__resto { color: #DCE6F8; }
+.v4-hero .v4-hero__resto { color: var(--mata-texto); }
 .v4-hero .v4-oks li { color: var(--branco); }
 .v4-hero .v4-ok { background: var(--branco); color: var(--cta); }
 
 
-.v5-hero__mock img { filter: drop-shadow(0 22px 34px rgba(5, 18, 48, .35)); }
+.v5-hero__mock img { filter: drop-shadow(0 22px 34px rgba(8, 22, 16, .35)); }
 
 
 /* =========================================================================
-   SEÇÕES AZUIS — dobras 7 e 8 (a história) e 10 (depoimentos)
+   SEÇÕES ESCURAS — dobras 7 e 8 (a história) e 10 (depoimentos)
 
-   O mesmo azul da hero (pedido de 23/11/2026). Títulos em branco, com o
-   destaque em amarelo; texto corrido em azul bem claro, negrito em
+   O mesmo verde-mata da hero (pedido de 23/11/2026). Títulos em branco,
+   com o destaque em mel; texto corrido em verde bem claro, negrito em
    branco. O que mora em cartão branco (a fala do pai, a assinatura da
-   Ana, os prints dos depoimentos) volta para o azul-marinho, para não
+   Ana, os prints dos depoimentos) volta para a cor do texto, para não
    herdar o texto claro da seção.
    ========================================================================= */
-.v6-sec--azul { background: var(--azul-fundo); color: var(--azul-texto); }
-.v6-sec--azul .v4-titulo { color: var(--branco); }
-.v6-sec--azul .v4-titulo em,
-.v6-sec--azul .v4-poder { color: var(--mata-realce); }
-.v6-sec--azul strong { color: var(--branco); }
+.v6-sec--escura { background: var(--fundo-escuro); color: var(--fundo-escuro-texto); }
+.v6-sec--escura .v4-titulo { color: var(--branco); }
+.v6-sec--escura .v4-titulo em,
+.v6-sec--escura .v4-poder { color: var(--mata-realce); }
+.v6-sec--escura strong { color: var(--branco); }
 
-.v6-sec--azul .v4-depo__titulo { color: var(--branco); }
-.v6-sec--azul .v4-depo__titulo::before { background: var(--mata-realce); }
+.v6-sec--escura .v4-depo__titulo { color: var(--branco); }
+.v6-sec--escura .v4-depo__titulo::before { background: var(--mata-realce); }
 
-.v6-sec--azul .v4-citacao,
-.v6-sec--azul .v4-assina,
-.v6-sec--azul .v4-depo__print { color: var(--tinta); border-color: transparent; box-shadow: 0 14px 34px rgba(5, 18, 48, .28); }
-.v6-sec--azul .v4-citacao strong,
-.v6-sec--azul .v4-assina strong,
-.v6-sec--azul .v4-depo__print strong { color: var(--tinta); }
+.v6-sec--escura .v4-citacao,
+.v6-sec--escura .v4-assina,
+.v6-sec--escura .v4-depo__print { color: var(--tinta); border-color: transparent; box-shadow: 0 14px 34px rgba(8, 22, 16, .28); }
+.v6-sec--escura .v4-citacao strong,
+.v6-sec--escura .v4-assina strong,
+.v6-sec--escura .v4-depo__print strong { color: var(--tinta); }
 
 
 /* =========================================================================
@@ -262,7 +265,7 @@ body { line-height: 1.65; }
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 20px 24px rgba(15, 31, 64, .12));
+  filter: drop-shadow(0 20px 24px rgba(31, 42, 36, .12));
 }
 
 .v6-dores__mapa { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; pointer-events: none; }
@@ -282,7 +285,7 @@ body { line-height: 1.65; }
   color: var(--branco);
   font-size: .75rem;
   font-weight: 800;
-  box-shadow: 0 0 0 4px rgba(255, 255, 255, .85), 0 4px 10px rgba(15, 31, 64, .25);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, .85), 0 4px 10px rgba(31, 42, 36, .25);
 }
 
 .v6-dor__fio {
@@ -429,12 +432,12 @@ body { line-height: 1.65; }
 }
 
 .v5p-card__mock,
-.v5p-popup__mock { background: linear-gradient(170deg, #F1F5FB, #DFE8F6); }
+.v5p-popup__mock { background: linear-gradient(170deg, #F4F3EA, #DDEBE2); }
 
 .v5p-preco { font-weight: 800; letter-spacing: -.045em; }
 .v5p-economia { color: var(--salvia); }
 
-.v5p-popup { box-shadow: 0 24px 60px rgba(10, 22, 48, .4); }
-.v5p-popup::backdrop { background: rgba(10, 22, 48, .7); }
+.v5p-popup { box-shadow: 0 24px 60px rgba(16, 32, 26, .4); }
+.v5p-popup::backdrop { background: rgba(16, 32, 26, .72); }
 .v5p-popup__pergunta strong,
 .v5p-popup__preco strong { color: var(--verde); }

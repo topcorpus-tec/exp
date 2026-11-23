@@ -56,7 +56,7 @@
 .v5-bonus__faixa--videoaulas   { --painel: linear-gradient(150deg, #DCEBE2, #BFD9CA); }
 .v5-bonus__faixa--whatsapp     { --painel: linear-gradient(150deg, #DDF3E4, #A9DDBB); }
 .v5-bonus__faixa--reflexologia { --painel: linear-gradient(150deg, #FBEBD0, #F4D29A); }
-.v5-bonus__faixa--drenagem     { --painel: linear-gradient(150deg, #DFEAF4, #BCD3E8); }
+.v5-bonus__faixa--drenagem     { --painel: linear-gradient(150deg, #E4EFE6, #C3DCCB); }  /* v6: era azul */
 .v5-bonus__faixa--fibromialgia { --painel: linear-gradient(150deg, #F3E1E4, #E3BEC6); }
 
 .v5-bonus__midia {
@@ -140,8 +140,8 @@
   margin: 0 0 2px;
   padding: 3px 10px;
   border-radius: 8px;
-  background: #E1F2FB;
-  color: #4A5A63;
+  background: #E1F0E6;   /* v6: era azul */
+  color: #4F5C54;
   font-size: .6875rem;
   font-weight: 700;
   text-transform: uppercase;
