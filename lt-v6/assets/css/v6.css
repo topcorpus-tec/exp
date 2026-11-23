@@ -441,3 +441,85 @@ body { line-height: 1.65; }
 .v5p-popup::backdrop { background: rgba(16, 32, 26, .72); }
 .v5p-popup__pergunta strong,
 .v5p-popup__preco strong { color: var(--verde); }
+
+
+/* =========================================================================
+   LETRAS DOURADAS — degradê leve (pedido de 23/11/2026)
+
+   Tudo o que é dourado sobre o verde-mata ganha um degradê de cima para
+   baixo, do dourado-claro ao dourado mais fundo: os destaques dos
+   títulos nas dobras escuras, a promessa da hero, o "Mas suas mãos podem
+   ajudar." e o "Você tem mais poder nas suas mãos". O tom mais escuro
+   (#D9A441) ainda dá 5,4:1 no verde. O clone repete o degradê em cada
+   linha quando o destaque quebra. Navegador sem background-clip: text
+   fica com o dourado liso de antes.
+   ========================================================================= */
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .v4-hero .v4-hero__titulo em,
+  .v4-hero .v4-hero__promessa,
+  .v4-sec--mata .v4-titulo em,
+  .v4-remedio__virada strong,
+  .v6-sec--escura .v4-titulo em,
+  .v6-sec--escura .v4-poder {
+    background-image: linear-gradient(180deg, #FBE3A0 0%, #F4C766 45%, #D9A441 100%);
+    -webkit-background-clip: text;
+            background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-box-decoration-break: clone;
+            box-decoration-break: clone;
+  }
+}
+
+
+/* =========================================================================
+   LINHAS NOS FUNDOS CLAROS (pedido de 23/11/2026)
+
+   Só nas seções de fundo claro (as verde-mata ficam lisas). Duas camadas
+   atrás do conteúdo, sem mexer no HTML:
+
+     ::before  linhas verticais finas, a cada 96px, bem fracas e paradas;
+     ::after   as mesmas linhas um pouco mais marcadas, mostradas só numa
+               faixa de luz que desce devagar pela seção (máscara que
+               anda), como um brilho correndo pelas linhas.
+
+   O isolation põe as camadas atrás do texto e na frente do fundo da
+   seção. Para quem pede menos movimento, a faixa fica parada no meio.
+   ========================================================================= */
+.v4-sec:not(.v4-sec--mata):not(.v6-sec--escura) {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.v4-sec:not(.v4-sec--mata):not(.v6-sec--escura)::before,
+.v4-sec:not(.v4-sec--mata):not(.v6-sec--escura)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(90deg,
+    var(--v6-linha, rgba(31, 42, 36, .045)) 0 1px,
+    transparent 1px 96px);
+  background-position: center top;
+}
+.v4-sec:not(.v4-sec--mata):not(.v6-sec--escura)::after {
+  --v6-linha: rgba(44, 106, 82, .16);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 45%, #000 55%, transparent 100%);
+          mask-image: linear-gradient(180deg, transparent 0%, #000 45%, #000 55%, transparent 100%);
+  -webkit-mask-size: 100% 60%;
+          mask-size: 100% 60%;
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  animation: v6-linhas 9s linear infinite;
+}
+@keyframes v6-linhas {
+  from { -webkit-mask-position: 0 -150%; mask-position: 0 -150%; }
+  to   { -webkit-mask-position: 0 250%;  mask-position: 0 250%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .v4-sec:not(.v4-sec--mata):not(.v6-sec--escura)::after {
+    animation: none;
+    -webkit-mask-position: 0 50%;
+            mask-position: 0 50%;
+  }
+}
