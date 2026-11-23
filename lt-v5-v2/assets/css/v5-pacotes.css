@@ -6,6 +6,8 @@
      1. Dobra 9 — os dois pacotes (Básico e Premium) no lugar do cartão
         único da oferta
      2. Popup   — o Premium por R$ 37, que abre no botão do Básico
+     3. Dobra 11 — o mockup maior e o botão logo abaixo do texto
+     4. Dobra 3  — o mockup das páginas de segurança maior
 
    Segue a seção "Escolha o pacote ideal para você" e o popup da
    referência (paiseprofessores.com.br/musicograma-FV3-lp2), com as cores e
@@ -309,3 +311,50 @@ html:has(.v5p-popup[open]) { overflow: hidden; }
 }
 .v4-btn.v5p-popup__nao:hover { background: var(--creme); }
 .v4-btn.v5p-popup__nao:active { transform: translateY(1px); box-shadow: inset 0 0 0 2px var(--tinta); }
+
+
+/* =========================================================================
+   3. DOBRA 11 — MOCKUP GRANDE E BOTÃO ABAIXO DO TEXTO
+
+   Na v5 as duas colunas eram iguais e o mockup parava em 460px. Aqui a
+   coluna do mockup fica com perto de 60% da largura e ele ocupa a coluna
+   inteira (passa de 600px no desktop); no celular, a largura toda.
+   O botão vem logo depois do texto, alinhado à esquerda com ele.
+   ========================================================================= */
+.v4-consulta .v4-consulta__cena { width: 100%; }
+
+@media (min-width: 900px) {
+  .v4-consulta {
+    grid-template-columns: minmax(0, .75fr) minmax(0, 1.25fr);
+    gap: 48px;
+  }
+}
+
+.v5-consulta__btn { margin-top: 28px; }
+/* Na coluna estreita o texto do botão quebrava em duas linhas. Com letra
+   e folga um pouco menores, cabe numa linha a partir de 1100px; entre 900
+   e 1100px ele ainda pode quebrar, que é melhor que estourar a coluna. */
+@media (min-width: 900px) {
+  .v5-consulta__btn { padding-inline: 24px; font-size: 1rem; }
+}
+@media (min-width: 1100px) {
+  .v5-consulta__btn { white-space: nowrap; }
+}
+
+
+/* =========================================================================
+   4. DOBRA 3 — MOCKUP GRANDE
+
+   Na v5 a coluna do texto era a maior (1,1 contra 0,9) e as páginas
+   paravam em 560px. Aqui inverte: as páginas ganham a coluna maior e
+   ocupam a largura toda dela (perto de 600px no desktop); no celular, a
+   largura toda.
+   ========================================================================= */
+.v4-serio .v4-serio__pagina { width: 100%; max-width: none; }
+
+@media (min-width: 900px) {
+  .v4-serio {
+    grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+    gap: 48px;
+  }
+}

@@ -698,7 +698,8 @@
 
     <!-- ==================== DOBRA 11 — PARA CONSULTAR SEMPRE ====================
          O mockup mostra as páginas da lombar impressas e abertas no
-         celular. -->
+         celular. Na v5-v2 ele é maior que na v5 (a coluna dele ganhou
+         espaço) e o botão fica logo abaixo do texto: v5-pacotes.css, parte 3. -->
     <section class="v4-sec v4-sec--areia" aria-labelledby="consulta-title">
       <div class="v4-wrap v4-consulta">
         <div class="v4-consulta__texto">
@@ -710,6 +711,14 @@
             Abriu o mapa do corpo, encontrou a região que dói e a página já mostra onde tocar, como
             tocar e qual pressão usar.
           </p>
+
+          <!-- v5-v2: o botão saiu do pé da dobra (centrado, abaixo das duas
+               colunas) e veio para baixo do título e do texto, na coluna da
+               esquerda. Como os outros fora da oferta, leva para #oferta. -->
+          <a class="v4-btn v5-consulta__btn" href="#oferta">
+            <span>Quero o Manual agora mesmo</span>
+            <svg width="20" height="20" aria-hidden="true"><use href="#i-seta" /></svg>
+          </a>
         </div>
 
         <figure class="v4-mock v4-consulta__cena">
@@ -717,15 +726,6 @@
                alt="As páginas da aplicação para lombar do Manual, impressas e abertas no celular: onde tocar, onde evitar pressionar e as fotos numeradas de cada manobra."
                width="1000" height="1000" loading="lazy" decoding="async" />
         </figure>
-      </div>
-
-      <!-- O último botão antes das perguntas frequentes. Como os outros fora
-           da oferta, ele leva para #oferta. -->
-      <div class="v4-wrap v4-consulta__cta">
-        <a class="v4-btn v4-btn--centro" href="#oferta">
-          <span>Quero o Manual agora mesmo</span>
-          <svg width="20" height="20" aria-hidden="true"><use href="#i-seta" /></svg>
-        </a>
       </div>
     </section>
     <!-- ==================== /DOBRA 11 ==================== -->
