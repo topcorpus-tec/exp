@@ -1,5 +1,10 @@
 /* =========================================================================
-   Manual Ilustrado — manual.js (lt-v4-v2, a mesma da lt-v4-27)
+   Manual Ilustrado — manual.js (lt-v4-v2)
+
+   Em 23/11/2026 a oferta desta página virou pacotes (pedido do João, só
+   nesta LP), com o mesmo JS da lt-v6, onde os pacotes foram desenhados:
+   um destino de compra por pacote (CHECKOUTS), o popup do Premium por
+   R$ 37 (initPopup) e a parada das âncoras nos pacotes.
 
    A mesma base da lt-v2 (destino da compra, parada das âncoras da oferta e
    FAQ), com uma peça nova da v4: as linhas que ligam cada dor ao seu ponto
@@ -20,7 +25,10 @@
   /* =======================================================================
      DESTINO DA COMPRA
 
-     Desde 29/10/2026 o botão da oferta passa pelo funil do SF
+     HISTÓRICO (até 23/11/2026, quando a oferta virou pacotes; os links
+     de hoje estão em CHECKOUTS, logo abaixo):
+
+     De 29/10/2026 a 23/11/2026 o botão da oferta passou pelo funil do SF
      (sf.topcorpus.com.br), no sfunnel 119, o da v4. A lt-v4-27 e a
      lt-v4-v2 usam o mesmo, então as vendas das duas cores da v4 caem
      juntas no funil, separadas das outras páginas de 27 (lt-v1-27-sf 30,
@@ -32,36 +40,114 @@
      &checkoutMode=10: pay.hotmart.com/W95360090D?off=9z1ywsjs
      &checkoutMode=10&xcod=0&external_code=0 (conferido em 29/10/2026).
      ======================================================================= */
-  var CHECKOUT_URL = "https://sf.topcorpus.com.br/sf/?sfunnel=119";
+  /* Desde 23/11/2026 a oferta é em pacotes, e cada botão de compra diz o
+     seu pacote em data-checkout="<chave>". Os links vieram do João, um
+     sfunnel do SF para cada pacote (conferidos em 23/11/2026: cada um
+     redireciona para a sua oferta na Hotmart, produto W95360090D):
+
+       basico         Pacote Básico, R$ 27 (botão do Básico e o "Não" do
+                      popup): sfunnel 215 -> off=9z1ywsjs, a mesma oferta
+                      do sfunnel 119, que esta página usava antes
+       premium        Pacote Premium, R$ 47: sfunnel 218 -> off=btqvp33t
+       premium-popup  o Premium com R$ 10 de desconto, R$ 37 (o "Sim" do
+                      popup): sfunnel 217 -> off=zb9x95bv */
+  var CHECKOUTS = {
+    "basico":        "https://sf.topcorpus.com.br/sf/?sfunnel=215",
+    "premium":       "https://sf.topcorpus.com.br/sf/?sfunnel=218",
+    "premium-popup": "https://sf.topcorpus.com.br/sf/?sfunnel=217"
+  };
 
   /* =======================================================================
-     DESTINO DO CTA DA OFERTA
+     DESTINO DOS BOTÕES DE COMPRA
 
-     Só o botão do cartão da oferta (dobra 9) sai da página. Os outros
-     quatro (hero, dobra 3, dobra 7 e dobra 8) são âncoras para #oferta, como
-     o doc pede: quem clica ali ainda não viu o preço.
+     Só os botões dos pacotes (dobra 9) e os do popup saem da página. O da
+     dobra 11 é âncora para #oferta, como o doc pede.
      ======================================================================= */
   function initCheckout() {
     var links = [].slice.call(document.querySelectorAll("[data-checkout]"));
-    if (!links.length) return;
-
-    if (!CHECKOUT_URL) {
-      links.forEach(function (a) {
-        a.setAttribute("aria-disabled", "true");
-        a.addEventListener("click", function (ev) { ev.preventDefault(); });
-      });
-      if (window.console && console.warn) {
-        console.warn(
-          "[manual] CHECKOUT_URL vazio: " + links.length +
-          " CTA(s) inertes. Preencher em assets/js/manual.js."
-        );
-      }
-      return;
-    }
+    var vazios = [];
 
     links.forEach(function (a) {
-      a.setAttribute("href", CHECKOUT_URL);
-      a.removeAttribute("aria-disabled");
+      var chave = a.getAttribute("data-checkout");
+      var url = CHECKOUTS[chave];
+      if (url) {
+        a.setAttribute("href", url);
+        a.removeAttribute("aria-disabled");
+        return;
+      }
+      a.setAttribute("aria-disabled", "true");
+      a.addEventListener("click", function (ev) {
+        /* O botão do Básico abre o popup antes; quem decide o que fazer com
+           esse clique é o initPopup. */
+        if (!a.hasAttribute("data-popup")) ev.preventDefault();
+      });
+      if (vazios.indexOf(chave) < 0) vazios.push(chave);
+    });
+
+    if (vazios.length && window.console && console.warn) {
+      console.warn(
+        "[manual] checkout vazio para: " + vazios.join(", ") +
+        ". Esses botões ficam inertes. Preencher CHECKOUTS em assets/js/manual.js."
+      );
+    }
+  }
+
+  /* =======================================================================
+     POPUP DO PREMIUM
+
+     O botão do Básico ([data-popup="<id do dialog>"]) abre o popup em vez
+     de ir para a compra, a cada clique, como na referência
+     (paiseprofessores.com.br/musicograma-FV3-lp2): o Básico só se compra
+     pelo "Não" do popup. Fechado sem escolher (X, Esc ou clique fora da
+     caixa), a pessoa volta aos pacotes.
+
+     Sem <dialog> (navegador antigo) o clique segue o link normalmente.
+     Cada passo vai para o dataLayer, para medir no GTM quantos abrem o
+     popup e quantos aceitam: popup_premium_aberto, popup_premium_sim,
+     popup_premium_nao e popup_premium_fechado.
+     ======================================================================= */
+  function evento(nome) {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: nome });
+  }
+
+  function initPopup() {
+    [].slice.call(document.querySelectorAll("[data-popup]")).forEach(function (botao) {
+      var popup = document.getElementById(botao.getAttribute("data-popup"));
+      if (!popup || typeof popup.showModal !== "function") return;
+
+      var escolheu = false;
+
+      botao.addEventListener("click", function (e) {
+        e.preventDefault();
+        escolheu = false;
+        popup.showModal();
+        evento("popup_premium_aberto");
+      });
+
+      [].slice.call(popup.querySelectorAll("[data-evento]")).forEach(function (a) {
+        a.addEventListener("click", function () {
+          escolheu = true;
+          evento(a.getAttribute("data-evento"));
+        });
+      });
+
+      [].slice.call(popup.querySelectorAll("[data-fechar]")).forEach(function (x) {
+        x.addEventListener("click", function () { popup.close(); });
+      });
+
+      /* Clique no fundo escuro: o alvo é o próprio <dialog>, fora da caixa. */
+      popup.addEventListener("click", function (e) {
+        if (e.target !== popup) return;
+        var r = popup.getBoundingClientRect();
+        var dentro = e.clientX >= r.left && e.clientX <= r.right &&
+                     e.clientY >= r.top && e.clientY <= r.bottom;
+        if (!dentro) popup.close();
+      });
+
+      popup.addEventListener("close", function () {
+        if (!escolheu) evento("popup_premium_fechado");
+      });
     });
   }
 
@@ -80,14 +166,19 @@
     return y;
   }
 
+  /* Pacotes: a caixa agora são os dois pacotes. Se cabem inteiros na tela
+     (desktop), a rolagem para com o pé deles no pé da tela, como na v5. Se
+     não cabem (no celular, empilhados, nunca cabem), para no topo da dobra:
+     alinhar pelo pé pularia o Básico e o título. */
   function alvoDaOferta() {
     var dobra = document.getElementById("oferta");
-    var caixa = document.querySelector("#oferta .v4-oferta__card");
+    var caixa = document.querySelector("#oferta .v5p-pacotes");
     if (!dobra || !caixa) return null;
 
     var folga = 24;
     var topoDobra = topoNaPagina(dobra);
     var peCaixa = topoNaPagina(caixa) + caixa.offsetHeight;
+    if (peCaixa + folga - topoDobra > window.innerHeight) return topoDobra;
     return Math.max(topoDobra, peCaixa + folga - window.innerHeight);
   }
 
@@ -243,6 +334,7 @@
      ======================================================================= */
   function boot() {
     initCheckout();
+    initPopup();
     initAncoras();
     initFaq();
     initMapa();

@@ -1,0 +1,353 @@
+/* =========================================================================
+   Manual Ilustrado — /lt-v4-v2/ — pacotes.css
+
+   A oferta em pacotes, carregada depois do v4.css (pedido de 23/11/2026,
+   pelo João: os pacotes entram só nesta página). Veio da lt-v6, onde foi
+   desenhada, com as cores da v4 verde, que são as desta página:
+
+     1. Dobra 9 — os dois pacotes (Básico e Premium) no lugar do cartão
+        único da oferta, no modelo da seção de pacotes da
+        paiseprofessores.com.br/musicograma-FV3-lp2
+     2. Popup   — o Premium por R$ 37, que abre no botão do Básico
+     3. Detalhes — o botão do Básico vazado e as estrelinhas do Premium
+
+   Nada de vermelho no preço riscado (regra da v4: numa página sobre dor,
+   o vermelho lembra a própria dor).
+   ========================================================================= */
+
+
+/* =========================================================================
+   1. DOBRA 9 — OS PACOTES
+
+   Fundo claro, como na referência, num verde-sálvia que não existe em
+   nenhuma outra dobra: a de antes (história) é areia e a de depois
+   (depoimentos) é creme, e a oferta precisa se separar das duas.
+
+   Celular: um embaixo do outro, o Básico primeiro. A partir de 900px,
+   lado a lado e alinhados pelo topo: o Premium, mais comprido, desce
+   além do Básico.
+   ========================================================================= */
+.v5p-sec { background: linear-gradient(180deg, var(--salvia-clara), var(--verde-claro)); }
+
+.v5p-pacotes {
+  display: grid;
+  gap: 40px;
+  max-width: 480px;
+  margin-inline: auto;
+}
+@media (min-width: 900px) {
+  .v5p-pacotes {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    gap: 28px;
+    max-width: 860px;
+  }
+}
+
+.v5p-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 18px 18px 24px;
+  border: 2px solid #A9CDB8;
+  border-radius: 22px;
+  background: var(--branco);
+  color: var(--tinta);
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(31, 42, 36, .08);
+}
+.v5p-card--premium {
+  padding-top: 34px;
+  border: 3px solid var(--verde);
+  box-shadow: 0 20px 44px rgba(44, 106, 82, .22);
+}
+/* No desktop o Básico desce o mesmo tanto que o selo ocupa, para as duas
+   artes começarem na mesma altura. */
+@media (min-width: 900px) {
+  .v5p-card--basico { margin-top: 16px; }
+}
+
+.v5p-selo {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 9px 20px;
+  border-radius: 999px;
+  background: var(--verde);
+  color: var(--branco);
+  font-weight: 800;
+  font-size: .8125rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: 0 8px 18px rgba(44, 106, 82, .3);
+}
+
+/* A arte de cada pacote, num fundo 4:3, como na referência. */
+/* A arte fica solta dentro do quadro (absolute): assim a altura do quadro
+   é sempre a do 4:3, e não a da imagem. */
+.v5p-card__mock {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: 14px;
+  background: linear-gradient(170deg, var(--areia), var(--verde-claro));
+}
+.v5p-card__mock img {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  max-width: calc(100% - 12px);
+  max-height: calc(100% - 20px);
+}
+
+/* No Básico, só a capa do Manual (recortada do mockup da v4), com cara de
+   livro: lombada azul como a da capa, cantos e sombra. */
+.v5p-card__mock--capa img {
+  width: auto;
+  height: 82%;
+  border-left: 5px solid #1B4E8C;
+  border-radius: 2px 7px 7px 2px;
+  box-shadow: 0 2px 4px rgba(31, 42, 36, .18), 0 16px 28px rgba(31, 42, 36, .28);
+  transform: rotate(-2deg);
+}
+
+.v5p-card__nome {
+  margin-top: 16px;
+  font-family: var(--serifa);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 1.3rem + 1vw, 1.75rem);
+  line-height: 1.1;
+  color: var(--tinta);
+}
+
+/* ---------- a lista, com a bolinha mel (também usada no popup) ---------- */
+.v5p-lista {
+  display: grid;
+  gap: 10px;
+  margin: 16px 0 0;
+  text-align: left;
+}
+.v5p-lista > li {
+  position: relative;
+  padding-left: 17px;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--tinta-suave);
+}
+.v5p-lista > li strong { color: var(--tinta); }
+.v5p-lista > li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .62em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--mel);
+}
+
+/* ---------- fio, de/por, preço, economia e botão ---------- */
+.v5p-card__pe { padding-top: 6px; }
+
+.v5p-fio {
+  width: 120px;
+  height: 0;
+  margin: 18px auto 20px;
+  border: 0;
+  border-top: 3px solid var(--mel);
+}
+
+.v5p-de {
+  font-weight: 800;
+  font-size: 1.0625rem;
+  color: var(--tinta);
+}
+.v5p-de s { color: var(--tinta-suave); }
+
+.v5p-preco {
+  margin-top: 4px;
+  font-family: var(--serifa);
+  font-weight: 700;
+  font-size: clamp(3rem, 2.5rem + 2.4vw, 3.75rem);
+  line-height: 1;
+  letter-spacing: -.03em;
+  color: var(--verde);
+}
+.v5p-preco__rs { font-size: .42em; letter-spacing: 0; vertical-align: .85em; margin-right: 4px; }
+
+.v5p-economia {
+  margin-top: 6px;
+  font-weight: 800;
+  font-size: .9375rem;
+  color: var(--tinta);
+}
+
+.v5p-card .v4-btn {
+  width: 100%;
+  display: flex;
+  margin-top: 18px;
+  padding-inline: 18px;
+}
+
+.v5p-entrega {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 32px;
+  font-size: .9375rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--tinta-suave);
+}
+.v5p-entrega svg { flex: none; color: var(--verde); }
+
+
+/* =========================================================================
+   2. POPUP — O PREMIUM POR R$ 37
+
+   Como o da referência: título, a pergunta do desconto, a lista, o
+   de/por e os dois botões, sem arte. <dialog> nativo, aberto com
+   showModal() pelo manual.js: o navegador cuida do foco, do Esc e de
+   deixar o resto da página inerte. Se a tela for baixa, a caixa rola por
+   dentro.
+   ========================================================================= */
+.v5p-popup {
+  width: min(460px, calc(100vw - 36px));
+  max-height: 90vh;
+  margin: auto;
+  padding: 28px 20px 22px;
+  overflow: auto;
+  border: 0;
+  border-radius: 22px;
+  background: var(--branco);
+  color: var(--tinta);
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(16, 32, 26, .45);
+}
+.v5p-popup::backdrop { background: rgba(16, 32, 26, .72); }
+.v5p-popup[open] { animation: v5p-entra .28s ease-out; }
+@keyframes v5p-entra {
+  from { opacity: 0; transform: translateY(16px) scale(.98); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .v5p-popup[open] { animation: none; }
+}
+
+/* Sem rolar a página atrás enquanto o popup está aberto. */
+html:has(.v5p-popup[open]) { overflow: hidden; }
+
+.v5p-popup__fechar {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--areia);
+  color: var(--tinta);
+  cursor: pointer;
+}
+.v5p-popup__fechar:hover { background: var(--areia-forte); }
+.v5p-popup__fechar svg { transform: rotate(45deg); }
+
+.v5p-popup__titulo {
+  padding-inline: 22px;
+  font-family: var(--serifa);
+  font-weight: 700;
+  font-size: 1.4rem;
+  line-height: 1.2;
+  color: var(--tinta);
+  text-wrap: balance;
+}
+.v5p-popup__pergunta {
+  margin-top: 12px;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--tinta-suave);
+}
+.v5p-popup__pergunta strong { color: var(--verde); }
+
+.v5p-popup .v5p-lista { gap: 9px; margin-top: 14px; }
+.v5p-popup .v5p-lista > li { font-size: .97rem; line-height: 1.45; }
+
+.v5p-popup__preco {
+  margin: 16px 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+.v5p-popup__preco s { color: var(--tinta-suave); }
+.v5p-popup__preco strong {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--verde);
+  white-space: nowrap;
+}
+
+/* Os dois botões, um embaixo do outro: o "Sim" no mel do CTA, o "Não"
+   contornado. O padding de lado do v4.css (34px a partir de 600px) é
+   largo demais para a caixa estreita. */
+.v5p-popup .v4-btn {
+  width: 100%;
+  display: flex;
+  min-height: 54px;
+  padding: 14px 18px;
+  font-size: .95rem;
+}
+.v4-btn.v5p-popup__nao {
+  margin-top: 10px;
+  min-height: 50px;
+  background: var(--branco);
+  color: var(--tinta);
+  box-shadow: inset 0 0 0 2px var(--tinta);
+}
+.v4-btn.v5p-popup__nao:hover { background: var(--creme); }
+.v4-btn.v5p-popup__nao:active { transform: translateY(1px); box-shadow: inset 0 0 0 2px var(--tinta); }
+
+
+/* =========================================================================
+   3. DETALHES — Básico vazado e estrelinhas no Premium
+
+   O botão do Básico fica vazado: sem fundo, contorno e texto em verde
+   (o mel da v4 não teria contraste como texto no branco). O cheio, em
+   mel, fica só no Premium, para o olho ir até ele primeiro.
+
+   Em volta do Premium, estrelinhas de quatro pontas acendem, sobem um
+   pouco e apagam, cada uma no seu tempo (--d); paradas e fracas para quem
+   pede menos movimento. Ficam a no máximo 20px para fora do card, dentro
+   da margem da página no celular.
+   ========================================================================= */
+.v4-btn.v6-btn--vazado {
+  background: transparent;
+  color: var(--verde);
+  box-shadow: inset 0 0 0 2px var(--verde);
+}
+.v4-btn.v6-btn--vazado:hover { background: var(--verde-claro); }
+.v4-btn.v6-btn--vazado:active { box-shadow: inset 0 0 0 2px var(--verde); }
+
+.v6-brilhos { position: absolute; inset: 0; pointer-events: none; }
+.v6-brilhos i {
+  position: absolute;
+  width: var(--s, 10px);
+  height: var(--s, 10px);
+  background: #F4C04A;
+  clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+  opacity: 0;
+  animation: v6-brilho 4.2s ease-in-out var(--d, 0s) infinite;
+}
+.v6-brilhos i:nth-child(3n) { background: #9ED7B5; }
+@keyframes v6-brilho {
+  0%   { opacity: 0;   transform: translateY(4px) scale(.4) rotate(0deg); }
+  30%  { opacity: .85; transform: translateY(-2px) scale(1) rotate(20deg); }
+  60%  { opacity: 0;   transform: translateY(-10px) scale(.5) rotate(40deg); }
+  100% { opacity: 0;   transform: translateY(-10px) scale(.4) rotate(40deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .v6-brilhos i { animation: none; opacity: .35; }
+}

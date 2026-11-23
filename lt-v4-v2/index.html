@@ -11,7 +11,7 @@
   <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=()" />
 
   <meta property="og:title"       content="Antes do próximo remédio, experimente usar as mãos" />
-  <meta property="og:description" content="Mais de 70 massagens ilustradas e 5 bônus. Manual Ilustrado para Alívio da Dor com Massagem por R$27." />
+  <meta property="og:description" content="Mais de 70 massagens ilustradas. Manual Ilustrado para Alívio da Dor com Massagem a partir de R$27." />
   <meta property="og:type"        content="website" />
   <meta property="og:locale"      content="pt_BR" />
 
@@ -42,6 +42,7 @@
        herda o design-system, o taping nem o manual.css das versões
        anteriores: todo o visual está no v4.css. -->
   <link rel="stylesheet" href="assets/css/v4.css" />
+  <link rel="stylesheet" href="assets/css/pacotes.css" />
 
   <script src="assets/js/manual.js" defer></script>
 </head>
@@ -364,7 +365,7 @@
     <section class="v4-sec" aria-labelledby="bonus-title">
       <div class="v4-wrap">
         <h2 class="v4-titulo v4-titulo--centro" id="bonus-title">
-          Junto com o Manual, você leva mais <em>5 bônus incríveis e totalmente gratuitos:</em>
+          No Pacote Premium, você leva o Manual e mais <em>5 bônus incríveis:</em>
         </h2>
 
         <div class="v4-bonus">
@@ -530,55 +531,108 @@
     </section>
     <!-- ==================== /DOBRAS 7 E 8 ==================== -->
 
-    <!-- ==================== DOBRA 9 — OFERTA ====================
-         O cartão segue a referência de oferta do doc (Musicograma, Pais e
-         Professores): a arte do que vem no alto, a lista, um fio, o "de/por",
-         o preço grande, a economia e o botão largo.
+    <!-- ==================== DOBRA 9 — OS PACOTES (V5-V2) ====================
+         No lugar do cartão único da v5, dois pacotes lado a lado, seguindo a
+         seção "Escolha o pacote ideal para você" da referência
+         (paiseprofessores.com.br/musicograma-FV3-lp2): o Básico (R$ 27, só o
+         Manual) e o Premium (R$ 47, o Manual e os 5 bônus), com o Premium
+         em destaque. Fundo claro, como lá, no verde-sálvia da paleta. No
+         celular eles empilham, o Básico primeiro.
 
-         É a única dobra com botão de compra ([data-checkout]); todos os
-         outros botões da página trazem para cá. O manual.js para a rolagem
-         com o pé deste cartão dentro da tela, para o preço e o botão
-         aparecerem juntos. -->
-    <section class="v4-sec v4-sec--mata v4-oferta" id="oferta" aria-labelledby="oferta-title">
+         O "de" de cada pacote vem da tabela de valores do doc da #5: o
+         Manual sozinho vale R$ 107; o Manual com os 5 bônus, R$ 297.
+
+         Na lt-v4-v2 desde 23/11/2026 (pedido do João: os pacotes só nesta
+         página), trazida da lt-v6, onde foi desenhada; o CSS está no
+         pacotes.css.
+
+         O botão do Básico não sai direto para a compra: abre o popup
+         (#popup-premium, no fim da página), que oferece o Premium por R$ 37.
+         Como na referência, quem compra o Básico passa sempre pelo popup.
+         Sem JS, ou num navegador sem <dialog>, ele vai direto para o
+         checkout do Básico. Os três destinos (basico, premium e
+         premium-popup) ficam no manual.js. -->
+    <section class="v4-sec v4-oferta v5p-sec" id="oferta" aria-labelledby="oferta-title">
       <div class="v4-wrap">
-        <h2 class="v4-titulo v4-titulo--centro" id="oferta-title">Veja tudo que você recebe hoje:</h2>
+        <h2 class="v4-titulo v4-titulo--centro" id="oferta-title">Escolha o pacote <em>ideal para você</em></h2>
 
-        <div class="v4-oferta__card">
-          <div class="v4-oferta__mock">
-            <img src="assets/img/mockup-oferta.webp"
-                 alt="O Manual Ilustrado para Alívio da Dor ao centro, cercado pelos cinco bônus: o Mapa de Reflexologia dos Pés, o Mapa dos Pontos de Dor na Fibromialgia, o Guia Ilustrado de Drenagem Linfática, as videoaulas e o WhatsApp."
-                 width="1100" height="661" loading="lazy" decoding="async" />
-          </div>
+        <div class="v5p-pacotes">
 
-          <ul class="v4-oferta__itens">
-            <li><span><strong>Manual completo</strong>, com mais de 70 manobras ilustradas</span><span class="v4-oferta__valor">R$107,00</span></li>
-            <li><span><strong>Bônus 1</strong> &ndash; Vídeo-aula das manobras</span><span class="v4-oferta__valor">R$57,00</span></li>
-            <li><span><strong>Bônus 2</strong> &ndash; Meu contato no WhatsApp para tirar dúvidas</span><span class="v4-oferta__valor">R$29,00</span></li>
-            <li><span><strong>Bônus 3</strong> &ndash; Mapa ilustrado de reflexologia</span><span class="v4-oferta__valor">R$20,00</span></li>
-            <li><span><strong>Bônus 4</strong> &ndash; Guia ilustrado de drenagem linfática</span><span class="v4-oferta__valor">R$37,00</span></li>
-            <li><span><strong>Bônus 5</strong> &ndash; Mapa dos Pontos de Dor na Fibromialgia</span><span class="v4-oferta__valor">R$47,00</span></li>
-          </ul>
+          <article class="v5p-card v5p-card--basico" aria-labelledby="pac-basico-nome">
+            <div class="v5p-card__mock v5p-card__mock--capa">
+              <img src="assets/img/capa-manual.webp"
+                   alt="A capa do Manual Ilustrado para Alívio da Dor, com a Ana Martha fazendo massagem nas costas de uma paciente."
+                   width="403" height="543" loading="lazy" decoding="async" />
+            </div>
+            <h3 class="v5p-card__nome" id="pac-basico-nome">Pacote Básico</h3>
+            <ul class="v5p-lista">
+              <li>Manual Ilustrado para Alívio da Dor com Massagem</li>
+              <li>Pronto para aplicar</li>
+              <li>Acesso por 12 meses</li>
+            </ul>
+            <div class="v5p-card__pe">
+              <hr class="v5p-fio" />
+              <p class="v5p-de">De: <s>R$ 107,00</s> por</p>
+              <p class="v5p-preco"><span class="v5p-preco__rs">R$</span>27</p>
+              <p class="v5p-economia">Você economiza R$ 80,00</p>
+              <a class="v4-btn v4-btn--compra v6-btn--vazado" href="#" data-checkout="basico" data-popup="popup-premium">
+                <span>Quero o Pacote Básico</span>
+              </a>
+            </div>
+          </article>
 
-          <p class="v4-oferta__total">
-            <strong>Juntando tudo isso, o valor total seria:</strong> <s>R$297,00</s>
-          </p>
+          <article class="v5p-card v5p-card--premium" aria-labelledby="pac-premium-nome">
+            <!-- Estrelinhas sutis saindo do card (pedido de 23/11/2026).
+                 Só enfeite: aria-hidden, sem clique, e paradas para quem
+                 pede menos movimento. -->
+            <span class="v6-brilhos" aria-hidden="true">
+              <i style="left:-18px; top:16%; --s:10px; --d:0s"></i>
+              <i style="right:-16px; top:9%; --s:12px; --d:1.1s"></i>
+              <i style="left:-13px; top:44%; --s:8px; --d:2.3s"></i>
+              <i style="right:-19px; top:36%; --s:9px; --d:.6s"></i>
+              <i style="left:-17px; top:74%; --s:11px; --d:1.7s"></i>
+              <i style="right:-14px; top:66%; --s:8px; --d:2.9s"></i>
+              <i style="left:16%; top:-15px; --s:9px; --d:3.4s"></i>
+              <i style="right:18%; top:-12px; --s:10px; --d:.3s"></i>
+              <i style="right:-15px; top:88%; --s:9px; --d:2s"></i>
+            </span>
+            <p class="v5p-selo">Recomendado</p>
+            <div class="v5p-card__mock">
+              <img src="assets/img/mockup-oferta.webp"
+                   alt="O Manual Ilustrado para Alívio da Dor ao centro, cercado pelos cinco bônus: o Mapa de Reflexologia dos Pés, o Mapa dos Pontos de Dor na Fibromialgia, o Guia Ilustrado de Drenagem Linfática, as videoaulas e o WhatsApp."
+                   width="1100" height="661" loading="lazy" decoding="async" />
+            </div>
+            <h3 class="v5p-card__nome" id="pac-premium-nome">Pacote Premium</h3>
+            <ul class="v5p-lista">
+              <li>Manual Ilustrado para Alívio da Dor com Massagem</li>
+              <li><strong>5 Bônus Inclusos</strong></li>
+              <li>Videoaulas das Manobras</li>
+              <li>Mapa Ilustrado da Reflexologia</li>
+              <li>Guia Ilustrado da Drenagem Linfática</li>
+              <li>Mapa dos Pontos de Dor na Fibromialgia</li>
+              <li>Meu Contato Direto no WhatsApp</li>
+              <li>Pronto para utilizar</li>
+              <li>Suporte tira-dúvidas</li>
+              <li>Acesso Imediato + Atualizações</li>
+            </ul>
+            <div class="v5p-card__pe">
+              <hr class="v5p-fio" />
+              <p class="v5p-de">De: <s>R$ 297,00</s> por</p>
+              <p class="v5p-preco"><span class="v5p-preco__rs">R$</span>47</p>
+              <p class="v5p-economia">Você economiza R$ 250,00</p>
+              <a class="v4-btn v4-btn--compra" href="#" data-checkout="premium">
+                <span>Quero o Pacote Premium</span>
+                <svg width="20" height="20" aria-hidden="true"><use href="#i-seta" /></svg>
+              </a>
+            </div>
+          </article>
 
-          <hr class="v4-oferta__fio" />
-
-          <p class="v4-oferta__de">De <s>R$297,00</s> por</p>
-          <p class="v4-oferta__preco"><span class="v4-oferta__rs">R$</span>27</p>
-          <p class="v4-oferta__economia">você economiza R$ 270</p>
-
-          <p class="v4-oferta__entrega">
-            <svg width="18" height="18" aria-hidden="true"><use href="#i-mail" /></svg>
-            Garanta o seu e receba agora mesmo por e-mail
-          </p>
-
-          <a class="v4-btn v4-btn--compra" href="#" data-checkout>
-            <span>Quero o Manual e todos os bônus</span>
-            <svg width="20" height="20" aria-hidden="true"><use href="#i-seta" /></svg>
-          </a>
         </div>
+
+        <p class="v5p-entrega">
+          <svg width="18" height="18" aria-hidden="true"><use href="#i-mail" /></svg>
+          Receba agora mesmo por e-mail &middot; 7 dias de garantia
+        </p>
       </div>
     </section>
     <!-- ==================== /DOBRA 9 ==================== -->
@@ -756,6 +810,34 @@
     </section>
     <!-- ==================== /DOBRA 12 ==================== -->
 
+
+    <!-- ==================== POPUP — O PREMIUM POR R$ 37 ====================
+         Abre a cada clique no botão do Básico (dobra 9), como na referência:
+         a compra do Básico é sempre pelo "Não" daqui. Fechado no X, no Esc
+         ou fora da caixa, a pessoa volta aos pacotes. "Sim" vai para o
+         premium-popup (R$ 37), "Não" para o Básico (R$ 27). Texto do pedido
+         de 23/11/2026; os dois botões seguem os da referência. -->
+    <dialog class="v5p-popup" id="popup-premium" aria-labelledby="popup-titulo">
+      <button class="v5p-popup__fechar" type="button" data-fechar aria-label="Fechar">
+        <svg width="20" height="20" aria-hidden="true"><use href="#i-plus" /></svg>
+      </button>
+      <h2 class="v5p-popup__titulo" id="popup-titulo">Antes de finalizar&hellip; Temos um presente exclusivo para você!</h2>
+      <p class="v5p-popup__pergunta">Com <strong>R$ 10,00 de desconto</strong>, você quer levar a versão <strong>Premium</strong>?</p>
+      <ul class="v5p-lista">
+        <li>Manual Ilustrado para Alívio da Dor com Massagem</li>
+        <li><strong>5 Bônus Inclusos</strong></li>
+        <li>Pronto para utilizar</li>
+        <li>Suporte tira-dúvidas</li>
+        <li>Acesso Imediato + Atualizações</li>
+      </ul>
+      <p class="v5p-popup__preco">De <s>R$ 47</s> por apenas <strong>R$ 37</strong></p>
+      <a class="v4-btn v4-btn--compra" href="#" data-checkout="premium-popup" data-evento="popup_premium_sim">
+        <span>Sim! Quero o pacote Premium</span>
+      </a>
+      <a class="v4-btn v5p-popup__nao" href="#" data-checkout="basico" data-evento="popup_premium_nao">
+        <span>Não! Quero o pacote Básico</span>
+      </a>
+    </dialog>
   </main>
 
   <!-- ==================== RODAPÉ ====================
