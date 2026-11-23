@@ -43,16 +43,17 @@
   --cta-escuro:   #0B6A39;
   --cta-texto:    #FFFFFF;
 
-  --mata:         #0F1F40;   /* dobras escuras: azul-marinho     */
+  --mata:         #1D315B;   /* dobras escuras: o mesmo azul     */
   --mata-texto:   #C9D5EC;
   --mata-realce:  #FFC93C;
 
   --salvia:       #13874A;   /* verde do "ok": 4,8:1 no branco   */
   --salvia-clara: #E1F4E9;
 
-  /* O azul das dobras de destaque (hero, história e depoimentos). */
-  --azul-fundo: linear-gradient(180deg, #1D52BD 0%, #143A8C 100%);
-  --azul-texto: #DCE6F8;     /* texto corrido no azul: 5:1      */
+  /* O azul de todos os fundos azuis (hero, história, depoimentos, a
+     dobra 5 e o rodapé): #1D315B, liso, escolhido em 23/11/2026. */
+  --azul-fundo: #1D315B;
+  --azul-texto: #DCE6F8;     /* texto corrido no azul: 10:1     */
 
   --serifa: var(--sans);
   --raio:    20px;
@@ -184,17 +185,13 @@ body { line-height: 1.65; }
 /* =========================================================================
    DOBRA 1 — FUNDO AZUL (pedido de 23/11/2026)
 
-   Degradê do azul da capa para um azul mais fundo, com uma luz clara
-   atrás do mockup. Sobre ele: título branco, destaque e promessa em
-   amarelo (texto grande: 3,9:1 no azul do topo, acima dos 3:1 que o
-   WCAG pede para texto grande), o resto em azul bem claro (5:1) e os ✓
-   em branco.
+   O azul liso (--azul-fundo). Sobre ele: título branco (12,8:1),
+   destaque e promessa em amarelo (8,3:1), o resto em azul bem claro
+   (10:1) e os ✓ com texto branco.
    ========================================================================= */
 .v4-hero {
   padding-top: clamp(32px, 5vw, 56px);
-  background:
-    radial-gradient(55% 42% at 50% 60%, rgba(120, 170, 255, .35) 0%, rgba(120, 170, 255, 0) 70%),
-    var(--azul-fundo);
+  background: var(--azul-fundo);
   color: var(--branco);
 }
 .v4-hero .v4-hero__titulo { color: var(--branco); }
