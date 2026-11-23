@@ -695,3 +695,55 @@ body { line-height: 1.65; }
   .v6-selo-bonus__disco small { font-size: .625rem; }
   .v6-selo-bonus__disco b { font-size: 1.9rem; }
 }
+
+
+/* =========================================================================
+   PREMIUM — fundo da arte espelhado (pedido de 23/11/2026)
+
+   O painel atrás do mockup do Premium vira uma superfície de espelho:
+   degradê claro com faixas de luz, filete branco no alto e sombra interna
+   embaixo, como vidro polido. Por trás do produto (::before vem antes da
+   imagem, então fica atrás dela), uma faixa de reflexo atravessa o painel
+   a cada 5 s. Parado para quem pede menos movimento.
+   ========================================================================= */
+.v5p-card--premium .v5p-card__mock {
+  overflow: hidden;
+  background:
+    linear-gradient(115deg,
+      rgba(255, 255, 255, 0) 4%, rgba(255, 255, 255, .9) 16%, rgba(255, 255, 255, 0) 27%,
+      rgba(255, 255, 255, 0) 58%, rgba(255, 255, 255, .7) 70%, rgba(255, 255, 255, 0) 80%),
+    linear-gradient(170deg, #FFFFFF 0%, #DCE8E1 30%, #B7CEC0 55%, #EEF5F1 74%, #C6DACD 100%);
+  box-shadow:
+    inset 0 1px 0 #FFFFFF,
+    inset 0 0 0 1px rgba(255, 255, 255, .6),
+    inset 0 -18px 28px rgba(31, 42, 36, .10);
+}
+/* O reflexo que corre: atrás do produto, forte (::before, antes da
+   imagem); por cima de tudo, bem leve, como vidro (::after). */
+.v5p-card--premium .v5p-card__mock::before,
+.v5p-card--premium .v5p-card__mock::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-size: 260% 100%;
+  background-position: 130% 0;
+  pointer-events: none;
+  animation: v6-espelho 5s ease-in-out infinite;
+}
+.v5p-card--premium .v5p-card__mock::before {
+  background-image: linear-gradient(110deg,
+    transparent 36%, rgba(255, 255, 255, .95) 46%, rgba(255, 255, 255, .35) 52%, transparent 60%);
+}
+.v5p-card--premium .v5p-card__mock::after {
+  z-index: 1;
+  background-image: linear-gradient(110deg,
+    transparent 42%, rgba(255, 255, 255, .28) 48%, rgba(255, 255, 255, .08) 52%, transparent 56%);
+}
+@keyframes v6-espelho {
+  0%, 50% { background-position: 130% 0; }
+  100%    { background-position: -30% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .v5p-card--premium .v5p-card__mock::before,
+  .v5p-card--premium .v5p-card__mock::after { animation: none; }
+}
