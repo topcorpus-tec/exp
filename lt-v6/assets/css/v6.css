@@ -833,10 +833,11 @@ body { line-height: 1.65; }
           mask-image: radial-gradient(closest-side, #000 20%, rgba(0, 0, 0, .6) 48%, transparent 78%);
   animation: v6-raios 60s linear infinite;
 }
-/* Desfoque forte nas duas camadas (pedido de 23/11/2026): a luz vira
-   uma névoa e os raios, feixes suaves, sem borda marcada. */
-.v4-hero__mock::before { filter: blur(36px); }
-.v4-hero__mock::after  { filter: blur(18px); }
+/* Desfoque nas duas camadas (23/11/2026): o bastante para a luz ficar
+   difusa e os raios sem borda marcada, mas ainda visíveis como feixes.
+   36/18px ficou forte demais; 18/8px é o meio-termo. */
+.v4-hero__mock::before { filter: blur(18px); }
+.v4-hero__mock::after  { filter: blur(8px); }
 
 @keyframes v6-luz {
   0%, 100% { opacity: .75; scale: .94; }
