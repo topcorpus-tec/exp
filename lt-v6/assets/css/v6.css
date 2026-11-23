@@ -848,3 +848,61 @@ body { line-height: 1.65; }
   .v4-hero__mock::before,
   .v4-hero__mock::after { animation: none; }
 }
+
+
+/* =========================================================================
+   DOBRA 2 NO CELULAR — corpo e legenda numa tela só (23/11/2026)
+
+   Abaixo de 900px a dobra vira uma prancha de anatomia: o corpo à
+   esquerda (42% da largura), com os pontos numerados menores, e a
+   legenda das nove dores à direita, numa coluna compacta com fios finos
+   entre os itens (no lugar dos cartões grandes empilhados embaixo). Com
+   o título, tudo cabe numa tela de celular. No desktop nada muda: o
+   corpo fica no centro com os balões dos lados.
+   ========================================================================= */
+@media (max-width: 899px) {
+  .v6-dores .v4-titulo { margin-bottom: 24px; }
+
+  .v6-dores__grade {
+    display: grid;
+    grid-template-columns: 42% 1fr;
+    align-items: center;
+    gap: 14px;
+  }
+  .v6-dores__grade .v6-corpo { width: 100%; margin: 0; }
+
+  .v6-dor__ponto {
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    font-size: .625rem;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, .85), 0 3px 8px rgba(15, 31, 64, .22);
+  }
+
+  .v6-dores__lista {
+    display: block;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+  .v6-dores__lista li {
+    gap: 10px;
+    padding: 8px 0;
+    border: 0;
+    border-bottom: 1px solid var(--linha);
+    border-radius: 0;
+    background: none;
+    font-size: .8125rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+  .v6-dores__lista li:first-child { border-top: 1px solid var(--linha); }
+  .v6-dores__lista span {
+    width: 20px;
+    height: 20px;
+    font-size: .625rem;
+  }
+}
+@media (min-width: 900px) {
+  .v6-dores__grade { display: block; }
+}
