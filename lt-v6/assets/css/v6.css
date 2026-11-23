@@ -17,14 +17,15 @@
        vermelho (regra que vem da v4: numa página sobre dor, o vermelho
        lembra a própria dor);
      - forma: botões em pílula, firmes, sem pulsar; cartões brancos com
-       borda fina e sombra baixa; uma faixa com o logo do Manual no topo.
+       borda fina e sombra baixa. A faixa branca com o logo no topo saiu
+       em 23/11/2026: a página abre direto na hero.
 
    Quase tudo no v4.css lê as variáveis do :root, então a troca de cor é
    feita aqui, pelos mesmos nomes da v4. Contraste: todo texto sobre o seu fundo
    passa de 4,5:1 (WCAG AA).
 
-   Partes: tokens · topo · títulos · botões · blocos · dobra 1 · dobra 2 ·
-   dobra 9 (pacotes e popup).
+   Partes: tokens · títulos · botões · blocos · dobra 1 · seções escuras ·
+   dobra 2 · dobra 9 (pacotes e popup) · letras douradas · linhas.
    ========================================================================= */
 
 :root {
@@ -55,8 +56,14 @@
   --salvia-clara: #E1F4E9;
 
   /* O fundo das dobras escuras (hero, história, depoimentos, a dobra 5
-     e o rodapé): o verde-mata da v4 verde e da v5 (#1E3B32), liso. */
-  --fundo-escuro:       #1E3B32;
+     e o rodapé): o verde-mata da v4 verde e da v5 (#1E3B32), com um
+     degradê bem leve (23/11/2026): um brilho suave no alto e o verde
+     indo de um tom pouco mais claro para um pouco mais fundo. A diferença
+     entre as pontas é pequena de propósito; o texto claro passa de 8:1
+     em qualquer ponto. --mata segue liso para quem usa a cor sozinha. */
+  --fundo-escuro:
+    radial-gradient(120% 60% at 50% 0%, rgba(255, 255, 255, .045) 0%, rgba(255, 255, 255, 0) 70%),
+    linear-gradient(180deg, #22433A 0%, #1E3B32 50%, #19332B 100%);
   --fundo-escuro-texto: #D3E0D8;   /* texto corrido nele: 8,9:1 */
 
   --serifa: var(--sans);
@@ -67,23 +74,6 @@
 
 body { line-height: 1.65; }
 :focus-visible { outline-color: var(--verde); }
-
-
-/* =========================================================================
-   TOPO — faixa branca com o logo do Manual
-   ========================================================================= */
-.v6-topo {
-  display: flex;
-  justify-content: center;
-  padding: 12px 20px;
-  background: var(--branco);
-  border-bottom: 1px solid var(--linha);
-}
-.v6-topo img { width: auto; height: 46px; }
-@media (min-width: 900px) {
-  .v6-topo { padding-block: 14px; }
-  .v6-topo img { height: 54px; }
-}
 
 
 /* =========================================================================
@@ -523,3 +513,9 @@ body { line-height: 1.65; }
             mask-position: 0 50%;
   }
 }
+
+
+/* A dobra 5 e o rodapé pintam o fundo com --mata (liso) no v4.css; aqui
+   eles ganham o mesmo degradê das outras dobras escuras. */
+.v4-sec--mata,
+.v4-rodape { background: var(--fundo-escuro); }
