@@ -1,0 +1,176 @@
+/* =========================================================================
+   Manual Ilustrado — /lt-v6/ — v6.css
+
+   A identidade da v6, carregada por último, por cima do v4.css, do v5.css
+   e do v5-pacotes.css (a v6 nasceu da v5, que nasceu da v4 verde; os
+   layouts ficam, a cara muda). Pedido de 23/11/2026: página totalmente
+   nova, com outras letras e outros estilos.
+
+     - letra: Manrope em tudo. A Fraunces saiu; os títulos que eram serifa
+       viram Manrope 800, com o espaço entre letras apertado;
+     - destaque nos títulos: no lugar do itálico verde, a palavra em azul
+       com um marca-texto amarelo por baixo;
+     - cor: as da capa do Manual. Azul-marinho no texto e nas dobras
+       escuras, azul nos destaques e nos preços, amarelo nos botões e
+       acentos. O verde fica só onde quer dizer "ok": os ✓, o Premium e a
+       economia. Nada de vermelho (regra que vem da v4: numa página sobre
+       dor, o vermelho lembra a própria dor);
+     - forma: botões em pílula, pulsando de leve (parado para quem pede
+       menos movimento), e cantos mais redondos nos cartões.
+
+   Quase tudo no v4.css lê as variáveis do :root, então a troca de cor é
+   feita aqui, pelos mesmos nomes. Os nomes ficaram da v4: --verde agora é
+   azul e --mata é o azul-marinho. Contraste: todo texto sobre o seu fundo
+   passa de 4,5:1 (WCAG AA).
+   ========================================================================= */
+
+:root {
+  --creme:        #F6F8FC;   /* fundo da página                  */
+  --areia:        #EAF0F9;   /* fundo das dobras alternadas      */
+  --areia-forte:  #D3DEEF;
+  --branco:       #FFFFFF;
+
+  --tinta:        #12244A;   /* azul-marinho: 15:1 no fundo      */
+  --tinta-suave:  #4A5875;   /* 6,9:1 no fundo                   */
+
+  --verde:        #1E5BCC;   /* o azul dos destaques: 6:1 no branco */
+  --verde-claro:  #E2EBFA;
+  --mel:          #FFC23A;
+  --cta:          #FFC23A;   /* com o marinho por cima: 10:1     */
+  --cta-escuro:   #F5AE14;
+  --cta-texto:    #12244A;
+
+  --mata:         #12244A;   /* dobras escuras: azul-marinho     */
+  --mata-texto:   #C9D5EC;
+  --mata-realce:  #FFC93C;
+
+  --salvia:       #13874A;   /* verde do "ok": 4,8:1 no branco   */
+  --salvia-clara: #E1F4E9;
+
+  --marca:        rgba(255, 194, 58, .5);   /* o marca-texto dos títulos */
+
+  --serifa: var(--sans);
+  --raio:    22px;
+  --raio-sm: 14px;
+  --sombra:  0 1px 2px rgba(18, 36, 74, .06), 0 14px 34px rgba(18, 36, 74, .10);
+}
+
+:focus-visible { outline-color: var(--verde); }
+
+
+/* =========================================================================
+   TÍTULOS — Manrope 800, com o marca-texto no destaque
+   ========================================================================= */
+.v4-titulo,
+.v4-hero__titulo {
+  font-weight: 800;
+  letter-spacing: -.028em;
+}
+.v4-titulo {
+  font-size: clamp(1.625rem, 1.15rem + 2vw, 2.5rem);
+  line-height: 1.15;
+}
+.v4-hero__titulo {
+  max-width: 19ch;
+  font-size: clamp(2rem, 1.3rem + 3.3vw, 3.375rem);
+  line-height: 1.08;
+}
+
+/* A palavra em destaque: azul, sem itálico, com uma faixa amarela na
+   metade de baixo, como um marca-texto. O clone repete a faixa em cada
+   linha quando o destaque quebra. */
+.v4-titulo em,
+.v4-hero__titulo em {
+  font-style: normal;
+  color: var(--verde);
+  background: linear-gradient(transparent 60%, var(--marca) 60%, var(--marca) 90%, transparent 90%);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  padding-inline: .06em;
+}
+/* Nas dobras escuras o destaque é o amarelo, sem marca-texto. */
+.v4-sec--mata .v4-titulo em { color: var(--mata-realce); background: none; padding: 0; }
+
+.v4-titulo__linha2 { letter-spacing: -.01em; }
+
+/* Os outros títulos e frases que eram serifa: Manrope forte. */
+.v4-pressao__titulo, .v4-bonus__titulo, .v4-depo__titulo, .v5-bonus__titulo,
+.v4-fecho, .v4-poder, .v4-remedio__virada, .v5p-card__nome, .v5p-popup__titulo {
+  font-weight: 800;
+  letter-spacing: -.02em;
+}
+.v4-fecho strong { font-weight: 800; }
+
+/* O que era itálico vira reto. */
+.v4-remedio__gesto, .v4-citacao p { font-style: normal; }
+.v4-remedio__gesto { font-weight: 600; }
+.v4-citacao p { font-weight: 700; letter-spacing: -.01em; }
+.v4-remedio__virada { letter-spacing: .02em; }
+
+
+/* =========================================================================
+   DOBRA 1 — luz azul atrás do mockup, no lugar da luz amarela
+   ========================================================================= */
+.v4-hero {
+  background:
+    radial-gradient(60% 42% at 50% 56%, rgba(30, 91, 204, .13) 0%, rgba(30, 91, 204, 0) 70%),
+    linear-gradient(180deg, var(--creme) 0%, var(--areia) 100%);
+}
+
+
+/* =========================================================================
+   BOTÕES — pílula amarela, pulsando
+   ========================================================================= */
+.v4-btn {
+  border-radius: 999px;
+  letter-spacing: .04em;
+  box-shadow: 0 0 0 6px rgba(255, 194, 58, .22), 0 12px 26px rgba(245, 174, 20, .32);
+  animation: v6-pulso 2.6s ease-in-out infinite;
+}
+.v4-btn:active {
+  box-shadow: 0 0 0 4px rgba(255, 194, 58, .22), 0 6px 14px rgba(245, 174, 20, .28);
+}
+@keyframes v6-pulso {
+  0%, 100% { box-shadow: 0 0 0 6px rgba(255, 194, 58, .22), 0 12px 26px rgba(245, 174, 20, .32); }
+  50%      { box-shadow: 0 0 0 12px rgba(255, 194, 58, .08), 0 12px 26px rgba(245, 174, 20, .32); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .v4-btn { animation: none; }
+}
+
+/* O "Não" do popup é contornado e não pulsa: o olho vai para o "Sim". */
+.v4-btn.v5p-popup__nao {
+  animation: none;
+  box-shadow: inset 0 0 0 2px var(--tinta);
+}
+
+
+/* =========================================================================
+   CARTÕES E BLOCOS — cantos mais redondos, sombra azulada
+   ========================================================================= */
+.v4-pressao { border-radius: var(--raio); background: var(--branco); box-shadow: var(--sombra); }
+.v4-assina { box-shadow: 0 6px 18px rgba(18, 36, 74, .08); }
+
+
+/* =========================================================================
+   DOBRA 9 — PACOTES E POPUP
+   ========================================================================= */
+.v5p-sec { background: linear-gradient(180deg, var(--areia), var(--verde-claro)); }
+
+.v5p-card { border-color: #C6D5EE; box-shadow: 0 12px 30px rgba(18, 36, 74, .08); }
+.v5p-card--premium {
+  border-color: var(--salvia);
+  box-shadow: 0 20px 44px rgba(19, 135, 74, .20);
+}
+.v5p-selo { background: var(--salvia); box-shadow: 0 8px 18px rgba(19, 135, 74, .3); }
+
+.v5p-card__mock,
+.v5p-popup__mock { background: linear-gradient(170deg, #EEF3FB, #D9E5F7); }
+
+.v5p-preco { font-weight: 800; letter-spacing: -.045em; }
+.v5p-economia { color: var(--salvia); }
+
+.v5p-popup { box-shadow: 0 24px 60px rgba(10, 22, 48, .45); }
+.v5p-popup::backdrop { background: rgba(10, 22, 48, .72); }
+.v5p-popup__pergunta strong,
+.v5p-popup__preco strong { color: var(--verde); }

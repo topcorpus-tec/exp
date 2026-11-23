@@ -15,16 +15,7 @@
    primeiro; os saltos são em 600, 900 e 1100px.
    ========================================================================= */
 
-@font-face {
-  font-family: "Fraunces";
-  src: url("../fonts/fraunces-latin.woff2") format("woff2");
-  font-weight: 500 700; font-style: normal; font-display: swap;
-}
-@font-face {
-  font-family: "Fraunces";
-  src: url("../fonts/fraunces-latin-italic.woff2") format("woff2");
-  font-weight: 500 600; font-style: italic; font-display: swap;
-}
+/* lt-v6: as @font-face da Fraunces saíram junto com a fonte (v6.css). */
 @font-face {
   font-family: "Manrope";
   src: url("https://pcm.topcorpus.com.br/assets/shared/fonts/Manrope-400.woff2") format("woff2");
