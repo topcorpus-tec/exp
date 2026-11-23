@@ -519,3 +519,34 @@ body { line-height: 1.65; }
    eles ganham o mesmo degradê das outras dobras escuras. */
 .v4-sec--mata,
 .v4-rodape { background: var(--fundo-escuro); }
+
+
+/* =========================================================================
+   DOBRA 1 — os dois ✓ em pílulas suaves (pedido de 23/11/2026)
+
+   Fundo branco quase transparente sobre o verde, borda fina e o ✓ branco
+   na ponta. No desktop, lado a lado; no celular, uma embaixo da outra,
+   centralizadas, cada uma do tamanho do seu texto. Se o texto quebrar em
+   duas linhas, o raio menor mantém a forma de pílula.
+   ========================================================================= */
+.v4-hero .v4-oks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.v4-hero .v4-oks li {
+  gap: 10px;
+  padding: 7px 16px 7px 7px;
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, .06);
+  font-size: .9375rem;
+  text-align: left;
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+}
+.v4-hero .v4-oks .v4-ok { width: 26px; height: 26px; }
+@media (min-width: 900px) {
+  .v4-hero .v4-oks { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 12px; }
+}
