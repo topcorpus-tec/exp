@@ -3,68 +3,88 @@
 
    A identidade da v6, carregada por último, por cima do v4.css, do v5.css
    e do v5-pacotes.css (a v6 nasceu da v5, que nasceu da v4 verde; os
-   layouts ficam, a cara muda). Pedido de 23/11/2026: página totalmente
-   nova, com outras letras e outros estilos.
+   layouts ficam, a cara muda). Pedidos de 23/11/2026: página totalmente
+   nova, só Manrope, e depois "tudo mais profissional".
 
-     - letra: Manrope em tudo. A Fraunces saiu; os títulos que eram serifa
-       viram Manrope 800, com o espaço entre letras apertado;
-     - destaque nos títulos: no lugar do itálico verde, a palavra em azul
-       com um marca-texto amarelo por baixo;
+     - letra: Manrope em tudo, títulos em 800 com o espaço entre letras
+       apertado. O destaque dos títulos é só a cor (azul), sem itálico e
+       sem enfeite;
      - cor: as da capa do Manual. Azul-marinho no texto e nas dobras
        escuras, azul nos destaques e nos preços, amarelo nos botões e
        acentos. O verde fica só onde quer dizer "ok": os ✓, o Premium e a
        economia. Nada de vermelho (regra que vem da v4: numa página sobre
        dor, o vermelho lembra a própria dor);
-     - forma: botões em pílula, pulsando de leve (parado para quem pede
-       menos movimento), e cantos mais redondos nos cartões.
+     - forma: botões em pílula, firmes, sem pulsar; cartões brancos com
+       borda fina e sombra baixa; uma faixa com o logo do Manual no topo.
 
    Quase tudo no v4.css lê as variáveis do :root, então a troca de cor é
    feita aqui, pelos mesmos nomes. Os nomes ficaram da v4: --verde agora é
    azul e --mata é o azul-marinho. Contraste: todo texto sobre o seu fundo
    passa de 4,5:1 (WCAG AA).
+
+   Partes: tokens · topo · títulos · botões · blocos · dobra 1 · dobra 2 ·
+   dobra 9 (pacotes e popup).
    ========================================================================= */
 
 :root {
-  --creme:        #F6F8FC;   /* fundo da página                  */
-  --areia:        #EAF0F9;   /* fundo das dobras alternadas      */
-  --areia-forte:  #D3DEEF;
+  --creme:        #F7F9FC;   /* fundo da página                  */
+  --areia:        #EEF2F8;   /* fundo das dobras alternadas      */
+  --areia-forte:  #DCE4F0;
   --branco:       #FFFFFF;
+  --linha:        #E3E9F2;   /* bordas finas dos cartões         */
 
-  --tinta:        #12244A;   /* azul-marinho: 15:1 no fundo      */
-  --tinta-suave:  #4A5875;   /* 6,9:1 no fundo                   */
+  --tinta:        #0F1F40;   /* azul-marinho: 16:1 no fundo      */
+  --tinta-suave:  #4B5873;   /* 7:1 no fundo                     */
 
   --verde:        #1E5BCC;   /* o azul dos destaques: 6:1 no branco */
-  --verde-claro:  #E2EBFA;
+  --verde-claro:  #E4ECFA;
   --mel:          #FFC23A;
   --cta:          #FFC23A;   /* com o marinho por cima: 10:1     */
   --cta-escuro:   #F5AE14;
-  --cta-texto:    #12244A;
+  --cta-texto:    #0F1F40;
 
-  --mata:         #12244A;   /* dobras escuras: azul-marinho     */
+  --mata:         #0F1F40;   /* dobras escuras: azul-marinho     */
   --mata-texto:   #C9D5EC;
   --mata-realce:  #FFC93C;
 
   --salvia:       #13874A;   /* verde do "ok": 4,8:1 no branco   */
   --salvia-clara: #E1F4E9;
 
-  --marca:        rgba(255, 194, 58, .5);   /* o marca-texto dos títulos */
-
   --serifa: var(--sans);
-  --raio:    22px;
+  --raio:    20px;
   --raio-sm: 14px;
-  --sombra:  0 1px 2px rgba(18, 36, 74, .06), 0 14px 34px rgba(18, 36, 74, .10);
+  --sombra:  0 1px 2px rgba(15, 31, 64, .05), 0 10px 28px rgba(15, 31, 64, .08);
 }
 
+body { line-height: 1.65; }
 :focus-visible { outline-color: var(--verde); }
 
 
 /* =========================================================================
-   TÍTULOS — Manrope 800, com o marca-texto no destaque
+   TOPO — faixa branca com o logo do Manual
+   ========================================================================= */
+.v6-topo {
+  display: flex;
+  justify-content: center;
+  padding: 12px 20px;
+  background: var(--branco);
+  border-bottom: 1px solid var(--linha);
+}
+.v6-topo img { width: auto; height: 46px; }
+@media (min-width: 900px) {
+  .v6-topo { padding-block: 14px; }
+  .v6-topo img { height: 54px; }
+}
+
+
+/* =========================================================================
+   TÍTULOS — Manrope 800; o destaque é só a cor
    ========================================================================= */
 .v4-titulo,
 .v4-hero__titulo {
   font-weight: 800;
   letter-spacing: -.028em;
+  color: var(--tinta);
 }
 .v4-titulo {
   font-size: clamp(1.625rem, 1.15rem + 2vw, 2.5rem);
@@ -75,21 +95,9 @@
   font-size: clamp(2rem, 1.3rem + 3.3vw, 3.375rem);
   line-height: 1.08;
 }
-
-/* A palavra em destaque: azul, sem itálico, com uma faixa amarela na
-   metade de baixo, como um marca-texto. O clone repete a faixa em cada
-   linha quando o destaque quebra. */
 .v4-titulo em,
-.v4-hero__titulo em {
-  font-style: normal;
-  color: var(--verde);
-  background: linear-gradient(transparent 60%, var(--marca) 60%, var(--marca) 90%, transparent 90%);
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-  padding-inline: .06em;
-}
-/* Nas dobras escuras o destaque é o amarelo, sem marca-texto. */
-.v4-sec--mata .v4-titulo em { color: var(--mata-realce); background: none; padding: 0; }
+.v4-hero__titulo em { font-style: normal; color: var(--verde); }
+.v4-sec--mata .v4-titulo em { color: var(--mata-realce); }
 
 .v4-titulo__linha2 { letter-spacing: -.01em; }
 
@@ -105,72 +113,236 @@
 .v4-remedio__gesto, .v4-citacao p { font-style: normal; }
 .v4-remedio__gesto { font-weight: 600; }
 .v4-citacao p { font-weight: 700; letter-spacing: -.01em; }
-.v4-remedio__virada { letter-spacing: .02em; }
+.v4-remedio__virada { letter-spacing: 0; text-transform: none; }
 
 
 /* =========================================================================
-   DOBRA 1 — luz azul atrás do mockup, no lugar da luz amarela
-   ========================================================================= */
-.v4-hero {
-  background:
-    radial-gradient(60% 42% at 50% 56%, rgba(30, 91, 204, .13) 0%, rgba(30, 91, 204, 0) 70%),
-    linear-gradient(180deg, var(--creme) 0%, var(--areia) 100%);
-}
-
-
-/* =========================================================================
-   BOTÕES — pílula amarela, pulsando
+   BOTÕES — pílula amarela, firme, sem pulsar
    ========================================================================= */
 .v4-btn {
   border-radius: 999px;
-  letter-spacing: .04em;
-  box-shadow: 0 0 0 6px rgba(255, 194, 58, .22), 0 12px 26px rgba(245, 174, 20, .32);
-  animation: v6-pulso 2.6s ease-in-out infinite;
+  letter-spacing: .03em;
+  box-shadow: 0 1px 0 var(--cta-escuro), 0 10px 24px rgba(245, 174, 20, .28);
+  transition: background-color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.v4-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 1px 0 var(--cta-escuro), 0 14px 28px rgba(245, 174, 20, .34);
 }
 .v4-btn:active {
-  box-shadow: 0 0 0 4px rgba(255, 194, 58, .22), 0 6px 14px rgba(245, 174, 20, .28);
-}
-@keyframes v6-pulso {
-  0%, 100% { box-shadow: 0 0 0 6px rgba(255, 194, 58, .22), 0 12px 26px rgba(245, 174, 20, .32); }
-  50%      { box-shadow: 0 0 0 12px rgba(255, 194, 58, .08), 0 12px 26px rgba(245, 174, 20, .32); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .v4-btn { animation: none; }
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 var(--cta-escuro), 0 6px 14px rgba(245, 174, 20, .26);
 }
 
-/* O "Não" do popup é contornado e não pulsa: o olho vai para o "Sim". */
-.v4-btn.v5p-popup__nao {
-  animation: none;
-  box-shadow: inset 0 0 0 2px var(--tinta);
+/* O "Não" do popup é contornado: o olho vai para o "Sim". */
+.v4-btn.v5p-popup__nao,
+.v4-btn.v5p-popup__nao:hover,
+.v4-btn.v5p-popup__nao:active { box-shadow: inset 0 0 0 2px var(--tinta); }
+
+
+/* =========================================================================
+   BLOCOS — cartões brancos com borda fina e sombra baixa
+   ========================================================================= */
+.v4-pressao,
+.v4-faq__item,
+.v4-assina,
+.v4-citacao {
+  border: 1px solid var(--linha);
+  box-shadow: var(--sombra);
+}
+.v4-pressao { border-radius: var(--raio); background: var(--branco); }
+.v4-faq__item { box-shadow: none; }
+.v4-faq__item[open] { box-shadow: var(--sombra); }
+
+/* Os títulos dos depoimentos: o fio amarelo vira azul, mais sóbrio. */
+.v4-depo__titulo::before { background: var(--verde); }
+
+
+/* =========================================================================
+   DOBRA 1 — fundo limpo, com uma luz azul bem leve atrás do mockup
+   ========================================================================= */
+.v4-hero {
+  padding-top: clamp(32px, 5vw, 56px);
+  background:
+    radial-gradient(55% 40% at 50% 58%, rgba(30, 91, 204, .09) 0%, rgba(30, 91, 204, 0) 70%),
+    var(--creme);
 }
 
 
 /* =========================================================================
-   CARTÕES E BLOCOS — cantos mais redondos, sombra azulada
+   DOBRA 2 — O CORPO DE FRENTE
+
+   A figura (770x1500) fica no centro; cada <li> cobre a figura inteira e
+   põe o ponto em --x/--y. No desktop o fio vai do ponto até a borda do
+   lado dele e o texto fica fora da figura, na altura do ponto. No
+   celular só os pontos ficam na figura, e a lista vem embaixo.
+
+   Entrada (só com .is-js, que o v5.js põe): tudo começa escondido e, com
+   .is-vista, cada dor entra 0,18 s depois da anterior (--i).
    ========================================================================= */
-.v4-pressao { border-radius: var(--raio); background: var(--branco); box-shadow: var(--sombra); }
-.v4-assina { box-shadow: 0 6px 18px rgba(18, 36, 74, .08); }
+.v6-dores .v4-titulo { margin-bottom: clamp(28px, 4vw, 48px); }
+
+.v6-corpo {
+  position: relative;
+  width: min(62vw, 300px);
+  aspect-ratio: 770 / 1500;
+  margin-inline: auto;
+}
+@media (min-width: 900px) {
+  .v6-corpo { width: auto; height: clamp(520px, 52vw, 660px); }
+}
+.v6-corpo__img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 24px rgba(15, 31, 64, .12));
+}
+
+.v6-dores__mapa { position: absolute; inset: 0; margin: 0; padding: 0; list-style: none; pointer-events: none; }
+.v6-dor { position: absolute; inset: 0; }
+
+.v6-dor__ponto {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
+  border-radius: 50%;
+  background: var(--tinta);
+  color: var(--branco);
+  font-size: .75rem;
+  font-weight: 800;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, .85), 0 4px 10px rgba(15, 31, 64, .25);
+}
+
+.v6-dor__fio {
+  position: absolute;
+  top: var(--y);
+  height: 1px;
+  background: var(--tinta);
+  opacity: .35;
+}
+.v6-dor[data-lado="esq"] .v6-dor__fio { left: -24px; width: calc(var(--x) + 24px); transform-origin: right center; }
+.v6-dor[data-lado="dir"] .v6-dor__fio { left: var(--x); right: -24px; transform-origin: left center; }
+
+.v6-dor__txt {
+  position: absolute;
+  top: var(--y);
+  width: max-content;
+  max-width: 290px;
+  padding: 10px 14px;
+  border: 1px solid var(--linha);
+  border-radius: 12px;
+  background: var(--branco);
+  color: var(--tinta);
+  font-size: .9375rem;
+  font-weight: 700;
+  line-height: 1.3;
+  box-shadow: var(--sombra);
+  translate: 0 -50%;
+}
+.v6-dor[data-lado="esq"] .v6-dor__txt { right: calc(100% + 24px); text-align: right; }
+.v6-dor[data-lado="dir"] .v6-dor__txt { left: calc(100% + 24px); }
+
+/* A lista numerada, só no celular. */
+.v6-dores__lista { display: none; }
+
+@media (max-width: 899px) {
+  /* Os textos dos balões saem da vista, mas continuam para o leitor de
+     tela; o fio some. */
+  .v6-dor__fio { display: none; }
+  .v6-dor__txt {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .v6-dores__lista {
+    display: grid;
+    gap: 8px;
+    max-width: 440px;
+    margin: 32px auto 0;
+    padding: 0;
+    list-style: none;
+  }
+  .v6-dores__lista li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border: 1px solid var(--linha);
+    border-radius: 12px;
+    background: var(--branco);
+    font-size: .9375rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--tinta);
+  }
+  .v6-dores__lista span {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--tinta);
+    color: var(--branco);
+    font-size: .75rem;
+    font-weight: 800;
+  }
+}
+
+/* ---- Entrada ---------------------------------------------------------- */
+.v6-dores.is-js .v6-dor__ponto { transform: scale(0); }
+.v6-dores.is-js .v6-dor__fio   { transform: scaleX(0); }
+.v6-dores.is-js .v6-dor__txt,
+.v6-dores.is-js .v6-dores__lista li { opacity: 0; transform: translateY(6px); }
+
+.v6-dores.is-js .v6-dor__ponto {
+  transition: transform .4s cubic-bezier(.34, 1.4, .64, 1) calc(var(--i) * .18s);
+}
+.v6-dores.is-js .v6-dor__fio {
+  transition: transform .4s ease calc(var(--i) * .18s + .1s);
+}
+.v6-dores.is-js .v6-dor__txt,
+.v6-dores.is-js .v6-dores__lista li {
+  transition: opacity .4s ease calc(var(--i) * .18s + .2s), transform .4s ease calc(var(--i) * .18s + .2s);
+}
+
+.v6-dores.is-vista .v6-dor__ponto { transform: scale(1); }
+.v6-dores.is-vista .v6-dor__fio   { transform: scaleX(1); }
+.v6-dores.is-vista .v6-dor__txt,
+.v6-dores.is-vista .v6-dores__lista li { opacity: 1; transform: none; }
 
 
 /* =========================================================================
    DOBRA 9 — PACOTES E POPUP
    ========================================================================= */
-.v5p-sec { background: linear-gradient(180deg, var(--areia), var(--verde-claro)); }
+.v5p-sec { background: var(--areia); }
 
-.v5p-card { border-color: #C6D5EE; box-shadow: 0 12px 30px rgba(18, 36, 74, .08); }
+.v5p-card { border-color: var(--linha); box-shadow: var(--sombra); }
 .v5p-card--premium {
   border-color: var(--salvia);
-  box-shadow: 0 20px 44px rgba(19, 135, 74, .20);
+  box-shadow: 0 18px 40px rgba(19, 135, 74, .16);
 }
-.v5p-selo { background: var(--salvia); box-shadow: 0 8px 18px rgba(19, 135, 74, .3); }
+.v5p-selo { background: var(--salvia); box-shadow: 0 6px 14px rgba(19, 135, 74, .25); }
 
 .v5p-card__mock,
-.v5p-popup__mock { background: linear-gradient(170deg, #EEF3FB, #D9E5F7); }
+.v5p-popup__mock { background: linear-gradient(170deg, #F1F5FB, #DFE8F6); }
 
 .v5p-preco { font-weight: 800; letter-spacing: -.045em; }
 .v5p-economia { color: var(--salvia); }
 
-.v5p-popup { box-shadow: 0 24px 60px rgba(10, 22, 48, .45); }
-.v5p-popup::backdrop { background: rgba(10, 22, 48, .72); }
+.v5p-popup { box-shadow: 0 24px 60px rgba(10, 22, 48, .4); }
+.v5p-popup::backdrop { background: rgba(10, 22, 48, .7); }
 .v5p-popup__pergunta strong,
 .v5p-popup__preco strong { color: var(--verde); }
