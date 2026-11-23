@@ -489,12 +489,12 @@ body { line-height: 1.65; }
   z-index: -1;
   pointer-events: none;
   background-image: repeating-linear-gradient(90deg,
-    var(--v6-linha, rgba(31, 42, 36, .045)) 0 1px,
-    transparent 1px 96px);
+    var(--v6-linha, rgba(31, 42, 36, .012)) 0 1px,
+    transparent 1px var(--v6-passo, 96px));
   background-position: center top;
 }
 .v4-sec:not(.v4-sec--mata):not(.v6-sec--escura)::after {
-  --v6-linha: rgba(44, 106, 82, .16);
+  --v6-linha: rgba(44, 106, 82, .045);
   -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 45%, #000 55%, transparent 100%);
           mask-image: linear-gradient(180deg, transparent 0%, #000 45%, #000 55%, transparent 100%);
   -webkit-mask-size: 100% 60%;
@@ -503,6 +503,15 @@ body { line-height: 1.65; }
           mask-repeat: no-repeat;
   animation: v6-linhas 9s linear infinite;
 }
+/* Quase transparentes (23/11/2026: "no desktop as linhas estão muito
+   fortes", depois "quase transparente"): as fixas caíram de .045 para
+   .012 e o brilho de .16 para .045. No desktop elas também ficam mais
+   espaçadas, a cada 140px. */
+@media (min-width: 900px) {
+  .v4-sec:not(.v4-sec--mata):not(.v6-sec--escura)::before,
+  .v4-sec:not(.v4-sec--mata):not(.v6-sec--escura)::after { --v6-passo: 140px; }
+}
+
 @keyframes v6-linhas {
   from { -webkit-mask-position: 0 -150%; mask-position: 0 -150%; }
   to   { -webkit-mask-position: 0 250%;  mask-position: 0 250%; }
@@ -905,4 +914,118 @@ body { line-height: 1.65; }
 }
 @media (min-width: 900px) {
   .v6-dores__grade { display: block; }
+}
+
+
+/* =========================================================================
+   DOBRA 3 NO CELULAR — texto centralizado (23/11/2026)
+
+   Abaixo de 900px o texto da dobra (título, pergunta, resposta e
+   parágrafos) fica centralizado. A frase final perde o filete amarelo da
+   esquerda, que não combina com texto no meio, e ganha um traço amarelo
+   curto em cima, centralizado. No desktop o texto segue à esquerda, ao
+   lado das páginas do Manual.
+   ========================================================================= */
+@media (max-width: 899px) {
+  .v4-serio__texto { text-align: center; }
+  .v4-serio__texto .v4-titulo { text-align: center; margin-inline: auto; }
+  .v4-serio__texto .v4-fecho {
+    padding: 18px 0 0;
+    border-left: 0;
+    position: relative;
+  }
+  .v4-serio__texto .v4-fecho::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 56px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--mel);
+    translate: -50% 0;
+  }
+}
+
+
+/* =========================================================================
+   CELULAR — mais textos centralizados (23/11/2026)
+
+   Seguindo a dobra 3: abaixo de 900px ficam no meio o texto de abertura
+   da dobra 4, o título e o texto das "Cinco etapas", a nota "Sem termos
+   técnicos", o quadro "Você não vai apertar demais" e o texto de cada
+   bônus. A lista das cinco etapas (A, D, E, I, R) segue alinhada à
+   esquerda dentro do quadro, porque lista com marcador no meio fica
+   difícil de ler.
+   ========================================================================= */
+@media (max-width: 899px) {
+  .v4-estreito > p,
+  .v4-passo__texto,
+  .v4-pressao__texto,
+  .v5-bonus__texto { text-align: center; }
+
+  /* A nota "Sem termos técnicos": o ✓ no meio, em cima do texto, e o
+     texto centralizado embaixo dele. */
+  .v4-nota-ok {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+  }
+  .v4-nota-ok .v4-ok { margin-top: 0; }
+  /* A escala de 1 a 10 ocupa a largura do quadro, centrada. */
+  .v4-escala { width: 100%; max-width: 340px; margin-inline: auto; }
+}
+
+
+/* =========================================================================
+   DOBRA 2 NO CELULAR — números menores e traços até a legenda
+   (23/11/2026). O SVG .v6-fios é criado pelo v5.js.
+   ========================================================================= */
+.v6-fios { display: none; }
+@media (max-width: 899px) {
+  .v6-dor__ponto {
+    width: 16px;
+    height: 16px;
+    margin: -8px 0 0 -8px;
+    font-size: .5625rem;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, .9), 0 2px 6px rgba(15, 31, 64, .22);
+  }
+  .v6-fios {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+  }
+  .v6-fios path {
+    fill: none;
+    stroke: var(--tinta);
+    stroke-opacity: .32;
+    stroke-width: 1;
+  }
+  .v6-fios circle { fill: var(--tinta); fill-opacity: .45; }
+
+  /* Entram junto com os pontos (só quando o JS esconde e revela). */
+  .v6-dores.is-js .v6-fios path {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset .6s ease calc(var(--i) * .18s + .15s);
+  }
+  .v6-dores.is-js .v6-fios circle {
+    opacity: 0;
+    transition: opacity .3s ease calc(var(--i) * .18s + .6s);
+  }
+  .v6-dores.is-vista .v6-fios path { stroke-dashoffset: 0; }
+  .v6-dores.is-vista .v6-fios circle { opacity: 1; }
+}
+
+/* Dobra 11 no celular: título, textos e botão no meio (23/11/2026). */
+@media (max-width: 899px) {
+  .v4-consulta__texto { text-align: center; }
+  .v4-consulta__texto .v4-titulo { text-align: center; margin-inline: auto; }
+  .v4-consulta__texto .v5-consulta__btn { margin-inline: auto; }
 }
