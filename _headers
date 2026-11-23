@@ -62,9 +62,9 @@
 # conclusão do pedido): só devem ser alcançadas dentro do fluxo de compra,
 # nunca pela busca.
 #
-# Cada etapa tem uma cópia por ticket do Manual — <etapa>-27, -67 e -97 —,
-# para dar uma URL a cada funil e separar tráfego por preço. O curinga
-# cobre as três de uma vez.
+# Cada etapa tinha uma cópia por ticket do Manual — <etapa>-27, -67 e -97 —,
+# para dar uma URL a cada funil e separar tráfego por preço. As de 67 e 97
+# saíram do ar em 23/11/2026; o curinga segue cobrindo a de 27.
 #
 # Estas continuam fora dos buscadores por natureza, não por serem
 # rascunho: são páginas de pós-compra, e uma delas encontrada na busca
