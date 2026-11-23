@@ -44,7 +44,11 @@
   <link rel="stylesheet" href="assets/css/v4.css" />
   <link rel="stylesheet" href="assets/css/pacotes.css" />
 
-  <script src="assets/js/manual.js" defer></script>
+  <!-- O ?v= força o navegador a baixar o manual.js novo: o servidor deixa
+       o JS em cache por 4 h, e o JS antigo (de antes dos pacotes) mandaria
+       todos os botões para o sfunnel 119, sem popup. Trocar o valor
+       sempre que o manual.js mudar. -->
+  <script src="assets/js/manual.js?v=20261123-pacotes" defer></script>
 </head>
 <body>
 
