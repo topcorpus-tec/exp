@@ -436,8 +436,9 @@ body { line-height: 1.65; }
 /* =========================================================================
    LETRAS DOURADAS — degradê leve (pedido de 23/11/2026)
 
-   Tudo o que é dourado sobre o verde-mata ganha um degradê de cima para
-   baixo, do dourado-claro ao dourado mais fundo: os destaques dos
+   Tudo o que é dourado sobre o verde-mata ganha um degradê lateral, da
+   esquerda para a direita: dourado mais fundo nas pontas e mais claro
+   no meio, como metal com luz no centro: os destaques dos
    títulos nas dobras escuras, a promessa da hero, o "Mas suas mãos podem
    ajudar." e o "Você tem mais poder nas suas mãos". O tom mais escuro
    (#D9A441) ainda dá 5,4:1 no verde. O clone repete o degradê em cada
@@ -451,7 +452,7 @@ body { line-height: 1.65; }
   .v4-remedio__virada strong,
   .v6-sec--escura .v4-titulo em,
   .v6-sec--escura .v4-poder {
-    background-image: linear-gradient(180deg, #FBE3A0 0%, #F4C766 45%, #D9A441 100%);
+    background-image: linear-gradient(90deg, #D9A441 0%, #F4C766 28%, #FBE3A0 50%, #F4C766 72%, #D9A441 100%);
     -webkit-background-clip: text;
             background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -637,7 +638,7 @@ body { line-height: 1.65; }
   top: 14px;
   right: 14px;
   z-index: 2;
-  width: 78px;
+  width: 100px;
   aspect-ratio: 1;
   filter: drop-shadow(0 6px 10px rgba(90, 60, 10, .32));
   pointer-events: none;
@@ -647,7 +648,7 @@ body { line-height: 1.65; }
   .v5-bonus__faixa[data-midia="esq"] .v6-selo-bonus { left: auto; right: 14px; }
 }
 @media (min-width: 860px) {
-  .v6-selo-bonus { top: 18px; right: 18px; width: 92px; }
+  .v6-selo-bonus { top: 18px; right: 18px; width: 124px; }
   .v5-bonus__faixa[data-midia="esq"] .v6-selo-bonus { left: 18px; }
 }
 
@@ -678,7 +679,7 @@ body { line-height: 1.65; }
 }
 .v6-selo-bonus__disco small {
   position: relative;
-  font-size: .5625rem;
+  font-size: .6875rem;
   font-weight: 800;
   letter-spacing: .18em;
   text-transform: uppercase;
@@ -687,13 +688,13 @@ body { line-height: 1.65; }
 .v6-selo-bonus__disco b {
   position: relative;
   margin-top: 2px;
-  font-size: 1.625rem;
+  font-size: 2.125rem;
   font-weight: 800;
   letter-spacing: -.02em;
 }
 @media (min-width: 860px) {
-  .v6-selo-bonus__disco small { font-size: .625rem; }
-  .v6-selo-bonus__disco b { font-size: 1.9rem; }
+  .v6-selo-bonus__disco small { font-size: .8125rem; }
+  .v6-selo-bonus__disco b { font-size: 2.625rem; }
 }
 
 
