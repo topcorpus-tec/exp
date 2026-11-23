@@ -10,9 +10,9 @@
        apertado. O destaque dos títulos é só a cor (azul), sem itálico e
        sem enfeite;
      - cor: as da capa do Manual. Azul-marinho no texto e nas dobras
-       escuras, azul nos destaques e nos preços, amarelo nos botões e
-       acentos. O verde fica só onde quer dizer "ok": os ✓, o Premium e a
-       economia. Nada de vermelho (regra que vem da v4: numa página sobre
+       escuras, azul nos destaques e nos preços, amarelo nos acentos. O
+       verde é a cor de agir e de "ok": os botões (pedido de 23/11/2026),
+       os ✓, o Premium e a economia. Nada de vermelho (regra que vem da v4: numa página sobre
        dor, o vermelho lembra a própria dor);
      - forma: botões em pílula, firmes, sem pulsar; cartões brancos com
        borda fina e sombra baixa; uma faixa com o logo do Manual no topo.
@@ -39,9 +39,9 @@
   --verde:        #1E5BCC;   /* o azul dos destaques: 6:1 no branco */
   --verde-claro:  #E4ECFA;
   --mel:          #FFC23A;
-  --cta:          #FFC23A;   /* com o marinho por cima: 10:1     */
-  --cta-escuro:   #F5AE14;
-  --cta-texto:    #0F1F40;
+  --cta:          #0F7F45;   /* botões verdes, texto branco: 5:1 */
+  --cta-escuro:   #0B6A39;
+  --cta-texto:    #FFFFFF;
 
   --mata:         #0F1F40;   /* dobras escuras: azul-marinho     */
   --mata-texto:   #C9D5EC;
@@ -95,6 +95,11 @@ body { line-height: 1.65; }
   font-size: clamp(2rem, 1.3rem + 3.3vw, 3.375rem);
   line-height: 1.08;
 }
+/* No desktop o título fica em três linhas (pedido de 23/11/2026): a
+   largura máxima abre o bastante para 3 linhas equilibradas. */
+@media (min-width: 900px) {
+  .v4-hero__titulo { max-width: 27ch; }
+}
 .v4-titulo em,
 .v4-hero__titulo em { font-style: normal; color: var(--verde); }
 .v4-sec--mata .v4-titulo em { color: var(--mata-realce); }
@@ -117,22 +122,36 @@ body { line-height: 1.65; }
 
 
 /* =========================================================================
-   BOTÕES — pílula amarela, firme, sem pulsar
+   BOTÕES — pílula verde, texto branco, firme, sem pulsar
    ========================================================================= */
 .v4-btn {
   border-radius: 999px;
   letter-spacing: .03em;
-  box-shadow: 0 1px 0 var(--cta-escuro), 0 10px 24px rgba(245, 174, 20, .28);
+  box-shadow: 0 1px 0 var(--cta-escuro), 0 10px 24px rgba(15, 127, 69, .26);
   transition: background-color .2s ease, transform .2s ease, box-shadow .2s ease;
 }
 .v4-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 1px 0 var(--cta-escuro), 0 14px 28px rgba(245, 174, 20, .34);
+  box-shadow: 0 1px 0 var(--cta-escuro), 0 14px 28px rgba(15, 127, 69, .32);
 }
 .v4-btn:active {
   transform: translateY(1px);
-  box-shadow: 0 1px 0 var(--cta-escuro), 0 6px 14px rgba(245, 174, 20, .26);
+  box-shadow: 0 1px 0 var(--cta-escuro), 0 6px 14px rgba(15, 127, 69, .24);
 }
+
+/* O botão do Pacote Básico é vazado: sem fundo, contorno e texto verdes.
+   O cheio fica só no Premium, para o olho ir até ele primeiro (pedido de
+   23/11/2026). */
+.v4-btn.v6-btn--vazado {
+  background: transparent;
+  color: var(--cta);
+  box-shadow: inset 0 0 0 2px var(--cta);
+}
+.v4-btn.v6-btn--vazado:hover {
+  background: var(--salvia-clara);
+  box-shadow: inset 0 0 0 2px var(--cta);
+}
+.v4-btn.v6-btn--vazado:active { box-shadow: inset 0 0 0 2px var(--cta); }
 
 /* O "Não" do popup é contornado: o olho vai para o "Sim". */
 .v4-btn.v5p-popup__nao,
@@ -335,6 +354,31 @@ body { line-height: 1.65; }
   box-shadow: 0 18px 40px rgba(19, 135, 74, .16);
 }
 .v5p-selo { background: var(--salvia); box-shadow: 0 6px 14px rgba(19, 135, 74, .25); }
+
+/* Estrelinhas em volta do Premium. Cada <i> é uma estrela de quatro
+   pontas (clip-path), posicionada na borda do card pelo style do HTML; ela
+   acende, sobe um pouco e apaga, cada uma no seu tempo (--d). Ficam a no
+   máximo 20px para fora do card, dentro da margem da página no celular. */
+.v6-brilhos { position: absolute; inset: 0; pointer-events: none; }
+.v6-brilhos i {
+  position: absolute;
+  width: var(--s, 10px);
+  height: var(--s, 10px);
+  background: #F4C04A;
+  clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
+  opacity: 0;
+  animation: v6-brilho 4.2s ease-in-out var(--d, 0s) infinite;
+}
+.v6-brilhos i:nth-child(3n) { background: #9ED7B5; }
+@keyframes v6-brilho {
+  0%   { opacity: 0;   transform: translateY(4px) scale(.4) rotate(0deg); }
+  30%  { opacity: .85; transform: translateY(-2px) scale(1) rotate(20deg); }
+  60%  { opacity: 0;   transform: translateY(-10px) scale(.5) rotate(40deg); }
+  100% { opacity: 0;   transform: translateY(-10px) scale(.4) rotate(40deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .v6-brilhos i { animation: none; opacity: .35; }
+}
 
 .v5p-card__mock,
 .v5p-popup__mock { background: linear-gradient(170deg, #F1F5FB, #DFE8F6); }
