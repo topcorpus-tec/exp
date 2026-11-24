@@ -23,8 +23,8 @@
        d464917, de 23/11/2026), num endereço novo, para o teste 50/50 do
        tráfego: metade na lt-v4-v2 (com pacotes) e metade aqui (sem
        pacote). A lt-v4-v2 e as outras páginas não foram tocadas.
-       O botão de compra ainda usa o sfunnel 119, o de antes; o João vai
-       mandar o link próprio desta página (trocar em assets/js/manual.js,
+       O botão de compra usa o sfunnel 220, o link próprio desta página
+       (mandado pelo João em 24/11/2026; em assets/js/manual.js,
        CHECKOUT_URL). -->
   <title>Manual Ilustrado para Alívio da Dor com Massagem</title>
 
@@ -51,7 +51,9 @@
        anteriores: todo o visual está no v4.css. -->
   <link rel="stylesheet" href="assets/css/v4.css" />
 
-  <script src="assets/js/manual.js" defer></script>
+  <!-- ?v= para o navegador baixar o manual.js com o link novo (o servidor
+       deixa o JS em cache por 4 h). Trocar o valor quando o manual.js mudar. -->
+  <script src="assets/js/manual.js?v=20261124-sfunnel220" defer></script>
 </head>
 <body>
 

@@ -32,7 +32,12 @@
      &checkoutMode=10: pay.hotmart.com/W95360090D?off=9z1ywsjs
      &checkoutMode=10&xcod=0&external_code=0 (conferido em 29/10/2026).
      ======================================================================= */
-  var CHECKOUT_URL = "https://sf.topcorpus.com.br/sf/?sfunnel=119";
+  /* lt-v4-v2-sp (24/11/2026): link próprio desta página, mandado pelo
+     João. O sfunnel 220 redireciona para a oferta de R$ 27 com todos os
+     bônus (pay.hotmart.com/W95360090D?off=9z1ywsjs&checkoutMode=10,
+     conferido em 24/11/2026). O texto acima, sobre o 119, é da época da
+     lt-v4-v2. */
+  var CHECKOUT_URL = "https://sf.topcorpus.com.br/sf/?sfunnel=220";
 
   /* =======================================================================
      DESTINO DO CTA DA OFERTA
