@@ -1280,3 +1280,134 @@ body { line-height: 1.65; }
   .v6-zap.is-js .v6-cel__msg,
   .v6-zap.is-js .v6-zap__aviso { opacity: 1; transform: none; transition: none; }
 }
+
+
+/* =========================================================================
+   OFERTA EM DOURADO (pedido de 25/11/2026)
+
+   "Botões em dourado, Básico só a borda, Premium dourado completo com
+   degradê e movimento" e "a caixa do Recomendado em dourado".
+
+     - Premium (e o "Sim" do popup, que também compra o Premium): fundo
+       num degradê de ouro que desliza devagar da esquerda para a direita,
+       e um reflexo claro que atravessa o botão de tempos em tempos;
+     - Básico: sem fundo, contorno em degradê de ouro (o truque das duas
+       camadas de fundo, padding-box e border-box, porque border-image não
+       respeita o raio da pílula) e texto em ouro escuro;
+     - caixa do Premium: a borda verde vira ouro em degradê, o selo
+       "Recomendado" vira uma pílula de ouro, a luz que dá a volta no
+       contorno fica branca (sobre o ouro, a dourada sumiria) e a sombra
+       que respira fica dourada.
+
+   Texto escuro sobre o ouro, nunca branco: branco sobre #E9C45E não passa
+   de 2:1. #2A1D04 sobre o tom mais escuro do degradê (#B8862B) dá 5,1:1.
+   O ouro escuro do Básico (#8A6410) dá 5,4:1 no branco.
+   ========================================================================= */
+:root {
+  --ouro-fundo:  #B8862B;
+  --ouro:        #E2B550;
+  --ouro-claro:  #FBE7A1;
+  --ouro-texto:  #2A1D04;
+  --ouro-escuro: #8A6410;
+  --ouro-degrade: linear-gradient(100deg,
+    #B8862B 0%, #E2B550 22%, #FBE7A1 40%, #E9C45E 55%, #C9952F 75%, #B8862B 88%, #E2B550 100%);
+}
+
+/* ---- Premium: ouro cheio, em movimento -------------------------------- */
+.v5p-card--premium .v4-btn--compra,
+.v5p-popup .v4-btn--compra {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--ouro-degrade);
+  background-size: 220% 100%;
+  color: var(--ouro-texto);
+  box-shadow: 0 2px 0 #9A6F1E, 0 12px 26px rgba(168, 122, 30, .38);
+  animation: v6-ouro-desliza 5s ease-in-out infinite alternate;
+}
+.v5p-card--premium .v4-btn--compra:hover,
+.v5p-popup .v4-btn--compra:hover {
+  background: var(--ouro-degrade);
+  background-size: 220% 100%;
+  box-shadow: 0 2px 0 #9A6F1E, 0 16px 30px rgba(168, 122, 30, .46);
+}
+.v5p-card--premium .v4-btn--compra:active,
+.v5p-popup .v4-btn--compra:active { box-shadow: 0 1px 0 #9A6F1E, 0 6px 14px rgba(168, 122, 30, .34); }
+.v5p-card--premium .v4-btn--compra::after,
+.v5p-popup .v4-btn--compra::after {      /* o reflexo que atravessa */
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, .55) 50%, transparent 62%);
+  background-size: 260% 100%;
+  background-position: 160% 0;
+  animation: v6-ouro-reflexo 3.6s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes v6-ouro-desliza {
+  from { background-position: 0% 50%; }
+  to   { background-position: 100% 50%; }
+}
+@keyframes v6-ouro-reflexo {
+  0%, 60% { background-position: 160% 0; }
+  100%    { background-position: -60% 0; }
+}
+
+/* ---- Básico: só a borda, em ouro ------------------------------------- */
+.v4-btn.v6-btn--vazado,
+.v4-btn.v6-btn--vazado:active {
+  border: 2px solid transparent;
+  background:
+    linear-gradient(var(--branco), var(--branco)) padding-box,
+    linear-gradient(100deg, #B8862B, #F2D27A 45%, #C9952F 70%, #B8862B) border-box;
+  color: var(--ouro-escuro);
+  box-shadow: 0 8px 18px rgba(168, 122, 30, .14);
+}
+.v4-btn.v6-btn--vazado:hover {
+  background:
+    linear-gradient(#FDF6E3, #FDF6E3) padding-box,
+    linear-gradient(100deg, #B8862B, #F2D27A 45%, #C9952F 70%, #B8862B) border-box;
+  box-shadow: 0 10px 22px rgba(168, 122, 30, .2);
+}
+
+/* ---- A caixa do Recomendado ------------------------------------------ */
+.v5p-card--premium {
+  border: 3px solid transparent;
+  background:
+    linear-gradient(var(--branco), var(--branco)) padding-box,
+    linear-gradient(135deg, #B8862B 0%, #F6D77A 28%, #C9952F 50%, #F1CF6E 74%, #A87A1E 100%) border-box;
+  animation: v6-respira-ouro 4s ease-in-out infinite;
+}
+@keyframes v6-respira-ouro {
+  0%, 100% { box-shadow: 0 18px 40px rgba(168, 122, 30, .16); }
+  50%      { box-shadow: 0 18px 48px rgba(168, 122, 30, .28), 0 0 0 4px rgba(226, 181, 80, .10); }
+}
+.v5p-card--premium::before {
+  background: conic-gradient(from var(--v6-ang),
+    transparent 0deg 270deg,
+    rgba(255, 255, 255, .55) 315deg,
+    #FFFFFF 340deg,
+    transparent 360deg);
+}
+.v5p-selo {
+  background: var(--ouro-degrade);
+  background-size: 160% 100%;
+  color: var(--ouro-texto);
+  box-shadow: 0 6px 16px rgba(168, 122, 30, .38), inset 0 1px 0 rgba(255, 255, 255, .45);
+}
+.v6-brilhos i:nth-child(3n) { background: #FBE7A1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .v5p-card--premium .v4-btn--compra,
+  .v5p-popup .v4-btn--compra,
+  .v5p-card--premium .v4-btn--compra::after,
+  .v5p-popup .v4-btn--compra::after,
+  .v5p-card--premium { animation: none; }
+  .v5p-card--premium .v4-btn--compra,
+  .v5p-popup .v4-btn--compra { background-position: 30% 50%; }
+}
+
+/* Bônus 1: a frase final em destaque (pedido de 25/11/2026), em negrito e
+   no verde da marca, na mesma linha do texto. */
+.v5-bonus__texto .v6-bonus__destaque { font-weight: 800; color: var(--verde); }
