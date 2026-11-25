@@ -231,6 +231,43 @@ body {
 
 .bloco__papel { font-size: .8rem; color: var(--muted); }
 
+/* Os planos que a página vende e o link do SF que o botão de cada um usa
+   (desde 25/11/2026 o link inteiro, para abrir ou copiar). Fica em branco
+   sobre a cor do bloco, como o chip do preço; o link vai em mono, igual ao
+   slug. "sem link" em âmbar, a mesma cor das pendências. */
+.planos {
+  margin: 0; padding: 0; list-style: none;
+  border: 1px solid var(--azul-linha); border-radius: 8px;
+  background: var(--surface);
+}
+.bloco--t67 .planos { border-color: var(--amarelo-linha); }
+.bloco--t97 .planos { border-color: var(--verde-linha); }
+.planos li { display: flex; flex-wrap: wrap; align-items: center; gap: .15rem .5rem; padding: .42rem .62rem .5rem; font-size: .78rem; }
+.planos li + li { border-top: 1px solid var(--line); }
+.planos__nome  { font-weight: 700; color: var(--ink-2); }
+.planos__preco { font-weight: 800; color: var(--azul); white-space: nowrap; }
+.bloco--t67 .planos__preco { color: var(--amarelo); }
+.bloco--t97 .planos__preco { color: var(--verde); }
+.planos__cp {
+  margin-left: auto;
+  padding: .22em .6em;
+  border: 1px solid var(--line); border-radius: 6px;
+  background: var(--surface);
+  font: inherit; font-size: .68rem; font-weight: 700; color: var(--muted);
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
+}
+.planos__cp:hover { background: var(--canvas); color: var(--ink-2); border-color: #CFDAE7; }
+.planos__cp.ok { background: var(--verde-bg); border-color: #BFE3CD; color: var(--verde); }
+.planos__sf {
+  flex-basis: 100%;
+  font-family: var(--mono); font-size: .7rem; color: var(--muted);
+  text-decoration: none; overflow-wrap: anywhere;
+}
+.planos__sf:hover, .planos__sf:focus-visible { color: var(--ink-2); text-decoration: underline; }
+.planos__sf--falta { flex-basis: auto; margin-left: auto; font-family: Manrope, sans-serif; font-size: .72rem; font-weight: 700; color: var(--ambar); }
+.planos__obs { flex-basis: 100%; font-size: .7rem; color: var(--muted); }
+
 /* Slug e endereço. O <a> do endereço é o "link" propriamente dito; o
    botão de baixo é o atalho grande. */
 .bloco__slug {
@@ -352,6 +389,9 @@ body {
           <span class="bloco__preco">US$19.90</span>
         </div>
         <p class="bloco__papel">De US$99.00 &middot; 2 cuotas de US$10.45 &middot; sfunnel 209</p>
+        <ul class="planos" aria-label="Plan y checkout">
+          <li><span class="planos__nome">Oferta única</span><span class="planos__preco">US$19.90</span><button class="planos__cp" type="button" data-copiar="https://sf.topcorpus.com.br/sf/?sfunnel=209">Copiar SF</button><a class="planos__sf" href="https://sf.topcorpus.com.br/sf/?sfunnel=209" target="_blank" rel="noopener">sf.topcorpus.com.br/sf/?sfunnel=209</a></li>
+        </ul>
         <span class="bloco__slug">/esp/lt-v1-19/</span>
         <div class="bloco__urls">
           <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/lt-v1-19/"><b>fb</b> exp-fb.topcorpus.com.br/esp/lt-v1-19/</a>
@@ -373,6 +413,9 @@ body {
           <span class="bloco__preco">US$19.90</span>
         </div>
         <p class="bloco__papel">De US$99.00 &middot; 2 cuotas de US$10.45 &middot; sfunnel 210</p>
+        <ul class="planos" aria-label="Plan y checkout">
+          <li><span class="planos__nome">Oferta única</span><span class="planos__preco">US$19.90</span><button class="planos__cp" type="button" data-copiar="https://sf.topcorpus.com.br/sf/?sfunnel=210">Copiar SF</button><a class="planos__sf" href="https://sf.topcorpus.com.br/sf/?sfunnel=210" target="_blank" rel="noopener">sf.topcorpus.com.br/sf/?sfunnel=210</a></li>
+        </ul>
         <span class="bloco__slug">/esp/lt-v2-19/</span>
         <div class="bloco__urls">
           <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/lt-v2-19/"><b>fb</b> exp-fb.topcorpus.com.br/esp/lt-v2-19/</a>
@@ -406,6 +449,9 @@ body {
           <span class="bloco__preco">US$ 9,90</span>
         </div>
         <p class="bloco__papel">De US$ 214 por US$ 9,90 &middot; ahorras US$ 204,10</p>
+        <ul class="planos" aria-label="Plan y checkout">
+          <li><span class="planos__nome">Oferta única</span><span class="planos__preco">US$ 9,90</span><button class="planos__cp" type="button" data-copiar="https://sf.topcorpus.com.br/sf/?sfunnel=198">Copiar SF</button><a class="planos__sf" href="https://sf.topcorpus.com.br/sf/?sfunnel=198" target="_blank" rel="noopener">sf.topcorpus.com.br/sf/?sfunnel=198</a></li>
+        </ul>
         <span class="bloco__slug">/esp/lt-v4-9/</span>
         <div class="bloco__urls">
           <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/lt-v4-9/"><b>fb</b> exp-fb.topcorpus.com.br/esp/lt-v4-9/</a>
@@ -427,6 +473,9 @@ body {
           <span class="bloco__preco">US$ 19,90</span>
         </div>
         <p class="bloco__papel">De US$ 214 por US$ 19,90 &middot; ahorras US$ 194,10</p>
+        <ul class="planos" aria-label="Plan y checkout">
+          <li><span class="planos__nome">Oferta única</span><span class="planos__preco">US$ 19,90</span><button class="planos__cp" type="button" data-copiar="https://sf.topcorpus.com.br/sf/?sfunnel=197">Copiar SF</button><a class="planos__sf" href="https://sf.topcorpus.com.br/sf/?sfunnel=197" target="_blank" rel="noopener">sf.topcorpus.com.br/sf/?sfunnel=197</a></li>
+        </ul>
         <span class="bloco__slug">/esp/lt-v4-19/</span>
         <div class="bloco__urls">
           <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/lt-v4-19/"><b>fb</b> exp-fb.topcorpus.com.br/esp/lt-v4-19/</a>
@@ -448,6 +497,9 @@ body {
           <span class="bloco__preco">US$ 29,90</span>
         </div>
         <p class="bloco__papel">De US$ 214 por US$ 29,90 &middot; ahorras US$ 184,10</p>
+        <ul class="planos" aria-label="Plan y checkout">
+          <li><span class="planos__nome">Oferta única</span><span class="planos__preco">US$ 29,90</span><button class="planos__cp" type="button" data-copiar="https://sf.topcorpus.com.br/sf/?sfunnel=199">Copiar SF</button><a class="planos__sf" href="https://sf.topcorpus.com.br/sf/?sfunnel=199" target="_blank" rel="noopener">sf.topcorpus.com.br/sf/?sfunnel=199</a></li>
+        </ul>
         <span class="bloco__slug">/esp/lt-v4-29/</span>
         <div class="bloco__urls">
           <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/lt-v4-29/"><b>fb</b> exp-fb.topcorpus.com.br/esp/lt-v4-29/</a>
@@ -481,6 +533,9 @@ body {
           <span class="bloco__preco">US$ 9,90</span>
         </div>
         <p class="bloco__papel">De US$ 214 por US$ 9,90 &middot; ahorras US$ 204,10</p>
+        <ul class="planos" aria-label="Plan y checkout">
+          <li><span class="planos__nome">Oferta única</span><span class="planos__preco">US$ 9,90</span><button class="planos__cp" type="button" data-copiar="https://sf.topcorpus.com.br/sf/?sfunnel=198">Copiar SF</button><a class="planos__sf" href="https://sf.topcorpus.com.br/sf/?sfunnel=198" target="_blank" rel="noopener">sf.topcorpus.com.br/sf/?sfunnel=198</a></li>
+        </ul>
         <span class="bloco__slug">/esp/lt-v4-v2-9/</span>
         <div class="bloco__urls">
           <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/lt-v4-v2-9/"><b>fb</b> exp-fb.topcorpus.com.br/esp/lt-v4-v2-9/</a>
@@ -502,6 +557,9 @@ body {
           <span class="bloco__preco">US$ 19,90</span>
         </div>
         <p class="bloco__papel">De US$ 214 por US$ 19,90 &middot; ahorras US$ 194,10</p>
+        <ul class="planos" aria-label="Plan y checkout">
+          <li><span class="planos__nome">Oferta única</span><span class="planos__preco">US$ 19,90</span><button class="planos__cp" type="button" data-copiar="https://sf.topcorpus.com.br/sf/?sfunnel=222">Copiar SF</button><a class="planos__sf" href="https://sf.topcorpus.com.br/sf/?sfunnel=222" target="_blank" rel="noopener">sf.topcorpus.com.br/sf/?sfunnel=222</a></li>
+        </ul>
         <span class="bloco__slug">/esp/lt-v4-v2-19/</span>
         <div class="bloco__urls">
           <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/lt-v4-v2-19/"><b>fb</b> exp-fb.topcorpus.com.br/esp/lt-v4-v2-19/</a>
@@ -523,6 +581,9 @@ body {
           <span class="bloco__preco">US$ 29,90</span>
         </div>
         <p class="bloco__papel">De US$ 214 por US$ 29,90 &middot; ahorras US$ 184,10</p>
+        <ul class="planos" aria-label="Plan y checkout">
+          <li><span class="planos__nome">Oferta única</span><span class="planos__preco">US$ 29,90</span><button class="planos__cp" type="button" data-copiar="https://sf.topcorpus.com.br/sf/?sfunnel=199">Copiar SF</button><a class="planos__sf" href="https://sf.topcorpus.com.br/sf/?sfunnel=199" target="_blank" rel="noopener">sf.topcorpus.com.br/sf/?sfunnel=199</a></li>
+        </ul>
         <span class="bloco__slug">/esp/lt-v4-v2-29/</span>
         <div class="bloco__urls">
           <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/esp/lt-v4-v2-29/"><b>fb</b> exp-fb.topcorpus.com.br/esp/lt-v4-v2-29/</a>

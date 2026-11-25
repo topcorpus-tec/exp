@@ -231,21 +231,42 @@ body {
 
 .bloco__papel { font-size: .8rem; color: var(--muted); }
 
-/* Os planos que a página vende e o checkout que o botão de cada um usa.
-   Fica em branco sobre o azul do bloco, como o chip do preço, e o sfunnel
-   vai na ponta em mono, igual ao slug: é o número que se confere no SF.
-   "sem link" em âmbar, a mesma cor das pendências. */
+/* Os planos que a página vende e o link do SF que o botão de cada um usa
+   (desde 25/11/2026 o link inteiro, para abrir ou copiar). Fica em branco
+   sobre a cor do bloco, como o chip do preço; o link vai em mono, igual ao
+   slug. "sem link" em âmbar, a mesma cor das pendências. */
 .planos {
   margin: 0; padding: 0; list-style: none;
   border: 1px solid var(--azul-linha); border-radius: 8px;
   background: var(--surface);
 }
-.planos li { display: flex; align-items: baseline; gap: .5rem; padding: .34rem .62rem; font-size: .78rem; }
+.bloco--t67 .planos { border-color: var(--amarelo-linha); }
+.bloco--t97 .planos { border-color: var(--verde-linha); }
+.planos li { display: flex; flex-wrap: wrap; align-items: center; gap: .15rem .5rem; padding: .42rem .62rem .5rem; font-size: .78rem; }
 .planos li + li { border-top: 1px solid var(--line); }
 .planos__nome  { font-weight: 700; color: var(--ink-2); }
 .planos__preco { font-weight: 800; color: var(--azul); white-space: nowrap; }
-.planos__sf    { margin-left: auto; font-family: var(--mono); font-size: .72rem; color: var(--muted); white-space: nowrap; }
-.planos__sf--falta { font-family: Manrope, sans-serif; font-weight: 700; color: var(--ambar); }
+.bloco--t67 .planos__preco { color: var(--amarelo); }
+.bloco--t97 .planos__preco { color: var(--verde); }
+.planos__cp {
+  margin-left: auto;
+  padding: .22em .6em;
+  border: 1px solid var(--line); border-radius: 6px;
+  background: var(--surface);
+  font: inherit; font-size: .68rem; font-weight: 700; color: var(--muted);
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
+}
+.planos__cp:hover { background: var(--canvas); color: var(--ink-2); border-color: #CFDAE7; }
+.planos__cp.ok { background: var(--verde-bg); border-color: #BFE3CD; color: var(--verde); }
+.planos__sf {
+  flex-basis: 100%;
+  font-family: var(--mono); font-size: .7rem; color: var(--muted);
+  text-decoration: none; overflow-wrap: anywhere;
+}
+.planos__sf:hover, .planos__sf:focus-visible { color: var(--ink-2); text-decoration: underline; }
+.planos__sf--falta { flex-basis: auto; margin-left: auto; font-family: Manrope, sans-serif; font-size: .72rem; font-weight: 700; color: var(--ambar); }
+.planos__obs { flex-basis: 100%; font-size: .7rem; color: var(--muted); }
 
 /* Slug e endereço. O <a> do endereço é o "link" propriamente dito; o
    botão de baixo é o atalho grande. */
@@ -388,6 +409,9 @@ body {
           <span class="bloco__preco">R$ 27</span>
         </div>
         <p class="bloco__papel">9&times; de R$ 3,39</p>
+        <ul class="planos" aria-label="Plano e checkout">
+          <li><span class="planos__nome">Oferta única</span><span class="planos__preco">R$ 27</span><button class="planos__cp" type="button" data-copiar="https://sf.topcorpus.com.br/sf/?sfunnel=131">Copiar SF</button><a class="planos__sf" href="https://sf.topcorpus.com.br/sf/?sfunnel=131" target="_blank" rel="noopener">sf.topcorpus.com.br/sf/?sfunnel=131</a><span class="planos__obs">só no gg: no fb o botão vai direto para a Hotmart</span></li>
+        </ul>
         <span class="bloco__slug">/lt-v1-27/</span>
         <div class="bloco__urls">
           <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/lt-v1-27/"><b>fb</b> exp-fb.topcorpus.com.br/lt-v1-27/</a>
@@ -422,6 +446,9 @@ body {
           <span class="bloco__preco">R$ 27</span>
         </div>
         <p class="bloco__papel">9&times; de R$ 3,39</p>
+        <ul class="planos" aria-label="Plano e checkout">
+          <li><span class="planos__nome">Oferta única</span><span class="planos__preco">R$ 27</span><button class="planos__cp" type="button" data-copiar="https://sf.topcorpus.com.br/sf/?sfunnel=31">Copiar SF</button><a class="planos__sf" href="https://sf.topcorpus.com.br/sf/?sfunnel=31" target="_blank" rel="noopener">sf.topcorpus.com.br/sf/?sfunnel=31</a></li>
+        </ul>
         <span class="bloco__slug">/lt-v2-27/</span>
         <div class="bloco__urls">
           <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/lt-v2-27/"><b>fb</b> exp-fb.topcorpus.com.br/lt-v2-27/</a>
@@ -462,7 +489,8 @@ body {
        ("deixa o endereço v5"); /lt-v6/ redireciona para lá.
 
        A lista de planos de cada bloco é o checkout que o botão da página usa
-       hoje, tirado do manual.js dela. Ao trocar um sfunnel na página, trocar
+       hoje, tirado do manual.js dela, com o link do SF para abrir ou copiar
+       (desde 25/11/2026 em toda página que passa pelo SF). Ao trocar um sfunnel na página, trocar
        aqui também. -->
   <section class="grupo">
     <div class="grupo__cab">
@@ -480,9 +508,9 @@ body {
         </div>
         <p class="bloco__papel">a v4 com a identidade verde e a Fraunces, com a oferta em pacotes desde 23/11/2026; teste 50/50 com a V4 Verde sem pacote</p>
         <ul class="planos" aria-label="Planos e checkouts">
-          <li><span class="planos__nome">Básico</span><span class="planos__preco">R$ 27</span><span class="planos__sf">sfunnel 215</span></li>
-          <li><span class="planos__nome">Premium</span><span class="planos__preco">R$ 47</span><span class="planos__sf">sfunnel 218</span></li>
-          <li><span class="planos__nome">Popup do Premium</span><span class="planos__preco">R$ 37</span><span class="planos__sf">sfunnel 217</span></li>
+          <li><span class="planos__nome">Básico</span><span class="planos__preco">R$ 27</span><button class="planos__cp" type="button" data-copiar="https://sf.topcorpus.com.br/sf/?sfunnel=215">Copiar SF</button><a class="planos__sf" href="https://sf.topcorpus.com.br/sf/?sfunnel=215" target="_blank" rel="noopener">sf.topcorpus.com.br/sf/?sfunnel=215</a></li>
+          <li><span class="planos__nome">Premium</span><span class="planos__preco">R$ 47</span><button class="planos__cp" type="button" data-copiar="https://sf.topcorpus.com.br/sf/?sfunnel=218">Copiar SF</button><a class="planos__sf" href="https://sf.topcorpus.com.br/sf/?sfunnel=218" target="_blank" rel="noopener">sf.topcorpus.com.br/sf/?sfunnel=218</a></li>
+          <li><span class="planos__nome">Popup do Premium</span><span class="planos__preco">R$ 37</span><button class="planos__cp" type="button" data-copiar="https://sf.topcorpus.com.br/sf/?sfunnel=217">Copiar SF</button><a class="planos__sf" href="https://sf.topcorpus.com.br/sf/?sfunnel=217" target="_blank" rel="noopener">sf.topcorpus.com.br/sf/?sfunnel=217</a></li>
         </ul>
         <span class="bloco__slug">/lt-v4-v2/</span>
         <div class="bloco__urls">
@@ -545,7 +573,7 @@ body {
         </div>
         <p class="bloco__papel">a V4 Verde como era antes dos pacotes, para o teste 50/50 com a V4 Verde com pacote (24/11/2026)</p>
         <ul class="planos" aria-label="Plano e checkout">
-          <li><span class="planos__nome">Oferta única</span><span class="planos__preco">R$ 27</span><span class="planos__sf">sfunnel 220</span></li>
+          <li><span class="planos__nome">Oferta única</span><span class="planos__preco">R$ 27</span><button class="planos__cp" type="button" data-copiar="https://sf.topcorpus.com.br/sf/?sfunnel=220">Copiar SF</button><a class="planos__sf" href="https://sf.topcorpus.com.br/sf/?sfunnel=220" target="_blank" rel="noopener">sf.topcorpus.com.br/sf/?sfunnel=220</a></li>
         </ul>
         <span class="bloco__slug">/lt-v4-v2-sp/</span>
         <div class="bloco__urls">
@@ -569,7 +597,7 @@ body {
         </div>
         <p class="bloco__papel">R$ 27 à vista, com a ID da v1</p>
         <ul class="planos" aria-label="Plano e checkout">
-          <li><span class="planos__nome">Oferta única</span><span class="planos__preco">R$ 27</span><span class="planos__sf">sfunnel 207</span></li>
+          <li><span class="planos__nome">Oferta única</span><span class="planos__preco">R$ 27</span><button class="planos__cp" type="button" data-copiar="https://sf.topcorpus.com.br/sf/?sfunnel=207">Copiar SF</button><a class="planos__sf" href="https://sf.topcorpus.com.br/sf/?sfunnel=207" target="_blank" rel="noopener">sf.topcorpus.com.br/sf/?sfunnel=207</a></li>
         </ul>
         <span class="bloco__slug">/lt-v4-27/</span>
         <div class="bloco__urls">
@@ -593,7 +621,7 @@ body {
         </div>
         <p class="bloco__papel">a v4 verde com a VSL da v3 no lugar do mockup do topo</p>
         <ul class="planos" aria-label="Plano e checkout">
-          <li><span class="planos__nome">Oferta única</span><span class="planos__preco">R$ 27</span><span class="planos__sf">sfunnel 205</span></li>
+          <li><span class="planos__nome">Oferta única</span><span class="planos__preco">R$ 27</span><button class="planos__cp" type="button" data-copiar="https://sf.topcorpus.com.br/sf/?sfunnel=205">Copiar SF</button><a class="planos__sf" href="https://sf.topcorpus.com.br/sf/?sfunnel=205" target="_blank" rel="noopener">sf.topcorpus.com.br/sf/?sfunnel=205</a></li>
         </ul>
         <span class="bloco__slug">/lt-v4-verde-vsl/</span>
         <div class="bloco__urls">
@@ -629,6 +657,9 @@ body {
           <span class="bloco__preco">R$ 27</span>
         </div>
         <p class="bloco__papel">9&times; de R$ 3,39</p>
+        <ul class="planos" aria-label="Plano e checkout">
+          <li><span class="planos__nome">Oferta única</span><span class="planos__preco">R$ 27</span><button class="planos__cp" type="button" data-copiar="https://sf.topcorpus.com.br/sf/?sfunnel=30">Copiar SF</button><a class="planos__sf" href="https://sf.topcorpus.com.br/sf/?sfunnel=30" target="_blank" rel="noopener">sf.topcorpus.com.br/sf/?sfunnel=30</a></li>
+        </ul>
         <span class="bloco__slug">/lt-v1-27-sf/</span>
         <div class="bloco__urls">
           <a class="bloco__url" href="https://exp-fb.topcorpus.com.br/lt-v1-27-sf/"><b>fb</b> exp-fb.topcorpus.com.br/lt-v1-27-sf/</a>
