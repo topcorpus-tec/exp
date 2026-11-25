@@ -49,7 +49,7 @@
   <link rel="stylesheet" href="assets/css/v4.css" />
   <link rel="stylesheet" href="assets/css/v5.css" />
   <link rel="stylesheet" href="assets/css/v5-pacotes.css" />
-  <link rel="stylesheet" href="assets/css/v6.css?v=20261123-fios3" /><!-- trocar o ?v= a cada mudança no v6.css: o servidor deixa o CSS em cache por 4 h -->
+  <link rel="stylesheet" href="assets/css/v6.css?v=20261125-zap" /><!-- trocar o ?v= a cada mudança no v6.css: o servidor deixa o CSS em cache por 4 h -->
 
   <script src="assets/js/manual.js" defer></script>
   <script src="assets/js/v5.js?v=20261123-fios" defer></script>
@@ -406,18 +406,46 @@
             </div>
             <div class="v5-bonus__midia">
               <span class="v6-selo-bonus" aria-hidden="true"><span class="v6-selo-bonus__disco"><small>Bônus</small><b>02</b></span></span>
-              <div class="v5-zap" role="img" aria-label="Um celular com a conversa no WhatsApp com a Ana Martha: num sábado à noite, uma aluna pergunta como massagear uma cliente com dor no ombro e a Ana responde em seguida, indicando a página do Manual e os alertas.">
-                <div class="v5-zap__cel" aria-hidden="true">
-                  <div class="v5-zap__topo">
-                    <img src="assets/img/avatar-ana.webp" alt="" width="120" height="120" loading="lazy" decoding="async" />
-                    <p><strong>Ana Martha</strong><span>online</span></p>
+              <!-- Bônus 2 (refeito em 25/11/2026, "BEM PROFISSIONAL"): um
+                   iPhone de pé, com a ilha, a barra de status, o topo do
+                   WhatsApp com voltar, vídeo e ligação, o papel de parede, os
+                   balões com rabinho e os dois tiques. O celular sai pela
+                   borda de baixo do painel (a barra de digitar fica de fora),
+                   e o cartão "Respondeu em 2 min" flutua na frente dele: a
+                   pergunta é das 23:41 e a resposta das 23:43. Tudo é
+                   desenho (aria-hidden); o leitor de tela ouve o aria-label.
+                   A classe v5-zap fica só porque o v5.js a usa para soltar as
+                   mensagens quando o celular aparece. Estilo no v6.css. -->
+              <div class="v5-zap v6-zap" role="img" aria-label="Um celular com a conversa no WhatsApp com a Ana Martha: num sábado às 23h41, uma aluna pergunta como massagear uma cliente com dor no ombro e a Ana responde dois minutos depois, indicando a página do Manual e os alertas.">
+                <div class="v6-cel" aria-hidden="true">
+                  <div class="v6-cel__tela">
+                    <div class="v6-cel__status">
+                      <span class="v6-cel__hora">23:44</span>
+                      <span class="v6-cel__ilha"></span>
+                      <span class="v6-cel__sinais">
+                        <svg viewBox="0 0 18 12" width="15" height="10"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+                        <svg viewBox="0 0 16 12" width="13" height="10"><path d="M8 11.6 5.6 9.2a3.4 3.4 0 0 1 4.8 0zM3.5 7.1a6.4 6.4 0 0 1 9 0l1.5-1.5a8.5 8.5 0 0 0-12 0zM.6 4.2a10.6 10.6 0 0 1 14.8 0L16 3.5l-.1-.1a12.2 12.2 0 0 0-15.8 0L0 3.5z"/></svg>
+                        <svg viewBox="0 0 27 13" width="22" height="11"><rect x=".5" y=".5" width="22" height="12" rx="3.5" fill="none" stroke="currentColor" opacity=".4"/><rect x="2.5" y="2.5" width="16" height="8" rx="2"/><path d="M24.5 4.5v4a2 2 0 0 0 0-4z" opacity=".45"/></svg>
+                      </span>
+                    </div>
+                    <div class="v6-cel__topo">
+                      <svg class="v6-cel__voltar" viewBox="0 0 12 20" width="11" height="19"><path d="M10 2 2 10l8 8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      <img src="assets/img/avatar-ana.webp" alt="" width="120" height="120" loading="lazy" decoding="async" />
+                      <p><strong>Ana Martha</strong><span>online</span></p>
+                      <svg class="v6-cel__acao" viewBox="0 0 24 24" width="22" height="22"><rect x="2" y="6" width="13.5" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="1.9"/><path d="m15.5 10.6 5.1-3.2a.6.6 0 0 1 .9.5v8.2a.6.6 0 0 1-.9.5l-5.1-3.2z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg>
+                      <svg class="v6-cel__acao" viewBox="0 0 24 24" width="20" height="20"><path d="M6.6 3.2 8.9 5.5c.5.5.6 1.3.2 1.9L7.8 9.3a12.6 12.6 0 0 0 6.9 6.9l1.9-1.3c.6-.4 1.4-.3 1.9.2l2.3 2.3c.6.6.6 1.6 0 2.2l-1.3 1.3c-.9.9-2.2 1.2-3.4.8A19.5 19.5 0 0 1 2.3 7.9c-.4-1.2-.1-2.5.8-3.4l1.3-1.3c.6-.6 1.6-.6 2.2 0z" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div class="v6-cel__chat">
+                      <p class="v6-cel__dia">Sábado</p>
+                      <p class="v6-cel__msg v6-cel__msg--eu">Ana, tô com uma cliente com dor no ombro que desce pro braço. Posso fazer a manobra do trapézio?<span class="v6-cel__meta">23:41<svg viewBox="0 0 18 11" width="16" height="10"><path d="m1 5.6 3.2 3.2L11 1.6M7.4 8.2l.6.6 6.8-7.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></p>
+                      <p class="v6-cel__msg v6-cel__msg--ana">Oi! Abre o Manual na página do ombro e confere os alertas antes de começar 😉 Qualquer dúvida, me chama!<span class="v6-cel__meta">23:43</span></p>
+                      <p class="v6-cel__msg v6-cel__msg--eu">Perfeito, obrigada!! 🙏<span class="v6-cel__meta">23:44<svg viewBox="0 0 18 11" width="16" height="10"><path d="m1 5.6 3.2 3.2L11 1.6M7.4 8.2l.6.6 6.8-7.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></p>
+                    </div>
                   </div>
-                  <div class="v5-zap__chat">
-                    <p class="v5-zap__dia">Sábado</p>
-                    <p class="v5-zap__msg v5-zap__msg--eu">Ana, tô com uma cliente com dor no ombro que desce pro braço. Posso fazer a manobra do trapézio?<span>23:41</span></p>
-                    <p class="v5-zap__msg v5-zap__msg--ana">Oi! Abre o Manual na página do ombro e confere os alertas antes de começar 😉 Qualquer dúvida, me chama!<span>23:43</span></p>
-                    <p class="v5-zap__msg v5-zap__msg--eu">Perfeito, obrigada!! 🙏<span>23:44</span></p>
-                  </div>
+                </div>
+                <div class="v6-zap__aviso" aria-hidden="true">
+                  <span class="v6-zap__raio"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M13.2 2.5 5 13.4h6l-1.2 8.1L18 10.6h-6z"/></svg></span>
+                  <span class="v6-zap__aviso-txt"><strong>Respondeu em 2 min</strong><small>sábado, 23:43</small></span>
                 </div>
               </div>
             </div>

@@ -1029,3 +1029,254 @@ body { line-height: 1.65; }
   .v4-consulta__texto .v4-titulo { text-align: center; margin-inline: auto; }
   .v4-consulta__texto .v5-consulta__btn { margin-inline: auto; }
 }
+
+
+/* =========================================================================
+   BÔNUS 2: O CELULAR COM O WHATSAPP (refeito em 25/11/2026)
+
+   O mockup antigo (v5.css, .v5-zap__*) era uma caixa larga e torta, com
+   borda preta grossa: parecia um tablet. Este é um iPhone de pé:
+     - moldura escura com fio de luz na borda e os botões dos lados;
+     - tela com a ilha, a barra de status e o topo do WhatsApp claro (o do
+       iPhone), com voltar, vídeo e ligação em verde;
+     - papel de parede bege com textura leve, balões com rabinho na
+       primeira mensagem e os dois tiques nas da aluna;
+     - um reflexo de vidro bem fraco por cima da tela.
+   O celular é mais alto que o painel e sai pela borda de baixo dele (o
+   painel tem overflow: hidden), então a barra de digitar nem é desenhada.
+   O cartão "Respondeu em 2 min" flutua na frente, do lado oposto ao selo.
+
+   Os tiques vão em cinza, não no azul do WhatsApp: a página não tem azul.
+   ========================================================================= */
+/* O espaço de cima do painel é o do selo: o celular começa abaixo dele, e
+   o selo só encosta no canto da moldura, sobre a barra de status. */
+.v5-bonus__faixa--whatsapp .v5-bonus__midia {
+  min-height: 0;
+  padding: 70px 0 0;
+  align-items: end;
+}
+@media (min-width: 860px) {
+  .v5-bonus__faixa--whatsapp .v5-bonus__midia { padding-top: 62px; }
+}
+
+/* A cena: a largura é a do celular; a altura é só a parte que aparece.
+   No celular ela fica à esquerda, longe do selo (que lá está à direita);
+   num tablet, no meio; no desktop, à direita, longe do selo da esquerda. */
+.v6-zap.v5-zap {
+  position: relative;
+  width: min(248px, 80%);
+  height: 450px;
+  justify-self: start;
+  margin: 0 0 0 clamp(12px, 5%, 48px);
+}
+@media (min-width: 560px) and (max-width: 859px) {
+  .v6-zap.v5-zap { justify-self: center; margin: 0; }
+}
+@media (min-width: 860px) {
+  .v6-zap.v5-zap {
+    width: min(264px, 58%);
+    height: 418px;
+    justify-self: end;
+    margin: 0 clamp(20px, 9%, 56px) 0 0;
+  }
+}
+.v6-zap::before {                       /* luz atrás do celular */
+  content: "";
+  position: absolute;
+  inset: -12% -30% -20%;
+  background: radial-gradient(closest-side, rgba(255, 255, 255, .6), transparent 75%);
+  pointer-events: none;
+}
+
+.v6-cel {
+  position: relative;
+  aspect-ratio: 264 / 548;
+  padding: 8px;
+  border-radius: 46px;
+  background: linear-gradient(150deg, #4A514E 0%, #1B201E 22%, #121614 60%, #2C3330 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, .22),
+    inset 0 0 0 3px #0C0F0E,
+    0 34px 60px -14px rgba(14, 56, 36, .45),
+    0 12px 26px -8px rgba(14, 56, 36, .28);
+}
+.v6-cel::before,                         /* volume, à esquerda */
+.v6-cel::after {                         /* liga/desliga, à direita */
+  content: "";
+  position: absolute;
+  width: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #2A302E, #4C5450);
+}
+.v6-cel::before { left: -3px;  top: 22%; height: 11%; box-shadow: 0 -38px 0 -0.5px #3A413E; }
+.v6-cel::after  { right: -3px; top: 27%; height: 15%; }
+
+.v6-cel__tela {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 38px;
+  background-color: #EFEAE2;
+  background-image:
+    radial-gradient(rgba(84, 72, 52, .07) 1px, transparent 1.4px),
+    radial-gradient(rgba(84, 72, 52, .05) 1px, transparent 1.4px);
+  background-size: 16px 16px, 16px 16px;
+  background-position: 0 0, 8px 8px;
+  font-family: Manrope, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+.v6-cel__tela::after {                   /* reflexo do vidro */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(118deg, rgba(255, 255, 255, .22) 0%, rgba(255, 255, 255, 0) 34%);
+  pointer-events: none;
+}
+
+.v6-cel__status {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  padding: 4px 18px 0 24px;
+  background: #F6F5F3;
+  color: #111B21;
+}
+.v6-cel__hora { font-size: .8125rem; font-weight: 800; letter-spacing: -.01em; }
+.v6-cel__ilha {
+  position: absolute;
+  top: 9px;
+  left: 50%;
+  width: 66px;
+  height: 20px;
+  margin-left: -33px;
+  border-radius: 999px;
+  background: #0A0C0B;
+}
+.v6-cel__sinais { display: inline-flex; align-items: center; gap: 3px; }
+.v6-cel__sinais svg { display: block; fill: currentColor; }
+
+.v6-cel__topo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px 9px 10px;
+  border-bottom: 1px solid #DEDBD5;
+  background: #F6F5F3;
+  color: #0D7A43;
+}
+.v6-cel__topo svg { display: block; flex: 0 0 auto; }
+.v6-cel__topo img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; }
+.v6-cel__topo p { display: grid; flex: 1 1 auto; margin: 0; line-height: 1.2; color: #111B21; }
+.v6-cel__topo strong { font-size: .8125rem; font-weight: 800; white-space: nowrap; }
+.v6-cel__topo span { font-size: .6875rem; color: #667781; }
+.v6-cel__acao + .v6-cel__acao { margin-left: 8px; }
+
+.v6-cel__chat { display: grid; gap: 4px; padding: 10px 10px 0; }
+.v6-cel__dia {
+  justify-self: center;
+  margin: 0 0 6px;
+  padding: 3px 10px;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, .92);
+  box-shadow: 0 1px .5px rgba(11, 20, 26, .1);
+  color: #54656F;
+  font-size: .6875rem;
+  font-weight: 700;
+}
+.v6-cel__msg {
+  position: relative;
+  max-width: 84%;
+  margin: 0;
+  padding: 6px 8px 5px 9px;
+  border-radius: 9px;
+  box-shadow: 0 1px .5px rgba(11, 20, 26, .13);
+  color: #111B21;
+  font-size: .75rem;
+  line-height: 1.38;
+}
+.v6-cel__msg--eu  { justify-self: end;   background: #D9FDD3; }
+.v6-cel__msg--ana { justify-self: start; background: #FFFFFF; }
+/* Rabinho só no primeiro balão de cada lado seguido, como no app. */
+.v6-cel__msg--eu:first-of-type,
+.v6-cel__msg--ana + .v6-cel__msg--eu { border-top-right-radius: 0; margin-top: 4px; }
+.v6-cel__msg--ana { border-top-left-radius: 0; margin-top: 4px; }
+.v6-cel__msg--eu:first-of-type::before,
+.v6-cel__msg--ana + .v6-cel__msg--eu::before,
+.v6-cel__msg--ana::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 8px;
+  height: 11px;
+  background: inherit;
+}
+.v6-cel__msg--eu::before  { right: -7px; clip-path: polygon(0 0, 100% 0, 0 100%); }
+.v6-cel__msg--ana::before { left: -7px;  clip-path: polygon(0 0, 100% 0, 100% 100%); }
+
+/* Hora e tiques no fim da última linha, à direita, como no app. */
+.v6-cel__meta {
+  float: right;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin: 5px -2px -3px 10px;
+  color: #667781;
+  font-size: .625rem;
+  line-height: 1;
+}
+.v6-cel__meta svg { display: block; color: #8A9590; }
+
+/* O cartão flutuante */
+.v6-zap__aviso {
+  position: absolute;
+  z-index: 3;
+  bottom: 12px;
+  left: 30%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 16px 9px 9px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .94);
+  box-shadow: 0 16px 30px -10px rgba(14, 56, 36, .4), 0 0 0 1px rgba(14, 56, 36, .06);
+  white-space: nowrap;
+}
+@media (min-width: 860px) {
+  .v6-zap__aviso { left: auto; right: 72%; bottom: 18px; }
+}
+.v6-zap__raio {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: linear-gradient(150deg, #1A9A58, #0F7F45);
+  color: #fff;
+}
+.v6-zap__raio svg { display: block; fill: currentColor; }
+.v6-zap__aviso-txt { display: grid; line-height: 1.2; }
+.v6-zap__aviso-txt strong { font-size: .8125rem; font-weight: 800; color: var(--tinta); }
+.v6-zap__aviso-txt small  { font-size: .6875rem; font-weight: 600; color: #6B7A72; }
+
+/* Entrada: as mensagens caem uma de cada vez quando o celular aparece (o
+   v5.js põe .is-js e .is-vista no .v5-zap), e o cartão chega logo depois
+   da resposta da Ana. */
+.v6-zap.is-js .v6-cel__msg,
+.v6-zap.is-js .v6-zap__aviso {
+  opacity: 0;
+  transform: translateY(10px) scale(.96);
+  transition: opacity .4s ease, transform .5s cubic-bezier(.34, 1.56, .64, 1);
+}
+.v6-zap.is-js .v6-cel__msg--eu  { transform-origin: right top; }
+.v6-zap.is-js .v6-cel__msg--ana { transform-origin: left top; }
+.v6-zap.is-js.is-vista .v6-cel__msg,
+.v6-zap.is-js.is-vista .v6-zap__aviso { opacity: 1; transform: none; }
+.v6-zap.is-js.is-vista .v6-cel__msg:nth-of-type(2) { transition-delay: .2s; }
+.v6-zap.is-js.is-vista .v6-cel__msg:nth-of-type(3) { transition-delay: 1.1s; }
+.v6-zap.is-js.is-vista .v6-cel__msg:nth-of-type(4) { transition-delay: 1.9s; }
+.v6-zap.is-js.is-vista .v6-zap__aviso { transition-delay: 1.5s; }
+@media (prefers-reduced-motion: reduce) {
+  .v6-zap.is-js .v6-cel__msg,
+  .v6-zap.is-js .v6-zap__aviso { opacity: 1; transform: none; transition: none; }
+}
