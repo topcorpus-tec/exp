@@ -46,13 +46,20 @@
        O v4.css é o da v4 verde; o que é só da V5 (os corpos animados da
        dobra 2 e os bônus em faixa da dobra 6) está no v5.css, carregado
        depois. Regra do doc: botão SÓ na oferta e no fim da dobra 11. -->
-  <link rel="stylesheet" href="assets/css/v4.css" />
-  <link rel="stylesheet" href="assets/css/v5.css" />
-  <link rel="stylesheet" href="assets/css/v5-pacotes.css" />
+  <!-- Endereço: desde 25/11/2026 esta página mora em /lt-v5/ (pedido do
+       time: "deixa o endereço v5"). Nasceu como lt-v5-v2, foi lt-v6 de
+       23 a 25/11/2026, e o _redirects manda /lt-v6/ para cá. A lt-v5
+       antiga (a de antes dos pacotes) saiu do ar no mesmo dia. Os ?v= de
+       20261125-v5 existem porque a lt-v5 antiga tinha arquivos com estes
+       mesmos nomes e outro conteúdo, e o navegador e a Cloudflare podiam
+       ter guardado aqueles. -->
+  <link rel="stylesheet" href="assets/css/v4.css?v=20261125-v5" />
+  <link rel="stylesheet" href="assets/css/v5.css?v=20261125-v5" />
+  <link rel="stylesheet" href="assets/css/v5-pacotes.css?v=20261125-v5" />
   <link rel="stylesheet" href="assets/css/v6.css?v=20261125-ouro" /><!-- trocar o ?v= a cada mudança no v6.css: o servidor deixa o CSS em cache por 4 h -->
 
-  <script src="assets/js/manual.js" defer></script>
-  <script src="assets/js/v5.js?v=20261123-fios" defer></script>
+  <script src="assets/js/manual.js?v=20261125-v5" defer></script>
+  <script src="assets/js/v5.js?v=20261125-v5" defer></script>
 </head>
 <body>
 

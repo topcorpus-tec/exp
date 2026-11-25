@@ -1,0 +1,5 @@
+# A V5 com pacotes morou em /lt-v6/ de 23 a 25/11/2026 e passou para
+# /lt-v5/ ("deixa o endereço v5"). O link antigo circulou no grupo e
+# esteve no índice, então ele leva para o novo em vez de dar 404.
+/lt-v6        /lt-v5/         301
+/lt-v6/*      /lt-v5/:splat   301
