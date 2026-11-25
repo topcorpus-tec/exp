@@ -31,7 +31,8 @@
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
 
 # A v5 (lt-v5) nasceu em 18/11/2026 da Página de Vendas #5, a partir da
-# v4 verde. Fora dos buscadores pelo mesmo motivo.
+# v4 verde, e saiu do ar em 25/11/2026 (a lt-v6 virou a V5). A regra fica
+# para a cópia antiga que a Cloudflare ainda servir de cache.
 /lt-v5
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
 /lt-v5/*
@@ -40,6 +41,7 @@
 # A v6 (lt-v6) nasceu em 23/11/2026 como cópia da lt-v5, com a oferta em
 # pacotes (Básico, Premium e o popup do Premium). Nasceu como lt-v5-v2 e
 # foi renomeada no mesmo dia. Fora dos buscadores pelo mesmo motivo.
+# Desde 25/11/2026 é ela a V5 do índice, no mesmo endereço /lt-v6/.
 /lt-v6
   X-Robots-Tag: noindex, nofollow, noarchive, nosnippet
 /lt-v6/*
