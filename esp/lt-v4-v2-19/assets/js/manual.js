@@ -39,8 +39,14 @@
      ?off=jy8ogydh&checkoutMode=10 (conferido em 07/11/2026).
 
      O sfunnel 193 é o link da campanha da Meta e leva a esta página na
-     versão de 9,90 (exp-fb/esp/lt-v4-9/); não é destino de botão. */
-  var CHECKOUT_URL = "https://sf.topcorpus.com.br/sf/?sfunnel=197";
+     versão de 9,90 (exp-fb/esp/lt-v4-9/); não é destino de botão.
+
+     Desde 25/11/2026 esta página (a V4v2 de 19,90) usa o sfunnel 222,
+     pedido pelo João. Ele leva à mesma oferta do 197
+     (pay.hotmart.com/K108329146K?off=jy8ogydh&checkoutMode=10, US$19,90,
+     conferido em 25/11/2026). A V4v1 de 19,90 (esp/lt-v4-19) segue no
+     197. */
+  var CHECKOUT_URL = "https://sf.topcorpus.com.br/sf/?sfunnel=222";
 
   /* =======================================================================
      DESTINO DO CTA DA OFERTA
