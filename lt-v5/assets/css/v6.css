@@ -43,14 +43,14 @@
 
   --verde:        #2C6A52;   /* verde dos destaques: 6:1 no creme */
   --verde-claro:  #DDEBE2;
-  --mel:          #FFC23A;
+  --mel:          #9C27B0;   /* acentos (fios, aspas, marcadores): o roxo vivo, 26/11 */
   --cta:          #0F7F45;   /* botões verdes, texto branco: 5:1 */
   --cta-escuro:   #0B6A39;
   --cta-texto:    #FFFFFF;
 
   --mata:         #1E3B32;   /* dobras escuras: o verde-mata     */
   --mata-texto:   #D3E0D8;   /* 8,9:1 no verde-mata              */
-  --mata-realce:  #F4C766;   /* 7,6:1 no verde-mata              */
+  --mata-realce:  #E0A6F5;   /* lilás, 6,3:1 no verde-mata (era dourado até 26/11) */
 
   --salvia:       #13874A;   /* verde do "ok": 4,8:1 no branco   */
   --salvia-clara: #E1F4E9;
@@ -405,7 +405,7 @@ body { line-height: 1.65; }
   position: absolute;
   width: var(--s, 10px);
   height: var(--s, 10px);
-  background: #F4C04A;
+  background: #A93FC0;
   clip-path: polygon(50% 0, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0 50%, 39% 39%);
   opacity: 0;
   animation: v6-brilho 4.2s ease-in-out var(--d, 0s) infinite;
@@ -434,7 +434,8 @@ body { line-height: 1.65; }
 
 
 /* =========================================================================
-   LETRAS DOURADAS — degradê leve (pedido de 23/11/2026)
+   LETRAS EM DEGRADÊ — leve (pedido de 23/11/2026; dourado até 26/11, agora lilás:
+   o tom mais escuro, #CC88E8, dá 4,8:1 no verde-mata)
 
    Tudo o que é dourado sobre o verde-mata ganha um degradê lateral, da
    esquerda para a direita: dourado mais fundo nas pontas e mais claro
@@ -452,7 +453,7 @@ body { line-height: 1.65; }
   .v4-remedio__virada strong,
   .v6-sec--escura .v4-titulo em,
   .v6-sec--escura .v4-poder {
-    background-image: linear-gradient(90deg, #D9A441 0%, #F4C766 28%, #FBE3A0 50%, #F4C766 72%, #D9A441 100%);
+    background-image: linear-gradient(90deg, #CC88E8 0%, #E0A6F5 28%, #F3D6FC 50%, #E0A6F5 72%, #CC88E8 100%);
     -webkit-background-clip: text;
             background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -588,8 +589,8 @@ body { line-height: 1.65; }
   border-radius: 22px;
   background: conic-gradient(from var(--v6-ang),
     transparent 0deg 270deg,
-    rgba(255, 233, 168, .55) 315deg,
-    #FFF6DA 340deg,
+    rgba(232, 190, 250, .55) 315deg,
+    #FBEFFF 340deg,
     transparent 360deg);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
@@ -640,7 +641,7 @@ body { line-height: 1.65; }
    Saiu daqui o selo dourado "Bônus 0N" que ficava sobre cada arte (pedido
    de 23/11): repetia a etiqueta ao lado do título.
    ========================================================================= */
-:root { --roxo: #5B0F42; }
+:root { --roxo: #8E24AA; }   /* 26/11: "um roxo mais vivo" (era #5B0F42) */
 
 .v5-bonus__num { background: var(--roxo); color: #fff; }
 #bonus-title em { color: var(--roxo); }
@@ -722,7 +723,7 @@ body { line-height: 1.65; }
   bottom: 4%;
   left: 9%;
   right: 9%;
-  border: 1px solid rgba(244, 199, 102, .38);
+  border: 1px solid rgba(224, 166, 245, .38);
   border-bottom: 0;
   border-radius: 999px 999px 0 0;
   background:
@@ -764,10 +765,10 @@ body { line-height: 1.65; }
   translate: -50% -52%;
   border-radius: 50%;
   background: radial-gradient(closest-side,
-    rgba(255, 236, 180, .42) 0%,
-    rgba(255, 236, 180, .22) 40%,
-    rgba(255, 236, 180, .07) 65%,
-    rgba(255, 236, 180, 0) 100%);
+    rgba(230, 190, 248, .42) 0%,
+    rgba(230, 190, 248, .22) 40%,
+    rgba(230, 190, 248, .07) 65%,
+    rgba(230, 190, 248, 0) 100%);
   animation: v6-luz 7s ease-in-out infinite;
 }
 .v4-hero__mock::after {
@@ -775,8 +776,8 @@ body { line-height: 1.65; }
   aspect-ratio: 1;
   translate: -50% -52%;
   background: repeating-conic-gradient(from 0deg,
-    rgba(255, 240, 200, .15) 0deg 5deg,
-    rgba(255, 240, 200, 0) 5deg 20deg);
+    rgba(242, 218, 252, .15) 0deg 5deg,
+    rgba(242, 218, 252, 0) 5deg 20deg);
   -webkit-mask-image: radial-gradient(closest-side, #000 20%, rgba(0, 0, 0, .6) 48%, transparent 78%);
           mask-image: radial-gradient(closest-side, #000 20%, rgba(0, 0, 0, .6) 48%, transparent 78%);
   animation: v6-raios 60s linear infinite;
@@ -1222,92 +1223,88 @@ body { line-height: 1.65; }
 
 
 /* =========================================================================
-   OFERTA EM DOURADO (pedido de 25/11/2026)
-
-   "Botões em dourado, Básico só a borda, Premium dourado completo com
-   degradê e movimento" e "a caixa do Recomendado em dourado".
+   OFERTA EM ROXO (25/11/2026 em dourado; 26/11/2026: "troque os dourados
+   por roxo, um roxo mais vivo, tudo que tá dourado fica roxo")
 
      - Premium (e o "Sim" do popup, que também compra o Premium): fundo
-       num degradê de ouro que desliza devagar da esquerda para a direita,
+       num degradê roxo que desliza devagar da esquerda para a direita,
        e um reflexo claro que atravessa o botão de tempos em tempos;
-     - Básico: sem fundo, contorno em degradê de ouro (o truque das duas
+     - Básico: sem fundo, contorno em degradê roxo (o truque das duas
        camadas de fundo, padding-box e border-box, porque border-image não
-       respeita o raio da pílula) e texto em ouro escuro;
-     - caixa do Premium: a borda verde vira ouro em degradê, o selo
-       "Recomendado" vira uma pílula de ouro, a luz que dá a volta no
-       contorno fica branca (sobre o ouro, a dourada sumiria) e a sombra
-       que respira fica dourada.
+       respeita o raio da pílula) e texto em roxo escuro;
+     - caixa do Premium: borda em degradê roxo, o selo "Recomendado" numa
+       pílula roxa, a luz que dá a volta no contorno branca e a sombra que
+       respira arroxeada.
 
-   Texto escuro sobre o ouro, nunca branco: branco sobre #E9C45E não passa
-   de 2:1. #2A1D04 sobre o tom mais escuro do degradê (#B8862B) dá 5,1:1.
-   O ouro escuro do Básico (#8A6410) dá 5,4:1 no branco.
+   Texto branco sobre o roxo: o tom mais claro do degradê (#A93FC0) dá
+   5:1; o do meio (#9C27B0), 6,3:1. O roxo escuro do Básico (#6A1B9A) dá
+   9,4:1 no branco.
    ========================================================================= */
 :root {
-  --ouro-fundo:  #B8862B;
-  --ouro:        #E2B550;
-  --ouro-claro:  #FBE7A1;
-  --ouro-texto:  #2A1D04;
-  --ouro-escuro: #8A6410;
-  --ouro-degrade: linear-gradient(100deg,
-    #B8862B 0%, #E2B550 22%, #FBE7A1 40%, #E9C45E 55%, #C9952F 75%, #B8862B 88%, #E2B550 100%);
+  --vivo:         #9C27B0;
+  --vivo-escuro:  #6A1B9A;
+  --vivo-borda:   #4A0E63;
+  --vivo-degrade: linear-gradient(100deg,
+    #5E1279 0%, #8E24AA 22%, #A93FC0 40%, #9C27B0 55%, #7B1FA2 75%, #5E1279 88%, #8E24AA 100%);
 }
 
-/* ---- Premium: ouro cheio, em movimento -------------------------------- */
+/* ---- Premium: roxo cheio, em movimento -------------------------------- */
 .v5p-card--premium .v4-btn--compra,
 .v5p-popup .v4-btn--compra {
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  background: var(--ouro-degrade);
+  background: var(--vivo-degrade);
   background-size: 220% 100%;
-  color: var(--ouro-texto);
-  box-shadow: 0 2px 0 #9A6F1E, 0 12px 26px rgba(168, 122, 30, .38);
-  animation: v6-ouro-desliza 5s ease-in-out infinite alternate;
+  color: #FFFFFF;
+  text-shadow: 0 1px 0 rgba(50, 0, 70, .25);
+  box-shadow: 0 2px 0 var(--vivo-borda), 0 12px 26px rgba(106, 27, 154, .38);
+  animation: v6-vivo-desliza 5s ease-in-out infinite alternate;
 }
 .v5p-card--premium .v4-btn--compra:hover,
 .v5p-popup .v4-btn--compra:hover {
-  background: var(--ouro-degrade);
+  background: var(--vivo-degrade);
   background-size: 220% 100%;
-  box-shadow: 0 2px 0 #9A6F1E, 0 16px 30px rgba(168, 122, 30, .46);
+  box-shadow: 0 2px 0 var(--vivo-borda), 0 16px 30px rgba(106, 27, 154, .46);
 }
 .v5p-card--premium .v4-btn--compra:active,
-.v5p-popup .v4-btn--compra:active { box-shadow: 0 1px 0 #9A6F1E, 0 6px 14px rgba(168, 122, 30, .34); }
+.v5p-popup .v4-btn--compra:active { box-shadow: 0 1px 0 var(--vivo-borda), 0 6px 14px rgba(106, 27, 154, .34); }
 .v5p-card--premium .v4-btn--compra::after,
 .v5p-popup .v4-btn--compra::after {      /* o reflexo que atravessa */
   content: "";
   position: absolute;
   z-index: -1;
   inset: 0;
-  background: linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, .55) 50%, transparent 62%);
+  background: linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, .38) 50%, transparent 62%);
   background-size: 260% 100%;
   background-position: 160% 0;
-  animation: v6-ouro-reflexo 3.6s ease-in-out infinite;
+  animation: v6-vivo-reflexo 3.6s ease-in-out infinite;
   pointer-events: none;
 }
-@keyframes v6-ouro-desliza {
+@keyframes v6-vivo-desliza {
   from { background-position: 0% 50%; }
   to   { background-position: 100% 50%; }
 }
-@keyframes v6-ouro-reflexo {
+@keyframes v6-vivo-reflexo {
   0%, 60% { background-position: 160% 0; }
   100%    { background-position: -60% 0; }
 }
 
-/* ---- Básico: só a borda, em ouro ------------------------------------- */
+/* ---- Básico: só a borda, em roxo -------------------------------------- */
 .v4-btn.v6-btn--vazado,
 .v4-btn.v6-btn--vazado:active {
   border: 2px solid transparent;
   background:
     linear-gradient(var(--branco), var(--branco)) padding-box,
-    linear-gradient(100deg, #B8862B, #F2D27A 45%, #C9952F 70%, #B8862B) border-box;
-  color: var(--ouro-escuro);
-  box-shadow: 0 8px 18px rgba(168, 122, 30, .14);
+    linear-gradient(100deg, #6A1B9A, #C77DDB 45%, #8E24AA 70%, #6A1B9A) border-box;
+  color: var(--vivo-escuro);
+  box-shadow: 0 8px 18px rgba(106, 27, 154, .14);
 }
 .v4-btn.v6-btn--vazado:hover {
   background:
-    linear-gradient(#FDF6E3, #FDF6E3) padding-box,
-    linear-gradient(100deg, #B8862B, #F2D27A 45%, #C9952F 70%, #B8862B) border-box;
-  box-shadow: 0 10px 22px rgba(168, 122, 30, .2);
+    linear-gradient(#F7EEFB, #F7EEFB) padding-box,
+    linear-gradient(100deg, #6A1B9A, #C77DDB 45%, #8E24AA 70%, #6A1B9A) border-box;
+  box-shadow: 0 10px 22px rgba(106, 27, 154, .2);
 }
 
 /* ---- A caixa do Recomendado ------------------------------------------ */
@@ -1315,12 +1312,12 @@ body { line-height: 1.65; }
   border: 3px solid transparent;
   background:
     linear-gradient(var(--branco), var(--branco)) padding-box,
-    linear-gradient(135deg, #B8862B 0%, #F6D77A 28%, #C9952F 50%, #F1CF6E 74%, #A87A1E 100%) border-box;
-  animation: v6-respira-ouro 4s ease-in-out infinite;
+    linear-gradient(135deg, #6A1B9A 0%, #CE8FE3 28%, #8E24AA 50%, #BA68C8 74%, #5E1279 100%) border-box;
+  animation: v6-respira-vivo 4s ease-in-out infinite;
 }
-@keyframes v6-respira-ouro {
-  0%, 100% { box-shadow: 0 18px 40px rgba(168, 122, 30, .16); }
-  50%      { box-shadow: 0 18px 48px rgba(168, 122, 30, .28), 0 0 0 4px rgba(226, 181, 80, .10); }
+@keyframes v6-respira-vivo {
+  0%, 100% { box-shadow: 0 18px 40px rgba(106, 27, 154, .16); }
+  50%      { box-shadow: 0 18px 48px rgba(106, 27, 154, .28), 0 0 0 4px rgba(156, 39, 176, .10); }
 }
 .v5p-card--premium::before {
   background: conic-gradient(from var(--v6-ang),
@@ -1330,12 +1327,12 @@ body { line-height: 1.65; }
     transparent 360deg);
 }
 .v5p-selo {
-  background: var(--ouro-degrade);
+  background: var(--vivo-degrade);
   background-size: 160% 100%;
-  color: var(--ouro-texto);
-  box-shadow: 0 6px 16px rgba(168, 122, 30, .38), inset 0 1px 0 rgba(255, 255, 255, .45);
+  color: #FFFFFF;
+  box-shadow: 0 6px 16px rgba(106, 27, 154, .38), inset 0 1px 0 rgba(255, 255, 255, .3);
 }
-.v6-brilhos i:nth-child(3n) { background: #FBE7A1; }
+.v6-brilhos i:nth-child(3n) { background: #EBC8F7; }
 
 @media (prefers-reduced-motion: reduce) {
   .v5p-card--premium .v4-btn--compra,
