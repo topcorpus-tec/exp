@@ -628,83 +628,22 @@ body { line-height: 1.65; }
 
 
 /* =========================================================================
-   SELO DOURADO NOS BÔNUS (pedido de 23/11/2026)
+   ROXO DOS BÔNUS (pedido de 26/11/2026)
 
-   Um selo em cada arte de bônus, no canto de fora (à direita quando a arte
-   está à direita, à esquerda quando está à esquerda; no celular, onde a
-   arte vai em cima, sempre à direita). Desenhado em CSS:
-     - disco de borda serrilhada (clip-path com 28 pontas) em dourado
-       metálico, com luz no alto à esquerda;
-     - anel interno fino, claro por fora e escuro por dentro, como relevo;
-     - "BÔNUS" e o número em marrom-escuro, com um filete claro embaixo,
-       como gravado.
-   A sombra fica no <span> de fora (drop-shadow), porque o clip-path do
-   disco cortaria uma sombra posta nele. É enfeite: aria-hidden, o número
-   do bônus já está no texto ao lado.
+   O roxo das capas dos mapas (Fibromialgia e Reflexologia), que aparecem
+   ao lado do Manual nos mockups, entra nos detalhes da dobra dos bônus:
+   a etiqueta "Bônus N", o "5 bônus incríveis" do título e a linha em
+   destaque do Bônus 1 (regra no fim do arquivo). Medido na capa do Mapa
+   da Fibromialgia (meio-tom #5A0A3B), um pouco mais puxado para o roxo.
+   Branco sobre ele dá 13:1; ele sobre o creme, 12:1.
+
+   Saiu daqui o selo dourado "Bônus 0N" que ficava sobre cada arte (pedido
+   de 23/11): repetia a etiqueta ao lado do título.
    ========================================================================= */
-.v6-selo-bonus {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  z-index: 2;
-  width: 100px;
-  aspect-ratio: 1;
-  filter: drop-shadow(0 6px 10px rgba(90, 60, 10, .32));
-  pointer-events: none;
-}
-.v5-bonus__faixa[data-midia="esq"] .v6-selo-bonus { right: auto; left: 14px; }
-@media (max-width: 859px) {
-  .v5-bonus__faixa[data-midia="esq"] .v6-selo-bonus { left: auto; right: 14px; }
-}
-@media (min-width: 860px) {
-  .v6-selo-bonus { top: 18px; right: 18px; width: 124px; }
-  .v5-bonus__faixa[data-midia="esq"] .v6-selo-bonus { left: 18px; }
-}
+:root { --roxo: #5B0F42; }
 
-.v6-selo-bonus__disco {
-  position: relative;
-  display: grid;
-  place-content: center;
-  justify-items: center;
-  width: 100%;
-  height: 100%;
-  clip-path: polygon(50.00% 0.00%, 55.21% 3.79%, 61.13% 1.25%, 65.36% 6.11%, 71.69% 4.95%, 74.74% 10.63%, 81.17% 10.91%, 82.88% 17.12%, 89.09% 18.83%, 89.37% 25.26%, 95.05% 28.31%, 93.89% 34.64%, 98.75% 38.87%, 96.21% 44.79%, 100.00% 50.00%, 96.21% 55.21%, 98.75% 61.13%, 93.89% 65.36%, 95.05% 71.69%, 89.37% 74.74%, 89.09% 81.17%, 82.88% 82.88%, 81.17% 89.09%, 74.74% 89.37%, 71.69% 95.05%, 65.36% 93.89%, 61.13% 98.75%, 55.21% 96.21%, 50.00% 100.00%, 44.79% 96.21%, 38.87% 98.75%, 34.64% 93.89%, 28.31% 95.05%, 25.26% 89.37%, 18.83% 89.09%, 17.12% 82.88%, 10.91% 81.17%, 10.63% 74.74%, 4.95% 71.69%, 6.11% 65.36%, 1.25% 61.13%, 3.79% 55.21%, 0.00% 50.00%, 3.79% 44.79%, 1.25% 38.87%, 6.11% 34.64%, 4.95% 28.31%, 10.63% 25.26%, 10.91% 18.83%, 17.12% 17.12%, 18.83% 10.91%, 25.26% 10.63%, 28.31% 4.95%, 34.64% 6.11%, 38.87% 1.25%, 44.79% 3.79%);
-  background:
-    radial-gradient(circle at 32% 26%, rgba(255, 250, 225, .95) 0%, rgba(255, 250, 225, 0) 34%),
-    conic-gradient(from 210deg, #B8862B, #F3D27A, #C9962F, #FBE7A6, #B07D22, #E9C25E, #B8862B);
-  color: #4A3105;
-  text-align: center;
-  line-height: 1;
-  text-shadow: 0 1px 0 rgba(255, 244, 205, .7);
-}
-/* O anel interno, em relevo. */
-.v6-selo-bonus__disco::before {
-  content: "";
-  position: absolute;
-  inset: 13%;
-  border-radius: 50%;
-  border: 1.5px solid rgba(255, 246, 214, .85);
-  box-shadow: inset 0 0 0 3px rgba(140, 96, 20, .28), 0 0 0 1px rgba(140, 96, 20, .25);
-}
-.v6-selo-bonus__disco small {
-  position: relative;
-  font-size: .6875rem;
-  font-weight: 800;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  margin-left: .18em;                /* compensa o espaçamento da última letra */
-}
-.v6-selo-bonus__disco b {
-  position: relative;
-  margin-top: 2px;
-  font-size: 2.125rem;
-  font-weight: 800;
-  letter-spacing: -.02em;
-}
-@media (min-width: 860px) {
-  .v6-selo-bonus__disco small { font-size: .8125rem; }
-  .v6-selo-bonus__disco b { font-size: 2.625rem; }
-}
+.v5-bonus__num { background: var(--roxo); color: #fff; }
+#bonus-title em { color: var(--roxo); }
 
 
 /* =========================================================================
@@ -1410,4 +1349,4 @@ body { line-height: 1.65; }
 
 /* Bônus 1: a frase final em destaque (pedido de 25/11/2026), em negrito e
    no verde da marca, na mesma linha do texto. */
-.v5-bonus__texto .v6-bonus__destaque { font-weight: 800; color: var(--verde); }
+.v5-bonus__texto .v6-bonus__destaque { font-weight: 800; color: var(--roxo); }
