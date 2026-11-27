@@ -161,27 +161,27 @@
     return y;
   }
 
-  /* Os botões que trazem para a oferta levam ao Premium, o melhor pacote
-     (pedido da Fran e do Emilio, 23/11/2026):
+  /* Os botões que trazem para a oferta levam ao Básico (desde 27/11/2026;
+     de 23 a 26/11 levavam ao Premium, pedido da Fran e do Emilio):
 
        - celular (cards um embaixo do outro): a rolagem para no começo do
-         card do Premium, com o selo "Recomendado" no alto da tela;
-       - desktop (cards lado a lado): para com o pé do card do Premium no
-         pé da tela, para o preço e o botão dele aparecerem, com o Básico
+         card do Básico, que é o primeiro;
+       - desktop (cards lado a lado): para com o pé do card do Básico no
+         pé da tela, para o preço e o botão dele aparecerem, com o Premium
          ao lado. Se a dobra inteira couber, para no topo dela. */
   function alvoDaOferta() {
     var dobra = document.getElementById("oferta");
-    var premium = document.querySelector("#oferta .v5p-card--premium");
-    if (!dobra || !premium) return null;
+    var basico = document.querySelector("#oferta .v5p-card--basico");
+    if (!dobra || !basico) return null;
 
-    var topoPremium = topoNaPagina(premium);
+    var topoBasico = topoNaPagina(basico);
     var empilhado = window.matchMedia && matchMedia("(max-width: 899px)").matches;
-    if (empilhado) return Math.max(0, topoPremium - 32);
+    if (empilhado) return Math.max(0, topoBasico - 32);
 
     var folga = 32;
     var topoDobra = topoNaPagina(dobra);
-    var pePremium = topoPremium + premium.offsetHeight;
-    return Math.max(topoDobra, pePremium + folga - window.innerHeight);
+    var peBasico = topoBasico + basico.offsetHeight;
+    return Math.max(topoDobra, peBasico + folga - window.innerHeight);
   }
 
 
