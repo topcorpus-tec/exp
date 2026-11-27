@@ -1249,8 +1249,11 @@ body { line-height: 1.65; }
 }
 
 /* ---- Premium: roxo cheio, em movimento -------------------------------- */
+/* 27/11/2026: o botão da dobra "Um Manual para consultar" (o último da
+   página, que ainda estava verde) entra aqui: "na mesma cor dos outros". */
 .v5p-card--premium .v4-btn--compra,
-.v5p-popup .v4-btn--compra {
+.v5p-popup .v4-btn--compra,
+.v4-btn.v5-consulta__btn {
   position: relative;
   overflow: hidden;
   isolation: isolate;
@@ -1262,15 +1265,18 @@ body { line-height: 1.65; }
   animation: v6-vivo-desliza 5s ease-in-out infinite alternate;
 }
 .v5p-card--premium .v4-btn--compra:hover,
-.v5p-popup .v4-btn--compra:hover {
+.v5p-popup .v4-btn--compra:hover,
+.v4-btn.v5-consulta__btn:hover {
   background: var(--vivo-degrade);
   background-size: 220% 100%;
   box-shadow: 0 2px 0 var(--vivo-borda), 0 16px 30px rgba(106, 27, 154, .46);
 }
 .v5p-card--premium .v4-btn--compra:active,
-.v5p-popup .v4-btn--compra:active { box-shadow: 0 1px 0 var(--vivo-borda), 0 6px 14px rgba(106, 27, 154, .34); }
+.v5p-popup .v4-btn--compra:active,
+.v4-btn.v5-consulta__btn:active { box-shadow: 0 1px 0 var(--vivo-borda), 0 6px 14px rgba(106, 27, 154, .34); }
 .v5p-card--premium .v4-btn--compra::after,
-.v5p-popup .v4-btn--compra::after {      /* o reflexo que atravessa */
+.v5p-popup .v4-btn--compra::after,
+.v4-btn.v5-consulta__btn::after {      /* o reflexo que atravessa */
   content: "";
   position: absolute;
   z-index: -1;
@@ -1337,11 +1343,14 @@ body { line-height: 1.65; }
 @media (prefers-reduced-motion: reduce) {
   .v5p-card--premium .v4-btn--compra,
   .v5p-popup .v4-btn--compra,
+  .v4-btn.v5-consulta__btn,
   .v5p-card--premium .v4-btn--compra::after,
   .v5p-popup .v4-btn--compra::after,
+  .v4-btn.v5-consulta__btn::after,
   .v5p-card--premium { animation: none; }
   .v5p-card--premium .v4-btn--compra,
-  .v5p-popup .v4-btn--compra { background-position: 30% 50%; }
+  .v5p-popup .v4-btn--compra,
+  .v4-btn.v5-consulta__btn { background-position: 30% 50%; }
 }
 
 /* Bônus 1: a frase final em destaque (pedido de 25/11/2026), em negrito e
