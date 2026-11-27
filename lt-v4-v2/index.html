@@ -41,7 +41,7 @@
        identidade verde (verde e mel sobre creme, Fraunces nos títulos). Não
        herda o design-system, o taping nem o manual.css das versões
        anteriores: todo o visual está no v4.css. -->
-  <link rel="stylesheet" href="assets/css/v4.css" />
+  <link rel="stylesheet" href="assets/css/v4.css?v=20261127-setas-verdes" />
   <link rel="stylesheet" href="assets/css/pacotes.css" />
 
   <!-- O ?v= força o navegador a baixar o manual.js novo: o servidor deixa
@@ -266,6 +266,18 @@
           <img src="assets/img/maos-costas.webp"
                alt="Duas mãos pousadas com cuidado no alto das costas de uma pessoa deitada na maca."
                width="937" height="460" loading="lazy" decoding="async" />
+          <!-- Setas animadas (27/11/2026, ideia do Eduardo): as duas mãos
+               deslizam do alto das costas para baixo e para os lados. Cada
+               traço se desenha devagar, a ponta aparece no fim e o ciclo
+               recomeça. Enfeite: aria-hidden. Estilo no fim do v4.css. -->
+          <svg class="v4-maos__setas" viewBox="0 0 937 460" aria-hidden="true" focusable="false">
+            <g>
+              <path class="v4-maos__corpo" pathLength="100" d="M405 178 C410 262 385 318 300 352" />
+              <path class="v4-maos__ponta" d="M329.5 357.3 L300 352 L317.7 327.8" />
+              <path class="v4-maos__corpo" pathLength="100" d="M540 192 C536 272 562 326 648 356" />
+              <path class="v4-maos__ponta" d="M629.2 332.6 L648 356 L618.7 362.6" />
+            </g>
+          </svg>
         </figure>
 
         <div class="v4-estreito">
