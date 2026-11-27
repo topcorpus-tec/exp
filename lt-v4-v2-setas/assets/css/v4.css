@@ -1091,7 +1091,8 @@ strong { font-weight: 800; }
    o mesmo viewBox dela (937 x 460), então as setas acompanham a foto em
    qualquer largura. Ciclo de 3,6 s: o traço se desenha (como as mãos
    deslizando), a ponta aparece, as setas ficam um instante e somem.
-   Traço escuro com um halo claro, no estilo das setas das fotos do Manual.
+   Traço verde-claro com um halo branco (27/11: "deixe as setas verdes, pra
+   dar uma sensação de conforto"; antes era escuro, como as setas do Manual).
    Com "reduzir movimento", as setas ficam paradas e inteiras.
    ========================================================================= */
 .v4-maos { position: relative; }
@@ -1106,7 +1107,7 @@ strong { font-weight: 800; }
 .v4-maos__setas g { filter: drop-shadow(0 0 2px rgba(255, 255, 255, .85)); }
 .v4-maos__setas path {
   fill: none;
-  stroke: #141A17;
+  stroke: #34B27B;   /* verde claro, "pra dar uma sensação de conforto" (27/11) */
   stroke-width: 8;
   stroke-linecap: round;
   stroke-linejoin: round;
